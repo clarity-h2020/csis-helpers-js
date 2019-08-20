@@ -1,4 +1,9 @@
 {
+  "extends": "recommended",
+  "rules": {
+    "semi": 0,
+    "indent": 0
+  },
   "env": {
     "jest": true
   }

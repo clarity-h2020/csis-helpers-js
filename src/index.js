@@ -1,22 +1,9 @@
-import React, { Component } from 'react'
-import PropTypes from 'prop-types'
+import * as CSISRemoteHelpers from './lib/CSISRemoteHelpers.js';
+import * as EMIKATHelpers from './lib/EMIKATHelpers.js';
+import * as CSISHelpers from './lib/CSISHelpers.js';
 
-import styles from './styles.css'
+//export EMIKATHelpers from './lib/EMIKATHelpers.js';
+export {CSISHelpers, CSISRemoteHelpers, EMIKATHelpers}
 
-export default class ExampleComponent extends Component {
-  static propTypes = {
-    text: PropTypes.string
-  }
-
-  render() {
-    const {
-      text
-    } = this.props
-
-    return (
-      <div className={styles.test}>
-        Example Component: {text}
-      </div>
-    )
-  }
-}
+//export {CSISHelpers, EMIKATHelpers}
+//export EMIKATHelpers from './lib/EMIKATHelpers.js';
