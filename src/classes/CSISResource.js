@@ -33,8 +33,7 @@ export default class CSISResource {
     /**
      * Convenience method for retrieving the service type from Drupal resource JSON object
      * 
-     * @return {Object}
-     * @returns {String}
+     * @return {String}
      */
     getServiceType() {
         const serviceType = this.getTags('taxonomy_term--service_type');

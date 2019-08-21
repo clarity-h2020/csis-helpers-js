@@ -12,22 +12,17 @@ const app = express();
 var server;
 
 beforeAll(() => {
-    app.get('/jsonapi/group/study', function (req, res) {
+    // https://csis.myclimateservice.eu/jsonapi/group/study/c3609e3e-f80f-482b-9e9f-3a26226a6859
+    app.get('/jsonapi/group/study/c3609e3e-f80f-482b-9e9f-3a26226a6859', function (req, res) {
         res.json(apiResponseStudy);
     });
 
-    // https://csis.myclimateservice.eu/jsonapi/group/study?filter[id][condition][path]=id&filter[id][condition][operator]=%3D&filter[id][condition][value]=c3609e3e-f80f-482b-9e9f-3a26226a6859');
-    app.get('/jsonapi/node/data_package/a8ff7930-4a9f-4289-8246-3383ba13c30f/field_resources', function (req, res) {
-        res.json(apiResponseStudy);
-    });
-
-    // https://csis.myclimateservice.eu/jsonapi/group/study/c3609e3e-f80f-482b-9e9f-3a26226a6859/field_data_package
     // https://csis.myclimateservice.eu/jsonapi/node/data_package/a8ff7930-4a9f-4289-8246-3383ba13c30f
-    app.get('/jsonapi/group/study/c3609e3e-f80f-482b-9e9f-3a26226a6859/field_data_package', function (req, res) {
+    app.get('/jsonapi/node/data_package/a8ff7930-4a9f-4289-8246-3383ba13c30f', function (req, res) {
         res.json(apiResponseDataPackage);
     });
 
-    // https://csis.myclimateservice.eu/jsonapi/node/data_package/a8ff7930-4a9f-4289-8246-3383ba13c30f/field_resources?resourceVersion=id%3A270&include=field_resource_tags,field_map_view,field_references,field_analysis_context.field_field_eu_gl_methodology,field_analysis_context.field_hazard
+    // https://csis.myclimateservice.eu/jsonapi/node/data_package/a8ff7930-4a9f-4289-8246-3383ba13c30f/field_resources?include=field_resource_tags,field_map_view,field_references,field_analysis_context.field_field_eu_gl_methodology,field_analysis_context.field_hazard
     app.get('/jsonapi/node/data_package/a8ff7930-4a9f-4289-8246-3383ba13c30f/field_resources', function (req, res) {
         res.json(apiResponseResources);
     });
@@ -38,26 +33,26 @@ beforeAll(() => {
 
 test('[DEV] test extract study area from study json', async (done) => {
     expect.assertions(5);
-    const response = await axios.get('http://localhost:31336/jsonapi/group/study?filter[id][condition][path]=id&filter[id][condition][operator]=%3D&filter[id][condition][value]=c3609e3e-f80f-482b-9e9f-3a26226a6859');
+    const response = await axios.get('http://localhost:31336/jsonapi/group/study/c3609e3e-f80f-482b-9e9f-3a26226a6859');
     expect(response).toBeDefined();
     expect(response.data).toBeDefined();
     expect(response.data.data).toBeDefined();
-    expect(response.data.data[0]).not.toBeNull();
+    expect(response.data.data).not.toBeNull();
 
-    const studyAreaJson = CSISHelpers.extractStudyAreaFromStudyGroupNode(response.data.data[0]);
+    const studyAreaJson = CSISHelpers.extractStudyAreaFromStudyGroupNode(response.data.data);
     expect(studyAreaJson).toEqual(studyArea);
     done();
 });
 
 test('[RELEASE] test extract study area from study json', async (done) => {
     expect.assertions(5);
-    const response = await axios.get('http://localhost:31336/jsonapi/group/study?filter[id][condition][path]=id&filter[id][condition][operator]=%3D&filter[id][condition][value]=c3609e3e-f80f-482b-9e9f-3a26226a6859');
+    const response = await axios.get('http://localhost:31336/jsonapi/group/study/c3609e3e-f80f-482b-9e9f-3a26226a6859');
     expect(response).toBeDefined();
     expect(response.data).toBeDefined();
     expect(response.data.data).toBeDefined();
-    expect(response.data.data[0]).not.toBeNull();
+    expect(response.data.data).not.toBeNull();
 
-    const studyAreaJson = _CSISHelpers.extractStudyAreaFromStudyGroupNode(response.data.data[0]);
+    const studyAreaJson = _CSISHelpers.extractStudyAreaFromStudyGroupNode(response.data.data);
     expect(studyAreaJson).toEqual(studyArea);
     done();
 });
@@ -163,7 +158,7 @@ test('get 1st "reference" for first HC resource with @mapview:ogc:wms references
 });
 
 test('check for emikat id in study', () => {
-    const emikatId = CSISHelpers.extractEmikatIdFromStudyGroupNode(apiResponseStudy.data[0]);
+    const emikatId = CSISHelpers.extractEmikatIdFromStudyGroupNode(apiResponseStudy.data);
     expect(emikatId).toEqual(2846);
 
 });

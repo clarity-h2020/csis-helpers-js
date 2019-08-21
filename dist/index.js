@@ -901,12 +901,12 @@ function () {
   };
 }();
 /**
-* Gets the Study Node  from Drupal JSON API
+* Gets the Study Node from Drupal JSON API
 *
 * @param {String} studyUuid
-* @param {String} [include ]
+* @param {String} [include]
 * @param {String} [csisBaseUrl]
-* @return {Object}
+* @return {Promise<Object>}
 */
 
 var getStudyGroupNodeFromCsis =
@@ -931,7 +931,7 @@ function () {
             log.debug('fetching study from CSOS API:' + requestUrl);
             _context3.next = 7;
             return csisClient.get(requestUrl, {
-              credentials: 'include'
+              withCredentials: true
             });
 
           case 7:
@@ -2194,7 +2194,7 @@ function () {
   }, {
     key: "extractReferencesfromResource",
     value: function extractReferencesfromResource(resource, referencesArray, referenceType) {
-      var references = []; // the reference type is avialble only at the level of the `included` array
+      var references = []; // the reference type is available only at the level of the `included` array
 
       if (resource.relationships.field_references != null && resource.relationships.field_references.data != null && resource.relationships.field_references.data.length > 0) {
         references = resource.relationships.field_references.data.flatMap(function (referenceReference) {

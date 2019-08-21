@@ -166,7 +166,7 @@ export default class CSISHelpers {
       */
   static extractReferencesfromResource(resource, referencesArray, referenceType) {
     let references = [];
-    // the reference type is avialble only at the level of the `included` array
+    // the reference type is available only at the level of the `included` array
     if (resource.relationships.field_references != null && resource.relationships.field_references.data != null
       && resource.relationships.field_references.data.length > 0) {
       references = resource.relationships.field_references.data.flatMap((referenceReference) => {
@@ -212,7 +212,7 @@ export default class CSISHelpers {
  */
 
 export const extractEmikatIdFromStudyGroupNode = CSISHelpers.extractEmikatIdFromStudyGroupNode
-export const getIncludedObject = CSISHelpers.getIncludedObject;
+export const getIncludedObject = CSISHelpers.getIncludedObject; 
 export const filterResourcesbyTagName = CSISHelpers.filterResourcesbyTagName;
 export const filterResourcesbyReferenceType = CSISHelpers.filterResourcesbyReferenceType;
 export const extractReferencesfromResource = CSISHelpers.extractReferencesfromResource;

@@ -47,12 +47,12 @@ export const getEmikatCredentialsFromCsis = async function (csisBaseUrl = 'https
 }
 
 /**
-* Gets the Study Node  from Drupal JSON API
+* Gets the Study Node from Drupal JSON API
 *
 * @param {String} studyUuid
-* @param {String} [include ]
+* @param {String} [include]
 * @param {String} [csisBaseUrl]
-* @return {Object}
+* @return {Promise<Object>}
 */
 export const getStudyGroupNodeFromCsis = async function (
   studyUuid,
@@ -64,7 +64,7 @@ export const getStudyGroupNodeFromCsis = async function (
   try {
     log.debug('fetching study from CSOS API:' + requestUrl);
 
-    const apiResponse = await csisClient.get(requestUrl, { credentials: 'include' });
+    const apiResponse = await csisClient.get(requestUrl, { withCredentials: true });
     return apiResponse.data;
   }
   catch (error) {
