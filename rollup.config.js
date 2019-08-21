@@ -37,6 +37,7 @@ export default {
     url(),
     babel(
       {
+        runtimeHelpers: true,
         extensions,
         include: ['src/**/*.js'],
         exclude: ['node_modules/**', '*.json']
