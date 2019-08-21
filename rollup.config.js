@@ -12,6 +12,7 @@ const extensions = [
   '.js', '.jsx'
 ]
 export default {
+  external: ['axios', 'loglevel', 'Wkt', 'query-string'],
   input: 'src/index.js',
   output: [
     {
@@ -34,8 +35,17 @@ export default {
       modules: true
     }),
     url(),
-    babel({ extensions, include: ['src/**/*.js'], exclude: ['node_modules/**', '*.json'] }),
-    resolve(),
+    babel(
+      {
+        runtimeHelpers: true,
+        extensions,
+        include: ['src/**/*.js'],
+        exclude: ['node_modules/**', '*.json']
+      }),
+    resolve(
+      {
+        preferBuiltins: false
+      }),
     commonjs()
   ]
 }
