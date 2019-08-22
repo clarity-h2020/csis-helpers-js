@@ -1,7 +1,7 @@
 import log from 'loglevel';
 import axios from 'axios';
 
-export const csisClient = axios.create({ credentials: 'include' });
+export const csisClient = axios.create({ withCredentials: true });
 csisClient.defaults.headers.common['Accept'] = 'application/vnd.api+json';
 csisClient.defaults.headers.common['Content-Type'] = 'application/vnd.api+json';
 
@@ -27,8 +27,8 @@ export const getXCsrfToken = async function (csisBaseUrl = 'https://csis.myclima
 export const getEmikatCredentialsFromCsis = async function (csisBaseUrl = 'https://csis.myclimateservice.eu') {
 
   try {
-    const apiResponse = await csisClient.get(csisBaseUrl + '/jsonapi', { credentials: 'include' });
-    const userResponse = await csisClient.get(apiResponse.data.meta.links.me.href, { credentials: 'include' });
+    const apiResponse = await csisClient.get(csisBaseUrl + '/jsonapi', { withCredentials: true });
+    const userResponse = await csisClient.get(apiResponse.data.meta.links.me.href, { withCredentials: true });
 
     if (userResponse.data.data.attributes.field_basic_auth_credentials) {
       // const header = {'Authorization' : 'Basic ' + btoa(userResponse.data.data.attributes.field_basic_auth_credentials)};
@@ -47,28 +47,115 @@ export const getEmikatCredentialsFromCsis = async function (csisBaseUrl = 'https
 }
 
 /**
-* Gets the Study Node from Drupal JSON API
+* Gets the Study Node from Drupal JSON AP
 *
+* @param {String} csisBaseUrl
 * @param {String} studyUuid
-* @param {String} [include]
-* @param {String} [csisBaseUrl]
+* @param {String} include
 * @return {Promise<Object>}
 */
 export const getStudyGroupNodeFromCsis = async function (
+  csisBaseUrl = 'https://csis.myclimateservice.eu',
   studyUuid,
   include = 'field_data_package,field_data_package.field_resources,field_data_package.field_resources.field_resource_tags,field_data_package.field_resources.field_references',
-  csisBaseUrl = 'https://csis.myclimateservice.eu', ) {
+ ) {
 
   const requestUrl = csisBaseUrl + '/jsonapi/group/study/' + studyUuid + '?include=' + include;
 
   try {
-    log.debug('fetching study from CSOS API:' + requestUrl);
+    log.debug('fetching study from CSIS API:' + requestUrl);
 
     const apiResponse = await csisClient.get(requestUrl, { withCredentials: true });
     return apiResponse.data;
   }
   catch (error) {
     console.error(`could not fetch study from ${requestUrl}`, error);
+    throw error;
+  }
+}
+
+/**
+* Gets the Study Node from Drupal JSON API
+*
+* @param {String} csisBaseUrl
+* @param {String} datapackageUuid
+* @param {String} include
+* @return {Promise<Object>}
+*/
+export const getDatapackageFromCsis = async function (
+  csisBaseUrl = 'https://csis.myclimateservice.eu',
+  datapackageUuid,
+  include = 'field_resources,field_resources.field_resource_tags,field_resources.field_references',
+  ) {
+
+  const requestUrl = csisBaseUrl + '/jsonapi/node/data_package/' + datapackageUuid + '?include=' + include;
+
+  try {
+    log.debug('fetching datapackage from CSIS API:' + requestUrl);
+
+    const apiResponse = await csisClient.get(requestUrl, { withCredentials: true });
+    return apiResponse.data;
+  }
+  catch (error) {
+    console.error(`could not fetch datapackage from ${requestUrl}`, error);
+    throw error;
+  }
+}
+
+/**
+* Gets Datapackage Resources array from Drupal JSON API
+*
+* @param {String} csisBaseUrl
+* @param {String} datapackageUuid
+* @param {String} include
+* @return {Promise<Object>}
+*/
+export const getDatapackageResourcesFromCsis = async function (
+  csisBaseUrl = 'https://csis.myclimateservice.eu', 
+  datapackageUuid,
+  include = 'field_resource_tags,field_references'
+  ) {
+
+  const requestUrl = csisBaseUrl + '/jsonapi/node/data_package/'+ datapackageUuid +'/field_resources?include=' + include;
+
+  try {
+    log.debug('fetching datapackage resources from CSIS API:' + requestUrl);
+
+    const apiResponse = await csisClient.get(requestUrl, { withCredentials: true });
+    return apiResponse.data;
+  }
+  catch (error) {
+    console.error(`could not fetch datapackage resources from ${requestUrl}`, error);
+    throw error;
+  }
+}
+
+/**
+* Gets a single Resource from Drupal JSON API
+* https://csis.myclimateservice.eu/jsonapi/node/data_package_metadata/b834a248-1817-44ce-9cb3-f882198c1e1f?include=field_resource_tags,field_references
+*
+* @param {String} csisBaseUrl
+* @param {String} resourceUuid
+* @param {String} include
+* @return {Promise<Object>}
+*/
+export const getDatapackageResourceFromCsis = async function (
+  csisBaseUrl = 'https://csis.myclimateservice.eu', 
+  resourceUuid,
+  include = 'field_resource_tags,field_references'
+  ) {
+
+  // data_package_metadata WTF? yaeh, that's the name of the resource type :-(
+  const requestUrl = csisBaseUrl + '/jsonapi/node/data_package_metadata/' + resourceUuid + '?include=' + include;
+
+  try {
+    log.debug('fetching datapackage resources from CSIS API:' + requestUrl);
+
+    const apiResponse = await csisClient.get(requestUrl, { withCredentials: true });
+    return apiResponse.data;
+  }
+  catch (error) {
+    console.error(`could not fetch datapackage resources from ${requestUrl}`, error);
     throw error;
   }
 }

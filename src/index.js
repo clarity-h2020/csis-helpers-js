@@ -2,8 +2,8 @@ import * as CSISRemoteHelpers from './lib/CSISRemoteHelpers.js';
 import * as EMIKATHelpers from './lib/EMIKATHelpers.js';
 import * as CSISHelpers from './lib/CSISHelpers.js';
 
-//export EMIKATHelpers from './lib/EMIKATHelpers.js';
-export {CSISHelpers, CSISRemoteHelpers, EMIKATHelpers}
+import log from 'loglevel';
+// SEEMS TO BE REALLY NECESSARY TO GET DEBUG MESSAGES ON CONSOLE.
+log.enableAll();
 
-//export {CSISHelpers, EMIKATHelpers}
-//export EMIKATHelpers from './lib/EMIKATHelpers.js';
+export {CSISHelpers, CSISRemoteHelpers, EMIKATHelpers}

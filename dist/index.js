@@ -782,7 +782,7 @@ function _asyncToGenerator(fn) {
 var asyncToGenerator = _asyncToGenerator;
 
 var csisClient = axios.create({
-  credentials: 'include'
+  withCredentials: true
 });
 csisClient.defaults.headers.common['Accept'] = 'application/vnd.api+json';
 csisClient.defaults.headers.common['Content-Type'] = 'application/vnd.api+json';
@@ -853,14 +853,14 @@ function () {
             _context2.prev = 1;
             _context2.next = 4;
             return csisClient.get(csisBaseUrl + '/jsonapi', {
-              credentials: 'include'
+              withCredentials: true
             });
 
           case 4:
             apiResponse = _context2.sent;
             _context2.next = 7;
             return csisClient.get(apiResponse.data.meta.links.me.href, {
-              credentials: 'include'
+              withCredentials: true
             });
 
           case 7:
@@ -901,11 +901,11 @@ function () {
   };
 }();
 /**
-* Gets the Study Node from Drupal JSON API
+* Gets the Study Node from Drupal JSON AP
 *
+* @param {String} csisBaseUrl
 * @param {String} studyUuid
-* @param {String} [include]
-* @param {String} [csisBaseUrl]
+* @param {String} include
 * @return {Promise<Object>}
 */
 
@@ -914,9 +914,10 @@ var getStudyGroupNodeFromCsis =
 function () {
   var _ref3 = asyncToGenerator(
   /*#__PURE__*/
-  regenerator.mark(function _callee3(studyUuid) {
-    var include,
-        csisBaseUrl,
+  regenerator.mark(function _callee3() {
+    var csisBaseUrl,
+        studyUuid,
+        include,
         requestUrl,
         apiResponse,
         _args3 = arguments;
@@ -924,36 +925,213 @@ function () {
       while (1) {
         switch (_context3.prev = _context3.next) {
           case 0:
-            include = _args3.length > 1 && _args3[1] !== undefined ? _args3[1] : 'field_data_package,field_data_package.field_resources,field_data_package.field_resources.field_resource_tags,field_data_package.field_resources.field_references';
-            csisBaseUrl = _args3.length > 2 && _args3[2] !== undefined ? _args3[2] : 'https://csis.myclimateservice.eu';
+            csisBaseUrl = _args3.length > 0 && _args3[0] !== undefined ? _args3[0] : 'https://csis.myclimateservice.eu';
+            studyUuid = _args3.length > 1 ? _args3[1] : undefined;
+            include = _args3.length > 2 && _args3[2] !== undefined ? _args3[2] : 'field_data_package,field_data_package.field_resources,field_data_package.field_resources.field_resource_tags,field_data_package.field_resources.field_references';
             requestUrl = csisBaseUrl + '/jsonapi/group/study/' + studyUuid + '?include=' + include;
-            _context3.prev = 3;
-            log.debug('fetching study from CSOS API:' + requestUrl);
-            _context3.next = 7;
+            _context3.prev = 4;
+            log.debug('fetching study from CSIS API:' + requestUrl);
+            _context3.next = 8;
             return csisClient.get(requestUrl, {
               withCredentials: true
             });
 
-          case 7:
+          case 8:
             apiResponse = _context3.sent;
             return _context3.abrupt("return", apiResponse.data);
 
-          case 11:
-            _context3.prev = 11;
-            _context3.t0 = _context3["catch"](3);
+          case 12:
+            _context3.prev = 12;
+            _context3.t0 = _context3["catch"](4);
             console.error("could not fetch study from ".concat(requestUrl), _context3.t0);
             throw _context3.t0;
 
-          case 15:
+          case 16:
           case "end":
             return _context3.stop();
         }
       }
-    }, _callee3, null, [[3, 11]]);
+    }, _callee3, null, [[4, 12]]);
   }));
 
-  return function getStudyGroupNodeFromCsis(_x) {
+  return function getStudyGroupNodeFromCsis() {
     return _ref3.apply(this, arguments);
+  };
+}();
+/**
+* Gets the Study Node from Drupal JSON API
+*
+* @param {String} csisBaseUrl
+* @param {String} datapackageUuid
+* @param {String} include
+* @return {Promise<Object>}
+*/
+
+var getDatapackageFromCsis =
+/*#__PURE__*/
+function () {
+  var _ref4 = asyncToGenerator(
+  /*#__PURE__*/
+  regenerator.mark(function _callee4() {
+    var csisBaseUrl,
+        datapackageUuid,
+        include,
+        requestUrl,
+        apiResponse,
+        _args4 = arguments;
+    return regenerator.wrap(function _callee4$(_context4) {
+      while (1) {
+        switch (_context4.prev = _context4.next) {
+          case 0:
+            csisBaseUrl = _args4.length > 0 && _args4[0] !== undefined ? _args4[0] : 'https://csis.myclimateservice.eu';
+            datapackageUuid = _args4.length > 1 ? _args4[1] : undefined;
+            include = _args4.length > 2 && _args4[2] !== undefined ? _args4[2] : 'field_resources,field_resources.field_resource_tags,field_resources.field_references';
+            requestUrl = csisBaseUrl + '/jsonapi/node/data_package/' + datapackageUuid + '?include=' + include;
+            _context4.prev = 4;
+            log.debug('fetching datapackage from CSIS API:' + requestUrl);
+            _context4.next = 8;
+            return csisClient.get(requestUrl, {
+              withCredentials: true
+            });
+
+          case 8:
+            apiResponse = _context4.sent;
+            return _context4.abrupt("return", apiResponse.data);
+
+          case 12:
+            _context4.prev = 12;
+            _context4.t0 = _context4["catch"](4);
+            console.error("could not fetch datapackage from ".concat(requestUrl), _context4.t0);
+            throw _context4.t0;
+
+          case 16:
+          case "end":
+            return _context4.stop();
+        }
+      }
+    }, _callee4, null, [[4, 12]]);
+  }));
+
+  return function getDatapackageFromCsis() {
+    return _ref4.apply(this, arguments);
+  };
+}();
+/**
+* Gets Datapackage Resources array from Drupal JSON API
+*
+* @param {String} csisBaseUrl
+* @param {String} datapackageUuid
+* @param {String} include
+* @return {Promise<Object>}
+*/
+
+var getDatapackageResourcesFromCsis =
+/*#__PURE__*/
+function () {
+  var _ref5 = asyncToGenerator(
+  /*#__PURE__*/
+  regenerator.mark(function _callee5() {
+    var csisBaseUrl,
+        datapackageUuid,
+        include,
+        requestUrl,
+        apiResponse,
+        _args5 = arguments;
+    return regenerator.wrap(function _callee5$(_context5) {
+      while (1) {
+        switch (_context5.prev = _context5.next) {
+          case 0:
+            csisBaseUrl = _args5.length > 0 && _args5[0] !== undefined ? _args5[0] : 'https://csis.myclimateservice.eu';
+            datapackageUuid = _args5.length > 1 ? _args5[1] : undefined;
+            include = _args5.length > 2 && _args5[2] !== undefined ? _args5[2] : 'field_resource_tags,field_references';
+            requestUrl = csisBaseUrl + '/jsonapi/node/data_package/' + datapackageUuid + '/field_resources?include=' + include;
+            _context5.prev = 4;
+            log.debug('fetching datapackage resources from CSIS API:' + requestUrl);
+            _context5.next = 8;
+            return csisClient.get(requestUrl, {
+              withCredentials: true
+            });
+
+          case 8:
+            apiResponse = _context5.sent;
+            return _context5.abrupt("return", apiResponse.data);
+
+          case 12:
+            _context5.prev = 12;
+            _context5.t0 = _context5["catch"](4);
+            console.error("could not fetch datapackage resources from ".concat(requestUrl), _context5.t0);
+            throw _context5.t0;
+
+          case 16:
+          case "end":
+            return _context5.stop();
+        }
+      }
+    }, _callee5, null, [[4, 12]]);
+  }));
+
+  return function getDatapackageResourcesFromCsis() {
+    return _ref5.apply(this, arguments);
+  };
+}();
+/**
+* Gets a single Resource from Drupal JSON API
+* https://csis.myclimateservice.eu/jsonapi/node/data_package_metadata/b834a248-1817-44ce-9cb3-f882198c1e1f?include=field_resource_tags,field_references
+*
+* @param {String} csisBaseUrl
+* @param {String} resourceUuid
+* @param {String} include
+* @return {Promise<Object>}
+*/
+
+var getDatapackageResourceFromCsis =
+/*#__PURE__*/
+function () {
+  var _ref6 = asyncToGenerator(
+  /*#__PURE__*/
+  regenerator.mark(function _callee6() {
+    var csisBaseUrl,
+        resourceUuid,
+        include,
+        requestUrl,
+        apiResponse,
+        _args6 = arguments;
+    return regenerator.wrap(function _callee6$(_context6) {
+      while (1) {
+        switch (_context6.prev = _context6.next) {
+          case 0:
+            csisBaseUrl = _args6.length > 0 && _args6[0] !== undefined ? _args6[0] : 'https://csis.myclimateservice.eu';
+            resourceUuid = _args6.length > 1 ? _args6[1] : undefined;
+            include = _args6.length > 2 && _args6[2] !== undefined ? _args6[2] : 'field_resource_tags,field_references';
+            // data_package_metadata WTF? yaeh, that's the name of the resource type :-(
+            requestUrl = csisBaseUrl + '/jsonapi/node/data_package_metadata/' + resourceUuid + '?include=' + include;
+            _context6.prev = 4;
+            log.debug('fetching datapackage resources from CSIS API:' + requestUrl);
+            _context6.next = 8;
+            return csisClient.get(requestUrl, {
+              withCredentials: true
+            });
+
+          case 8:
+            apiResponse = _context6.sent;
+            return _context6.abrupt("return", apiResponse.data);
+
+          case 12:
+            _context6.prev = 12;
+            _context6.t0 = _context6["catch"](4);
+            console.error("could not fetch datapackage resources from ".concat(requestUrl), _context6.t0);
+            throw _context6.t0;
+
+          case 16:
+          case "end":
+            return _context6.stop();
+        }
+      }
+    }, _callee6, null, [[4, 12]]);
+  }));
+
+  return function getDatapackageResourceFromCsis() {
+    return _ref6.apply(this, arguments);
   };
 }();
 
@@ -961,7 +1139,10 @@ var CSISRemoteHelpers = /*#__PURE__*/Object.freeze({
 	csisClient: csisClient,
 	getXCsrfToken: getXCsrfToken,
 	getEmikatCredentialsFromCsis: getEmikatCredentialsFromCsis,
-	getStudyGroupNodeFromCsis: getStudyGroupNodeFromCsis
+	getStudyGroupNodeFromCsis: getStudyGroupNodeFromCsis,
+	getDatapackageFromCsis: getDatapackageFromCsis,
+	getDatapackageResourcesFromCsis: getDatapackageResourcesFromCsis,
+	getDatapackageResourceFromCsis: getDatapackageResourceFromCsis
 });
 
 var EMIKAT_STUDY_ID = '$emikat_id';
@@ -2059,7 +2240,7 @@ function () {
       * 
       * @param {string} type 
       * @param {number} id 
-      * @param {boolean} includedArray 
+      * @param {Object[]} includedArray 
       * @see https://www.drupal.org/docs/8/modules/jsonapi/includes
      */
     value: function getIncludedObject(type, id, includedArray) {
@@ -2108,7 +2289,7 @@ function () {
        */
       var studyArea = new wicket.Wkt();
 
-      if (studyGroupNode.attributes.field_area != null && studyGroupNode.attributes.field_area.value != null) {
+      if (studyGroupNode && studyGroupNode.attributes && studyGroupNode.attributes.field_area != null && studyGroupNode.attributes.field_area.value != null) {
         studyArea.read(studyGroupNode.attributes.field_area.value);
       } else {
         log.warn('no study area in study ' + studyGroupNode);
@@ -2118,12 +2299,12 @@ function () {
       return studyAreaJson;
     }
     /**
-     * Filters resource array by tag id/name which are included in the tags array (due to Drupal API quirks).
+     * Filters resource array by tag name which are included in the tags array (due to Drupal API quirks).
      * 
      * @param {Object[]} resourceArray the original resource array
      * @param {Object[]} tagsArray included objects - Drupal APi style! :-/
      * @param {string} tagType The tag type, e.g. 'taxonomy_term--eu_gl'
-     * @param {string} tagName The name of the tag, e.g.'eu-gl:hazard-characterization:local-effects'
+     * @param {string} tagName The name of the tag, e.g.'Hazard Characterization - Local Effects'
      * @return {Object[]}
      * @see getIncludedObject()
      */
@@ -2148,7 +2329,41 @@ function () {
 
         return false;
       });
-      log.debug(filteredResourceArray.length + ' resources left after filtering ' + resourceArray.length + ' resources by tag type ' + tagType + ' and tag name ' + tagName);
+      log.debug(filteredResourceArray.length + ' resources left after filtering ' + resourceArray.length + ' resources by tag type ' + tagType + ' and tag name ' + name);
+      return filteredResourceArray;
+    }
+    /**
+    * Filters resource array by tag id which are included in the tags array (due to Drupal API quirks).
+    * 
+    * @param {Object[]} resourceArray the original resource array
+    * @param {Object[]} tagsArray included objects - Drupal APi style! :-/
+    * @param {string} id The id of the UU-GL Taxonomy tag, e.g.'eu-gl:hazard-characterization:local-effects'
+    * @return {Object[]}
+    * @see getIncludedObject()
+    */
+
+  }, {
+    key: "filterResourcesByEuglId",
+    value: function filterResourcesByEuglId(resourceArray, tagsArray, id) {
+      /**
+       * If we request exactly **one** resource, there would be a possibility for simplification that applies to all taxonomy terms and tags: 
+       * Instead of looking at `resource.relationships.field_resource_tags.data` we just have to search in `tagsArray` (included objects, respectively).
+       */
+      var tagType = 'taxonomy_term--eu_gl';
+      var filteredResourceArray = resourceArray.filter(function (resource) {
+        if (resource.relationships.field_resource_tags != null && resource.relationships.field_resource_tags.data != null && resource.relationships.field_resource_tags.data.length > 0) {
+          return resource.relationships.field_resource_tags.data.some(function (tagReference) {
+            return tagReference.type === tagType ? tagsArray.some(function (tagObject) {
+              return tagReference.type === tagObject.type && tagReference.id === tagObject.id && tagObject.attributes.field_eu_gl_taxonomy_id && tagObject.attributes.field_eu_gl_taxonomy_id.value && tagObject.attributes.field_eu_gl_taxonomy_id.value === id;
+            }) : false;
+          });
+        } else {
+          log.warn('no EU-GL tags found  in resource ' + resource.id);
+        }
+
+        return false;
+      });
+      log.debug(filteredResourceArray.length + ' resources left after filtering ' + resourceArray.length + ' resources by tag type ' + tagType + ' and EU-GL id ' + id);
       return filteredResourceArray;
     }
     /**
@@ -2172,7 +2387,7 @@ function () {
             });
           });
         } else {
-          log.warn('no references found  in resource ' + resource.id);
+          log.warn("no references found in resource '".concat(resource.attributes.title, "' (").concat(resource.id, ")"));
         }
 
         return false;
@@ -2241,6 +2456,7 @@ function () {
 var extractEmikatIdFromStudyGroupNode = CSISHelpers.extractEmikatIdFromStudyGroupNode;
 var getIncludedObject = CSISHelpers.getIncludedObject;
 var filterResourcesbyTagName = CSISHelpers.filterResourcesbyTagName;
+var filterResourcesByEuglId = CSISHelpers.filterResourcesByEuglId;
 var filterResourcesbyReferenceType = CSISHelpers.filterResourcesbyReferenceType;
 var extractReferencesfromResource = CSISHelpers.extractReferencesfromResource;
 var extractTagsfromResource = CSISHelpers.extractTagsfromResource;
@@ -2251,11 +2467,14 @@ var CSISHelpers$1 = /*#__PURE__*/Object.freeze({
 	extractEmikatIdFromStudyGroupNode: extractEmikatIdFromStudyGroupNode,
 	getIncludedObject: getIncludedObject,
 	filterResourcesbyTagName: filterResourcesbyTagName,
+	filterResourcesByEuglId: filterResourcesByEuglId,
 	filterResourcesbyReferenceType: filterResourcesbyReferenceType,
 	extractReferencesfromResource: extractReferencesfromResource,
 	extractTagsfromResource: extractTagsfromResource,
 	extractStudyAreaFromStudyGroupNode: extractStudyAreaFromStudyGroupNode
 });
+
+log.enableAll();
 
 exports.CSISHelpers = CSISHelpers$1;
 exports.CSISRemoteHelpers = CSISRemoteHelpers;

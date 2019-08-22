@@ -2,6 +2,10 @@ import axios from 'axios';
 import log from 'loglevel';
 
 import * as CSISRemoteHelpers from './../lib/CSISRemoteHelpers.js';
+import * as CSISHelpers from './../lib/CSISHelpers.js';
+
+import {CSISRemoteHelpers as _CSISRemoteHelpers, CSISHelpers as _CSISHelpers} from './../../dist/index.js';
+
 import apiResponseStudy from './../__fixtures__/study.json';
 
 /**
@@ -25,10 +29,12 @@ beforeAll(async (done) => {
 
             // therefore we change the instance in CSISRemoteHelpers :o
             CSISRemoteHelpers.csisClient.defaults.headers.common[header[0]] = header[1];
+            //hacketyhack:
+            _CSISRemoteHelpers.csisClient.defaults.headers.common[header[0]] = header[1];
         });
     }
     debugLogInterceptor = CSISRemoteHelpers.csisClient.interceptors.request.use((request) => {
-        log.debug(JSON.stringify(request));
+        //log.debug(JSON.stringify(request));
         return request;
     });
     done();
@@ -81,8 +87,8 @@ describe('Remote API tests with authentication', () => {
         done();
     });
 
-    it('test get complete Study', async (done) => {
-        const studyGroupNode = await CSISRemoteHelpers.getStudyGroupNodeFromCsis('c3609e3e-f80f-482b-9e9f-3a26226a6859');
+    it('[DEV] test get complete Study', async (done) => {
+        const studyGroupNode = await CSISRemoteHelpers.getStudyGroupNodeFromCsis(undefined, 'c3609e3e-f80f-482b-9e9f-3a26226a6859');
         expect.assertions(6);
         expect(studyGroupNode).toBeDefined();
         expect(studyGroupNode).not.toBeNull();
@@ -90,6 +96,41 @@ describe('Remote API tests with authentication', () => {
         expect(apiResponseStudy).not.toBeNull();
         expect(apiResponseStudy.data).not.toBeNull();
         expect(apiResponseStudy.data.id).toEqual(studyGroupNode.data.id);
+        done();
+    });
+
+    it('[PROD] test get complete Study', async (done) => {
+        const studyGroupNode = await _CSISRemoteHelpers.getStudyGroupNodeFromCsis(undefined, 'c3609e3e-f80f-482b-9e9f-3a26226a6859');
+        expect.assertions(6);
+        expect(studyGroupNode).toBeDefined();
+        expect(studyGroupNode).not.toBeNull();
+        expect(apiResponseStudy).toBeDefined();
+        expect(apiResponseStudy).not.toBeNull();
+        expect(apiResponseStudy.data).not.toBeNull();
+        expect(apiResponseStudy.data.id).toEqual(studyGroupNode.data.id);
+        done();
+    });
+
+    it('[DEV] test get datapackage resources for eu-gl:hazard-characterization', async (done) => {
+        const resourcesApiResponse = await CSISRemoteHelpers.getDatapackageResourcesFromCsis(undefined, "a8ff7930-4a9f-4289-8246-3383ba13c30f");
+        
+        expect.assertions(6);
+        
+        expect(resourcesApiResponse).toBeDefined();
+        expect(resourcesApiResponse).not.toBeNull();
+        expect(resourcesApiResponse.data).not.toBeNull();
+        expect(resourcesApiResponse.included).not.toBeNull();
+        
+        const filteredResources = CSISHelpers.filterResourcesByEuglId(
+            resourcesApiResponse.data, 
+            resourcesApiResponse.included,  
+            'eu-gl:hazard-characterization');
+
+        log.info(`filteredResources: ${filteredResources.length}`);
+
+        expect(filteredResources).not.toBeNull();
+        expect(filteredResources.length).toBeGreaterThan(0);
+
         done();
     });
 });

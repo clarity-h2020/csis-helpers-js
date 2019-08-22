@@ -32,7 +32,7 @@ export default class CSISHelpers {
     * 
     * @param {string} type 
     * @param {number} id 
-    * @param {boolean} includedArray 
+    * @param {Object[]} includedArray 
     * @see https://www.drupal.org/docs/8/modules/jsonapi/includes
    */
   static getIncludedObject(type, id, includedArray) {
@@ -78,7 +78,7 @@ export default class CSISHelpers {
      */
     let studyArea = new Wkt.Wkt();
 
-    if (studyGroupNode.attributes.field_area != null && studyGroupNode.attributes.field_area.value != null) {
+    if (studyGroupNode && studyGroupNode.attributes && studyGroupNode.attributes.field_area != null && studyGroupNode.attributes.field_area.value != null) {
       studyArea.read(studyGroupNode.attributes.field_area.value);
     } else {
       log.warn('no study area in study ' + studyGroupNode);
@@ -89,12 +89,12 @@ export default class CSISHelpers {
   }
 
   /**
-   * Filters resource array by tag id/name which are included in the tags array (due to Drupal API quirks).
+   * Filters resource array by tag name which are included in the tags array (due to Drupal API quirks).
    * 
    * @param {Object[]} resourceArray the original resource array
    * @param {Object[]} tagsArray included objects - Drupal APi style! :-/
    * @param {string} tagType The tag type, e.g. 'taxonomy_term--eu_gl'
-   * @param {string} tagName The name of the tag, e.g.'eu-gl:hazard-characterization:local-effects'
+   * @param {string} tagName The name of the tag, e.g.'Hazard Characterization - Local Effects'
    * @return {Object[]}
    * @see getIncludedObject()
    */
@@ -114,12 +114,53 @@ export default class CSISHelpers {
       } else {
         log.warn('no tags found  in resource ' + resource.id)
       }
+      return false;
+
+    });
+
+    log.debug(filteredResourceArray.length + ' resources left after filtering ' + resourceArray.length
+      + ' resources by tag type ' + tagType + ' and tag name ' + name);
+
+    return filteredResourceArray;
+  }
+
+  /**
+ * Filters resource array by tag id which are included in the tags array (due to Drupal API quirks).
+ * 
+ * @param {Object[]} resourceArray the original resource array
+ * @param {Object[]} tagsArray included objects - Drupal APi style! :-/
+ * @param {string} id The id of the UU-GL Taxonomy tag, e.g.'eu-gl:hazard-characterization:local-effects'
+ * @return {Object[]}
+ * @see getIncludedObject()
+ */
+  static filterResourcesByEuglId(resourceArray, tagsArray, id) {
+    /**
+     * If we request exactly **one** resource, there would be a possibility for simplification that applies to all taxonomy terms and tags: 
+     * Instead of looking at `resource.relationships.field_resource_tags.data` we just have to search in `tagsArray` (included objects, respectively).
+     */
+    const tagType = 'taxonomy_term--eu_gl';
+    let filteredResourceArray = resourceArray.filter((resource) => {
+      if (resource.relationships.field_resource_tags != null && resource.relationships.field_resource_tags.data != null
+        && resource.relationships.field_resource_tags.data.length > 0) {
+        return resource.relationships.field_resource_tags.data.some((tagReference) => {
+          return tagReference.type === tagType ? tagsArray.some((tagObject) => {
+            return (tagReference.type === tagObject.type
+              && tagReference.id === tagObject.id
+              && tagObject.attributes.field_eu_gl_taxonomy_id
+              && tagObject.attributes.field_eu_gl_taxonomy_id.value
+              && tagObject.attributes.field_eu_gl_taxonomy_id.value === id);
+          }) : false;
+        });
+      } else {
+        log.warn('no EU-GL tags found  in resource ' + resource.id)
+      }
 
       return false;
 
     });
+
     log.debug(filteredResourceArray.length + ' resources left after filtering ' + resourceArray.length
-      + ' resources by tag type ' + tagType + ' and tag name ' + tagName);
+      + ' resources by tag type ' + tagType + ' and EU-GL id ' + id);
 
     return filteredResourceArray;
   }
@@ -144,7 +185,7 @@ export default class CSISHelpers {
           });
         });
       } else {
-        log.warn('no references found  in resource ' + resource.id)
+        log.warn(`no references found in resource '${resource.attributes.title}' (${resource.id})`)
       }
 
       return false;
@@ -212,8 +253,9 @@ export default class CSISHelpers {
  */
 
 export const extractEmikatIdFromStudyGroupNode = CSISHelpers.extractEmikatIdFromStudyGroupNode
-export const getIncludedObject = CSISHelpers.getIncludedObject; 
+export const getIncludedObject = CSISHelpers.getIncludedObject;
 export const filterResourcesbyTagName = CSISHelpers.filterResourcesbyTagName;
+export const filterResourcesByEuglId = CSISHelpers.filterResourcesByEuglId;
 export const filterResourcesbyReferenceType = CSISHelpers.filterResourcesbyReferenceType;
 export const extractReferencesfromResource = CSISHelpers.extractReferencesfromResource;
 export const extractTagsfromResource = CSISHelpers.extractTagsfromResource;
