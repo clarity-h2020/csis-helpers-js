@@ -63,7 +63,7 @@ export const getStudyGroupNodeFromCsis = async function (
   const requestUrl = csisBaseUrl + '/jsonapi/group/study/' + studyUuid + '?include=' + include;
 
   try {
-    log.debug('fetching study from CSIS API:' + requestUrl);
+    log.debug('fetching study from CSIS API: ' + requestUrl);
 
     const apiResponse = await csisClient.get(requestUrl, { withCredentials: true });
     return apiResponse.data;

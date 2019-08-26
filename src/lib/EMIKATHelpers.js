@@ -75,7 +75,7 @@ export async function fetchUsers(url, authString) {
 export function addEmikatId(urlTemplate, emikatId) {
   if(urlTemplate && emikatId && urlTemplate.includes(EMIKAT_STUDY_ID))
   {
-    return urlTemplate.replace(EMIKAT_STUDY_ID, emikatId);
+    return urlTemplate.replace(EMIKAT_STUDY_ID, emikatId.toString());
   }
   
   return urlTemplate;

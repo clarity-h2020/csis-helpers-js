@@ -930,7 +930,7 @@ function () {
             include = _args3.length > 2 && _args3[2] !== undefined ? _args3[2] : 'field_data_package,field_data_package.field_resources,field_data_package.field_resources.field_resource_tags,field_data_package.field_resources.field_references';
             requestUrl = csisBaseUrl + '/jsonapi/group/study/' + studyUuid + '?include=' + include;
             _context3.prev = 4;
-            log.debug('fetching study from CSIS API:' + requestUrl);
+            log.debug('fetching study from CSIS API: ' + requestUrl);
             _context3.next = 8;
             return csisClient.get(requestUrl, {
               withCredentials: true
@@ -1259,7 +1259,7 @@ function _fetchUsers() {
 
 function addEmikatId(urlTemplate, emikatId) {
   if (urlTemplate && emikatId && urlTemplate.includes(EMIKAT_STUDY_ID)) {
-    return urlTemplate.replace(EMIKAT_STUDY_ID, emikatId);
+    return urlTemplate.replace(EMIKAT_STUDY_ID, emikatId.toString());
   }
 
   return urlTemplate;
