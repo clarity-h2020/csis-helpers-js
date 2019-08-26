@@ -69,18 +69,22 @@ export async function fetchUsers(url, authString) {
  * `https://service.emikat.at/EmiKatTst/api/scenarios/${emikat_id}/feature/view.2812/table/data`
  * However, this has to many drawbacks
  * 
- * @param {string} urlTemplate 
- * @param {number} emikatId 
+ * @param {String} urlTemplate 
+ * @param {String|Number} emikatId 
  */
 export function addEmikatId(urlTemplate, emikatId) {
-  let url = urlTemplate.replace(EMIKAT_STUDY_ID, emikatId);
-  return url;
+  if(urlTemplate && emikatId && urlTemplate.includes(EMIKAT_STUDY_ID))
+  {
+    return urlTemplate.replace(EMIKAT_STUDY_ID, emikatId);
+  }
+  
+  return urlTemplate;
 }
 
 /**
  * Generates a simple column definition for ReactTable from EMIKAT tabular Data
  * 
- * @param {Object[]} columns 
+ * @param {Object[]} columnnames 
  * @return {Object[]}
  */
 export function generateColumns(columnnames) {
@@ -93,12 +97,6 @@ export function generateColumns(columnnames) {
     accessor: row => row.values[index] // Custom value accessors!
   }));
 }
-
-
-export function sum(a, b) {
-  return a + b;
-}
-
 
 /**
  * We can either use "import EMIKATHelpers from './EMIKATHelpers.js'" and call  "EMIKATHelpers.getIncludedObject(...)" or

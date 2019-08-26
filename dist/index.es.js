@@ -1247,18 +1247,21 @@ function _fetchUsers() {
  * `https://service.emikat.at/EmiKatTst/api/scenarios/${emikat_id}/feature/view.2812/table/data`
  * However, this has to many drawbacks
  * 
- * @param {string} urlTemplate 
- * @param {number} emikatId 
+ * @param {String} urlTemplate 
+ * @param {String|Number} emikatId 
  */
 
 function addEmikatId(urlTemplate, emikatId) {
-  var url = urlTemplate.replace(EMIKAT_STUDY_ID, emikatId);
-  return url;
+  if (urlTemplate && emikatId && urlTemplate.includes(EMIKAT_STUDY_ID)) {
+    return urlTemplate.replace(EMIKAT_STUDY_ID, emikatId);
+  }
+
+  return urlTemplate;
 }
 /**
  * Generates a simple column definition for ReactTable from EMIKAT tabular Data
  * 
- * @param {Object[]} columns 
+ * @param {Object[]} columnnames 
  * @return {Object[]}
  */
 
@@ -1277,9 +1280,6 @@ function generateColumns(columnnames) {
     };
   });
 }
-function sum(a, b) {
-  return a + b;
-}
 /**
  * We can either use "import EMIKATHelpers from './EMIKATHelpers.js'" and call  "EMIKATHelpers.getIncludedObject(...)" or
  * "import {getIncludedObject} from './EMIKATHelpers.js'" and call "getIncludedObject(...)".
@@ -1290,8 +1290,7 @@ var EMIKATHelpers = /*#__PURE__*/Object.freeze({
 	fetchData: fetchData,
 	fetchUsers: fetchUsers,
 	addEmikatId: addEmikatId,
-	generateColumns: generateColumns,
-	sum: sum
+	generateColumns: generateColumns
 });
 
 function _classCallCheck(instance, Constructor) {
