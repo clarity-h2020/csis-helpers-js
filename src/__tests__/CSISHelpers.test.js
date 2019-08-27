@@ -1,7 +1,7 @@
 import axios from 'axios';
 import log from 'loglevel';
 import CSISHelpers from './../lib/CSISHelpers.js';
-import {CSISHelpers as _CSISHelpers} from './../../dist/index.js';
+import { CSISHelpers as _CSISHelpers } from './../../dist/index.js';
 import express from 'express'
 import apiResponseStudy from './../__fixtures__/study.json';
 import apiResponseDataPackage from './../__fixtures__/dataPackage.json';
@@ -105,6 +105,32 @@ test('[DEV] find resources with @mapview:ogc:wms references in resource array', 
     const filteredResources = CSISHelpers.filterResourcesbyReferenceType(resourcesArray, includedArray, referenceType);
     expect(filteredResources.length).toBeLessThan(resourcesArray.length);
     expect(filteredResources).toHaveLength(30);
+});
+
+test('get taxonomy_term--hazards tags from resources ', () => {
+    const tagType = 'taxonomy_term--hazards';
+    const resourcesArray = apiResponseResources.data;
+    const includedArray = apiResponseResources.included;
+    /**
+     * @type{Set}
+     */
+    const distinctTags = new Set();
+
+    expect(resourcesArray).not.toBeNull();
+    expect(resourcesArray.length).toBeGreaterThan(0);
+    resourcesArray.map(resource => {
+        const tags = CSISHelpers.extractTagsfromResource(resource, includedArray, tagType);
+        if (tags) {
+            tags.map(tag => {
+                distinctTags.add(tag);
+            });
+        }
+    });
+
+    expect(distinctTags.size).toBeGreaterThan(0);
+    distinctTags.forEach(tag => {
+        log.debug(`found distinct tag $tag.attributes.name in $resourcesArray.length`);
+    });
 });
 
 /**
