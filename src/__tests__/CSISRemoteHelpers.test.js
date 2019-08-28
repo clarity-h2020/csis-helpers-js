@@ -11,7 +11,15 @@ import apiResponseStudy from './../__fixtures__/study.json';
 /**
  * @type {Object[]}
  */
-import headers from '../__fixtures__/csisHeaders.js';
+var headers = undefined;
+try {
+    import('./../__fixtures__/csisHeaders.js').then(
+        (module) => { headers = module.default; log.info('headers.js fixture found, executing remote API tests'); },
+        (error) => { log.info('csisHeaders.js is not present, skipping remote API tests'); }
+    );
+} catch (error) {
+    //ignore
+}
 
 let debugLogInterceptor;
 
@@ -20,8 +28,19 @@ let debugLogInterceptor;
  */
 beforeAll(async (done) => {
 
+    if (!headers) {
+        try {
+            const module = await import('./../__fixtures__/csisHeaders.js');
+            headers = module.default;
+            log.info('headers.js fixture found, executing remote API tests');
+        } catch (error) {
+            log.info('csisHeaders.js is not present, skipping remote API tests');
+        }
+    }
+
     //axios.defaults.withCredentials = true;
     if (headers && Array.isArray(headers)) {
+        log.info('headers.js fixture found, executing remote API tests');
         headers.forEach((header) => {
             // this will fail when a new instance of axios has been created in CSISRemoteHelpers
             // because the instance is created with the *previous* defaults! :o
@@ -29,9 +48,9 @@ beforeAll(async (done) => {
 
             // therefore we change the instance in CSISRemoteHelpers :o
             CSISRemoteHelpers.csisClient.defaults.headers.common[header[0]] = header[1];
-            //hacketyhack:
-            _CSISRemoteHelpers.csisClient.defaults.headers.common[header[0]] = header[1];
         });
+    } else {
+        log.warn('no headers.js fixture found, skipping remote API tests');
     }
     debugLogInterceptor = CSISRemoteHelpers.csisClient.interceptors.request.use((request) => {
         //log.debug(JSON.stringify(request));
@@ -71,6 +90,10 @@ test('get and compare X-CSRF Token', async (done) => {
 });
 
 describe('Remote API tests with authentication', () => {
+
+    setTimeout(function(){
+        //do what you need here
+    }, 2000);
 
     // skip tests if local headers file containing session cookie is not available
     if (!headers) {
