@@ -9,12 +9,32 @@ csisClient.defaults.headers.common['Content-Type'] = 'application/vnd.api+json';
  * Get the X-CSRF Token from the CSIS API. Usually needed only for PUT, POST and PATCH requests.
  * 
  * @param {String} csisBaseUrl 
+ * @return {Promise<Object>}
  */
 export const getXCsrfToken = async function (csisBaseUrl = 'https://csis.myclimateservice.eu') {
   const apiResponse = await csisClient.get(csisBaseUrl + "/rest/session/token");
   // introduce ugly side effect:
   csisClient.defaults.headers.post['X-CSRF-Token'] = apiResponse.data;
   return apiResponse.data;
+}
+
+/**
+ * Login to CSIS.
+ * 
+ * @param {String} csisBaseUrl 
+ * @param {String} username 
+ * @param {String} password 
+ * @return {Promise<Object>}
+ */
+export const login = async function (csisBaseUrl = 'https://csis.myclimateservice.eu', username, password) {
+  const apiResponse = await csisClient.post(csisBaseUrl + "/user/login/?_format=json",
+    JSON.stringify({
+      'name': username,
+      'pass': password
+    })
+  );
+
+  return apiResponse;
 }
 
 /**
@@ -58,7 +78,7 @@ export const getStudyGroupNodeFromCsis = async function (
   csisBaseUrl = 'https://csis.myclimateservice.eu',
   studyUuid,
   include = 'field_data_package,field_data_package.field_resources,field_data_package.field_resources.field_resource_tags,field_data_package.field_resources.field_references',
- ) {
+) {
 
   const requestUrl = csisBaseUrl + '/jsonapi/group/study/' + studyUuid + '?include=' + include;
 
@@ -86,7 +106,7 @@ export const getDatapackageFromCsis = async function (
   csisBaseUrl = 'https://csis.myclimateservice.eu',
   datapackageUuid,
   include = 'field_resources,field_resources.field_resource_tags,field_resources.field_references',
-  ) {
+) {
 
   const requestUrl = csisBaseUrl + '/jsonapi/node/data_package/' + datapackageUuid + '?include=' + include;
 
@@ -111,12 +131,12 @@ export const getDatapackageFromCsis = async function (
 * @return {Promise<Object>}
 */
 export const getDatapackageResourcesFromCsis = async function (
-  csisBaseUrl = 'https://csis.myclimateservice.eu', 
+  csisBaseUrl = 'https://csis.myclimateservice.eu',
   datapackageUuid,
   include = 'field_resource_tags,field_references'
-  ) {
+) {
 
-  const requestUrl = csisBaseUrl + '/jsonapi/node/data_package/'+ datapackageUuid +'/field_resources?include=' + include;
+  const requestUrl = csisBaseUrl + '/jsonapi/node/data_package/' + datapackageUuid + '/field_resources?include=' + include;
 
   try {
     log.debug('fetching datapackage resources from CSIS API:' + requestUrl);
@@ -140,10 +160,10 @@ export const getDatapackageResourcesFromCsis = async function (
 * @return {Promise<Object>}
 */
 export const getDatapackageResourceFromCsis = async function (
-  csisBaseUrl = 'https://csis.myclimateservice.eu', 
+  csisBaseUrl = 'https://csis.myclimateservice.eu',
   resourceUuid,
   include = 'field_resource_tags,field_references'
-  ) {
+) {
 
   // data_package_metadata WTF? yaeh, that's the name of the resource type :-(
   const requestUrl = csisBaseUrl + '/jsonapi/node/data_package_metadata/' + resourceUuid + '?include=' + include;
