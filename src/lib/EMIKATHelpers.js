@@ -10,7 +10,45 @@
 
 import axios from 'axios';
 
+/**
+ * Until [this discussion](https://github.com/clarity-h2020/data-package/issues/42) is settled,
+ * we define the variable names we know already ...
+ */
+
+/**
+ * The EMIKAT STUDY ID
+ * 
+ * @type {String}
+ */
 export const EMIKAT_STUDY_ID = '$emikat_id';
+
+/**
+ * PROJECT=BASELINE ... (for future selection of an alternative ADAPTATION variants)
+ * 
+ * @type {String}
+ */
+export const EMIKAT_PROJECT_VARIANT = '$emikat_variant';
+
+/**
+ * PERIOD='Baseline' ... (Alternatives are: '20110101-20401231', '20410101-20701231' and '20710101-21001231')
+ * 
+ * @type {String}
+ */
+export const EMIKAT_PERIOD = '$emikat_period';
+
+/**
+ * RCP='Baseline' ... (Alternatives are: 'rcp26', 'rcp45' and 'rcp85')
+ * 
+ * @type {String}
+ */
+export const EMIKAT_RCP = '$emikat_rcp';
+
+/**
+ * FREQUENCE='Rare' ... (Alternatives are: 'Occassional' or 'Frequent')
+ * 
+ * @type {String}
+ */
+export const EMIKAT_FREQUENCY = '$emikat_frequency';
 
 const emikatClient = axios.create();
 
@@ -71,13 +109,41 @@ export async function fetchUsers(url, authString) {
  * 
  * @param {String} urlTemplate 
  * @param {String|Number} emikatId 
+ * @return {String}
+ * 
+ * @deprecated use addEmikatParameters() instead!
  */
 export function addEmikatId(urlTemplate, emikatId) {
-  if(urlTemplate && emikatId && urlTemplate.includes(EMIKAT_STUDY_ID))
-  {
-    return urlTemplate.replace(EMIKAT_STUDY_ID, emikatId.toString());
+  if (urlTemplate && emikatId && urlTemplate.includes(EMIKAT_STUDY_ID)) {
+    //return urlTemplate.replace(EMIKAT_STUDY_ID, emikatId.toString());
+    return addEmikatParameters(urlTemplate, new Map([[EMIKAT_STUDY_ID, emikatId]]));
   }
-  
+
+  return urlTemplate;
+}
+
+/**
+ * Replaces EMIKAT_STUDY_ID with the actual study id.
+ * Note: We *could* use template strings in a fixed URL,  e.g.
+ * `https://service.emikat.at/EmiKatTst/api/scenarios/${emikat_id}/feature/view.2812/table/data`
+ * However, this has to many drawbacks
+ * 
+ * @param {String} urlTemplate 
+ * @param {Map<String,any>} emikatVariables 
+ * @return {String}
+ * 
+ * @deprecated
+ */
+export function addEmikatParameters(urlTemplate, emikatVariables) {
+  if (urlTemplate && emikatVariables) {
+    let url = (' ' + urlTemplate).slice(1);
+    emikatVariables.forEach((value, key) => {
+      url = url.replace(key, value.toString());
+    });
+
+    return url;
+  }
+
   return urlTemplate;
 }
 

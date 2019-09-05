@@ -784,6 +784,7 @@ csisClient.defaults.headers.common['Content-Type'] = 'application/vnd.api+json';
  * Get the X-CSRF Token from the CSIS API. Usually needed only for PUT, POST and PATCH requests.
  * 
  * @param {String} csisBaseUrl 
+ * @return {Promise<Object>}
  */
 
 var getXCsrfToken =
@@ -822,6 +823,55 @@ function () {
   };
 }();
 /**
+ * Login to CSIS.
+ * 
+ * @param {String} csisBaseUrl 
+ * @param {String} username 
+ * @param {String} password 
+ * @return {Promise<Object>}
+ */
+
+var login =
+/*#__PURE__*/
+function () {
+  var _ref2 = asyncToGenerator(
+  /*#__PURE__*/
+  regenerator.mark(function _callee2() {
+    var csisBaseUrl,
+        username,
+        password,
+        apiResponse,
+        _args2 = arguments;
+    return regenerator.wrap(function _callee2$(_context2) {
+      while (1) {
+        switch (_context2.prev = _context2.next) {
+          case 0:
+            csisBaseUrl = _args2.length > 0 && _args2[0] !== undefined ? _args2[0] : 'https://csis.myclimateservice.eu';
+            username = _args2.length > 1 ? _args2[1] : undefined;
+            password = _args2.length > 2 ? _args2[2] : undefined;
+            _context2.next = 5;
+            return csisClient.post(csisBaseUrl + "/user/login/?_format=json", JSON.stringify({
+              'name': username,
+              'pass': password
+            }));
+
+          case 5:
+            apiResponse = _context2.sent;
+            return _context2.abrupt("return", apiResponse);
+
+          case 7:
+          case "end":
+            return _context2.stop();
+        }
+      }
+    }, _callee2);
+  }));
+
+  return function login() {
+    return _ref2.apply(this, arguments);
+  };
+}();
+/**
 * Gets EMIKAT Credentials from Drupal JSON API and return a headers object
 * ready to be used with axios.
 *
@@ -832,66 +882,66 @@ function () {
 var getEmikatCredentialsFromCsis =
 /*#__PURE__*/
 function () {
-  var _ref2 = asyncToGenerator(
+  var _ref3 = asyncToGenerator(
   /*#__PURE__*/
-  regenerator.mark(function _callee2() {
+  regenerator.mark(function _callee3() {
     var csisBaseUrl,
         apiResponse,
         userResponse,
-        _args2 = arguments;
-    return regenerator.wrap(function _callee2$(_context2) {
+        _args3 = arguments;
+    return regenerator.wrap(function _callee3$(_context3) {
       while (1) {
-        switch (_context2.prev = _context2.next) {
+        switch (_context3.prev = _context3.next) {
           case 0:
-            csisBaseUrl = _args2.length > 0 && _args2[0] !== undefined ? _args2[0] : 'https://csis.myclimateservice.eu';
-            _context2.prev = 1;
-            _context2.next = 4;
+            csisBaseUrl = _args3.length > 0 && _args3[0] !== undefined ? _args3[0] : 'https://csis.myclimateservice.eu';
+            _context3.prev = 1;
+            _context3.next = 4;
             return csisClient.get(csisBaseUrl + '/jsonapi', {
               withCredentials: true
             });
 
           case 4:
-            apiResponse = _context2.sent;
-            _context2.next = 7;
+            apiResponse = _context3.sent;
+            _context3.next = 7;
             return csisClient.get(apiResponse.data.meta.links.me.href, {
               withCredentials: true
             });
 
           case 7:
-            userResponse = _context2.sent;
+            userResponse = _context3.sent;
 
             if (!userResponse.data.data.attributes.field_basic_auth_credentials) {
-              _context2.next = 12;
+              _context3.next = 12;
               break;
             }
 
-            return _context2.abrupt("return", 'Basic ' + btoa(userResponse.data.data.attributes.field_basic_auth_credentials));
+            return _context3.abrupt("return", 'Basic ' + btoa(userResponse.data.data.attributes.field_basic_auth_credentials));
 
           case 12:
             log.error('no field field_basic_auth_credentials in user profile ' + userResponse.data.data.attributes.name);
-            return _context2.abrupt("return", null);
+            return _context3.abrupt("return", null);
 
           case 14:
-            _context2.next = 20;
+            _context3.next = 20;
             break;
 
           case 16:
-            _context2.prev = 16;
-            _context2.t0 = _context2["catch"](1);
-            console.error("could not fetch emikat credentials from $csisBaseUrl", _context2.t0); // return null;
+            _context3.prev = 16;
+            _context3.t0 = _context3["catch"](1);
+            console.error("could not fetch emikat credentials from $csisBaseUrl", _context3.t0); // return null;
 
-            throw _context2.t0;
+            throw _context3.t0;
 
           case 20:
           case "end":
-            return _context2.stop();
+            return _context3.stop();
         }
       }
-    }, _callee2, null, [[1, 16]]);
+    }, _callee3, null, [[1, 16]]);
   }));
 
   return function getEmikatCredentialsFromCsis() {
-    return _ref2.apply(this, arguments);
+    return _ref3.apply(this, arguments);
   };
 }();
 /**
@@ -906,69 +956,11 @@ function () {
 var getStudyGroupNodeFromCsis =
 /*#__PURE__*/
 function () {
-  var _ref3 = asyncToGenerator(
-  /*#__PURE__*/
-  regenerator.mark(function _callee3() {
-    var csisBaseUrl,
-        studyUuid,
-        include,
-        requestUrl,
-        apiResponse,
-        _args3 = arguments;
-    return regenerator.wrap(function _callee3$(_context3) {
-      while (1) {
-        switch (_context3.prev = _context3.next) {
-          case 0:
-            csisBaseUrl = _args3.length > 0 && _args3[0] !== undefined ? _args3[0] : 'https://csis.myclimateservice.eu';
-            studyUuid = _args3.length > 1 ? _args3[1] : undefined;
-            include = _args3.length > 2 && _args3[2] !== undefined ? _args3[2] : 'field_data_package,field_data_package.field_resources,field_data_package.field_resources.field_resource_tags,field_data_package.field_resources.field_references';
-            requestUrl = csisBaseUrl + '/jsonapi/group/study/' + studyUuid + '?include=' + include;
-            _context3.prev = 4;
-            log.debug('fetching study from CSIS API: ' + requestUrl);
-            _context3.next = 8;
-            return csisClient.get(requestUrl, {
-              withCredentials: true
-            });
-
-          case 8:
-            apiResponse = _context3.sent;
-            return _context3.abrupt("return", apiResponse.data);
-
-          case 12:
-            _context3.prev = 12;
-            _context3.t0 = _context3["catch"](4);
-            console.error("could not fetch study from ".concat(requestUrl), _context3.t0);
-            throw _context3.t0;
-
-          case 16:
-          case "end":
-            return _context3.stop();
-        }
-      }
-    }, _callee3, null, [[4, 12]]);
-  }));
-
-  return function getStudyGroupNodeFromCsis() {
-    return _ref3.apply(this, arguments);
-  };
-}();
-/**
-* Gets the Study Node from Drupal JSON API
-*
-* @param {String} csisBaseUrl
-* @param {String} datapackageUuid
-* @param {String} include
-* @return {Promise<Object>}
-*/
-
-var getDatapackageFromCsis =
-/*#__PURE__*/
-function () {
   var _ref4 = asyncToGenerator(
   /*#__PURE__*/
   regenerator.mark(function _callee4() {
     var csisBaseUrl,
-        datapackageUuid,
+        studyUuid,
         include,
         requestUrl,
         apiResponse,
@@ -978,11 +970,11 @@ function () {
         switch (_context4.prev = _context4.next) {
           case 0:
             csisBaseUrl = _args4.length > 0 && _args4[0] !== undefined ? _args4[0] : 'https://csis.myclimateservice.eu';
-            datapackageUuid = _args4.length > 1 ? _args4[1] : undefined;
-            include = _args4.length > 2 && _args4[2] !== undefined ? _args4[2] : 'field_resources,field_resources.field_resource_tags,field_resources.field_references';
-            requestUrl = csisBaseUrl + '/jsonapi/node/data_package/' + datapackageUuid + '?include=' + include;
+            studyUuid = _args4.length > 1 ? _args4[1] : undefined;
+            include = _args4.length > 2 && _args4[2] !== undefined ? _args4[2] : 'field_data_package,field_data_package.field_resources,field_data_package.field_resources.field_resource_tags,field_data_package.field_resources.field_references';
+            requestUrl = csisBaseUrl + '/jsonapi/group/study/' + studyUuid + '?include=' + include;
             _context4.prev = 4;
-            log.debug('fetching datapackage from CSIS API:' + requestUrl);
+            log.debug('fetching study from CSIS API: ' + requestUrl);
             _context4.next = 8;
             return csisClient.get(requestUrl, {
               withCredentials: true
@@ -995,7 +987,7 @@ function () {
           case 12:
             _context4.prev = 12;
             _context4.t0 = _context4["catch"](4);
-            console.error("could not fetch datapackage from ".concat(requestUrl), _context4.t0);
+            console.error("could not fetch study from ".concat(requestUrl), _context4.t0);
             throw _context4.t0;
 
           case 16:
@@ -1006,12 +998,12 @@ function () {
     }, _callee4, null, [[4, 12]]);
   }));
 
-  return function getDatapackageFromCsis() {
+  return function getStudyGroupNodeFromCsis() {
     return _ref4.apply(this, arguments);
   };
 }();
 /**
-* Gets Datapackage Resources array from Drupal JSON API
+* Gets the Study Node from Drupal JSON API
 *
 * @param {String} csisBaseUrl
 * @param {String} datapackageUuid
@@ -1019,7 +1011,7 @@ function () {
 * @return {Promise<Object>}
 */
 
-var getDatapackageResourcesFromCsis =
+var getDatapackageFromCsis =
 /*#__PURE__*/
 function () {
   var _ref5 = asyncToGenerator(
@@ -1037,10 +1029,10 @@ function () {
           case 0:
             csisBaseUrl = _args5.length > 0 && _args5[0] !== undefined ? _args5[0] : 'https://csis.myclimateservice.eu';
             datapackageUuid = _args5.length > 1 ? _args5[1] : undefined;
-            include = _args5.length > 2 && _args5[2] !== undefined ? _args5[2] : 'field_resource_tags,field_references';
-            requestUrl = csisBaseUrl + '/jsonapi/node/data_package/' + datapackageUuid + '/field_resources?include=' + include;
+            include = _args5.length > 2 && _args5[2] !== undefined ? _args5[2] : 'field_resources,field_resources.field_resource_tags,field_resources.field_references';
+            requestUrl = csisBaseUrl + '/jsonapi/node/data_package/' + datapackageUuid + '?include=' + include;
             _context5.prev = 4;
-            log.debug('fetching datapackage resources from CSIS API:' + requestUrl);
+            log.debug('fetching datapackage from CSIS API:' + requestUrl);
             _context5.next = 8;
             return csisClient.get(requestUrl, {
               withCredentials: true
@@ -1053,7 +1045,7 @@ function () {
           case 12:
             _context5.prev = 12;
             _context5.t0 = _context5["catch"](4);
-            console.error("could not fetch datapackage resources from ".concat(requestUrl), _context5.t0);
+            console.error("could not fetch datapackage from ".concat(requestUrl), _context5.t0);
             throw _context5.t0;
 
           case 16:
@@ -1064,28 +1056,27 @@ function () {
     }, _callee5, null, [[4, 12]]);
   }));
 
-  return function getDatapackageResourcesFromCsis() {
+  return function getDatapackageFromCsis() {
     return _ref5.apply(this, arguments);
   };
 }();
 /**
-* Gets a single Resource from Drupal JSON API
-* https://csis.myclimateservice.eu/jsonapi/node/data_package_metadata/b834a248-1817-44ce-9cb3-f882198c1e1f?include=field_resource_tags,field_references
+* Gets Datapackage Resources array from Drupal JSON API
 *
 * @param {String} csisBaseUrl
-* @param {String} resourceUuid
+* @param {String} datapackageUuid
 * @param {String} include
 * @return {Promise<Object>}
 */
 
-var getDatapackageResourceFromCsis =
+var getDatapackageResourcesFromCsis =
 /*#__PURE__*/
 function () {
   var _ref6 = asyncToGenerator(
   /*#__PURE__*/
   regenerator.mark(function _callee6() {
     var csisBaseUrl,
-        resourceUuid,
+        datapackageUuid,
         include,
         requestUrl,
         apiResponse,
@@ -1095,10 +1086,9 @@ function () {
         switch (_context6.prev = _context6.next) {
           case 0:
             csisBaseUrl = _args6.length > 0 && _args6[0] !== undefined ? _args6[0] : 'https://csis.myclimateservice.eu';
-            resourceUuid = _args6.length > 1 ? _args6[1] : undefined;
+            datapackageUuid = _args6.length > 1 ? _args6[1] : undefined;
             include = _args6.length > 2 && _args6[2] !== undefined ? _args6[2] : 'field_resource_tags,field_references';
-            // data_package_metadata WTF? yaeh, that's the name of the resource type :-(
-            requestUrl = csisBaseUrl + '/jsonapi/node/data_package_metadata/' + resourceUuid + '?include=' + include;
+            requestUrl = csisBaseUrl + '/jsonapi/node/data_package/' + datapackageUuid + '/field_resources?include=' + include;
             _context6.prev = 4;
             log.debug('fetching datapackage resources from CSIS API:' + requestUrl);
             _context6.next = 8;
@@ -1124,14 +1114,75 @@ function () {
     }, _callee6, null, [[4, 12]]);
   }));
 
-  return function getDatapackageResourceFromCsis() {
+  return function getDatapackageResourcesFromCsis() {
     return _ref6.apply(this, arguments);
+  };
+}();
+/**
+* Gets a single Resource from Drupal JSON API
+* https://csis.myclimateservice.eu/jsonapi/node/data_package_metadata/b834a248-1817-44ce-9cb3-f882198c1e1f?include=field_resource_tags,field_references
+*
+* @param {String} csisBaseUrl
+* @param {String} resourceUuid
+* @param {String} include
+* @return {Promise<Object>}
+*/
+
+var getDatapackageResourceFromCsis =
+/*#__PURE__*/
+function () {
+  var _ref7 = asyncToGenerator(
+  /*#__PURE__*/
+  regenerator.mark(function _callee7() {
+    var csisBaseUrl,
+        resourceUuid,
+        include,
+        requestUrl,
+        apiResponse,
+        _args7 = arguments;
+    return regenerator.wrap(function _callee7$(_context7) {
+      while (1) {
+        switch (_context7.prev = _context7.next) {
+          case 0:
+            csisBaseUrl = _args7.length > 0 && _args7[0] !== undefined ? _args7[0] : 'https://csis.myclimateservice.eu';
+            resourceUuid = _args7.length > 1 ? _args7[1] : undefined;
+            include = _args7.length > 2 && _args7[2] !== undefined ? _args7[2] : 'field_resource_tags,field_references';
+            // data_package_metadata WTF? yaeh, that's the name of the resource type :-(
+            requestUrl = csisBaseUrl + '/jsonapi/node/data_package_metadata/' + resourceUuid + '?include=' + include;
+            _context7.prev = 4;
+            log.debug('fetching datapackage resources from CSIS API:' + requestUrl);
+            _context7.next = 8;
+            return csisClient.get(requestUrl, {
+              withCredentials: true
+            });
+
+          case 8:
+            apiResponse = _context7.sent;
+            return _context7.abrupt("return", apiResponse.data);
+
+          case 12:
+            _context7.prev = 12;
+            _context7.t0 = _context7["catch"](4);
+            console.error("could not fetch datapackage resources from ".concat(requestUrl), _context7.t0);
+            throw _context7.t0;
+
+          case 16:
+          case "end":
+            return _context7.stop();
+        }
+      }
+    }, _callee7, null, [[4, 12]]);
+  }));
+
+  return function getDatapackageResourceFromCsis() {
+    return _ref7.apply(this, arguments);
   };
 }();
 
 var CSISRemoteHelpers = /*#__PURE__*/Object.freeze({
 	csisClient: csisClient,
 	getXCsrfToken: getXCsrfToken,
+	login: login,
 	getEmikatCredentialsFromCsis: getEmikatCredentialsFromCsis,
 	getStudyGroupNodeFromCsis: getStudyGroupNodeFromCsis,
 	getDatapackageFromCsis: getDatapackageFromCsis,
@@ -1139,7 +1190,46 @@ var CSISRemoteHelpers = /*#__PURE__*/Object.freeze({
 	getDatapackageResourceFromCsis: getDatapackageResourceFromCsis
 });
 
+/**
+ * Until [this discussion](https://github.com/clarity-h2020/data-package/issues/42) is settled,
+ * we define the variable names we know already ...
+ */
+
+/**
+ * The EMIKAT STUDY ID
+ * 
+ * @type {String}
+ */
+
 var EMIKAT_STUDY_ID = '$emikat_id';
+/**
+ * PROJECT=BASELINE ... (for future selection of an alternative ADAPTATION variants)
+ * 
+ * @type {String}
+ */
+
+var EMIKAT_PROJECT_VARIANT = '$emikat_variant';
+/**
+ * PERIOD='Baseline' ... (Alternatives are: '20110101-20401231', '20410101-20701231' and '20710101-21001231')
+ * 
+ * @type {String}
+ */
+
+var EMIKAT_PERIOD = '$emikat_period';
+/**
+ * RCP='Baseline' ... (Alternatives are: 'rcp26', 'rcp45' and 'rcp85')
+ * 
+ * @type {String}
+ */
+
+var EMIKAT_RCP = '$emikat_rcp';
+/**
+ * FREQUENCE='Rare' ... (Alternatives are: 'Occassional' or 'Frequent')
+ * 
+ * @type {String}
+ */
+
+var EMIKAT_FREQUENCY = '$emikat_frequency';
 var emikatClient = axios.create();
 /**
  * 
@@ -1249,11 +1339,39 @@ function _fetchUsers() {
  * 
  * @param {String} urlTemplate 
  * @param {String|Number} emikatId 
+ * @return {String}
+ * 
+ * @deprecated use addEmikatParameters() instead!
  */
 
 function addEmikatId(urlTemplate, emikatId) {
   if (urlTemplate && emikatId && urlTemplate.includes(EMIKAT_STUDY_ID)) {
-    return urlTemplate.replace(EMIKAT_STUDY_ID, emikatId.toString());
+    //return urlTemplate.replace(EMIKAT_STUDY_ID, emikatId.toString());
+    return addEmikatParameters(urlTemplate, new Map([[EMIKAT_STUDY_ID, emikatId]]));
+  }
+
+  return urlTemplate;
+}
+/**
+ * Replaces EMIKAT_STUDY_ID with the actual study id.
+ * Note: We *could* use template strings in a fixed URL,  e.g.
+ * `https://service.emikat.at/EmiKatTst/api/scenarios/${emikat_id}/feature/view.2812/table/data`
+ * However, this has to many drawbacks
+ * 
+ * @param {String} urlTemplate 
+ * @param {Map<String,any>} emikatVariables 
+ * @return {String}
+ * 
+ * @deprecated
+ */
+
+function addEmikatParameters(urlTemplate, emikatVariables) {
+  if (urlTemplate && emikatVariables) {
+    var url = (' ' + urlTemplate).slice(1);
+    emikatVariables.forEach(function (value, key) {
+      url = url.replace(key, value.toString());
+    });
+    return url;
   }
 
   return urlTemplate;
@@ -1287,9 +1405,14 @@ function generateColumns(columnnames) {
 
 var EMIKATHelpers = /*#__PURE__*/Object.freeze({
 	EMIKAT_STUDY_ID: EMIKAT_STUDY_ID,
+	EMIKAT_PROJECT_VARIANT: EMIKAT_PROJECT_VARIANT,
+	EMIKAT_PERIOD: EMIKAT_PERIOD,
+	EMIKAT_RCP: EMIKAT_RCP,
+	EMIKAT_FREQUENCY: EMIKAT_FREQUENCY,
 	fetchData: fetchData,
 	fetchUsers: fetchUsers,
 	addEmikatId: addEmikatId,
+	addEmikatParameters: addEmikatParameters,
 	generateColumns: generateColumns
 });
 
