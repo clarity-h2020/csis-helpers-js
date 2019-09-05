@@ -10,7 +10,30 @@
 
 import axios from 'axios';
 
-export const EMIKAT_STUDY_ID = '$emikat_id';
+/**
+ * Until [this discussion](https://github.com/clarity-h2020/data-package/issues/42) is settled,
+ * we define sets with all possible variants ... 
+ */
+
+/**
+ * @type {Set<string>}
+ */
+export const EMIKAT_STUDY_ID = new Set(['$emikat_id', '${emikat_id}']);
+
+$emikat_variant 
+$emikat_period 
+$emikat_rcp 
+$emikat_frequency 
+$emikat_id
+
+PROJECT
+PERIOD
+RCP
+FREQUENCE
+STYLES
+
+
+
 
 const emikatClient = axios.create();
 
