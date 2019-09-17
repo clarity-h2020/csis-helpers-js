@@ -20,35 +20,35 @@ import axios from 'axios';
  * 
  * @type {String}
  */
-export const EMIKAT_STUDY_ID = '$emikat_id';
+export const EMIKAT_STUDY_ID = '${emikat_id}';
 
 /**
- * PROJECT=BASELINE ... (for future selection of an alternative ADAPTATION variants)
+ * STUDY_VARIANT=BASELINE ... (for future selection of an alternative ADAPTATION variants)
  * 
  * @type {String}
  */
-export const EMIKAT_PROJECT_VARIANT = '$emikat_variant';
+export const STUDY_VARIANT = '${study_variant}';
 
 /**
- * PERIOD='Baseline' ... (Alternatives are: '20110101-20401231', '20410101-20701231' and '20710101-21001231')
+ * TIME_PERIOD='Baseline' ... (Alternatives are: '20110101-20401231', '20410101-20701231' and '20710101-21001231')
  * 
  * @type {String}
  */
-export const EMIKAT_PERIOD = '$emikat_period';
+export const TIME_PERIOD = '${time_period}';
 
 /**
- * RCP='Baseline' ... (Alternatives are: 'rcp26', 'rcp45' and 'rcp85')
+ * EMISSIONS_SCENARIO='Baseline' ... (Alternatives are: 'rcp26', 'rcp45' and 'rcp85')
  * 
  * @type {String}
  */
-export const EMIKAT_RCP = '$emikat_rcp';
+export const EMISSIONS_SCENARIO = '${emissions_scenario}';
 
 /**
- * FREQUENCE='Rare' ... (Alternatives are: 'Occassional' or 'Frequent')
+ * EVENT_FREQUENCY='Rare' ... (Alternatives are: 'Occassional' or 'Frequent')
  * 
  * @type {String}
  */
-export const EMIKAT_FREQUENCY = '$emikat_frequency';
+export const EVENT_FREQUENCY = '${event_frequency}';
 
 const emikatClient = axios.create();
 

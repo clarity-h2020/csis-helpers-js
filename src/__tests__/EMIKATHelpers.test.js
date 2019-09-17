@@ -74,14 +74,15 @@ test('[RELEASE] URL with EmikatId', () => {
    */
   const transformedUrl = _EMIKATHelpers.addEmikatId(url, 31337);
   expect(url).not.toEqual(transformedUrl);
-  expect(transformedUrl.includes('31337'));
+  expect(transformedUrl.includes('$')).toBeFalsy;
+  expect(transformedUrl.includes('31337')).toBeTruthy;
 });
 
 test('[DEV] URL with EMIKAT PARAMETERS', () => {
   /**
    * @type {String}
    */
-  const urlTemplate = `https://service.emikat.at/geoserver/clarity/wms?service=WMS&version=1.1.0&request=GetMap&layers=clarity%3Aview.2974&bbox=4672000.0%2C1979500.0%2C4687500.0%2C1988000.0&width=768&height=421&srs=EPSG%3A3035&format=image%2Fgif&CQL_FILTER=PROJECT%3D%27${EMIKATHelpers.EMIKAT_PROJECT_VARIANT}%27%20and%20PERIOD=%27${EMIKATHelpers.EMIKAT_PERIOD}%27%20AND%20RCP=%27${EMIKATHelpers.EMIKAT_RCP}%27%20AND%20FREQUENCE=%27${EMIKATHelpers.EMIKAT_FREQUENCY}%27%20AND%20SZ_ID=${EMIKATHelpers.EMIKAT_STUDY_ID}&styles=T_A`;
+  const urlTemplate = `https://service.emikat.at/geoserver/clarity/wms?service=WMS&version=1.1.0&request=GetMap&layers=clarity%3Aview.2974&bbox=4672000.0%2C1979500.0%2C4687500.0%2C1988000.0&width=768&height=421&srs=EPSG%3A3035&format=image%2Fgif&CQL_FILTER=PROJECT%3D%27${EMIKATHelpers.STUDY_VARIANT}%27%20and%20PERIOD=%27${EMIKATHelpers.TIME_PERIOD}%27%20AND%20RCP=%27${EMIKATHelpers.EMISSIONS_SCENARIO}%27%20AND%20FREQUENCE=%27${EMIKATHelpers.EVENT_FREQUENCY}%27%20AND%20SZ_ID=${EMIKATHelpers.EMIKAT_STUDY_ID}&styles=T_A`;
 
   /**
    * @type {String}
@@ -93,10 +94,10 @@ test('[DEV] URL with EMIKAT PARAMETERS', () => {
    */
   const parametersMap = new Map([
     [EMIKATHelpers.EMIKAT_STUDY_ID, 2846],
-    [EMIKATHelpers.EMIKAT_PROJECT_VARIANT, 'BASELINE'],
-    [EMIKATHelpers.EMIKAT_PERIOD, 'Baseline'],
-    [EMIKATHelpers.EMIKAT_RCP, 'Baseline'],
-    [EMIKATHelpers.EMIKAT_FREQUENCY, 'Rare']
+    [_EMIKATHelpers.STUDY_VARIANT, 'BASELINE'],
+    [_EMIKATHelpers.TIME_PERIOD, 'Baseline'],
+    [_EMIKATHelpers.EMISSIONS_SCENARIO, 'Baseline'],
+    [_EMIKATHelpers.EVENT_FREQUENCY, 'Rare']
   ]);
 
   /**
@@ -104,6 +105,7 @@ test('[DEV] URL with EMIKAT PARAMETERS', () => {
      */
   const transformedUrl = EMIKATHelpers.addEmikatParameters(urlTemplate, parametersMap);
   expect(urlTemplate).not.toEqual(transformedUrl);
+  expect(transformedUrl.includes('$')).toBeFalsy;
   expect(transformedUrl.includes('2846'));
   expect(transformedUrl.includes('BASELINE'));
   expect(transformedUrl.includes('Baseline'));
@@ -115,7 +117,7 @@ test('[PROD] URL with EMIKAT PARAMETERS', () => {
   /**
    * @type {String}
    */
-  const urlTemplate = `https://service.emikat.at/geoserver/clarity/wms?service=WMS&version=1.1.0&request=GetMap&layers=clarity%3Aview.2974&bbox=4672000.0%2C1979500.0%2C4687500.0%2C1988000.0&width=768&height=421&srs=EPSG%3A3035&format=image%2Fgif&CQL_FILTER=PROJECT%3D%27${_EMIKATHelpers.EMIKAT_PROJECT_VARIANT}%27%20and%20PERIOD=%27${_EMIKATHelpers.EMIKAT_PERIOD}%27%20AND%20RCP=%27${_EMIKATHelpers.EMIKAT_RCP}%27%20AND%20FREQUENCE=%27${_EMIKATHelpers.EMIKAT_FREQUENCY}%27%20AND%20SZ_ID=${_EMIKATHelpers.EMIKAT_STUDY_ID}&styles=T_A`;
+  const urlTemplate = `https://service.emikat.at/geoserver/clarity/wms?service=WMS&version=1.1.0&request=GetMap&layers=clarity%3Aview.2974&bbox=4672000.0%2C1979500.0%2C4687500.0%2C1988000.0&width=768&height=421&srs=EPSG%3A3035&format=image%2Fgif&CQL_FILTER=PROJECT%3D%27${_EMIKATHelpers.STUDY_VARIANT}%27%20and%20PERIOD=%27${_EMIKATHelpers.TIME_PERIOD}%27%20AND%20RCP=%27${_EMIKATHelpers.EMISSIONS_SCENARIO}%27%20AND%20FREQUENCE=%27${_EMIKATHelpers.EVENT_FREQUENCY}%27%20AND%20SZ_ID=${_EMIKATHelpers.EMIKAT_STUDY_ID}&styles=T_A`;
 
   /**
    * @type {String}
@@ -127,10 +129,10 @@ test('[PROD] URL with EMIKAT PARAMETERS', () => {
    */
   const parametersMap = new Map([
     [_EMIKATHelpers.EMIKAT_STUDY_ID, 2846],
-    [_EMIKATHelpers.EMIKAT_PROJECT_VARIANT, 'BASELINE'],
-    [_EMIKATHelpers.EMIKAT_PERIOD, 'Baseline'],
-    [_EMIKATHelpers.EMIKAT_RCP, 'Baseline'],
-    [_EMIKATHelpers.EMIKAT_FREQUENCY, 'Rare']
+    [_EMIKATHelpers.STUDY_VARIANT, 'BASELINE'],
+    [_EMIKATHelpers.TIME_PERIOD, 'Baseline'],
+    [_EMIKATHelpers.EMISSIONS_SCENARIO, 'Baseline'],
+    [_EMIKATHelpers.EVENT_FREQUENCY, 'Rare']
   ]);
 
 
@@ -139,11 +141,27 @@ test('[PROD] URL with EMIKAT PARAMETERS', () => {
    */
   const transformedUrl = _EMIKATHelpers.addEmikatParameters(urlTemplate, parametersMap);
   expect(urlTemplate).not.toEqual(transformedUrl);
+  expect(transformedUrl.includes('$')).toBeFalsy();
   expect(transformedUrl.includes('2846'));
   expect(transformedUrl.includes('BASELINE'));
   expect(transformedUrl.includes('Baseline'));
   expect(transformedUrl.includes('Rare'));
   expect(url).toEqual(transformedUrl);
+});
+
+test('[RELEASE] simple URL with EmikatId', () => {
+  /**
+   * @type {String}
+   */
+  const url = 'https://service.emikat.at/geoserver/clarity/wms?CQL_FILTER=SZ_ID=${emikat_id}';
+  /**
+   * @type {String}
+   */
+  const transformedUrl = EMIKATHelpers.addEmikatId(url, 31337);
+  expect(url).not.toEqual(transformedUrl);
+  expect(transformedUrl.includes('$')).toBeFalsy();
+  expect(transformedUrl.includes('31337')).toBeTruthy();
+  expect(transformedUrl).toEqual('https://service.emikat.at/geoserver/clarity/wms?CQL_FILTER=SZ_ID=31337');
 });
 
 afterAll(() => {

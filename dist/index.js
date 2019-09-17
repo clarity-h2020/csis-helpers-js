@@ -1207,35 +1207,35 @@ var CSISRemoteHelpers = /*#__PURE__*/Object.freeze({
  * @type {String}
  */
 
-var EMIKAT_STUDY_ID = '$emikat_id';
+var EMIKAT_STUDY_ID = '${emikat_id}';
 /**
- * PROJECT=BASELINE ... (for future selection of an alternative ADAPTATION variants)
+ * STUDY_VARIANT=BASELINE ... (for future selection of an alternative ADAPTATION variants)
  * 
  * @type {String}
  */
 
-var EMIKAT_PROJECT_VARIANT = '$emikat_variant';
+var STUDY_VARIANT = '${study_variant}';
 /**
- * PERIOD='Baseline' ... (Alternatives are: '20110101-20401231', '20410101-20701231' and '20710101-21001231')
+ * TIME_PERIOD='Baseline' ... (Alternatives are: '20110101-20401231', '20410101-20701231' and '20710101-21001231')
  * 
  * @type {String}
  */
 
-var EMIKAT_PERIOD = '$emikat_period';
+var TIME_PERIOD = '${time_period}';
 /**
- * RCP='Baseline' ... (Alternatives are: 'rcp26', 'rcp45' and 'rcp85')
+ * EMISSIONS_SCENARIO='Baseline' ... (Alternatives are: 'rcp26', 'rcp45' and 'rcp85')
  * 
  * @type {String}
  */
 
-var EMIKAT_RCP = '$emikat_rcp';
+var EMISSIONS_SCENARIO = '${emissions_scenario}';
 /**
- * FREQUENCE='Rare' ... (Alternatives are: 'Occassional' or 'Frequent')
+ * EVENT_FREQUENCY='Rare' ... (Alternatives are: 'Occassional' or 'Frequent')
  * 
  * @type {String}
  */
 
-var EMIKAT_FREQUENCY = '$emikat_frequency';
+var EVENT_FREQUENCY = '${event_frequency}';
 var emikatClient = axios.create();
 /**
  * 
@@ -1411,10 +1411,10 @@ function generateColumns(columnnames) {
 
 var EMIKATHelpers = /*#__PURE__*/Object.freeze({
 	EMIKAT_STUDY_ID: EMIKAT_STUDY_ID,
-	EMIKAT_PROJECT_VARIANT: EMIKAT_PROJECT_VARIANT,
-	EMIKAT_PERIOD: EMIKAT_PERIOD,
-	EMIKAT_RCP: EMIKAT_RCP,
-	EMIKAT_FREQUENCY: EMIKAT_FREQUENCY,
+	STUDY_VARIANT: STUDY_VARIANT,
+	TIME_PERIOD: TIME_PERIOD,
+	EMISSIONS_SCENARIO: EMISSIONS_SCENARIO,
+	EVENT_FREQUENCY: EVENT_FREQUENCY,
 	fetchData: fetchData,
 	fetchUsers: fetchUsers,
 	addEmikatId: addEmikatId,
