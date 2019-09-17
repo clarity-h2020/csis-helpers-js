@@ -37,6 +37,12 @@ export const STUDY_VARIANT = '${study_variant}';
 export const TIME_PERIOD = '${time_period}';
 
 /**
+ * Allowed values for TIME_PERIOD constant
+ * @type {String[]}
+ */
+export const TIME_PERIOD_VALUES = ['Baseline', '20110101-20401231', '20410101-20701231', '20710101-21001231'];
+
+/**
  * EMISSIONS_SCENARIO='Baseline' ... (Alternatives are: 'rcp26', 'rcp45' and 'rcp85')
  * 
  * @type {String}
@@ -44,11 +50,23 @@ export const TIME_PERIOD = '${time_period}';
 export const EMISSIONS_SCENARIO = '${emissions_scenario}';
 
 /**
+ * Allowed values for EMISSIONS_SCENARIO constant
+ * @type {String[]}
+ */
+export const EMISSIONS_SCENARIO_VALUES = ['Baseline', 'rcp26', 'rcp45', 'rcp85'];
+
+/**
  * EVENT_FREQUENCY='Rare' ... (Alternatives are: 'Occassional' or 'Frequent')
  * 
  * @type {String}
  */
 export const EVENT_FREQUENCY = '${event_frequency}';
+
+/**
+ * Allowed values for EVENT_FREQUENCY constant
+ * @type {String[]}
+ */
+export const EVENT_FREQUENCY_VALUES = ['Rare', 'Occassional', 'Frequent'];
 
 const emikatClient = axios.create();
 

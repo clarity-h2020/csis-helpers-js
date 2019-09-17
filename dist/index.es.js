@@ -1217,6 +1217,12 @@ var STUDY_VARIANT = '${study_variant}';
 
 var TIME_PERIOD = '${time_period}';
 /**
+ * Allowed values for TIME_PERIOD constant
+ * @type {String[]}
+ */
+
+var TIME_PERIOD_VALUES = ['Baseline', '20110101-20401231', '20410101-20701231', '20710101-21001231'];
+/**
  * EMISSIONS_SCENARIO='Baseline' ... (Alternatives are: 'rcp26', 'rcp45' and 'rcp85')
  * 
  * @type {String}
@@ -1224,12 +1230,24 @@ var TIME_PERIOD = '${time_period}';
 
 var EMISSIONS_SCENARIO = '${emissions_scenario}';
 /**
+ * Allowed values for EMISSIONS_SCENARIO constant
+ * @type {String[]}
+ */
+
+var EMISSIONS_SCENARIO_VALUES = ['Baseline', 'rcp26', 'rcp45', 'rcp85'];
+/**
  * EVENT_FREQUENCY='Rare' ... (Alternatives are: 'Occassional' or 'Frequent')
  * 
  * @type {String}
  */
 
 var EVENT_FREQUENCY = '${event_frequency}';
+/**
+ * Allowed values for EVENT_FREQUENCY constant
+ * @type {String[]}
+ */
+
+var EVENT_FREQUENCY_VALUES = ['Rare', 'Occassional', 'Frequent'];
 var emikatClient = axios.create();
 /**
  * 
@@ -1407,8 +1425,11 @@ var EMIKATHelpers = /*#__PURE__*/Object.freeze({
 	EMIKAT_STUDY_ID: EMIKAT_STUDY_ID,
 	STUDY_VARIANT: STUDY_VARIANT,
 	TIME_PERIOD: TIME_PERIOD,
+	TIME_PERIOD_VALUES: TIME_PERIOD_VALUES,
 	EMISSIONS_SCENARIO: EMISSIONS_SCENARIO,
+	EMISSIONS_SCENARIO_VALUES: EMISSIONS_SCENARIO_VALUES,
 	EVENT_FREQUENCY: EVENT_FREQUENCY,
+	EVENT_FREQUENCY_VALUES: EVENT_FREQUENCY_VALUES,
 	fetchData: fetchData,
 	fetchUsers: fetchUsers,
 	addEmikatId: addEmikatId,
