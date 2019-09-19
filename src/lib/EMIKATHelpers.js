@@ -66,7 +66,7 @@ export const EVENT_FREQUENCY = '${event_frequency}';
  * Allowed values for EVENT_FREQUENCY constant
  * @type {String[]}
  */
-export const EVENT_FREQUENCY_VALUES = ['Rare', 'Occassional', 'Frequent'];
+export const EVENT_FREQUENCY_VALUES = ['Rare', 'Occasional', 'Frequent'];
 
 const emikatClient = axios.create();
 
