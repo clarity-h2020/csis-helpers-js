@@ -11,6 +11,8 @@
 import Wkt from 'wicket';
 import log from 'loglevel';
 
+import * as EMIKATHelpers from './EMIKATHelpers.js';
+
 /**
  * Be aware of the difference between default and named exports. It is a common source of mistakes.
  * We suggest that you stick to using default imports and exports when a module only exports a single thing (for example, a component). 
@@ -26,6 +28,31 @@ import log from 'loglevel';
  * @author Pascal Dihé
  */
 export default class CSISHelpers {
+
+    /**
+     * Query params extracted from CSIS Helpers. See /examples and /fixtures/csisHelpers.json
+     */
+    static defaultQueryParams = {
+      "host": "https://csis.myclimateservice.eu",
+      "study_uuid": undefined,
+      "step_uuid": undefined,
+      "datapackage_uuid": undefined,
+      "resource_uuid": undefined,
+      "study_area": undefined,
+      "grouping_tag": undefined,
+      "write_permissions": undefined,
+      "minx": 72, // deprecated
+      "miny": 55, // deprecated
+      "maxx": 30, // deprecated
+      "maxy": -30,  // deprecated  
+      "emikat_id": undefined, // this is the emikat study id
+      "study_variant": EMIKATHelpers.STUDY_VARIANT_VALUES[0],
+      "time_period": EMIKATHelpers.TIME_PERIOD_VALUES[0],
+      "emissions_scenario": EMIKATHelpers.EMISSIONS_SCENARIO_VALUES[0],
+      "event_frequency": EMIKATHelpers.EVENT_FREQUENCY_VALUES[0]
+    };
+
+
   /**
     * Drupal JSON API 'deeply' includes objects, e.g. &include=field_references are provided only once in a separate array name 'included'.
     * This method resolves the references and extracts the included  object.
@@ -260,3 +287,4 @@ export const filterResourcesbyReferenceType = CSISHelpers.filterResourcesbyRefer
 export const extractReferencesfromResource = CSISHelpers.extractReferencesfromResource;
 export const extractTagsfromResource = CSISHelpers.extractTagsfromResource;
 export const extractStudyAreaFromStudyGroupNode = CSISHelpers.extractStudyAreaFromStudyGroupNode;
+export const defaultQueryParams = CSISHelpers.defaultQueryParams;

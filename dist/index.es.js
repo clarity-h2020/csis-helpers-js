@@ -1210,6 +1210,12 @@ var EMIKAT_STUDY_ID = '${emikat_id}';
 
 var STUDY_VARIANT = '${study_variant}';
 /**
+ * Allowed values for STUDY_VARIANT constant
+ * @type {String[]}
+ */
+
+var STUDY_VARIANT_VALUES = ['BASELINE'];
+/**
  * TIME_PERIOD='Baseline' ... (Alternatives are: '20110101-20401231', '20410101-20701231' and '20710101-21001231')
  * 
  * @type {String}
@@ -1236,7 +1242,7 @@ var EMISSIONS_SCENARIO = '${emissions_scenario}';
 
 var EMISSIONS_SCENARIO_VALUES = ['Baseline', 'rcp26', 'rcp45', 'rcp85'];
 /**
- * EVENT_FREQUENCY='Rare' ... (Alternatives are: 'Occassional' or 'Frequent')
+ * EVENT_FREQUENCY='Rare' ... (Alternatives are: 'Occasional' or 'Frequent')
  * 
  * @type {String}
  */
@@ -1247,7 +1253,7 @@ var EVENT_FREQUENCY = '${event_frequency}';
  * @type {String[]}
  */
 
-var EVENT_FREQUENCY_VALUES = ['Rare', 'Occassional', 'Frequent'];
+var EVENT_FREQUENCY_VALUES = ['Rare', 'Occasional', 'Frequent'];
 var emikatClient = axios.create();
 /**
  * 
@@ -1298,58 +1304,6 @@ function _fetchData() {
   return _fetchData.apply(this, arguments);
 }
 /**
- * 
- * @param {*} url 
- * @param {*} authString 
- * @deprecated
- */
-
-function fetchUsers(_x3, _x4) {
-  return _fetchUsers.apply(this, arguments);
-}
-
-function _fetchUsers() {
-  _fetchUsers = asyncToGenerator(
-  /*#__PURE__*/
-  regenerator.mark(function _callee2(url, authString) {
-    var response;
-    return regenerator.wrap(function _callee2$(_context2) {
-      while (1) {
-        switch (_context2.prev = _context2.next) {
-          case 0:
-            _context2.prev = 0;
-            console.log('fetching from:' + url);
-            _context2.next = 4;
-            return emikatClient.get(url, {
-              headers: {
-                Authorization: authString
-              }
-            });
-
-          case 4:
-            response = _context2.sent;
-            // we *could* do once:  
-            emikatClient.defaults.headers.common['Authorization'] = authString; // but that would break functional code as it has side effects on the emikatClient instance.
-            //console.log(JSON.stringify(response));
-
-            return _context2.abrupt("return", response);
-
-          case 9:
-            _context2.prev = 9;
-            _context2.t0 = _context2["catch"](0);
-            console.error(_context2.t0);
-            throw _context2.t0;
-
-          case 13:
-          case "end":
-            return _context2.stop();
-        }
-      }
-    }, _callee2, null, [[0, 9]]);
-  }));
-  return _fetchUsers.apply(this, arguments);
-}
-/**
  * Replaces EMIKAT_STUDY_ID with the actual study id.
  * Note: We *could* use template strings in a fixed URL,  e.g.
  * `https://service.emikat.at/EmiKatTst/api/scenarios/${emikat_id}/feature/view.2812/table/data`
@@ -1385,9 +1339,16 @@ function addEmikatId(urlTemplate, emikatId) {
 
 function addEmikatParameters(urlTemplate, emikatVariables) {
   if (urlTemplate && emikatVariables) {
+    // make a copy - JavaScript style ... :-(
     var url = (' ' + urlTemplate).slice(1);
     emikatVariables.forEach(function (value, key) {
-      url = url.replace(key, value.toString());
+      if (value) {
+        // another 'nice' JS pitfall: String.replace doesn't replace all occurrences. UNBELIEVEABLE!!
+        // See https://stackoverflow.com/a/1145525
+        url = url.split(key).join(value);
+      } else {
+        log.warn("no value found for parameter ".concat(key, " in ").concat(urlTemplate));
+      }
     });
     return url;
   }
@@ -1424,6 +1385,7 @@ function generateColumns(columnnames) {
 var EMIKATHelpers = /*#__PURE__*/Object.freeze({
 	EMIKAT_STUDY_ID: EMIKAT_STUDY_ID,
 	STUDY_VARIANT: STUDY_VARIANT,
+	STUDY_VARIANT_VALUES: STUDY_VARIANT_VALUES,
 	TIME_PERIOD: TIME_PERIOD,
 	TIME_PERIOD_VALUES: TIME_PERIOD_VALUES,
 	EMISSIONS_SCENARIO: EMISSIONS_SCENARIO,
@@ -1431,7 +1393,6 @@ var EMIKATHelpers = /*#__PURE__*/Object.freeze({
 	EVENT_FREQUENCY: EVENT_FREQUENCY,
 	EVENT_FREQUENCY_VALUES: EVENT_FREQUENCY_VALUES,
 	fetchData: fetchData,
-	fetchUsers: fetchUsers,
 	addEmikatId: addEmikatId,
 	addEmikatParameters: addEmikatParameters,
 	generateColumns: generateColumns
@@ -1462,6 +1423,23 @@ function _createClass(Constructor, protoProps, staticProps) {
 }
 
 var createClass = _createClass;
+
+function _defineProperty(obj, key, value) {
+  if (key in obj) {
+    Object.defineProperty(obj, key, {
+      value: value,
+      enumerable: true,
+      configurable: true,
+      writable: true
+    });
+  } else {
+    obj[key] = value;
+  }
+
+  return obj;
+}
+
+var defineProperty = _defineProperty;
 
 var wicket = createCommonjsModule(function (module, exports) {
 /** @license
@@ -2372,6 +2350,10 @@ function () {
     key: "getIncludedObject",
 
     /**
+     * Query params extracted from CSIS Helpers. See /examples and /fixtures/csisHelpers.json
+     */
+
+    /**
       * Drupal JSON API 'deeply' includes objects, e.g. &include=field_references are provided only once in a separate array name 'included'.
       * This method resolves the references and extracts the included  object.
       * 
@@ -2590,6 +2572,39 @@ function () {
 
   return CSISHelpers;
 }();
+/**
+ * We can either use "import CSISHelpers from './CSISHelpers.js'" and call  "CSISHelpers.getIncludedObject(...)" or
+ * "import {getIncludedObject} from './CSISHelpers.js'" and call "getIncludedObject(...)".
+ * 
+ * However, It is not recommended to mix default exports with “named” exports. 
+ * See https://www.kaplankomputing.com/blog/tutorials/javascript/understanding-imports-exports-es6/
+ */
+
+
+defineProperty(CSISHelpers, "defaultQueryParams", {
+  "host": "https://csis.myclimateservice.eu",
+  "study_uuid": undefined,
+  "step_uuid": undefined,
+  "datapackage_uuid": undefined,
+  "resource_uuid": undefined,
+  "study_area": undefined,
+  "grouping_tag": undefined,
+  "write_permissions": undefined,
+  "minx": 72,
+  // deprecated
+  "miny": 55,
+  // deprecated
+  "maxx": 30,
+  // deprecated
+  "maxy": -30,
+  // deprecated  
+  "emikat_id": undefined,
+  // this is the emikat study id
+  "study_variant": STUDY_VARIANT_VALUES[0],
+  "time_period": TIME_PERIOD_VALUES[0],
+  "emissions_scenario": EMISSIONS_SCENARIO_VALUES[0],
+  "event_frequency": EVENT_FREQUENCY_VALUES[0]
+});
 var extractEmikatIdFromStudyGroupNode = CSISHelpers.extractEmikatIdFromStudyGroupNode;
 var getIncludedObject = CSISHelpers.getIncludedObject;
 var filterResourcesbyTagName = CSISHelpers.filterResourcesbyTagName;
@@ -2598,6 +2613,7 @@ var filterResourcesbyReferenceType = CSISHelpers.filterResourcesbyReferenceType;
 var extractReferencesfromResource = CSISHelpers.extractReferencesfromResource;
 var extractTagsfromResource = CSISHelpers.extractTagsfromResource;
 var extractStudyAreaFromStudyGroupNode = CSISHelpers.extractStudyAreaFromStudyGroupNode;
+var defaultQueryParams = CSISHelpers.defaultQueryParams;
 
 var CSISHelpers$1 = /*#__PURE__*/Object.freeze({
 	'default': CSISHelpers,
@@ -2608,7 +2624,8 @@ var CSISHelpers$1 = /*#__PURE__*/Object.freeze({
 	filterResourcesbyReferenceType: filterResourcesbyReferenceType,
 	extractReferencesfromResource: extractReferencesfromResource,
 	extractTagsfromResource: extractTagsfromResource,
-	extractStudyAreaFromStudyGroupNode: extractStudyAreaFromStudyGroupNode
+	extractStudyAreaFromStudyGroupNode: extractStudyAreaFromStudyGroupNode,
+	defaultQueryParams: defaultQueryParams
 });
 
 log.enableAll(); //export {CSISHelpers, CSISRemoteHelpers, EMIKATHelpers, CSISRemoteHelpersTests}

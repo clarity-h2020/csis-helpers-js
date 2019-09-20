@@ -9,6 +9,7 @@
  */
 
 import axios from 'axios';
+import log from 'loglevel';
 
 /**
  * Until [this discussion](https://github.com/clarity-h2020/data-package/issues/42) is settled,
@@ -28,6 +29,12 @@ export const EMIKAT_STUDY_ID = '${emikat_id}';
  * @type {String}
  */
 export const STUDY_VARIANT = '${study_variant}';
+
+/**
+ * Allowed values for STUDY_VARIANT constant
+ * @type {String[]}
+ */
+export const STUDY_VARIANT_VALUES = ['BASELINE'];
 
 /**
  * TIME_PERIOD='Baseline' ... (Alternatives are: '20110101-20401231', '20410101-20701231' and '20710101-21001231')
@@ -56,7 +63,7 @@ export const EMISSIONS_SCENARIO = '${emissions_scenario}';
 export const EMISSIONS_SCENARIO_VALUES = ['Baseline', 'rcp26', 'rcp45', 'rcp85'];
 
 /**
- * EVENT_FREQUENCY='Rare' ... (Alternatives are: 'Occassional' or 'Frequent')
+ * EVENT_FREQUENCY='Rare' ... (Alternatives are: 'Occasional' or 'Frequent')
  * 
  * @type {String}
  */
@@ -96,30 +103,6 @@ export async function fetchData(url, emikatCredentials) {
 };
 
 /**
- * 
- * @param {*} url 
- * @param {*} authString 
- * @deprecated
- */
-export async function fetchUsers(url, authString) {
-  try {
-    console.log('fetching from:' + url);
-    const response = await emikatClient.get(url, { headers: { Authorization: authString } });
-
-    // we *could* do once:  
-    emikatClient.defaults.headers.common['Authorization'] = authString;
-    // but that would break functional code as it has side effects on the emikatClient instance.
-
-    //console.log(JSON.stringify(response));
-    return response;
-
-  } catch (e) {
-    console.error(e);
-    throw e;
-  }
-};
-
-/**
  * Replaces EMIKAT_STUDY_ID with the actual study id.
  * Note: We *could* use template strings in a fixed URL,  e.g.
  * `https://service.emikat.at/EmiKatTst/api/scenarios/${emikat_id}/feature/view.2812/table/data`
@@ -154,9 +137,16 @@ export function addEmikatId(urlTemplate, emikatId) {
  */
 export function addEmikatParameters(urlTemplate, emikatVariables) {
   if (urlTemplate && emikatVariables) {
+    // make a copy - JavaScript style ... :-(
     let url = (' ' + urlTemplate).slice(1);
     emikatVariables.forEach((value, key) => {
-      url = url.replace(key, value.toString());
+      if (value) {
+        // another 'nice' JS pitfall: String.replace doesn't replace all occurrences. UNBELIEVEABLE!!
+        // See https://stackoverflow.com/a/1145525
+        url = url.split(key).join(value);
+      } else {
+        log.warn(`no value found for parameter ${key} in ${urlTemplate}`);
+      }
     });
 
     return url;
