@@ -75,6 +75,18 @@ export const EVENT_FREQUENCY = '${event_frequency}';
  */
 export const EVENT_FREQUENCY_VALUES = ['Rare', 'Occasional', 'Frequent'];
 
+/**
+ * Query Parameter Mapping. 
+ * @see dee CSISHelpers.defaultQueryParams
+ */
+export const  QUERY_PARAMS = new Map(
+  [[EMIKAT_STUDY_ID, 'emikat_id'],
+  [STUDY_VARIANT, 'study_variant'],
+  [TIME_PERIOD, 'time_period'],
+  [EMISSIONS_SCENARIO, 'emissions_scenario'],
+  [EVENT_FREQUENCY, 'event_frequency']]
+);
+
 const emikatClient = axios.create();
 
 /**

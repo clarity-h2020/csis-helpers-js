@@ -52,7 +52,6 @@ export default class CSISHelpers {
       "event_frequency": EMIKATHelpers.EVENT_FREQUENCY_VALUES[0]
     };
 
-
   /**
     * Drupal JSON API 'deeply' includes objects, e.g. &include=field_references are provided only once in a separate array name 'included'.
     * This method resolves the references and extracts the included  object.

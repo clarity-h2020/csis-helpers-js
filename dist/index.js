@@ -1260,6 +1260,12 @@ var EVENT_FREQUENCY = '${event_frequency}';
  */
 
 var EVENT_FREQUENCY_VALUES = ['Rare', 'Occasional', 'Frequent'];
+/**
+ * Query Parameter Mapping. 
+ * @see dee CSISHelpers.defaultQueryParams
+ */
+
+var QUERY_PARAMS = new Map([[EMIKAT_STUDY_ID, 'emikat_id'], [STUDY_VARIANT, 'study_variant'], [TIME_PERIOD, 'time_period'], [EMISSIONS_SCENARIO, 'emissions_scenario'], [EVENT_FREQUENCY, 'event_frequency']]);
 var emikatClient = axios.create();
 /**
  * 
@@ -1398,6 +1404,7 @@ var EMIKATHelpers = /*#__PURE__*/Object.freeze({
 	EMISSIONS_SCENARIO_VALUES: EMISSIONS_SCENARIO_VALUES,
 	EVENT_FREQUENCY: EVENT_FREQUENCY,
 	EVENT_FREQUENCY_VALUES: EVENT_FREQUENCY_VALUES,
+	QUERY_PARAMS: QUERY_PARAMS,
 	fetchData: fetchData,
 	addEmikatId: addEmikatId,
 	addEmikatParameters: addEmikatParameters,
