@@ -78,7 +78,7 @@ test('[RELEASE] URL with EmikatId', () => {
   expect(transformedUrl.includes('31337')).toBeTruthy;
 });
 
-test('[DEV] URL with EMIKAT PARAMETERS', () => {
+test('[DEV] WMS URL with EMIKAT PARAMETERS', () => {
   /**
    * @type {String}
    */
@@ -94,10 +94,10 @@ test('[DEV] URL with EMIKAT PARAMETERS', () => {
    */
   const parametersMap = new Map([
     [EMIKATHelpers.EMIKAT_STUDY_ID, 2846],
-    [_EMIKATHelpers.STUDY_VARIANT, 'BASELINE'],
-    [_EMIKATHelpers.TIME_PERIOD, 'Baseline'],
-    [_EMIKATHelpers.EMISSIONS_SCENARIO, 'Baseline'],
-    [_EMIKATHelpers.EVENT_FREQUENCY, 'Rare']
+    [EMIKATHelpers.STUDY_VARIANT, 'BASELINE'],
+    [EMIKATHelpers.TIME_PERIOD, 'Baseline'],
+    [EMIKATHelpers.EMISSIONS_SCENARIO, 'Baseline'],
+    [EMIKATHelpers.EVENT_FREQUENCY, 'Rare']
   ]);
 
   /**
@@ -113,7 +113,7 @@ test('[DEV] URL with EMIKAT PARAMETERS', () => {
   expect(url).toEqual(transformedUrl);
 });
 
-test('[PROD] URL with EMIKAT PARAMETERS', () => {
+test('[PROD] WMS URL with EMIKAT PARAMETERS', () => {
   /**
    * @type {String}
    */
@@ -132,7 +132,7 @@ test('[PROD] URL with EMIKAT PARAMETERS', () => {
     [_EMIKATHelpers.STUDY_VARIANT, 'BASELINE'],
     [_EMIKATHelpers.TIME_PERIOD, 'Baseline'],
     [_EMIKATHelpers.EMISSIONS_SCENARIO, 'Baseline'],
-    [_EMIKATHelpers.EVENT_FREQUENCY, 'Rare']
+    [_EMIKATHelpers.EVENT_FREQUENCY, 'Rare'],
   ]);
 
 
@@ -163,6 +163,84 @@ test('[RELEASE] simple URL with EmikatId', () => {
   expect(transformedUrl.includes('31337')).toBeTruthy();
   expect(transformedUrl).toEqual('https://service.emikat.at/geoserver/clarity/wms?CQL_FILTER=SZ_ID=31337');
 });
+
+
+test('[DEV] Table URL with EMIKAT PARAMETERS', () => {
+  /**
+   * @type {String}
+   */
+  const urlTemplate = `https://service.emikat.at/EmiKatTst/api/scenarios/${EMIKATHelpers.EMIKAT_STUDY_ID}/feature/view.2975/table/${EMIKATHelpers.DATA_FORMAT}?rownum=1000&filter=STUDY_VARIANT=%27${EMIKATHelpers.STUDY_VARIANT}%27&filter=TIME_PERIOD=%27${EMIKATHelpers.TIME_PERIOD}%27&filter=EMISSIONS_SCENARIO=%27${EMIKATHelpers.EMISSIONS_SCENARIO}%27&filter=EVENT_FREQUENCY=%27${EMIKATHelpers.EVENT_FREQUENCY}%27`;
+
+  /**
+   * @type {String}
+   */
+  const url = 'https://service.emikat.at/EmiKatTst/api/scenarios/2846/feature/view.2975/table/csv?rownum=1000&filter=STUDY_VARIANT=%27BASELINE%27&filter=TIME_PERIOD=%27Baseline%27&filter=EMISSIONS_SCENARIO=%27Baseline%27&filter=EVENT_FREQUENCY=%27Rare%27';
+
+  /**
+   * @type{Map<String, any>}
+   */
+  const parametersMap = new Map([
+    [EMIKATHelpers.EMIKAT_STUDY_ID, 2846],
+    [EMIKATHelpers.STUDY_VARIANT, 'BASELINE'],
+    [EMIKATHelpers.TIME_PERIOD, 'Baseline'],
+    [EMIKATHelpers.EMISSIONS_SCENARIO, 'Baseline'],
+    [EMIKATHelpers.EVENT_FREQUENCY, 'Rare'],
+    [EMIKATHelpers.DATA_FORMAT, 'csv']
+  ]);
+
+  /**
+     * @type {String}
+     */
+  const transformedUrl = EMIKATHelpers.addEmikatParameters(urlTemplate, parametersMap);
+
+  expect(urlTemplate).not.toEqual(transformedUrl);
+  expect(transformedUrl.includes('$')).toBeFalsy;
+  expect(transformedUrl.includes('csv'));
+  expect(transformedUrl.includes('2846'));
+  expect(transformedUrl.includes('BASELINE'));
+  expect(transformedUrl.includes('Baseline'));
+  expect(transformedUrl.includes('Rare'));
+  expect(url).toEqual(transformedUrl);
+});
+
+test('[PROD] Table URL with EMIKAT PARAMETERS', () => {
+  /**
+   * @type {String}
+   */
+  const urlTemplate = `https://service.emikat.at/EmiKatTst/api/scenarios/${_EMIKATHelpers.EMIKAT_STUDY_ID}/feature/view.2975/table/${_EMIKATHelpers.DATA_FORMAT}?rownum=1000&filter=STUDY_VARIANT=%27${_EMIKATHelpers.STUDY_VARIANT}%27&filter=TIME_PERIOD=%27${_EMIKATHelpers.TIME_PERIOD}%27&filter=EMISSIONS_SCENARIO=%27${_EMIKATHelpers.EMISSIONS_SCENARIO}%27&filter=EVENT_FREQUENCY=%27${_EMIKATHelpers.EVENT_FREQUENCY}%27`;
+
+  /**
+   * @type {String}
+   */
+  const url = 'https://service.emikat.at/EmiKatTst/api/scenarios/2846/feature/view.2975/table/csv?rownum=1000&filter=STUDY_VARIANT=%27BASELINE%27&filter=TIME_PERIOD=%27Baseline%27&filter=EMISSIONS_SCENARIO=%27Baseline%27&filter=EVENT_FREQUENCY=%27Rare%27';
+
+  /**
+   * @type{Map<String, any>}
+   */
+  const parametersMap = new Map([
+    [_EMIKATHelpers.EMIKAT_STUDY_ID, 2846],
+    [_EMIKATHelpers.STUDY_VARIANT, 'BASELINE'],
+    [_EMIKATHelpers.TIME_PERIOD, 'Baseline'],
+    [_EMIKATHelpers.EMISSIONS_SCENARIO, 'Baseline'],
+    [_EMIKATHelpers.EVENT_FREQUENCY, 'Rare'],
+    [_EMIKATHelpers.DATA_FORMAT, 'csv']
+  ]);
+
+  /**
+     * @type {String}
+     */
+  const transformedUrl = _EMIKATHelpers.addEmikatParameters(urlTemplate, parametersMap);
+
+  expect(urlTemplate).not.toEqual(transformedUrl);
+  expect(transformedUrl.includes('$')).toBeFalsy;
+  expect(transformedUrl.includes('csv'));
+  expect(transformedUrl.includes('2846'));
+  expect(transformedUrl.includes('BASELINE'));
+  expect(transformedUrl.includes('Baseline'));
+  expect(transformedUrl.includes('Rare'));
+  expect(url).toEqual(transformedUrl);
+});
+
 
 afterAll(() => {
   server.close(() => {

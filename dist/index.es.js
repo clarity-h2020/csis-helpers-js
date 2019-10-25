@@ -1223,6 +1223,13 @@ var STUDY_VARIANT_VALUES = ['BASELINE'];
 
 var TIME_PERIOD = '${time_period}';
 /**
+ * DATA_FORMAT = 'data' (JSON), 'csv' or 'geojson'
+ * 
+ * @type {String}
+ */
+
+var DATA_FORMAT = '${data_format}';
+/**
  * Allowed values for TIME_PERIOD constant
  * @type {String[]}
  */
@@ -1255,11 +1262,18 @@ var EVENT_FREQUENCY = '${event_frequency}';
 
 var EVENT_FREQUENCY_VALUES = ['Rare', 'Occasional', 'Frequent'];
 /**
- * Query Parameter Mapping. 
- * @see dee CSISHelpers.defaultQueryParams
+ * Allowed values for EMIKAT_DATA_FORMAT constant.
+ * data = EMIKAT proprietary JSON
+ * @type {String[]}
  */
 
-var QUERY_PARAMS = new Map([[EMIKAT_STUDY_ID, 'emikat_id'], [STUDY_VARIANT, 'study_variant'], [TIME_PERIOD, 'time_period'], [EMISSIONS_SCENARIO, 'emissions_scenario'], [EVENT_FREQUENCY, 'event_frequency']]);
+var DATA_FORMAT_VALUES = ['data', 'csv', 'geojson'];
+/**
+ * Query Parameter Mapping. 
+ * @see CSISHelpers.defaultQueryParams
+ */
+
+var QUERY_PARAMS = new Map([[EMIKAT_STUDY_ID, 'emikat_id'], [DATA_FORMAT, 'data_format'], [STUDY_VARIANT, 'study_variant'], [TIME_PERIOD, 'time_period'], [EMISSIONS_SCENARIO, 'emissions_scenario'], [EVENT_FREQUENCY, 'event_frequency']]);
 var emikatClient = axios.create();
 /**
  * 
@@ -1393,11 +1407,13 @@ var EMIKATHelpers = /*#__PURE__*/Object.freeze({
 	STUDY_VARIANT: STUDY_VARIANT,
 	STUDY_VARIANT_VALUES: STUDY_VARIANT_VALUES,
 	TIME_PERIOD: TIME_PERIOD,
+	DATA_FORMAT: DATA_FORMAT,
 	TIME_PERIOD_VALUES: TIME_PERIOD_VALUES,
 	EMISSIONS_SCENARIO: EMISSIONS_SCENARIO,
 	EMISSIONS_SCENARIO_VALUES: EMISSIONS_SCENARIO_VALUES,
 	EVENT_FREQUENCY: EVENT_FREQUENCY,
 	EVENT_FREQUENCY_VALUES: EVENT_FREQUENCY_VALUES,
+	DATA_FORMAT_VALUES: DATA_FORMAT_VALUES,
 	QUERY_PARAMS: QUERY_PARAMS,
 	fetchData: fetchData,
 	addEmikatId: addEmikatId,
@@ -2607,6 +2623,7 @@ defineProperty(CSISHelpers, "defaultQueryParams", {
   // deprecated  
   "emikat_id": undefined,
   // this is the emikat study id
+  "data_format": DATA_FORMAT_VALUES[0],
   "study_variant": STUDY_VARIANT_VALUES[0],
   "time_period": TIME_PERIOD_VALUES[0],
   "emissions_scenario": EMISSIONS_SCENARIO_VALUES[0],

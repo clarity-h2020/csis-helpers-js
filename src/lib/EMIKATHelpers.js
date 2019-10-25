@@ -44,6 +44,13 @@ export const STUDY_VARIANT_VALUES = ['BASELINE'];
 export const TIME_PERIOD = '${time_period}';
 
 /**
+ * DATA_FORMAT = 'data' (JSON), 'csv' or 'geojson'
+ * 
+ * @type {String}
+ */
+export const DATA_FORMAT = '${data_format}';
+
+/**
  * Allowed values for TIME_PERIOD constant
  * @type {String[]}
  */
@@ -76,11 +83,19 @@ export const EVENT_FREQUENCY = '${event_frequency}';
 export const EVENT_FREQUENCY_VALUES = ['Rare', 'Occasional', 'Frequent'];
 
 /**
- * Query Parameter Mapping. 
- * @see dee CSISHelpers.defaultQueryParams
+ * Allowed values for EMIKAT_DATA_FORMAT constant.
+ * data = EMIKAT proprietary JSON
+ * @type {String[]}
  */
-export const  QUERY_PARAMS = new Map(
+export const DATA_FORMAT_VALUES = ['data', 'csv', 'geojson'];
+
+/**
+ * Query Parameter Mapping. 
+ * @see CSISHelpers.defaultQueryParams
+ */
+export const QUERY_PARAMS = new Map(
   [[EMIKAT_STUDY_ID, 'emikat_id'],
+  [DATA_FORMAT, 'data_format'],
   [STUDY_VARIANT, 'study_variant'],
   [TIME_PERIOD, 'time_period'],
   [EMISSIONS_SCENARIO, 'emissions_scenario'],
@@ -108,9 +123,9 @@ export async function fetchData(url, emikatCredentials) {
 
     return response;
 
-  } catch (e) {
-    console.error('could not fetch EMIKAT data from ' + url, e);
-    throw e;
+  } catch (error) {
+    console.error('could not fetch EMIKAT data from ' + url, error);
+    throw error;
   }
 };
 
