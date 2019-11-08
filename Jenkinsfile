@@ -2,7 +2,7 @@ pipeline {
     agent {
         docker {
             image 'node:latest'
-            args '-p 3002:3000'
+            args '-p 3012:3000'
         }
     }
     environment {
