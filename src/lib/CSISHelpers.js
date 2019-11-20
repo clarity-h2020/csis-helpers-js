@@ -30,6 +30,15 @@ import * as EMIKATHelpers from './EMIKATHelpers.js';
 export default class CSISHelpers {
 
   /**
+   * Common Constants for *Template Resources*
+   */
+
+  /**
+   * The WMS getMap request layers attribute 
+   */
+  static LAYERS = '${layers}';
+
+  /**
    * Query params extracted from CSIS Helpers. See /examples and /fixtures/csisHelpers.json
    */
   static defaultQueryParams = {
@@ -146,7 +155,7 @@ export default class CSISHelpers {
     });
 
     log.debug(filteredResourceArray.length + ' resources left after filtering ' + resourceArray.length
-      + ' resources by tag type ' + tagType + ' and tag name ' + name);
+      + ' resources by tag type ' + tagType + ' and tag name ' + tagName);
 
     return filteredResourceArray;
   }
@@ -288,3 +297,19 @@ export const extractReferencesfromResource = CSISHelpers.extractReferencesfromRe
 export const extractTagsfromResource = CSISHelpers.extractTagsfromResource;
 export const extractStudyAreaFromStudyGroupNode = CSISHelpers.extractStudyAreaFromStudyGroupNode;
 export const defaultQueryParams = CSISHelpers.defaultQueryParams;
+
+ /**
+ *Re-Export *common* variable constants defined in EMIKATHelpers and add new common constants not relevant for EMIKATHelpers
+ */
+export const LAYERS = CSISHelpers.LAYERS;
+
+export const DATA_FORMAT = EMIKATHelpers.DATA_FORMAT;
+export const DATA_FORMAT_VALUES = EMIKATHelpers.DATA_FORMAT_VALUES;
+export const EMISSIONS_SCENARIO = EMIKATHelpers.EMISSIONS_SCENARIO;
+export const EMISSIONS_SCENARIO_VALUES = EMIKATHelpers.EMISSIONS_SCENARIO_VALUES;
+export const EVENT_FREQUENCY = EMIKATHelpers.EVENT_FREQUENCY;
+export const EVENT_FREQUENCY_VALUES = EMIKATHelpers.EVENT_FREQUENCY_VALUES;
+export const STUDY_VARIANT = EMIKATHelpers.STUDY_VARIANT;
+export const STUDY_VARIANT_VALUES = EMIKATHelpers.STUDY_VARIANT_VALUES;
+export const TIME_PERIOD = EMIKATHelpers.TIME_PERIOD;
+export const TIME_PERIOD_VALUES = EMIKATHelpers.TIME_PERIOD_VALUES;
