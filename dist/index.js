@@ -2379,6 +2379,14 @@ function () {
     key: "getIncludedObject",
 
     /**
+     * Common Constants for *Template Resources*
+     */
+
+    /**
+     * The WMS getMap request layers attribute 
+     */
+
+    /**
      * Query params extracted from CSIS Helpers. See /examples and /fixtures/csisHelpers.json
      */
 
@@ -2477,7 +2485,7 @@ function () {
 
         return false;
       });
-      log.debug(filteredResourceArray.length + ' resources left after filtering ' + resourceArray.length + ' resources by tag type ' + tagType + ' and tag name ' + name);
+      log.debug(filteredResourceArray.length + ' resources left after filtering ' + resourceArray.length + ' resources by tag type ' + tagType + ' and tag name ' + tagName);
       return filteredResourceArray;
     }
     /**
@@ -2610,6 +2618,8 @@ function () {
  */
 
 
+defineProperty(CSISHelpers, "LAYERS", '${layers}');
+
 defineProperty(CSISHelpers, "defaultQueryParams", {
   "host": "https://csis.myclimateservice.eu",
   "study_uuid": undefined,
@@ -2644,6 +2654,21 @@ var extractReferencesfromResource = CSISHelpers.extractReferencesfromResource;
 var extractTagsfromResource = CSISHelpers.extractTagsfromResource;
 var extractStudyAreaFromStudyGroupNode = CSISHelpers.extractStudyAreaFromStudyGroupNode;
 var defaultQueryParams = CSISHelpers.defaultQueryParams;
+/**
+*Re-Export *common* variable constants defined in EMIKATHelpers and add new common constants not relevant for EMIKATHelpers
+*/
+
+var LAYERS = CSISHelpers.LAYERS;
+var DATA_FORMAT$1 = DATA_FORMAT;
+var DATA_FORMAT_VALUES$1 = DATA_FORMAT_VALUES;
+var EMISSIONS_SCENARIO$1 = EMISSIONS_SCENARIO;
+var EMISSIONS_SCENARIO_VALUES$1 = EMISSIONS_SCENARIO_VALUES;
+var EVENT_FREQUENCY$1 = EVENT_FREQUENCY;
+var EVENT_FREQUENCY_VALUES$1 = EVENT_FREQUENCY_VALUES;
+var STUDY_VARIANT$1 = STUDY_VARIANT;
+var STUDY_VARIANT_VALUES$1 = STUDY_VARIANT_VALUES;
+var TIME_PERIOD$1 = TIME_PERIOD;
+var TIME_PERIOD_VALUES$1 = TIME_PERIOD_VALUES;
 
 var CSISHelpers$1 = /*#__PURE__*/Object.freeze({
 	'default': CSISHelpers,
@@ -2655,7 +2680,18 @@ var CSISHelpers$1 = /*#__PURE__*/Object.freeze({
 	extractReferencesfromResource: extractReferencesfromResource,
 	extractTagsfromResource: extractTagsfromResource,
 	extractStudyAreaFromStudyGroupNode: extractStudyAreaFromStudyGroupNode,
-	defaultQueryParams: defaultQueryParams
+	defaultQueryParams: defaultQueryParams,
+	LAYERS: LAYERS,
+	DATA_FORMAT: DATA_FORMAT$1,
+	DATA_FORMAT_VALUES: DATA_FORMAT_VALUES$1,
+	EMISSIONS_SCENARIO: EMISSIONS_SCENARIO$1,
+	EMISSIONS_SCENARIO_VALUES: EMISSIONS_SCENARIO_VALUES$1,
+	EVENT_FREQUENCY: EVENT_FREQUENCY$1,
+	EVENT_FREQUENCY_VALUES: EVENT_FREQUENCY_VALUES$1,
+	STUDY_VARIANT: STUDY_VARIANT$1,
+	STUDY_VARIANT_VALUES: STUDY_VARIANT_VALUES$1,
+	TIME_PERIOD: TIME_PERIOD$1,
+	TIME_PERIOD_VALUES: TIME_PERIOD_VALUES$1
 });
 
 log.enableAll(); //export {CSISHelpers, CSISRemoteHelpers, EMIKATHelpers, CSISRemoteHelpersTests}

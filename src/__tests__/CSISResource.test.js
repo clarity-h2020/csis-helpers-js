@@ -8,5 +8,5 @@ test('test CSISResource getServiceType', () => {
     const csisResource = new CSISResource(apiResponseResources.data[0], apiResponseResources.included);
     const serviceType = csisResource.getServiceType();
     expect(serviceType).not.toBeNull();
-    expect(serviceType.attributes.name).toEqual('ogc:wfs');
+    expect(serviceType.attributes.name).toEqual('ogc:wcs');
 });
