@@ -14,6 +14,30 @@
             "problemMatcher": [
                 "$jshint"
             ]
+        },
+        {
+            "type": "npm",
+            "script": "test:current",
+            "problemMatcher": [],
+        },
+        {
+            "label": "runCurrentTest",
+            "type": "shell",
+            "command": "yarn",
+            "args": [
+                "react-scripts",
+                "test",
+                "${fileBasenameNoExtension}",
+                "--env=jsdom",
+                "--watchAll=false"
+            ],
+            "group": "test",
+            "presentation": {
+                "echo": true,
+                "reveal": "always",
+                "focus": false,
+                "panel": "dedicated"
+            }
         }
     ]
 }

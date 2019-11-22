@@ -1,6 +1,8 @@
 import * as CSISRemoteHelpers from './lib/CSISRemoteHelpers.js';
 import * as EMIKATHelpers from './lib/EMIKATHelpers.js';
 import * as CSISHelpers from './lib/CSISHelpers.js';
+import CSISResource from './classes/CSISResource.js';
+
 
 //import CSISRemoteHelpersTests from './__tests__/CSISRemoteHelpers.test.js';
 
@@ -9,4 +11,4 @@ import log from 'loglevel';
 log.enableAll();
 
 //export {CSISHelpers, CSISRemoteHelpers, EMIKATHelpers, CSISRemoteHelpersTests}
-export {CSISHelpers, CSISRemoteHelpers, EMIKATHelpers}
+export {CSISHelpers, CSISRemoteHelpers, EMIKATHelpers, CSISResource}

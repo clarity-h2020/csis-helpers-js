@@ -1,0 +1,2802 @@
+{
+    "jsonapi": {
+        "version": "1.0",
+        "meta": {
+            "links": {
+                "self": {
+                    "href": "http:\/\/jsonapi.org\/format\/1.0\/"
+                }
+            }
+        }
+    },
+    "data": {
+        "type": "node--data_package_metadata",
+        "id": "38457a62-5fd1-4c1b-b308-ba1a66174ff8",
+        "attributes": {
+            "drupal_internal__nid": 1272,
+            "drupal_internal__vid": 1569,
+            "langcode": "en",
+            "revision_timestamp": "2019-03-19T14:56:35+00:00",
+            "revision_log": null,
+            "status": true,
+            "title": "Local effect apparent temperature",
+            "created": "2019-03-19T14:56:35+00:00",
+            "changed": "2019-10-04T15:56:07+00:00",
+            "promote": false,
+            "sticky": false,
+            "default_langcode": true,
+            "revision_translation_affected": true,
+            "path": {
+                "alias": null,
+                "pid": null,
+                "langcode": "en"
+            },
+            "content_translation_source": "und",
+            "content_translation_outdated": false,
+            "field_bounding_box": {
+                "value": "POLYGON ((58.007813 74.068785, 58.007813 33.303203, -31.992188 33.303203, -31.992188 74.068785, 58.007813 74.068785))",
+                "geo_type": "Polygon",
+                "lat": 53.685994,
+                "lon": 13.0078125,
+                "left": -31.992188,
+                "top": 74.068785,
+                "right": 58.007813,
+                "bottom": 33.303203,
+                "geohash": "",
+                "latlon": "53.685994,13.0078125"
+            },
+            "field_bytes": null,
+            "field_crs": null,
+            "field_description": "Local effect apparent temperature is calculated by EMIKAT on the fly and for the study area indicated by ${emikat_id}.\r\nFor testing, you can substitute 2846 for ${emikat_id} and one of the values that are advertised under \u0022Categorisation (tags)\u0022 for other variables.\r\n\r\n\u003Cp\/\u003E\u003Cb\u003Ebeware:\u003C\/b\u003E only the map shows apparent temperature today, tables show all temperatures plus the \u0022discomfort level\u0022 in one table! \r\n",
+            "field_encoding": null,
+            "field_format": null,
+            "field_hash": null,
+            "field_mediatype": null,
+            "field_name": "TODO",
+            "field_profile": " http:\/\/csis.myclimateservice.eu\/data\/schemas\/clarity-data-resource-json-schema.json",
+            "field_reference_periods": [
+                "2011"
+            ],
+            "field_schema": null,
+            "field_title": "Local effect apparent temperature - OBSOLETE",
+            "field_trs": "ISO 8601:2004",
+            "field_url": [
+                "https:\/\/service.emikat.at\/EmiKatTst\/api\/scenarios\/${emikat_id}\/feature\/view.2974\/table\/csv?rownum=1000\u0026filter=STUDY_VARIANT=\u0027${study_variant}\u0027\u0026filter=TIME_PERIOD=\u0027${time_period}\u0027\u0026filter=EMISSIONS_SCENARIO=\u0027${time_period}\u0027\u0026filter=EVENT_FREQUENCY=\u0027${event_frequency}\u0027"
+            ]
+        },
+        "relationships": {
+            "node_type": {
+                "data": {
+                    "type": "node_type--node_type",
+                    "id": "87a92330-525a-4ace-bbda-6b83b415b09e"
+                },
+                "links": {
+                    "self": {
+                        "href": "https:\/\/csis.myclimateservice.eu\/jsonapi\/node\/data_package_metadata\/38457a62-5fd1-4c1b-b308-ba1a66174ff8\/relationships\/node_type?resourceVersion=id%3A1569"
+                    },
+                    "related": {
+                        "href": "https:\/\/csis.myclimateservice.eu\/jsonapi\/node\/data_package_metadata\/38457a62-5fd1-4c1b-b308-ba1a66174ff8\/node_type?resourceVersion=id%3A1569"
+                    }
+                }
+            },
+            "revision_uid": {
+                "data": {
+                    "type": "user--user",
+                    "id": "0859f3c9-3dae-474b-b5d1-9217f0fb8f0e"
+                },
+                "links": {
+                    "self": {
+                        "href": "https:\/\/csis.myclimateservice.eu\/jsonapi\/node\/data_package_metadata\/38457a62-5fd1-4c1b-b308-ba1a66174ff8\/relationships\/revision_uid?resourceVersion=id%3A1569"
+                    },
+                    "related": {
+                        "href": "https:\/\/csis.myclimateservice.eu\/jsonapi\/node\/data_package_metadata\/38457a62-5fd1-4c1b-b308-ba1a66174ff8\/revision_uid?resourceVersion=id%3A1569"
+                    }
+                }
+            },
+            "uid": {
+                "data": {
+                    "type": "user--user",
+                    "id": "e98ea441-976e-46c5-b5d8-05222d014b55"
+                },
+                "links": {
+                    "self": {
+                        "href": "https:\/\/csis.myclimateservice.eu\/jsonapi\/node\/data_package_metadata\/38457a62-5fd1-4c1b-b308-ba1a66174ff8\/relationships\/uid?resourceVersion=id%3A1569"
+                    },
+                    "related": {
+                        "href": "https:\/\/csis.myclimateservice.eu\/jsonapi\/node\/data_package_metadata\/38457a62-5fd1-4c1b-b308-ba1a66174ff8\/uid?resourceVersion=id%3A1569"
+                    }
+                }
+            },
+            "menu_link": {
+                "data": null,
+                "links": {
+                    "self": {
+                        "href": "https:\/\/csis.myclimateservice.eu\/jsonapi\/node\/data_package_metadata\/38457a62-5fd1-4c1b-b308-ba1a66174ff8\/relationships\/menu_link?resourceVersion=id%3A1569"
+                    },
+                    "related": {
+                        "href": "https:\/\/csis.myclimateservice.eu\/jsonapi\/node\/data_package_metadata\/38457a62-5fd1-4c1b-b308-ba1a66174ff8\/menu_link?resourceVersion=id%3A1569"
+                    }
+                }
+            },
+            "field_analysis_context": {
+                "data": {
+                    "type": "node--analysis_context",
+                    "id": "be81bdf7-b907-4c7a-83df-dff2bebcb7a7"
+                },
+                "links": {
+                    "self": {
+                        "href": "https:\/\/csis.myclimateservice.eu\/jsonapi\/node\/data_package_metadata\/38457a62-5fd1-4c1b-b308-ba1a66174ff8\/relationships\/field_analysis_context?resourceVersion=id%3A1569"
+                    },
+                    "related": {
+                        "href": "https:\/\/csis.myclimateservice.eu\/jsonapi\/node\/data_package_metadata\/38457a62-5fd1-4c1b-b308-ba1a66174ff8\/field_analysis_context?resourceVersion=id%3A1569"
+                    }
+                }
+            },
+            "field_contributors": {
+                "data": [
+                    {
+                        "type": "node--dp_contributors",
+                        "id": "cf4eeeca-023c-45b0-a092-50b0fdc4e005"
+                    },
+                    {
+                        "type": "node--dp_contributors",
+                        "id": "7f995a69-f920-438c-89dd-446d6bf46206"
+                    }
+                ],
+                "links": {
+                    "self": {
+                        "href": "https:\/\/csis.myclimateservice.eu\/jsonapi\/node\/data_package_metadata\/38457a62-5fd1-4c1b-b308-ba1a66174ff8\/relationships\/field_contributors?resourceVersion=id%3A1569"
+                    },
+                    "related": {
+                        "href": "https:\/\/csis.myclimateservice.eu\/jsonapi\/node\/data_package_metadata\/38457a62-5fd1-4c1b-b308-ba1a66174ff8\/field_contributors?resourceVersion=id%3A1569"
+                    }
+                }
+            },
+            "field_grid_info": {
+                "data": null,
+                "links": {
+                    "self": {
+                        "href": "https:\/\/csis.myclimateservice.eu\/jsonapi\/node\/data_package_metadata\/38457a62-5fd1-4c1b-b308-ba1a66174ff8\/relationships\/field_grid_info?resourceVersion=id%3A1569"
+                    },
+                    "related": {
+                        "href": "https:\/\/csis.myclimateservice.eu\/jsonapi\/node\/data_package_metadata\/38457a62-5fd1-4c1b-b308-ba1a66174ff8\/field_grid_info?resourceVersion=id%3A1569"
+                    }
+                }
+            },
+            "field_licenses": {
+                "data": [
+                    {
+                        "type": "node--dp_license",
+                        "id": "abf37666-11d6-4708-be1d-ae4af62419aa"
+                    }
+                ],
+                "links": {
+                    "self": {
+                        "href": "https:\/\/csis.myclimateservice.eu\/jsonapi\/node\/data_package_metadata\/38457a62-5fd1-4c1b-b308-ba1a66174ff8\/relationships\/field_licenses?resourceVersion=id%3A1569"
+                    },
+                    "related": {
+                        "href": "https:\/\/csis.myclimateservice.eu\/jsonapi\/node\/data_package_metadata\/38457a62-5fd1-4c1b-b308-ba1a66174ff8\/field_licenses?resourceVersion=id%3A1569"
+                    }
+                }
+            },
+            "field_map_view": {
+                "data": null,
+                "links": {
+                    "self": {
+                        "href": "https:\/\/csis.myclimateservice.eu\/jsonapi\/node\/data_package_metadata\/38457a62-5fd1-4c1b-b308-ba1a66174ff8\/relationships\/field_map_view?resourceVersion=id%3A1569"
+                    },
+                    "related": {
+                        "href": "https:\/\/csis.myclimateservice.eu\/jsonapi\/node\/data_package_metadata\/38457a62-5fd1-4c1b-b308-ba1a66174ff8\/field_map_view?resourceVersion=id%3A1569"
+                    }
+                }
+            },
+            "field_parameters": {
+                "data": [],
+                "links": {
+                    "self": {
+                        "href": "https:\/\/csis.myclimateservice.eu\/jsonapi\/node\/data_package_metadata\/38457a62-5fd1-4c1b-b308-ba1a66174ff8\/relationships\/field_parameters?resourceVersion=id%3A1569"
+                    },
+                    "related": {
+                        "href": "https:\/\/csis.myclimateservice.eu\/jsonapi\/node\/data_package_metadata\/38457a62-5fd1-4c1b-b308-ba1a66174ff8\/field_parameters?resourceVersion=id%3A1569"
+                    }
+                }
+            },
+            "field_references": {
+                "data": [
+                    {
+                        "type": "node--dp_reference",
+                        "id": "e440b536-b71e-407f-a5c0-d84fc4dc869f"
+                    },
+                    {
+                        "type": "node--dp_reference",
+                        "id": "1b90aae6-4333-4d28-9e72-8f0eb7185ee4"
+                    },
+                    {
+                        "type": "node--dp_reference",
+                        "id": "4f279ba3-1472-4144-a28a-64a72bd63a30"
+                    },
+                    {
+                        "type": "node--dp_reference",
+                        "id": "dab56507-2c93-4a1d-926b-ed3ebdd59427"
+                    }
+                ],
+                "links": {
+                    "self": {
+                        "href": "https:\/\/csis.myclimateservice.eu\/jsonapi\/node\/data_package_metadata\/38457a62-5fd1-4c1b-b308-ba1a66174ff8\/relationships\/field_references?resourceVersion=id%3A1569"
+                    },
+                    "related": {
+                        "href": "https:\/\/csis.myclimateservice.eu\/jsonapi\/node\/data_package_metadata\/38457a62-5fd1-4c1b-b308-ba1a66174ff8\/field_references?resourceVersion=id%3A1569"
+                    }
+                }
+            },
+            "field_resource_tags": {
+                "data": [
+                    {
+                        "type": "taxonomy_term--eu_gl",
+                        "id": "9f4ade27-35fd-4498-bc21-ae81f9077d67"
+                    },
+                    {
+                        "type": "taxonomy_term--hazards",
+                        "id": "10a3218e-fa21-4cdb-a139-5945590a65c2"
+                    },
+                    {
+                        "type": "taxonomy_term--emissions",
+                        "id": "63d1b025-5180-4a91-a842-b3dd5f6d5754"
+                    },
+                    {
+                        "type": "taxonomy_term--emissions",
+                        "id": "9ed94820-61f1-45ca-acc0-efece06cf0e0",
+                        "meta": {
+                            "arity": 0
+                        }
+                    },
+                    {
+                        "type": "taxonomy_term--emissions",
+                        "id": "ea53c0f4-860f-45a6-a493-ec7246c13666",
+                        "meta": {
+                            "arity": 0
+                        }
+                    },
+                    {
+                        "type": "taxonomy_term--emissions",
+                        "id": "c47abd0a-8560-48c0-a9d1-3bef3ecf4c50",
+                        "meta": {
+                            "arity": 0
+                        }
+                    },
+                    {
+                        "type": "taxonomy_term--emissions",
+                        "id": "9ed94820-61f1-45ca-acc0-efece06cf0e0",
+                        "meta": {
+                            "arity": 1
+                        }
+                    },
+                    {
+                        "type": "taxonomy_term--emissions",
+                        "id": "ea53c0f4-860f-45a6-a493-ec7246c13666",
+                        "meta": {
+                            "arity": 1
+                        }
+                    },
+                    {
+                        "type": "taxonomy_term--emissions",
+                        "id": "c47abd0a-8560-48c0-a9d1-3bef3ecf4c50",
+                        "meta": {
+                            "arity": 1
+                        }
+                    },
+                    {
+                        "type": "taxonomy_term--impact_scenarios",
+                        "id": "0897cedf-b33d-47f6-a2f3-b055199d6d99"
+                    },
+                    {
+                        "type": "taxonomy_term--impact_scenarios",
+                        "id": "9c2e5c01-4ed5-450e-a050-b3aab3e52b2a"
+                    },
+                    {
+                        "type": "taxonomy_term--impact_scenarios",
+                        "id": "99ea445e-31ad-4d43-a286-f080972550c1"
+                    },
+                    {
+                        "type": "taxonomy_term--dp_resourcetype",
+                        "id": "363a05e3-9cca-4dec-932f-3e40e8b323ac"
+                    },
+                    {
+                        "type": "taxonomy_term--service_type",
+                        "id": "9b02ca7c-f9d5-480f-9c83-6cde18fbfc41"
+                    },
+                    {
+                        "type": "taxonomy_term--dp_variables",
+                        "id": "277eae9b-4f79-48a2-bd7b-fd841d67365b"
+                    },
+                    {
+                        "type": "taxonomy_term--dp_variables",
+                        "id": "98649abd-0005-4350-9883-d2d5d104a42f"
+                    },
+                    {
+                        "type": "taxonomy_term--dp_variables",
+                        "id": "d9de23b0-2851-4287-88cb-cee13c2514ed"
+                    },
+                    {
+                        "type": "taxonomy_term--dp_variables",
+                        "id": "44dd4a2c-f5fd-4651-abbc-b3c3bc4f4c36"
+                    },
+                    {
+                        "type": "taxonomy_term--dp_variables",
+                        "id": "befdefda-f2a3-48e6-8986-78c02ac8ae5a"
+                    },
+                    {
+                        "type": "taxonomy_term--dp_variables",
+                        "id": "0ee49c22-238f-4f5e-a30f-eff2921f09ee"
+                    },
+                    {
+                        "type": "taxonomy_term--dp_variables",
+                        "id": "428253c6-c2e0-4e22-8412-00864ca2d065"
+                    },
+                    {
+                        "type": "taxonomy_term--dp_variables",
+                        "id": "55892e0b-b17a-4533-be33-2bd9fee26bf3"
+                    },
+                    {
+                        "type": "taxonomy_term--dp_variables",
+                        "id": "74f5f3f7-28da-4f0c-9159-ec9f178b3599"
+                    },
+                    {
+                        "type": "taxonomy_term--dp_variables",
+                        "id": "32bca98a-9693-4a60-b797-5061840bf68f"
+                    },
+                    {
+                        "type": "taxonomy_term--dp_variables",
+                        "id": "7781aa7f-4588-4180-afbf-2d7ba13f4f71"
+                    },
+                    {
+                        "type": "taxonomy_term--dp_variables",
+                        "id": "f678437d-af00-4e11-967a-a4f55831241f"
+                    },
+                    {
+                        "type": "taxonomy_term--dp_variables",
+                        "id": "aaadb150-5598-4e74-9564-4ee30995d83d"
+                    },
+                    {
+                        "type": "taxonomy_term--dp_variables",
+                        "id": "588b6601-434b-49d4-afb2-da702e606921"
+                    }
+                ],
+                "links": {
+                    "self": {
+                        "href": "https:\/\/csis.myclimateservice.eu\/jsonapi\/node\/data_package_metadata\/38457a62-5fd1-4c1b-b308-ba1a66174ff8\/relationships\/field_resource_tags?resourceVersion=id%3A1569"
+                    },
+                    "related": {
+                        "href": "https:\/\/csis.myclimateservice.eu\/jsonapi\/node\/data_package_metadata\/38457a62-5fd1-4c1b-b308-ba1a66174ff8\/field_resource_tags?resourceVersion=id%3A1569"
+                    }
+                }
+            },
+            "field_service_type": {
+                "data": {
+                    "type": "taxonomy_term--service_type",
+                    "id": "09d71726-b097-4332-aa1e-68e770757ca9"
+                },
+                "links": {
+                    "self": {
+                        "href": "https:\/\/csis.myclimateservice.eu\/jsonapi\/node\/data_package_metadata\/38457a62-5fd1-4c1b-b308-ba1a66174ff8\/relationships\/field_service_type?resourceVersion=id%3A1569"
+                    },
+                    "related": {
+                        "href": "https:\/\/csis.myclimateservice.eu\/jsonapi\/node\/data_package_metadata\/38457a62-5fd1-4c1b-b308-ba1a66174ff8\/field_service_type?resourceVersion=id%3A1569"
+                    }
+                }
+            },
+            "field_sources": {
+                "data": [
+                    {
+                        "type": "node--dp_source",
+                        "id": "33a6bc48-35f2-4620-aee7-a115551f9fb9"
+                    },
+                    {
+                        "type": "node--dp_source",
+                        "id": "10031b5a-c44b-44b1-a768-7dfa1f1878a8"
+                    }
+                ],
+                "links": {
+                    "self": {
+                        "href": "https:\/\/csis.myclimateservice.eu\/jsonapi\/node\/data_package_metadata\/38457a62-5fd1-4c1b-b308-ba1a66174ff8\/relationships\/field_sources?resourceVersion=id%3A1569"
+                    },
+                    "related": {
+                        "href": "https:\/\/csis.myclimateservice.eu\/jsonapi\/node\/data_package_metadata\/38457a62-5fd1-4c1b-b308-ba1a66174ff8\/field_sources?resourceVersion=id%3A1569"
+                    }
+                }
+            },
+            "field_spatial_extent": {
+                "data": {
+                    "type": "node--spatialextent",
+                    "id": "8ea2ac11-afb4-4e98-bfd4-9d72e4e31bc7"
+                },
+                "links": {
+                    "self": {
+                        "href": "https:\/\/csis.myclimateservice.eu\/jsonapi\/node\/data_package_metadata\/38457a62-5fd1-4c1b-b308-ba1a66174ff8\/relationships\/field_spatial_extent?resourceVersion=id%3A1569"
+                    },
+                    "related": {
+                        "href": "https:\/\/csis.myclimateservice.eu\/jsonapi\/node\/data_package_metadata\/38457a62-5fd1-4c1b-b308-ba1a66174ff8\/field_spatial_extent?resourceVersion=id%3A1569"
+                    }
+                }
+            },
+            "field_spatial_resolution": {
+                "data": null,
+                "links": {
+                    "self": {
+                        "href": "https:\/\/csis.myclimateservice.eu\/jsonapi\/node\/data_package_metadata\/38457a62-5fd1-4c1b-b308-ba1a66174ff8\/relationships\/field_spatial_resolution?resourceVersion=id%3A1569"
+                    },
+                    "related": {
+                        "href": "https:\/\/csis.myclimateservice.eu\/jsonapi\/node\/data_package_metadata\/38457a62-5fd1-4c1b-b308-ba1a66174ff8\/field_spatial_resolution?resourceVersion=id%3A1569"
+                    }
+                }
+            },
+            "field_temporal_extent": {
+                "data": null,
+                "links": {
+                    "self": {
+                        "href": "https:\/\/csis.myclimateservice.eu\/jsonapi\/node\/data_package_metadata\/38457a62-5fd1-4c1b-b308-ba1a66174ff8\/relationships\/field_temporal_extent?resourceVersion=id%3A1569"
+                    },
+                    "related": {
+                        "href": "https:\/\/csis.myclimateservice.eu\/jsonapi\/node\/data_package_metadata\/38457a62-5fd1-4c1b-b308-ba1a66174ff8\/field_temporal_extent?resourceVersion=id%3A1569"
+                    }
+                }
+            },
+            "field_threshold": {
+                "data": [],
+                "links": {
+                    "self": {
+                        "href": "https:\/\/csis.myclimateservice.eu\/jsonapi\/node\/data_package_metadata\/38457a62-5fd1-4c1b-b308-ba1a66174ff8\/relationships\/field_threshold?resourceVersion=id%3A1569"
+                    },
+                    "related": {
+                        "href": "https:\/\/csis.myclimateservice.eu\/jsonapi\/node\/data_package_metadata\/38457a62-5fd1-4c1b-b308-ba1a66174ff8\/field_threshold?resourceVersion=id%3A1569"
+                    }
+                }
+            }
+        },
+        "links": {
+            "self": {
+                "href": "https:\/\/csis.myclimateservice.eu\/jsonapi\/node\/data_package_metadata\/38457a62-5fd1-4c1b-b308-ba1a66174ff8?resourceVersion=id%3A1569"
+            }
+        }
+    },
+    "included": [
+        {
+            "type": "taxonomy_term--eu_gl",
+            "id": "9f4ade27-35fd-4498-bc21-ae81f9077d67",
+            "attributes": {
+                "drupal_internal__tid": 3,
+                "drupal_internal__revision_id": 3,
+                "langcode": "en",
+                "revision_created": null,
+                "revision_log_message": null,
+                "status": true,
+                "name": "Hazard Characterization - Local Effects",
+                "description": {
+                    "value": "\u003Cp\u003EThe hazard characterisation is derived by climate indices that provide an evaluation of relevant parameters for temperature and precipitation and their variation in a climate change perspective. These climate indices are calculated using the EURO-CORDEX dataset which has a spatial resolution of 0.11\u00b0 (approximately 10 km over Europe). In order to determine the effect of urban adaptation on the potential variation of such climate signals, this information needs to be downscaled on an urban level, i.e. with a finer-grained spatial resolution and considering the influence of urban microclimate variables. This procedure allows to increase the resolution of final outcome of heat wave and pluvial local effect from 10 km to 500 m, since the result is projected on a European reference grid with a resolution of 500 \u00d7 500 m.\u003C\/p\u003E\r\n\r\n\u003Cp\u003ETo this aim, a specific algorithm has been developed and applied, based on a broad literature review and original development, which links the broad-scale climate pattern to small-scale urban features. This method uses as additional input, building, infrastructure and landscape characteristics along with population distribution. This additional data is available for many cities and towns across Europe through platforms such as the Copernicus Land Monitoring Service\u003Csup\u003E\u003Cfont face=\u0022Calibri, serif\u0022\u003E\u003Cb\u003E\u003Ca class=\u0022sdfootnoteanc\u0022 href=\u0022#sdfootnote1sym\u0022 name=\u0022sdfootnote1anc\u0022 style=\u0022font-size:90%; color:#0000ff\u0022\u003E\u003Csup\u003E1\u003C\/sup\u003E\u003C\/a\u003E\u003C\/b\u003E\u003C\/font\u003E\u003C\/sup\u003E dataset UrbanAtlas and EuroStat\u003Csup\u003E\u003Cfont face=\u0022Calibri, serif\u0022\u003E\u003Cb\u003E\u003Ca class=\u0022sdfootnoteanc\u0022 href=\u0022#sdfootnote1sym\u0022 name=\u0022sdfootnote1anc\u0022 style=\u0022font-size:90%; color:#0000ff\u0022\u003E\u003Csup\u003E2\u003C\/sup\u003E\u003C\/a\u003E\u003C\/b\u003E\u003C\/font\u003E\u003C\/sup\u003E .\u003C\/p\u003E\r\n\r\n\u003Cp\u003EThis method is used here as a proof of concept and designed as a feature of the CSIS screening tool, limited to heat and flooding hazards, as most recurring climate change related hazard across Europe.\u003C\/p\u003E\r\n\r\n\u003Cp\u003E\u003Cspan style=\u0022font-size:10pt\u0022\u003E\u003Cspan style=\u0022page-break-before:always\u0022\u003E\u003Cspan style=\u0022font-family:\u0026quot;Calibri\u0026quot;,serif\u0022\u003E\u003Ca class=\u0022sdfootnotesym\u0022 href=\u0022#sdfootnote1anc\u0022 name=\u0022sdfootnote1sym\u0022 style=\u0022color:#0000ff\u0022\u003E1\u003C\/a\u003E \u003C\/span\u003E\u003C\/span\u003E\u003Ca href=\u0022 https:\/\/land.copernicus.eu\/\u0022\u003E \u003C\/a\u003E\u003C\/span\u003E\u003Ca href=\u0022 https:\/\/land.copernicus.eu\/\u0022\u003Ehttps:\/\/land.copernicus.eu\/\u003C\/a\u003E\u003C\/p\u003E\r\n\r\n\u003Cp\u003E\u003Cspan style=\u0022font-size:10pt\u0022\u003E\u003Cspan style=\u0022page-break-before:always\u0022\u003E\u003Cspan style=\u0022font-family:\u0026quot;Calibri\u0026quot;,serif\u0022\u003E\u003Ca class=\u0022sdfootnotesym\u0022 href=\u0022#sdfootnote1anc\u0022 name=\u0022sdfootnote1sym\u0022 style=\u0022color:#0000ff\u0022\u003E2\u003C\/a\u003E\u003Csup\u003E\u0002\u003C\/sup\u003E \u003C\/span\u003E\u003C\/span\u003E\u003C\/span\u003E\u003Ca href=\u0022https:\/\/ec.europa.eu\/eurostat\/home?\u0022\u003E https:\/\/ec.europa.eu\/eurostat\/home?\u003C\/a\u003E\u003C\/p\u003E\r\n",
+                    "format": "basic_html",
+                    "processed": "\u003Cp\u003EThe hazard characterisation is derived by climate indices that provide an evaluation of relevant parameters for temperature and precipitation and their variation in a climate change perspective. These climate indices are calculated using the EURO-CORDEX dataset which has a spatial resolution of 0.11\u00b0 (approximately 10 km over Europe). In order to determine the effect of urban adaptation on the potential variation of such climate signals, this information needs to be downscaled on an urban level, i.e. with a finer-grained spatial resolution and considering the influence of urban microclimate variables. This procedure allows to increase the resolution of final outcome of heat wave and pluvial local effect from 10 km to 500 m, since the result is projected on a European reference grid with a resolution of 500 \u00d7 500 m.\u003C\/p\u003E\n\n\u003Cp\u003ETo this aim, a specific algorithm has been developed and applied, based on a broad literature review and original development, which links the broad-scale climate pattern to small-scale urban features. This method uses as additional input, building, infrastructure and landscape characteristics along with population distribution. This additional data is available for many cities and towns across Europe through platforms such as the Copernicus Land Monitoring Service\u003Csup\u003E\u003Cfont face=\u0022Calibri, serif\u0022\u003E\u003Cb\u003E\u003Ca class=\u0022sdfootnoteanc\u0022 href=\u0022#sdfootnote1sym\u0022 name=\u0022sdfootnote1anc\u0022 style=\u0022font-size:90%; color:#0000ff\u0022 id=\u0022sdfootnote1anc\u0022\u003E\u003Csup\u003E1\u003C\/sup\u003E\u003C\/a\u003E\u003C\/b\u003E\u003C\/font\u003E\u003C\/sup\u003E dataset UrbanAtlas and EuroStat\u003Csup\u003E\u003Cfont face=\u0022Calibri, serif\u0022\u003E\u003Cb\u003E\u003Ca class=\u0022sdfootnoteanc\u0022 href=\u0022#sdfootnote1sym\u0022 name=\u0022sdfootnote1anc\u0022 style=\u0022font-size:90%; color:#0000ff\u0022 id=\u0022sdfootnote1anc\u0022\u003E\u003Csup\u003E2\u003C\/sup\u003E\u003C\/a\u003E\u003C\/b\u003E\u003C\/font\u003E\u003C\/sup\u003E .\u003C\/p\u003E\n\n\u003Cp\u003EThis method is used here as a proof of concept and designed as a feature of the CSIS screening tool, limited to heat and flooding hazards, as most recurring climate change related hazard across Europe.\u003C\/p\u003E\n\n\u003Cp\u003E\u003Cspan style=\u0022font-size:10pt\u0022\u003E\u003Cspan style=\u0022page-break-before:always\u0022\u003E\u003Cspan style=\u0022font-family:\u0026quot;Calibri\u0026quot;,serif\u0022\u003E\u003Ca class=\u0022sdfootnotesym\u0022 href=\u0022#sdfootnote1anc\u0022 name=\u0022sdfootnote1sym\u0022 style=\u0022color:#0000ff\u0022 id=\u0022sdfootnote1sym\u0022\u003E1\u003C\/a\u003E \u003C\/span\u003E\u003C\/span\u003E\u003Ca href=\u0022 https:\/\/land.copernicus.eu\/\u0022\u003E \u003C\/a\u003E\u003C\/span\u003E\u003Ca href=\u0022 https:\/\/land.copernicus.eu\/\u0022\u003Ehttps:\/\/land.copernicus.eu\/\u003C\/a\u003E\u003C\/p\u003E\n\n\u003Cp\u003E\u003Cspan style=\u0022font-size:10pt\u0022\u003E\u003Cspan style=\u0022page-break-before:always\u0022\u003E\u003Cspan style=\u0022font-family:\u0026quot;Calibri\u0026quot;,serif\u0022\u003E\u003Ca class=\u0022sdfootnotesym\u0022 href=\u0022#sdfootnote1anc\u0022 name=\u0022sdfootnote1sym\u0022 style=\u0022color:#0000ff\u0022 id=\u0022sdfootnote1sym\u0022\u003E2\u003C\/a\u003E\u003Csup\u003E\u003C\/sup\u003E\u003C\/span\u003E\u003C\/span\u003E\u003C\/span\u003E\u003Ca href=\u0022https:\/\/ec.europa.eu\/eurostat\/home?\u0022\u003E https:\/\/ec.europa.eu\/eurostat\/home?\u003C\/a\u003E\u003C\/p\u003E\n"
+                },
+                "weight": 1,
+                "changed": "2019-09-24T17:18:05+00:00",
+                "default_langcode": true,
+                "revision_translation_affected": true,
+                "path": {
+                    "alias": "\/taxonomy\/eu-gl\/hazard-characterization\/local-effects",
+                    "pid": 124,
+                    "langcode": "en"
+                },
+                "field_eu_gl_taxonomy_id": {
+                    "value": "eu-gl:hazard-characterization:local-effects",
+                    "format": "basic_html",
+                    "processed": "eu-gl:hazard-characterization:local-effects"
+                },
+                "field_study_step": 2,
+                "field_tab_title": "Hazard Characterization - Local Effects"
+            },
+            "relationships": {
+                "vid": {
+                    "data": {
+                        "type": "taxonomy_vocabulary--taxonomy_vocabulary",
+                        "id": "aa0a2b80-22fc-460c-ae5e-17f8a56f10fa"
+                    },
+                    "links": {
+                        "self": {
+                            "href": "https:\/\/csis.myclimateservice.eu\/jsonapi\/taxonomy_term\/eu_gl\/9f4ade27-35fd-4498-bc21-ae81f9077d67\/relationships\/vid"
+                        },
+                        "related": {
+                            "href": "https:\/\/csis.myclimateservice.eu\/jsonapi\/taxonomy_term\/eu_gl\/9f4ade27-35fd-4498-bc21-ae81f9077d67\/vid"
+                        }
+                    }
+                },
+                "revision_user": {
+                    "data": null,
+                    "links": {
+                        "self": {
+                            "href": "https:\/\/csis.myclimateservice.eu\/jsonapi\/taxonomy_term\/eu_gl\/9f4ade27-35fd-4498-bc21-ae81f9077d67\/relationships\/revision_user"
+                        },
+                        "related": {
+                            "href": "https:\/\/csis.myclimateservice.eu\/jsonapi\/taxonomy_term\/eu_gl\/9f4ade27-35fd-4498-bc21-ae81f9077d67\/revision_user"
+                        }
+                    }
+                },
+                "parent": {
+                    "data": [
+                        {
+                            "type": "taxonomy_term--eu_gl",
+                            "id": "755e32ab-2691-4a75-9dfd-9df494334205"
+                        }
+                    ],
+                    "links": {
+                        "self": {
+                            "href": "https:\/\/csis.myclimateservice.eu\/jsonapi\/taxonomy_term\/eu_gl\/9f4ade27-35fd-4498-bc21-ae81f9077d67\/relationships\/parent"
+                        },
+                        "related": {
+                            "href": "https:\/\/csis.myclimateservice.eu\/jsonapi\/taxonomy_term\/eu_gl\/9f4ade27-35fd-4498-bc21-ae81f9077d67\/parent"
+                        }
+                    }
+                }
+            },
+            "links": {
+                "self": {
+                    "href": "https:\/\/csis.myclimateservice.eu\/jsonapi\/taxonomy_term\/eu_gl\/9f4ade27-35fd-4498-bc21-ae81f9077d67"
+                }
+            }
+        },
+        {
+            "type": "taxonomy_term--hazards",
+            "id": "10a3218e-fa21-4cdb-a139-5945590a65c2",
+            "attributes": {
+                "drupal_internal__tid": 21,
+                "drupal_internal__revision_id": 21,
+                "langcode": "en",
+                "revision_created": null,
+                "revision_log_message": null,
+                "status": true,
+                "name": "heat-wave",
+                "description": {
+                    "value": "\u003Ch2 class=\u0022western\u0022 lang=\u0022en-GB\u0022 style=\u0022margin-bottom: 0.35cm;\u0022\u003E\u003Cb\u003EHeat wave\u003C\/b\u003E\u003C\/h2\u003E\r\n\r\n\u003Cp class=\u0022western\u0022 lang=\u0022en-GB\u0022 style=\u0022margin-bottom: 0.35cm\u0022\u003E\u003Cimg alt=\u0022heat wave\u0022 data-align=\u0022right\u0022 data-entity-type=\u0022file\u0022 data-entity-uuid=\u002215b6647c-deb3-4aa5-8767-2da326fa8030\u0022 height=\u0022151\u0022 src=\u0022\/sites\/default\/files\/inline-images\/heatwave_1_0.jpg\u0022 width=\u0022227\u0022 \/\u003EA heat wave is a period of abnormally and uncomfortably hot weather which usually persists from several days to several weeks.\u003C\/p\u003E\r\n\r\n\u003Cp class=\u0022western\u0022 lang=\u0022en-GB\u0022 style=\u0022margin-bottom: 0.35cm\u0022\u003EHeat waves can have severe effects on human health with tens of thousands of premature deaths in Europe since 2000 attributed to them. Particularly at risk are elderly people, younger adults and children, and people working outdoors\u003Csup\u003E\u003Ca class=\u0022sdfootnoteanc\u0022 href=\u0022#sdfootnote1sym\u0022 name=\u0022sdfootnote1anc\u0022\u003E\u003Csup\u003E1\u003C\/sup\u003E\u003C\/a\u003E\u003C\/sup\u003E. The effects of heat waves can be worsened within urban areas with pronounced urban heat islands. Heat waves negatively affect labour productivity, ecosystems and agriculture through the increased risk of fires and heat stresses. Furthermore, heat waves result in an increase in the demand for energy to power cooling systems, while at the same time energy production itself becomes less efficient\u003Csup\u003E\u003Ca class=\u0022sdfootnoteanc\u0022 href=\u0022#sdfootnote2sym\u0022 name=\u0022sdfootnote2anc\u0022\u003E\u003Csup\u003E2\u003C\/sup\u003E\u003C\/a\u003E\u003C\/sup\u003E.\u003C\/p\u003E\r\n\r\n\u003Cdiv id=\u0022sdfootnote1\u0022\u003E\r\n\u003Cp class=\u0022sdfootnote-western\u0022 lang=\u0022en-GB\u0022 style=\u0022page-break-before: always\u0022\u003E\u0026nbsp;\u003C\/p\u003E\r\n\r\n\u003Cp class=\u0022sdfootnote-western\u0022 lang=\u0022en-GB\u0022 style=\u0022page-break-before: always\u0022\u003E\u003Ca class=\u0022sdfootnotesym\u0022 href=\u0022#sdfootnote1anc\u0022 name=\u0022sdfootnote1sym\u0022\u003E1\u003C\/a\u003E\u003Csup\u003E\u0002\u003C\/sup\u003E World Meteorological Organizaion and World Health Organization, \u201eHeat waves and healt: guidance on warning-system development\u201c, 2015.\u003C\/p\u003E\r\n\u003C\/div\u003E\r\n\r\n\u003Cdiv id=\u0022sdfootnote2\u0022\u003E\r\n\u003Cp class=\u0022sdfootnote-western\u0022 lang=\u0022en-GB\u0022 style=\u0022page-break-before: always\u0022\u003E\u003Ca class=\u0022sdfootnotesym\u0022 href=\u0022#sdfootnote2anc\u0022 name=\u0022sdfootnote2sym\u0022\u003E2\u003C\/a\u003E\u003Csup\u003E\u0002\u003C\/sup\u003E European Environment Agency, \u201cClimate change, impacts and vulnerability in Europe 2016\u201d, Publications Office of the European Union, Luxembourg 2017.\u003C\/p\u003E\r\n\u003C\/div\u003E\r\n",
+                    "format": "basic_html",
+                    "processed": "\u003Ch2 class=\u0022western\u0022 lang=\u0022en-GB\u0022 style=\u0022margin-bottom: 0.35cm;\u0022 xml:lang=\u0022en-GB\u0022 xml:lang=\u0022en-GB\u0022\u003E\u003Cb\u003EHeat wave\u003C\/b\u003E\u003C\/h2\u003E\n\n\u003Cp class=\u0022western\u0022 lang=\u0022en-GB\u0022 style=\u0022margin-bottom: 0.35cm\u0022 xml:lang=\u0022en-GB\u0022 xml:lang=\u0022en-GB\u0022\u003E\u003Cimg alt=\u0022heat wave\u0022 data-entity-type=\u0022file\u0022 data-entity-uuid=\u002215b6647c-deb3-4aa5-8767-2da326fa8030\u0022 height=\u0022151\u0022 src=\u0022\/sites\/default\/files\/inline-images\/heatwave_1_0.jpg\u0022 width=\u0022227\u0022 class=\u0022align-right\u0022 \/\u003EA heat wave is a period of abnormally and uncomfortably hot weather which usually persists from several days to several weeks.\u003C\/p\u003E\n\n\u003Cp class=\u0022western\u0022 lang=\u0022en-GB\u0022 style=\u0022margin-bottom: 0.35cm\u0022 xml:lang=\u0022en-GB\u0022 xml:lang=\u0022en-GB\u0022\u003EHeat waves can have severe effects on human health with tens of thousands of premature deaths in Europe since 2000 attributed to them. Particularly at risk are elderly people, younger adults and children, and people working outdoors\u003Csup\u003E\u003Ca class=\u0022sdfootnoteanc\u0022 href=\u0022#sdfootnote1sym\u0022 name=\u0022sdfootnote1anc\u0022 id=\u0022sdfootnote1anc\u0022\u003E\u003Csup\u003E1\u003C\/sup\u003E\u003C\/a\u003E\u003C\/sup\u003E. The effects of heat waves can be worsened within urban areas with pronounced urban heat islands. Heat waves negatively affect labour productivity, ecosystems and agriculture through the increased risk of fires and heat stresses. Furthermore, heat waves result in an increase in the demand for energy to power cooling systems, while at the same time energy production itself becomes less efficient\u003Csup\u003E\u003Ca class=\u0022sdfootnoteanc\u0022 href=\u0022#sdfootnote2sym\u0022 name=\u0022sdfootnote2anc\u0022 id=\u0022sdfootnote2anc\u0022\u003E\u003Csup\u003E2\u003C\/sup\u003E\u003C\/a\u003E\u003C\/sup\u003E.\u003C\/p\u003E\n\n\u003Cdiv id=\u0022sdfootnote1\u0022\u003E\n\u003Cp class=\u0022sdfootnote-western\u0022 lang=\u0022en-GB\u0022 style=\u0022page-break-before: always\u0022 xml:lang=\u0022en-GB\u0022 xml:lang=\u0022en-GB\u0022\u003E\u00a0\u003C\/p\u003E\n\n\u003Cp class=\u0022sdfootnote-western\u0022 lang=\u0022en-GB\u0022 style=\u0022page-break-before: always\u0022 xml:lang=\u0022en-GB\u0022 xml:lang=\u0022en-GB\u0022\u003E\u003Ca class=\u0022sdfootnotesym\u0022 href=\u0022#sdfootnote1anc\u0022 name=\u0022sdfootnote1sym\u0022 id=\u0022sdfootnote1sym\u0022\u003E1\u003C\/a\u003E\u003Csup\u003E\u003C\/sup\u003E World Meteorological Organizaion and World Health Organization, \u201eHeat waves and healt: guidance on warning-system development\u201c, 2015.\u003C\/p\u003E\n\u003C\/div\u003E\n\n\u003Cdiv id=\u0022sdfootnote2\u0022\u003E\n\u003Cp class=\u0022sdfootnote-western\u0022 lang=\u0022en-GB\u0022 style=\u0022page-break-before: always\u0022 xml:lang=\u0022en-GB\u0022 xml:lang=\u0022en-GB\u0022\u003E\u003Ca class=\u0022sdfootnotesym\u0022 href=\u0022#sdfootnote2anc\u0022 name=\u0022sdfootnote2sym\u0022 id=\u0022sdfootnote2sym\u0022\u003E2\u003C\/a\u003E\u003Csup\u003E\u003C\/sup\u003E European Environment Agency, \u201cClimate change, impacts and vulnerability in Europe 2016\u201d, Publications Office of the European Union, Luxembourg 2017.\u003C\/p\u003E\n\u003C\/div\u003E\n"
+                },
+                "weight": 1,
+                "changed": "2019-02-25T15:45:18+00:00",
+                "default_langcode": true,
+                "revision_translation_affected": true,
+                "path": {
+                    "alias": "\/taxonomy\/hazard\/temperature\/heat\/heat-wave",
+                    "pid": 91,
+                    "langcode": "en"
+                },
+                "field_hazard_id": "hazard:temperature:heat:heat-wave"
+            },
+            "relationships": {
+                "vid": {
+                    "data": {
+                        "type": "taxonomy_vocabulary--taxonomy_vocabulary",
+                        "id": "572423f3-5489-4d3f-b5c2-66d72738154f"
+                    },
+                    "links": {
+                        "self": {
+                            "href": "https:\/\/csis.myclimateservice.eu\/jsonapi\/taxonomy_term\/hazards\/10a3218e-fa21-4cdb-a139-5945590a65c2\/relationships\/vid"
+                        },
+                        "related": {
+                            "href": "https:\/\/csis.myclimateservice.eu\/jsonapi\/taxonomy_term\/hazards\/10a3218e-fa21-4cdb-a139-5945590a65c2\/vid"
+                        }
+                    }
+                },
+                "revision_user": {
+                    "data": null,
+                    "links": {
+                        "self": {
+                            "href": "https:\/\/csis.myclimateservice.eu\/jsonapi\/taxonomy_term\/hazards\/10a3218e-fa21-4cdb-a139-5945590a65c2\/relationships\/revision_user"
+                        },
+                        "related": {
+                            "href": "https:\/\/csis.myclimateservice.eu\/jsonapi\/taxonomy_term\/hazards\/10a3218e-fa21-4cdb-a139-5945590a65c2\/revision_user"
+                        }
+                    }
+                },
+                "parent": {
+                    "data": [
+                        {
+                            "type": "taxonomy_term--hazards",
+                            "id": "ffb7f835-e330-46a5-ade9-4a238c5d3331"
+                        }
+                    ],
+                    "links": {
+                        "self": {
+                            "href": "https:\/\/csis.myclimateservice.eu\/jsonapi\/taxonomy_term\/hazards\/10a3218e-fa21-4cdb-a139-5945590a65c2\/relationships\/parent"
+                        },
+                        "related": {
+                            "href": "https:\/\/csis.myclimateservice.eu\/jsonapi\/taxonomy_term\/hazards\/10a3218e-fa21-4cdb-a139-5945590a65c2\/parent"
+                        }
+                    }
+                },
+                "field_icon": {
+                    "data": null,
+                    "links": {
+                        "self": {
+                            "href": "https:\/\/csis.myclimateservice.eu\/jsonapi\/taxonomy_term\/hazards\/10a3218e-fa21-4cdb-a139-5945590a65c2\/relationships\/field_icon"
+                        },
+                        "related": {
+                            "href": "https:\/\/csis.myclimateservice.eu\/jsonapi\/taxonomy_term\/hazards\/10a3218e-fa21-4cdb-a139-5945590a65c2\/field_icon"
+                        }
+                    }
+                },
+                "field_rel_haz": {
+                    "data": null,
+                    "links": {
+                        "self": {
+                            "href": "https:\/\/csis.myclimateservice.eu\/jsonapi\/taxonomy_term\/hazards\/10a3218e-fa21-4cdb-a139-5945590a65c2\/relationships\/field_rel_haz"
+                        },
+                        "related": {
+                            "href": "https:\/\/csis.myclimateservice.eu\/jsonapi\/taxonomy_term\/hazards\/10a3218e-fa21-4cdb-a139-5945590a65c2\/field_rel_haz"
+                        }
+                    }
+                }
+            },
+            "links": {
+                "self": {
+                    "href": "https:\/\/csis.myclimateservice.eu\/jsonapi\/taxonomy_term\/hazards\/10a3218e-fa21-4cdb-a139-5945590a65c2"
+                }
+            }
+        },
+        {
+            "type": "taxonomy_term--emissions",
+            "id": "63d1b025-5180-4a91-a842-b3dd5f6d5754",
+            "attributes": {
+                "drupal_internal__tid": 121,
+                "drupal_internal__revision_id": 121,
+                "langcode": "en",
+                "revision_created": null,
+                "revision_log_message": null,
+                "status": true,
+                "name": "baseline",
+                "description": null,
+                "weight": 0,
+                "changed": "2019-03-14T11:27:56+00:00",
+                "default_langcode": true,
+                "revision_translation_affected": true,
+                "path": {
+                    "alias": "\/taxonomy\/emissions-scenario\/baseline",
+                    "pid": 54,
+                    "langcode": "en"
+                },
+                "field_id": "emissions-scenario:baseline",
+                "field_rcp": null
+            },
+            "relationships": {
+                "vid": {
+                    "data": {
+                        "type": "taxonomy_vocabulary--taxonomy_vocabulary",
+                        "id": "1399bd79-9b23-4193-8d76-c3037c3b733b"
+                    },
+                    "links": {
+                        "self": {
+                            "href": "https:\/\/csis.myclimateservice.eu\/jsonapi\/taxonomy_term\/emissions\/63d1b025-5180-4a91-a842-b3dd5f6d5754\/relationships\/vid"
+                        },
+                        "related": {
+                            "href": "https:\/\/csis.myclimateservice.eu\/jsonapi\/taxonomy_term\/emissions\/63d1b025-5180-4a91-a842-b3dd5f6d5754\/vid"
+                        }
+                    }
+                },
+                "revision_user": {
+                    "data": null,
+                    "links": {
+                        "self": {
+                            "href": "https:\/\/csis.myclimateservice.eu\/jsonapi\/taxonomy_term\/emissions\/63d1b025-5180-4a91-a842-b3dd5f6d5754\/relationships\/revision_user"
+                        },
+                        "related": {
+                            "href": "https:\/\/csis.myclimateservice.eu\/jsonapi\/taxonomy_term\/emissions\/63d1b025-5180-4a91-a842-b3dd5f6d5754\/revision_user"
+                        }
+                    }
+                },
+                "parent": {
+                    "data": [
+                        {
+                            "type": "taxonomy_term--emissions",
+                            "id": "virtual",
+                            "meta": {
+                                "links": {
+                                    "help": {
+                                        "href": "https:\/\/www.drupal.org\/docs\/8\/modules\/json-api\/core-concepts#virtual",
+                                        "meta": {
+                                            "about": "Usage and meaning of the \u0027virtual\u0027 resource identifier."
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    ],
+                    "links": {
+                        "self": {
+                            "href": "https:\/\/csis.myclimateservice.eu\/jsonapi\/taxonomy_term\/emissions\/63d1b025-5180-4a91-a842-b3dd5f6d5754\/relationships\/parent"
+                        },
+                        "related": {
+                            "href": "https:\/\/csis.myclimateservice.eu\/jsonapi\/taxonomy_term\/emissions\/63d1b025-5180-4a91-a842-b3dd5f6d5754\/parent"
+                        }
+                    }
+                }
+            },
+            "links": {
+                "self": {
+                    "href": "https:\/\/csis.myclimateservice.eu\/jsonapi\/taxonomy_term\/emissions\/63d1b025-5180-4a91-a842-b3dd5f6d5754"
+                }
+            }
+        },
+        {
+            "type": "taxonomy_term--emissions",
+            "id": "9ed94820-61f1-45ca-acc0-efece06cf0e0",
+            "attributes": {
+                "drupal_internal__tid": 181,
+                "drupal_internal__revision_id": 181,
+                "langcode": "en",
+                "revision_created": null,
+                "revision_log_message": null,
+                "status": true,
+                "name": "business-as-usual",
+                "description": {
+                    "value": "\u003Cp\u003E\u003Cstrong\u003EBusiness as Usual Scenario \u2013 RCP8.5\u003C\/strong\u003E:\u003C\/p\u003E\r\n\r\n\u003Cp\u003EGreenhouse gas emissions increase over time owing to no intervention which lead to high greenhouse gas concentration levels by 2100 resulting in a radiative forcing of 8.5 W\/m^2\u003Csup\u003E\u003Cfont face=\u0022Calibri, serif\u0022\u003E\u003Cb\u003E\u003Ca class=\u0022sdfootnoteanc\u0022 href=\u0022#sdfootnote1sym\u0022 name=\u0022sdfootnote1anc\u0022 style=\u0022font-size:90%; color:#0000ff\u0022\u003E\u003Csup\u003E1\u003C\/sup\u003E\u003C\/a\u003E\u003C\/b\u003E\u003C\/font\u003E\u003C\/sup\u003E.\u003C\/p\u003E\r\n\r\n\u003Cp\u003E\u003Cspan style=\u0022font-size:10pt\u0022\u003E\u003Cspan style=\u0022page-break-before:always\u0022\u003E\u003Cspan style=\u0022font-family:\u0026quot;Calibri\u0026quot;,serif\u0022\u003E\u003Ca class=\u0022sdfootnotesym\u0022 href=\u0022#sdfootnote1anc\u0022 name=\u0022sdfootnote1sym\u0022 style=\u0022color:#0000ff\u0022\u003E1\u003C\/a\u003E \u003C\/span\u003E\u003C\/span\u003E L. S. Smith, Q. Liang and P. F. Quinn, \u201cA flexible hydrodynamic modelling framework for GPUs and CPUs: Application to the Carlisle 2005 floods,\u201d in International Conference on Flood Resilience: Experiences in Asia and Europe, Newcastle University, 2013.\u003C\/span\u003E\u003C\/p\u003E\r\n",
+                    "format": "basic_html",
+                    "processed": "\u003Cp\u003E\u003Cstrong\u003EBusiness as Usual Scenario \u2013 RCP8.5\u003C\/strong\u003E:\u003C\/p\u003E\n\n\u003Cp\u003EGreenhouse gas emissions increase over time owing to no intervention which lead to high greenhouse gas concentration levels by 2100 resulting in a radiative forcing of 8.5 W\/m^2\u003Csup\u003E\u003Cfont face=\u0022Calibri, serif\u0022\u003E\u003Cb\u003E\u003Ca class=\u0022sdfootnoteanc\u0022 href=\u0022#sdfootnote1sym\u0022 name=\u0022sdfootnote1anc\u0022 style=\u0022font-size:90%; color:#0000ff\u0022 id=\u0022sdfootnote1anc\u0022\u003E\u003Csup\u003E1\u003C\/sup\u003E\u003C\/a\u003E\u003C\/b\u003E\u003C\/font\u003E\u003C\/sup\u003E.\u003C\/p\u003E\n\n\u003Cp\u003E\u003Cspan style=\u0022font-size:10pt\u0022\u003E\u003Cspan style=\u0022page-break-before:always\u0022\u003E\u003Cspan style=\u0022font-family:\u0026quot;Calibri\u0026quot;,serif\u0022\u003E\u003Ca class=\u0022sdfootnotesym\u0022 href=\u0022#sdfootnote1anc\u0022 name=\u0022sdfootnote1sym\u0022 style=\u0022color:#0000ff\u0022 id=\u0022sdfootnote1sym\u0022\u003E1\u003C\/a\u003E \u003C\/span\u003E\u003C\/span\u003E L. S. Smith, Q. Liang and P. F. Quinn, \u201cA flexible hydrodynamic modelling framework for GPUs and CPUs: Application to the Carlisle 2005 floods,\u201d in International Conference on Flood Resilience: Experiences in Asia and Europe, Newcastle University, 2013.\u003C\/span\u003E\u003C\/p\u003E\n"
+                },
+                "weight": 1,
+                "changed": "2019-03-14T11:30:38+00:00",
+                "default_langcode": true,
+                "revision_translation_affected": true,
+                "path": {
+                    "alias": "\/taxonomy\/emissions-scenario\/business-as-usual",
+                    "pid": 109,
+                    "langcode": "en"
+                },
+                "field_id": "emissions-scenario:business-as-usual",
+                "field_rcp": "8.5"
+            },
+            "relationships": {
+                "vid": {
+                    "data": {
+                        "type": "taxonomy_vocabulary--taxonomy_vocabulary",
+                        "id": "1399bd79-9b23-4193-8d76-c3037c3b733b"
+                    },
+                    "links": {
+                        "self": {
+                            "href": "https:\/\/csis.myclimateservice.eu\/jsonapi\/taxonomy_term\/emissions\/9ed94820-61f1-45ca-acc0-efece06cf0e0\/relationships\/vid"
+                        },
+                        "related": {
+                            "href": "https:\/\/csis.myclimateservice.eu\/jsonapi\/taxonomy_term\/emissions\/9ed94820-61f1-45ca-acc0-efece06cf0e0\/vid"
+                        }
+                    }
+                },
+                "revision_user": {
+                    "data": null,
+                    "links": {
+                        "self": {
+                            "href": "https:\/\/csis.myclimateservice.eu\/jsonapi\/taxonomy_term\/emissions\/9ed94820-61f1-45ca-acc0-efece06cf0e0\/relationships\/revision_user"
+                        },
+                        "related": {
+                            "href": "https:\/\/csis.myclimateservice.eu\/jsonapi\/taxonomy_term\/emissions\/9ed94820-61f1-45ca-acc0-efece06cf0e0\/revision_user"
+                        }
+                    }
+                },
+                "parent": {
+                    "data": [
+                        {
+                            "type": "taxonomy_term--emissions",
+                            "id": "virtual",
+                            "meta": {
+                                "links": {
+                                    "help": {
+                                        "href": "https:\/\/www.drupal.org\/docs\/8\/modules\/json-api\/core-concepts#virtual",
+                                        "meta": {
+                                            "about": "Usage and meaning of the \u0027virtual\u0027 resource identifier."
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    ],
+                    "links": {
+                        "self": {
+                            "href": "https:\/\/csis.myclimateservice.eu\/jsonapi\/taxonomy_term\/emissions\/9ed94820-61f1-45ca-acc0-efece06cf0e0\/relationships\/parent"
+                        },
+                        "related": {
+                            "href": "https:\/\/csis.myclimateservice.eu\/jsonapi\/taxonomy_term\/emissions\/9ed94820-61f1-45ca-acc0-efece06cf0e0\/parent"
+                        }
+                    }
+                }
+            },
+            "links": {
+                "self": {
+                    "href": "https:\/\/csis.myclimateservice.eu\/jsonapi\/taxonomy_term\/emissions\/9ed94820-61f1-45ca-acc0-efece06cf0e0"
+                }
+            }
+        },
+        {
+            "type": "taxonomy_term--emissions",
+            "id": "ea53c0f4-860f-45a6-a493-ec7246c13666",
+            "attributes": {
+                "drupal_internal__tid": 179,
+                "drupal_internal__revision_id": 179,
+                "langcode": "en",
+                "revision_created": null,
+                "revision_log_message": null,
+                "status": true,
+                "name": "early-response",
+                "description": {
+                    "value": "\u003Cp\u003E\u003Cstrong\u003EEarly Response Scenario \u2013 RCP2.6: \u003C\/strong\u003E\u003C\/p\u003E\r\n\r\n\u003Cp\u003ERadiative forcing peaks by mid-century to a value around 3.1 W\/m^2, but returns to 2.6 W\/m^2 by 2100 due to a significant reduction in greenhouse gas emissions over time.\u003Csup\u003E\u003Cfont face=\u0022Calibri, serif\u0022\u003E\u003Cb\u003E\u003Ca class=\u0022sdfootnoteanc\u0022 href=\u0022#sdfootnote1sym\u0022 name=\u0022sdfootnote1anc\u0022 style=\u0022font-size:90%; color:#0000ff\u0022\u003E\u003Csup\u003E1\u003C\/sup\u003E\u003C\/a\u003E\u003C\/b\u003E\u003C\/font\u003E\u003C\/sup\u003E.\u003C\/p\u003E\r\n\r\n\u003Cp\u003E\u003Cspan style=\u0022font-size:10pt\u0022\u003E\u003Cspan style=\u0022page-break-before:always\u0022\u003E\u003Cspan style=\u0022font-family:\u0026quot;Calibri\u0026quot;,serif\u0022\u003E\u003Ca class=\u0022sdfootnotesym\u0022 href=\u0022#sdfootnote1anc\u0022 name=\u0022sdfootnote1sym\u0022 style=\u0022color:#0000ff\u0022\u003E1\u003C\/a\u003E \u003C\/span\u003E\u003C\/span\u003E L. S. Smith, Q. Liang and P. F. Quinn, \u201cA flexible hydrodynamic modelling framework for GPUs and CPUs: Application to the Carlisle 2005 floods,\u201d in International Conference on Flood Resilience: Experiences in Asia and Europe, Newcastle University, 2013.\u003C\/span\u003E\u003C\/p\u003E\r\n",
+                    "format": "basic_html",
+                    "processed": "\u003Cp\u003E\u003Cstrong\u003EEarly Response Scenario \u2013 RCP2.6: \u003C\/strong\u003E\u003C\/p\u003E\n\n\u003Cp\u003ERadiative forcing peaks by mid-century to a value around 3.1 W\/m^2, but returns to 2.6 W\/m^2 by 2100 due to a significant reduction in greenhouse gas emissions over time.\u003Csup\u003E\u003Cfont face=\u0022Calibri, serif\u0022\u003E\u003Cb\u003E\u003Ca class=\u0022sdfootnoteanc\u0022 href=\u0022#sdfootnote1sym\u0022 name=\u0022sdfootnote1anc\u0022 style=\u0022font-size:90%; color:#0000ff\u0022 id=\u0022sdfootnote1anc\u0022\u003E\u003Csup\u003E1\u003C\/sup\u003E\u003C\/a\u003E\u003C\/b\u003E\u003C\/font\u003E\u003C\/sup\u003E.\u003C\/p\u003E\n\n\u003Cp\u003E\u003Cspan style=\u0022font-size:10pt\u0022\u003E\u003Cspan style=\u0022page-break-before:always\u0022\u003E\u003Cspan style=\u0022font-family:\u0026quot;Calibri\u0026quot;,serif\u0022\u003E\u003Ca class=\u0022sdfootnotesym\u0022 href=\u0022#sdfootnote1anc\u0022 name=\u0022sdfootnote1sym\u0022 style=\u0022color:#0000ff\u0022 id=\u0022sdfootnote1sym\u0022\u003E1\u003C\/a\u003E \u003C\/span\u003E\u003C\/span\u003E L. S. Smith, Q. Liang and P. F. Quinn, \u201cA flexible hydrodynamic modelling framework for GPUs and CPUs: Application to the Carlisle 2005 floods,\u201d in International Conference on Flood Resilience: Experiences in Asia and Europe, Newcastle University, 2013.\u003C\/span\u003E\u003C\/p\u003E\n"
+                },
+                "weight": 2,
+                "changed": "2019-03-14T11:30:38+00:00",
+                "default_langcode": true,
+                "revision_translation_affected": true,
+                "path": {
+                    "alias": "\/taxonomy\/emissions-scenario\/early-response",
+                    "pid": 107,
+                    "langcode": "en"
+                },
+                "field_id": "emissions-scenario:early-response",
+                "field_rcp": "2.6"
+            },
+            "relationships": {
+                "vid": {
+                    "data": {
+                        "type": "taxonomy_vocabulary--taxonomy_vocabulary",
+                        "id": "1399bd79-9b23-4193-8d76-c3037c3b733b"
+                    },
+                    "links": {
+                        "self": {
+                            "href": "https:\/\/csis.myclimateservice.eu\/jsonapi\/taxonomy_term\/emissions\/ea53c0f4-860f-45a6-a493-ec7246c13666\/relationships\/vid"
+                        },
+                        "related": {
+                            "href": "https:\/\/csis.myclimateservice.eu\/jsonapi\/taxonomy_term\/emissions\/ea53c0f4-860f-45a6-a493-ec7246c13666\/vid"
+                        }
+                    }
+                },
+                "revision_user": {
+                    "data": null,
+                    "links": {
+                        "self": {
+                            "href": "https:\/\/csis.myclimateservice.eu\/jsonapi\/taxonomy_term\/emissions\/ea53c0f4-860f-45a6-a493-ec7246c13666\/relationships\/revision_user"
+                        },
+                        "related": {
+                            "href": "https:\/\/csis.myclimateservice.eu\/jsonapi\/taxonomy_term\/emissions\/ea53c0f4-860f-45a6-a493-ec7246c13666\/revision_user"
+                        }
+                    }
+                },
+                "parent": {
+                    "data": [
+                        {
+                            "type": "taxonomy_term--emissions",
+                            "id": "virtual",
+                            "meta": {
+                                "links": {
+                                    "help": {
+                                        "href": "https:\/\/www.drupal.org\/docs\/8\/modules\/json-api\/core-concepts#virtual",
+                                        "meta": {
+                                            "about": "Usage and meaning of the \u0027virtual\u0027 resource identifier."
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    ],
+                    "links": {
+                        "self": {
+                            "href": "https:\/\/csis.myclimateservice.eu\/jsonapi\/taxonomy_term\/emissions\/ea53c0f4-860f-45a6-a493-ec7246c13666\/relationships\/parent"
+                        },
+                        "related": {
+                            "href": "https:\/\/csis.myclimateservice.eu\/jsonapi\/taxonomy_term\/emissions\/ea53c0f4-860f-45a6-a493-ec7246c13666\/parent"
+                        }
+                    }
+                }
+            },
+            "links": {
+                "self": {
+                    "href": "https:\/\/csis.myclimateservice.eu\/jsonapi\/taxonomy_term\/emissions\/ea53c0f4-860f-45a6-a493-ec7246c13666"
+                }
+            }
+        },
+        {
+            "type": "taxonomy_term--emissions",
+            "id": "c47abd0a-8560-48c0-a9d1-3bef3ecf4c50",
+            "attributes": {
+                "drupal_internal__tid": 180,
+                "drupal_internal__revision_id": 180,
+                "langcode": "en",
+                "revision_created": null,
+                "revision_log_message": null,
+                "status": true,
+                "name": "effective-measures",
+                "description": {
+                    "value": "\u003Cp\u003E\u003Cstrong\u003EEffective Measures Scenario \u2013 RCP4.5: \u003C\/strong\u003E\u003C\/p\u003E\r\n\r\n\u003Cp\u003EThe application of a range of technologies and strategies for reducing greenhouse gas emissions is anticipated, which stabilize the total radiative forcing shortly after 2100 to 4.5 W\/m^2\u003Csup\u003E\u003Cfont face=\u0022Calibri, serif\u0022\u003E\u003Cb\u003E\u003Ca class=\u0022sdfootnoteanc\u0022 href=\u0022#sdfootnote1sym\u0022 name=\u0022sdfootnote1anc\u0022 style=\u0022font-size:90%; color:#0000ff\u0022\u003E\u003Csup\u003E1\u003C\/sup\u003E\u003C\/a\u003E\u003C\/b\u003E\u003C\/font\u003E\u003C\/sup\u003E.\u003C\/p\u003E\r\n\r\n\u003Cp\u003E\u003Cspan style=\u0022font-size:10pt\u0022\u003E\u003Cspan style=\u0022page-break-before:always\u0022\u003E\u003Cspan style=\u0022font-family:\u0026quot;Calibri\u0026quot;,serif\u0022\u003E\u003Ca class=\u0022sdfootnotesym\u0022 href=\u0022#sdfootnote1anc\u0022 name=\u0022sdfootnote1sym\u0022 style=\u0022color:#0000ff\u0022\u003E1\u003C\/a\u003E \u003C\/span\u003E\u003C\/span\u003E L. S. Smith, Q. Liang and P. F. Quinn, \u201cA flexible hydrodynamic modelling framework for GPUs and CPUs: Application to the Carlisle 2005 floods,\u201d in International Conference on Flood Resilience: Experiences in Asia and Europe, Newcastle University, 2013.\u003C\/span\u003E\u003C\/p\u003E\r\n",
+                    "format": "basic_html",
+                    "processed": "\u003Cp\u003E\u003Cstrong\u003EEffective Measures Scenario \u2013 RCP4.5: \u003C\/strong\u003E\u003C\/p\u003E\n\n\u003Cp\u003EThe application of a range of technologies and strategies for reducing greenhouse gas emissions is anticipated, which stabilize the total radiative forcing shortly after 2100 to 4.5 W\/m^2\u003Csup\u003E\u003Cfont face=\u0022Calibri, serif\u0022\u003E\u003Cb\u003E\u003Ca class=\u0022sdfootnoteanc\u0022 href=\u0022#sdfootnote1sym\u0022 name=\u0022sdfootnote1anc\u0022 style=\u0022font-size:90%; color:#0000ff\u0022 id=\u0022sdfootnote1anc\u0022\u003E\u003Csup\u003E1\u003C\/sup\u003E\u003C\/a\u003E\u003C\/b\u003E\u003C\/font\u003E\u003C\/sup\u003E.\u003C\/p\u003E\n\n\u003Cp\u003E\u003Cspan style=\u0022font-size:10pt\u0022\u003E\u003Cspan style=\u0022page-break-before:always\u0022\u003E\u003Cspan style=\u0022font-family:\u0026quot;Calibri\u0026quot;,serif\u0022\u003E\u003Ca class=\u0022sdfootnotesym\u0022 href=\u0022#sdfootnote1anc\u0022 name=\u0022sdfootnote1sym\u0022 style=\u0022color:#0000ff\u0022 id=\u0022sdfootnote1sym\u0022\u003E1\u003C\/a\u003E \u003C\/span\u003E\u003C\/span\u003E L. S. Smith, Q. Liang and P. F. Quinn, \u201cA flexible hydrodynamic modelling framework for GPUs and CPUs: Application to the Carlisle 2005 floods,\u201d in International Conference on Flood Resilience: Experiences in Asia and Europe, Newcastle University, 2013.\u003C\/span\u003E\u003C\/p\u003E\n"
+                },
+                "weight": 3,
+                "changed": "2019-03-14T11:30:38+00:00",
+                "default_langcode": true,
+                "revision_translation_affected": true,
+                "path": {
+                    "alias": "\/taxonomy\/emissions-scenario\/effective-measures",
+                    "pid": 108,
+                    "langcode": "en"
+                },
+                "field_id": "emissions-scenario:effective-measures",
+                "field_rcp": "4.5"
+            },
+            "relationships": {
+                "vid": {
+                    "data": {
+                        "type": "taxonomy_vocabulary--taxonomy_vocabulary",
+                        "id": "1399bd79-9b23-4193-8d76-c3037c3b733b"
+                    },
+                    "links": {
+                        "self": {
+                            "href": "https:\/\/csis.myclimateservice.eu\/jsonapi\/taxonomy_term\/emissions\/c47abd0a-8560-48c0-a9d1-3bef3ecf4c50\/relationships\/vid"
+                        },
+                        "related": {
+                            "href": "https:\/\/csis.myclimateservice.eu\/jsonapi\/taxonomy_term\/emissions\/c47abd0a-8560-48c0-a9d1-3bef3ecf4c50\/vid"
+                        }
+                    }
+                },
+                "revision_user": {
+                    "data": null,
+                    "links": {
+                        "self": {
+                            "href": "https:\/\/csis.myclimateservice.eu\/jsonapi\/taxonomy_term\/emissions\/c47abd0a-8560-48c0-a9d1-3bef3ecf4c50\/relationships\/revision_user"
+                        },
+                        "related": {
+                            "href": "https:\/\/csis.myclimateservice.eu\/jsonapi\/taxonomy_term\/emissions\/c47abd0a-8560-48c0-a9d1-3bef3ecf4c50\/revision_user"
+                        }
+                    }
+                },
+                "parent": {
+                    "data": [
+                        {
+                            "type": "taxonomy_term--emissions",
+                            "id": "virtual",
+                            "meta": {
+                                "links": {
+                                    "help": {
+                                        "href": "https:\/\/www.drupal.org\/docs\/8\/modules\/json-api\/core-concepts#virtual",
+                                        "meta": {
+                                            "about": "Usage and meaning of the \u0027virtual\u0027 resource identifier."
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    ],
+                    "links": {
+                        "self": {
+                            "href": "https:\/\/csis.myclimateservice.eu\/jsonapi\/taxonomy_term\/emissions\/c47abd0a-8560-48c0-a9d1-3bef3ecf4c50\/relationships\/parent"
+                        },
+                        "related": {
+                            "href": "https:\/\/csis.myclimateservice.eu\/jsonapi\/taxonomy_term\/emissions\/c47abd0a-8560-48c0-a9d1-3bef3ecf4c50\/parent"
+                        }
+                    }
+                }
+            },
+            "links": {
+                "self": {
+                    "href": "https:\/\/csis.myclimateservice.eu\/jsonapi\/taxonomy_term\/emissions\/c47abd0a-8560-48c0-a9d1-3bef3ecf4c50"
+                }
+            }
+        },
+        {
+            "type": "taxonomy_term--impact_scenarios",
+            "id": "0897cedf-b33d-47f6-a2f3-b055199d6d99",
+            "attributes": {
+                "drupal_internal__tid": 261,
+                "drupal_internal__revision_id": 261,
+                "langcode": "en",
+                "revision_created": null,
+                "revision_log_message": null,
+                "status": true,
+                "name": "extreme-rare",
+                "description": {
+                    "value": "\u003Cp\u003EScenario for an extreme hazard event; happens rarely; elements of risk are not well-adapted to this event.\u003C\/p\u003E\r\n\r\n\u003Cp\u003E\u0026nbsp;\u003C\/p\u003E\r\n\r\n\u003Ctable\u003E\r\n\t\u003Ctbody\u003E\r\n\t\t\u003Ctr\u003E\r\n\t\t\t\u003Ctd\u003E\u003Cstrong\u003EOccurrence\u003C\/strong\u003E\u003C\/td\u003E\r\n\t\t\t\u003Ctd\u003E\u003Cstrong\u003EEvent probability per year\u003C\/strong\u003E\u003C\/td\u003E\r\n\t\t\t\u003Ctd\u003E\u003Cstrong\u003EDescription (technical)\u0026nbsp;\u003C\/strong\u003E\u003C\/td\u003E\r\n\t\t\t\u003Ctd style=\u0022width: 655px;\u0022\u003E\u003Cstrong\u003EExample for heat wave\u003C\/strong\u003E\u003C\/td\u003E\r\n\t\t\t\u003Ctd style=\u0022width: 249px;\u0022\u003E\u003Cstrong\u003EExample for Naples\u003C\/strong\u003E\u003C\/td\u003E\r\n\t\t\u003C\/tr\u003E\r\n\t\t\u003Ctr\u003E\r\n\t\t\t\u003Ctd\u003Eevery 20 years or longer\u003C\/td\u003E\r\n\t\t\t\u003Ctd\u003E\u0026lt;0.05\u003C\/td\u003E\r\n\t\t\t\u003Ctd\u003ESelect event in the hazard matrix that corresponds to P\u0026lt;0.05. If more events are found, select event with highest hazard level.\u003C\/td\u003E\r\n\t\t\t\u003Ctd style=\u0022width: 655px;\u0022\u003EHeat wave with minimum 3 consecutive days that has probability to happen once in every 20 years or longer (P\u0026lt;0.05). This is the heat wave with highest heat intensity (Tmax) and highest duration (days). the heat wave with highest temperature and highest duration is selected, first taking into account the heat intensity and then duration.\u0026nbsp;\u003C\/td\u003E\r\n\t\t\t\u003Ctd style=\u0022width: 249px;\u0022\u003E\r\n\t\t\t\u003Cp\u003E1971-2000: 3days, 36C\u003C\/p\u003E\r\n\r\n\t\t\t\u003Cp\u003E2011-2040 (RCP45): 4days, 40\u00b0C\u003C\/p\u003E\r\n\r\n\t\t\t\u003Cp\u003E2041-2070 (RCP45): 5days, 40\u00b0C\u003C\/p\u003E\r\n\r\n\t\t\t\u003Cp\u003E2071-2100 (RCP45): 7days, 40\u00b0C\u003C\/p\u003E\r\n\r\n\t\t\t\u003Cp\u003E2011-2040 (RCP85): 6days, 38\u00b0C\u003C\/p\u003E\r\n\r\n\t\t\t\u003Cp\u003E2041-2070 (RCP85): 8days, 40\u00b0C\u003C\/p\u003E\r\n\r\n\t\t\t\u003Cp\u003E2071-2100 (RCP85): 8days, 40\u00b0C\u0022\u003C\/p\u003E\r\n\t\t\t\u003C\/td\u003E\r\n\t\t\u003C\/tr\u003E\r\n\t\u003C\/tbody\u003E\r\n\u003C\/table\u003E\r\n",
+                    "format": "basic_html",
+                    "processed": "\u003Cp\u003EScenario for an extreme hazard event; happens rarely; elements of risk are not well-adapted to this event.\u003C\/p\u003E\n\n\u003Cp\u003E\u00a0\u003C\/p\u003E\n\n\u003Ctable\u003E\u003Ctbody\u003E\u003Ctr\u003E\u003Ctd\u003E\u003Cstrong\u003EOccurrence\u003C\/strong\u003E\u003C\/td\u003E\n\t\t\t\u003Ctd\u003E\u003Cstrong\u003EEvent probability per year\u003C\/strong\u003E\u003C\/td\u003E\n\t\t\t\u003Ctd\u003E\u003Cstrong\u003EDescription (technical)\u00a0\u003C\/strong\u003E\u003C\/td\u003E\n\t\t\t\u003Ctd style=\u0022width: 655px;\u0022\u003E\u003Cstrong\u003EExample for heat wave\u003C\/strong\u003E\u003C\/td\u003E\n\t\t\t\u003Ctd style=\u0022width: 249px;\u0022\u003E\u003Cstrong\u003EExample for Naples\u003C\/strong\u003E\u003C\/td\u003E\n\t\t\u003C\/tr\u003E\u003Ctr\u003E\u003Ctd\u003Eevery 20 years or longer\u003C\/td\u003E\n\t\t\t\u003Ctd\u003E\u0026lt;0.05\u003C\/td\u003E\n\t\t\t\u003Ctd\u003ESelect event in the hazard matrix that corresponds to P\u0026lt;0.05. If more events are found, select event with highest hazard level.\u003C\/td\u003E\n\t\t\t\u003Ctd style=\u0022width: 655px;\u0022\u003EHeat wave with minimum 3 consecutive days that has probability to happen once in every 20 years or longer (P\u0026lt;0.05). This is the heat wave with highest heat intensity (Tmax) and highest duration (days). the heat wave with highest temperature and highest duration is selected, first taking into account the heat intensity and then duration.\u00a0\u003C\/td\u003E\n\t\t\t\u003Ctd style=\u0022width: 249px;\u0022\u003E\n\t\t\t\u003Cp\u003E1971-2000: 3days, 36C\u003C\/p\u003E\n\n\t\t\t\u003Cp\u003E2011-2040 (RCP45): 4days, 40\u00b0C\u003C\/p\u003E\n\n\t\t\t\u003Cp\u003E2041-2070 (RCP45): 5days, 40\u00b0C\u003C\/p\u003E\n\n\t\t\t\u003Cp\u003E2071-2100 (RCP45): 7days, 40\u00b0C\u003C\/p\u003E\n\n\t\t\t\u003Cp\u003E2011-2040 (RCP85): 6days, 38\u00b0C\u003C\/p\u003E\n\n\t\t\t\u003Cp\u003E2041-2070 (RCP85): 8days, 40\u00b0C\u003C\/p\u003E\n\n\t\t\t\u003Cp\u003E2071-2100 (RCP85): 8days, 40\u00b0C\u0022\u003C\/p\u003E\n\t\t\t\u003C\/td\u003E\n\t\t\u003C\/tr\u003E\u003C\/tbody\u003E\u003C\/table\u003E"
+                },
+                "weight": 2,
+                "changed": "2019-05-09T16:20:49+00:00",
+                "default_langcode": true,
+                "revision_translation_affected": true,
+                "path": {
+                    "alias": "\/taxonomy\/impact-scenario\/event\/extreme-rare",
+                    "pid": 174,
+                    "langcode": "en"
+                },
+                "field_event_type_id": "impact-scenario:event:extreme-rare"
+            },
+            "relationships": {
+                "vid": {
+                    "data": {
+                        "type": "taxonomy_vocabulary--taxonomy_vocabulary",
+                        "id": "7caaa522-8827-49dc-9326-30f5e080a6a3"
+                    },
+                    "links": {
+                        "self": {
+                            "href": "https:\/\/csis.myclimateservice.eu\/jsonapi\/taxonomy_term\/impact_scenarios\/0897cedf-b33d-47f6-a2f3-b055199d6d99\/relationships\/vid"
+                        },
+                        "related": {
+                            "href": "https:\/\/csis.myclimateservice.eu\/jsonapi\/taxonomy_term\/impact_scenarios\/0897cedf-b33d-47f6-a2f3-b055199d6d99\/vid"
+                        }
+                    }
+                },
+                "revision_user": {
+                    "data": null,
+                    "links": {
+                        "self": {
+                            "href": "https:\/\/csis.myclimateservice.eu\/jsonapi\/taxonomy_term\/impact_scenarios\/0897cedf-b33d-47f6-a2f3-b055199d6d99\/relationships\/revision_user"
+                        },
+                        "related": {
+                            "href": "https:\/\/csis.myclimateservice.eu\/jsonapi\/taxonomy_term\/impact_scenarios\/0897cedf-b33d-47f6-a2f3-b055199d6d99\/revision_user"
+                        }
+                    }
+                },
+                "parent": {
+                    "data": [
+                        {
+                            "type": "taxonomy_term--impact_scenarios",
+                            "id": "2fa84166-ea8e-4e45-9c37-d218d473a532"
+                        }
+                    ],
+                    "links": {
+                        "self": {
+                            "href": "https:\/\/csis.myclimateservice.eu\/jsonapi\/taxonomy_term\/impact_scenarios\/0897cedf-b33d-47f6-a2f3-b055199d6d99\/relationships\/parent"
+                        },
+                        "related": {
+                            "href": "https:\/\/csis.myclimateservice.eu\/jsonapi\/taxonomy_term\/impact_scenarios\/0897cedf-b33d-47f6-a2f3-b055199d6d99\/parent"
+                        }
+                    }
+                }
+            },
+            "links": {
+                "self": {
+                    "href": "https:\/\/csis.myclimateservice.eu\/jsonapi\/taxonomy_term\/impact_scenarios\/0897cedf-b33d-47f6-a2f3-b055199d6d99"
+                }
+            }
+        },
+        {
+            "type": "taxonomy_term--impact_scenarios",
+            "id": "9c2e5c01-4ed5-450e-a050-b3aab3e52b2a",
+            "attributes": {
+                "drupal_internal__tid": 259,
+                "drupal_internal__revision_id": 259,
+                "langcode": "en",
+                "revision_created": null,
+                "revision_log_message": null,
+                "status": true,
+                "name": "strong-occasional",
+                "description": {
+                    "value": "\u003Cp\u003EScenario for a strong hazard event; happens occasionally; elements of risk are partially adapted to this event.\u003C\/p\u003E\r\n\r\n\u003Cp\u003E\u0026nbsp;\u003C\/p\u003E\r\n\r\n\u003Cpre ccp_infra_timestamp=\u00221553011629701\u0022 ccp_infra_user_hash=\u00223745268567\u0022 ccp_infra_version=\u00222\u0022 data-ccp-timestamp=\u00221553011629701\u0022\u003E\r\n\r\n\u0026nbsp;\u003C\/pre\u003E\r\n\r\n\u003Ctable\u003E\r\n\t\u003Ctbody\u003E\r\n\t\t\u003Ctr\u003E\r\n\t\t\t\u003Ctd\u003E\u003Cstrong\u003EOccurrence\u003C\/strong\u003E\u003C\/td\u003E\r\n\t\t\t\u003Ctd\u003E\u003Cstrong\u003EEvent probability per year\u003C\/strong\u003E\u003C\/td\u003E\r\n\t\t\t\u003Ctd\u003E\u003Cstrong\u003EDescription (technical)\u0026nbsp;\u003C\/strong\u003E\u003C\/td\u003E\r\n\t\t\t\u003Ctd style=\u0022width: 667px;\u0022\u003E\u003Cstrong\u003EExample for heat wave\u003C\/strong\u003E\u003C\/td\u003E\r\n\t\t\t\u003Ctd style=\u0022width: 238px;\u0022\u003E\u003Cstrong\u003EExample for Naples\u003C\/strong\u003E\u003C\/td\u003E\r\n\t\t\u003C\/tr\u003E\r\n\t\t\u003Ctr\u003E\r\n\t\t\t\u003Ctd\u003Eevery 5 years\u003C\/td\u003E\r\n\t\t\t\u003Ctd\u003E0.20\u003C\/td\u003E\r\n\t\t\t\u003Ctd\u003ESelect event in the hazard matrix that corresponds to P=0.20. If more events are found, select event with highest hazard level.\u003C\/td\u003E\r\n\t\t\t\u003Ctd style=\u0022width: 667px;\u0022\u003EHeat wave with minimum 3 consecutive days that has probability to happen every 5 years (P=0.20). If more heat waves are found with different combination of heat intensity (Tmax) and duration (days), the heat wave with highest temperature and highest duration is selected, first taking into account the heat intensity and then duration.\u0026nbsp;\u003C\/td\u003E\r\n\t\t\t\u003Ctd style=\u0022width: 238px;\u0022\u003E\r\n\t\t\t\u003Cp\u003E1971-2000: 11days, 30C\u003C\/p\u003E\r\n\r\n\t\t\t\u003Cp\u003E2011-2040 (RCP45): 13days, 32\u00b0C\u003C\/p\u003E\r\n\r\n\t\t\t\u003Cp\u003E2041-2070 (RCP45): 3days, 38\u00b0C\u003C\/p\u003E\r\n\r\n\t\t\t\u003Cp\u003E2071-2100 (RCP45): 11days, 34\u00b0C\u003C\/p\u003E\r\n\r\n\t\t\t\u003Cp\u003E2011-2040 (RCP85): 5days, 34\u00b0C\u003C\/p\u003E\r\n\r\n\t\t\t\u003Cp\u003E2041-2070 (RCP85): 4days, 38\u00b0C\u003C\/p\u003E\r\n\r\n\t\t\t\u003Cp\u003E2071-2100 (RCP85): 4days, 40\u00b0C\u0022\u003C\/p\u003E\r\n\t\t\t\u003C\/td\u003E\r\n\t\t\u003C\/tr\u003E\r\n\t\u003C\/tbody\u003E\r\n\u003C\/table\u003E\r\n",
+                    "format": "basic_html",
+                    "processed": "\u003Cp\u003EScenario for a strong hazard event; happens occasionally; elements of risk are partially adapted to this event.\u003C\/p\u003E\n\n\u003Cp\u003E\u00a0\u003C\/p\u003E\n\n\u003Cpre ccp_infra_timestamp=\u00221553011629701\u0022 ccp_infra_user_hash=\u00223745268567\u0022 ccp_infra_version=\u00222\u0022 data-ccp-timestamp=\u00221553011629701\u0022\u003E\n\n\u00a0\u003C\/pre\u003E\n\n\u003Ctable\u003E\u003Ctbody\u003E\u003Ctr\u003E\u003Ctd\u003E\u003Cstrong\u003EOccurrence\u003C\/strong\u003E\u003C\/td\u003E\n\t\t\t\u003Ctd\u003E\u003Cstrong\u003EEvent probability per year\u003C\/strong\u003E\u003C\/td\u003E\n\t\t\t\u003Ctd\u003E\u003Cstrong\u003EDescription (technical)\u00a0\u003C\/strong\u003E\u003C\/td\u003E\n\t\t\t\u003Ctd style=\u0022width: 667px;\u0022\u003E\u003Cstrong\u003EExample for heat wave\u003C\/strong\u003E\u003C\/td\u003E\n\t\t\t\u003Ctd style=\u0022width: 238px;\u0022\u003E\u003Cstrong\u003EExample for Naples\u003C\/strong\u003E\u003C\/td\u003E\n\t\t\u003C\/tr\u003E\u003Ctr\u003E\u003Ctd\u003Eevery 5 years\u003C\/td\u003E\n\t\t\t\u003Ctd\u003E0.20\u003C\/td\u003E\n\t\t\t\u003Ctd\u003ESelect event in the hazard matrix that corresponds to P=0.20. If more events are found, select event with highest hazard level.\u003C\/td\u003E\n\t\t\t\u003Ctd style=\u0022width: 667px;\u0022\u003EHeat wave with minimum 3 consecutive days that has probability to happen every 5 years (P=0.20). If more heat waves are found with different combination of heat intensity (Tmax) and duration (days), the heat wave with highest temperature and highest duration is selected, first taking into account the heat intensity and then duration.\u00a0\u003C\/td\u003E\n\t\t\t\u003Ctd style=\u0022width: 238px;\u0022\u003E\n\t\t\t\u003Cp\u003E1971-2000: 11days, 30C\u003C\/p\u003E\n\n\t\t\t\u003Cp\u003E2011-2040 (RCP45): 13days, 32\u00b0C\u003C\/p\u003E\n\n\t\t\t\u003Cp\u003E2041-2070 (RCP45): 3days, 38\u00b0C\u003C\/p\u003E\n\n\t\t\t\u003Cp\u003E2071-2100 (RCP45): 11days, 34\u00b0C\u003C\/p\u003E\n\n\t\t\t\u003Cp\u003E2011-2040 (RCP85): 5days, 34\u00b0C\u003C\/p\u003E\n\n\t\t\t\u003Cp\u003E2041-2070 (RCP85): 4days, 38\u00b0C\u003C\/p\u003E\n\n\t\t\t\u003Cp\u003E2071-2100 (RCP85): 4days, 40\u00b0C\u0022\u003C\/p\u003E\n\t\t\t\u003C\/td\u003E\n\t\t\u003C\/tr\u003E\u003C\/tbody\u003E\u003C\/table\u003E"
+                },
+                "weight": 1,
+                "changed": "2019-03-19T16:09:56+00:00",
+                "default_langcode": true,
+                "revision_translation_affected": true,
+                "path": {
+                    "alias": "\/taxonomy\/impact-scenario\/event\/strong-occasional",
+                    "pid": 173,
+                    "langcode": "en"
+                },
+                "field_event_type_id": "impact-scenario:event:strong-occasional"
+            },
+            "relationships": {
+                "vid": {
+                    "data": {
+                        "type": "taxonomy_vocabulary--taxonomy_vocabulary",
+                        "id": "7caaa522-8827-49dc-9326-30f5e080a6a3"
+                    },
+                    "links": {
+                        "self": {
+                            "href": "https:\/\/csis.myclimateservice.eu\/jsonapi\/taxonomy_term\/impact_scenarios\/9c2e5c01-4ed5-450e-a050-b3aab3e52b2a\/relationships\/vid"
+                        },
+                        "related": {
+                            "href": "https:\/\/csis.myclimateservice.eu\/jsonapi\/taxonomy_term\/impact_scenarios\/9c2e5c01-4ed5-450e-a050-b3aab3e52b2a\/vid"
+                        }
+                    }
+                },
+                "revision_user": {
+                    "data": null,
+                    "links": {
+                        "self": {
+                            "href": "https:\/\/csis.myclimateservice.eu\/jsonapi\/taxonomy_term\/impact_scenarios\/9c2e5c01-4ed5-450e-a050-b3aab3e52b2a\/relationships\/revision_user"
+                        },
+                        "related": {
+                            "href": "https:\/\/csis.myclimateservice.eu\/jsonapi\/taxonomy_term\/impact_scenarios\/9c2e5c01-4ed5-450e-a050-b3aab3e52b2a\/revision_user"
+                        }
+                    }
+                },
+                "parent": {
+                    "data": [
+                        {
+                            "type": "taxonomy_term--impact_scenarios",
+                            "id": "2fa84166-ea8e-4e45-9c37-d218d473a532"
+                        }
+                    ],
+                    "links": {
+                        "self": {
+                            "href": "https:\/\/csis.myclimateservice.eu\/jsonapi\/taxonomy_term\/impact_scenarios\/9c2e5c01-4ed5-450e-a050-b3aab3e52b2a\/relationships\/parent"
+                        },
+                        "related": {
+                            "href": "https:\/\/csis.myclimateservice.eu\/jsonapi\/taxonomy_term\/impact_scenarios\/9c2e5c01-4ed5-450e-a050-b3aab3e52b2a\/parent"
+                        }
+                    }
+                }
+            },
+            "links": {
+                "self": {
+                    "href": "https:\/\/csis.myclimateservice.eu\/jsonapi\/taxonomy_term\/impact_scenarios\/9c2e5c01-4ed5-450e-a050-b3aab3e52b2a"
+                }
+            }
+        },
+        {
+            "type": "taxonomy_term--impact_scenarios",
+            "id": "99ea445e-31ad-4d43-a286-f080972550c1",
+            "attributes": {
+                "drupal_internal__tid": 258,
+                "drupal_internal__revision_id": 258,
+                "langcode": "en",
+                "revision_created": null,
+                "revision_log_message": null,
+                "status": true,
+                "name": "usual-frequent",
+                "description": {
+                    "value": "\u003Cp\u003EScenario for an usual hazard event; happens frequently; elements at\u0026nbsp;risk are well-adapted to this event.\u003C\/p\u003E\r\n\r\n\u003Cp\u003E\u0026nbsp;\u003C\/p\u003E\r\n\r\n\u003Ctable\u003E\r\n\t\u003Ctbody\u003E\r\n\t\t\u003Ctr\u003E\r\n\t\t\t\u003Ctd\u003E\u003Cstrong\u003EOccurrence\u003C\/strong\u003E\u003C\/td\u003E\r\n\t\t\t\u003Ctd\u003E\u003Cstrong\u003EEvent probability per year\u003C\/strong\u003E\u003C\/td\u003E\r\n\t\t\t\u003Ctd\u003E\u003Cstrong\u003EDescription (technical)\u0026nbsp;\u003C\/strong\u003E\u003C\/td\u003E\r\n\t\t\t\u003Ctd style=\u0022width: 658px;\u0022\u003E\u003Cstrong\u003EExample for heat wave\u003C\/strong\u003E\u003C\/td\u003E\r\n\t\t\t\u003Ctd style=\u0022width: 261px;\u0022\u003E\u003Cstrong\u003EExample for Naples\u003C\/strong\u003E\u003C\/td\u003E\r\n\t\t\u003C\/tr\u003E\r\n\t\t\u003Ctr\u003E\r\n\t\t\t\u003Ctd\u003Eevery year\u003C\/td\u003E\r\n\t\t\t\u003Ctd\u003E1\u003C\/td\u003E\r\n\t\t\t\u003Ctd\u003ESelect event in the hazard matrix that corresponds to P=1. If more events are found, select event with highest hazard level.\u003C\/td\u003E\r\n\t\t\t\u003Ctd style=\u0022width: 658px;\u0022\u003EHeat wave with minimum 3 consecutive days that has probability to happen every year (P=1). If more heat waves are found with different combination of heat intensity (Tmax) and duration (days), the heat wave with highest temperature and highest duration is selected, first taking into account the heat intensity and then duration.\u0026nbsp;\u003C\/td\u003E\r\n\t\t\t\u003Ctd style=\u0022width: 261px;\u0022\u003E\r\n\t\t\t\u003Cp\u003E1971-2000: 3days, 26C\u003C\/p\u003E\r\n\r\n\t\t\t\u003Cp\u003E2011-2040 (RCP45): 3days, 28\u00b0C\u003C\/p\u003E\r\n\r\n\t\t\t\u003Cp\u003E2041-2070 (RCP45): 3days, 34\u00b0C\u003C\/p\u003E\r\n\r\n\t\t\t\u003Cp\u003E2071-2100 (RCP45): 3days, 34\u00b0C\u003C\/p\u003E\r\n\r\n\t\t\t\u003Cp\u003E2011-2040 (RCP85): 3days, 30\u00b0C\u003C\/p\u003E\r\n\r\n\t\t\t\u003Cp\u003E2041-2070 (RCP85); 3days, 32\u00b0C\u003C\/p\u003E\r\n\r\n\t\t\t\u003Cp\u003E2071-2100 (RCP85): 3days, 34\u00b0C\u0022\u003C\/p\u003E\r\n\t\t\t\u003C\/td\u003E\r\n\t\t\u003C\/tr\u003E\r\n\t\u003C\/tbody\u003E\r\n\u003C\/table\u003E\r\n",
+                    "format": "basic_html",
+                    "processed": "\u003Cp\u003EScenario for an usual hazard event; happens frequently; elements at\u00a0risk are well-adapted to this event.\u003C\/p\u003E\n\n\u003Cp\u003E\u00a0\u003C\/p\u003E\n\n\u003Ctable\u003E\u003Ctbody\u003E\u003Ctr\u003E\u003Ctd\u003E\u003Cstrong\u003EOccurrence\u003C\/strong\u003E\u003C\/td\u003E\n\t\t\t\u003Ctd\u003E\u003Cstrong\u003EEvent probability per year\u003C\/strong\u003E\u003C\/td\u003E\n\t\t\t\u003Ctd\u003E\u003Cstrong\u003EDescription (technical)\u00a0\u003C\/strong\u003E\u003C\/td\u003E\n\t\t\t\u003Ctd style=\u0022width: 658px;\u0022\u003E\u003Cstrong\u003EExample for heat wave\u003C\/strong\u003E\u003C\/td\u003E\n\t\t\t\u003Ctd style=\u0022width: 261px;\u0022\u003E\u003Cstrong\u003EExample for Naples\u003C\/strong\u003E\u003C\/td\u003E\n\t\t\u003C\/tr\u003E\u003Ctr\u003E\u003Ctd\u003Eevery year\u003C\/td\u003E\n\t\t\t\u003Ctd\u003E1\u003C\/td\u003E\n\t\t\t\u003Ctd\u003ESelect event in the hazard matrix that corresponds to P=1. If more events are found, select event with highest hazard level.\u003C\/td\u003E\n\t\t\t\u003Ctd style=\u0022width: 658px;\u0022\u003EHeat wave with minimum 3 consecutive days that has probability to happen every year (P=1). If more heat waves are found with different combination of heat intensity (Tmax) and duration (days), the heat wave with highest temperature and highest duration is selected, first taking into account the heat intensity and then duration.\u00a0\u003C\/td\u003E\n\t\t\t\u003Ctd style=\u0022width: 261px;\u0022\u003E\n\t\t\t\u003Cp\u003E1971-2000: 3days, 26C\u003C\/p\u003E\n\n\t\t\t\u003Cp\u003E2011-2040 (RCP45): 3days, 28\u00b0C\u003C\/p\u003E\n\n\t\t\t\u003Cp\u003E2041-2070 (RCP45): 3days, 34\u00b0C\u003C\/p\u003E\n\n\t\t\t\u003Cp\u003E2071-2100 (RCP45): 3days, 34\u00b0C\u003C\/p\u003E\n\n\t\t\t\u003Cp\u003E2011-2040 (RCP85): 3days, 30\u00b0C\u003C\/p\u003E\n\n\t\t\t\u003Cp\u003E2041-2070 (RCP85); 3days, 32\u00b0C\u003C\/p\u003E\n\n\t\t\t\u003Cp\u003E2071-2100 (RCP85): 3days, 34\u00b0C\u0022\u003C\/p\u003E\n\t\t\t\u003C\/td\u003E\n\t\t\u003C\/tr\u003E\u003C\/tbody\u003E\u003C\/table\u003E"
+                },
+                "weight": 0,
+                "changed": "2019-03-19T16:09:56+00:00",
+                "default_langcode": true,
+                "revision_translation_affected": true,
+                "path": {
+                    "alias": "\/taxonomy\/impact-scenario\/event\/usual-frequent",
+                    "pid": 172,
+                    "langcode": "en"
+                },
+                "field_event_type_id": "impact-scenario:event:usual-frequent"
+            },
+            "relationships": {
+                "vid": {
+                    "data": {
+                        "type": "taxonomy_vocabulary--taxonomy_vocabulary",
+                        "id": "7caaa522-8827-49dc-9326-30f5e080a6a3"
+                    },
+                    "links": {
+                        "self": {
+                            "href": "https:\/\/csis.myclimateservice.eu\/jsonapi\/taxonomy_term\/impact_scenarios\/99ea445e-31ad-4d43-a286-f080972550c1\/relationships\/vid"
+                        },
+                        "related": {
+                            "href": "https:\/\/csis.myclimateservice.eu\/jsonapi\/taxonomy_term\/impact_scenarios\/99ea445e-31ad-4d43-a286-f080972550c1\/vid"
+                        }
+                    }
+                },
+                "revision_user": {
+                    "data": null,
+                    "links": {
+                        "self": {
+                            "href": "https:\/\/csis.myclimateservice.eu\/jsonapi\/taxonomy_term\/impact_scenarios\/99ea445e-31ad-4d43-a286-f080972550c1\/relationships\/revision_user"
+                        },
+                        "related": {
+                            "href": "https:\/\/csis.myclimateservice.eu\/jsonapi\/taxonomy_term\/impact_scenarios\/99ea445e-31ad-4d43-a286-f080972550c1\/revision_user"
+                        }
+                    }
+                },
+                "parent": {
+                    "data": [
+                        {
+                            "type": "taxonomy_term--impact_scenarios",
+                            "id": "2fa84166-ea8e-4e45-9c37-d218d473a532"
+                        }
+                    ],
+                    "links": {
+                        "self": {
+                            "href": "https:\/\/csis.myclimateservice.eu\/jsonapi\/taxonomy_term\/impact_scenarios\/99ea445e-31ad-4d43-a286-f080972550c1\/relationships\/parent"
+                        },
+                        "related": {
+                            "href": "https:\/\/csis.myclimateservice.eu\/jsonapi\/taxonomy_term\/impact_scenarios\/99ea445e-31ad-4d43-a286-f080972550c1\/parent"
+                        }
+                    }
+                }
+            },
+            "links": {
+                "self": {
+                    "href": "https:\/\/csis.myclimateservice.eu\/jsonapi\/taxonomy_term\/impact_scenarios\/99ea445e-31ad-4d43-a286-f080972550c1"
+                }
+            }
+        },
+        {
+            "type": "taxonomy_term--dp_resourcetype",
+            "id": "363a05e3-9cca-4dec-932f-3e40e8b323ac",
+            "attributes": {
+                "drupal_internal__tid": 1097,
+                "drupal_internal__revision_id": 1097,
+                "langcode": "en",
+                "revision_created": null,
+                "revision_log_message": null,
+                "status": true,
+                "name": "hazard-index",
+                "description": null,
+                "weight": 0,
+                "changed": "2019-06-25T14:00:39+00:00",
+                "default_langcode": true,
+                "revision_translation_affected": true,
+                "path": {
+                    "alias": null,
+                    "pid": null,
+                    "langcode": "en"
+                },
+                "field_resource_type_id": "resource-type:hazard-index"
+            },
+            "relationships": {
+                "vid": {
+                    "data": {
+                        "type": "taxonomy_vocabulary--taxonomy_vocabulary",
+                        "id": "b336c511-a1a7-4b0e-9c5e-7f0afc9c16d5"
+                    },
+                    "links": {
+                        "self": {
+                            "href": "https:\/\/csis.myclimateservice.eu\/jsonapi\/taxonomy_term\/dp_resourcetype\/363a05e3-9cca-4dec-932f-3e40e8b323ac\/relationships\/vid"
+                        },
+                        "related": {
+                            "href": "https:\/\/csis.myclimateservice.eu\/jsonapi\/taxonomy_term\/dp_resourcetype\/363a05e3-9cca-4dec-932f-3e40e8b323ac\/vid"
+                        }
+                    }
+                },
+                "revision_user": {
+                    "data": null,
+                    "links": {
+                        "self": {
+                            "href": "https:\/\/csis.myclimateservice.eu\/jsonapi\/taxonomy_term\/dp_resourcetype\/363a05e3-9cca-4dec-932f-3e40e8b323ac\/relationships\/revision_user"
+                        },
+                        "related": {
+                            "href": "https:\/\/csis.myclimateservice.eu\/jsonapi\/taxonomy_term\/dp_resourcetype\/363a05e3-9cca-4dec-932f-3e40e8b323ac\/revision_user"
+                        }
+                    }
+                },
+                "parent": {
+                    "data": [
+                        {
+                            "type": "taxonomy_term--dp_resourcetype",
+                            "id": "virtual",
+                            "meta": {
+                                "links": {
+                                    "help": {
+                                        "href": "https:\/\/www.drupal.org\/docs\/8\/modules\/json-api\/core-concepts#virtual",
+                                        "meta": {
+                                            "about": "Usage and meaning of the \u0027virtual\u0027 resource identifier."
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    ],
+                    "links": {
+                        "self": {
+                            "href": "https:\/\/csis.myclimateservice.eu\/jsonapi\/taxonomy_term\/dp_resourcetype\/363a05e3-9cca-4dec-932f-3e40e8b323ac\/relationships\/parent"
+                        },
+                        "related": {
+                            "href": "https:\/\/csis.myclimateservice.eu\/jsonapi\/taxonomy_term\/dp_resourcetype\/363a05e3-9cca-4dec-932f-3e40e8b323ac\/parent"
+                        }
+                    }
+                }
+            },
+            "links": {
+                "self": {
+                    "href": "https:\/\/csis.myclimateservice.eu\/jsonapi\/taxonomy_term\/dp_resourcetype\/363a05e3-9cca-4dec-932f-3e40e8b323ac"
+                }
+            }
+        },
+        {
+            "type": "taxonomy_term--service_type",
+            "id": "9b02ca7c-f9d5-480f-9c83-6cde18fbfc41",
+            "attributes": {
+                "drupal_internal__tid": 1094,
+                "drupal_internal__revision_id": 1094,
+                "langcode": "en",
+                "revision_created": null,
+                "revision_log_message": null,
+                "status": true,
+                "name": "emikat",
+                "description": null,
+                "weight": 0,
+                "changed": "2019-06-25T14:06:45+00:00",
+                "default_langcode": true,
+                "revision_translation_affected": true,
+                "path": {
+                    "alias": null,
+                    "pid": null,
+                    "langcode": "en"
+                },
+                "field_mapview": false,
+                "field_service_type_id": "service-type:emikat"
+            },
+            "relationships": {
+                "vid": {
+                    "data": {
+                        "type": "taxonomy_vocabulary--taxonomy_vocabulary",
+                        "id": "8a752fdc-17aa-4a24-b6d7-58ffffa3e818"
+                    },
+                    "links": {
+                        "self": {
+                            "href": "https:\/\/csis.myclimateservice.eu\/jsonapi\/taxonomy_term\/service_type\/9b02ca7c-f9d5-480f-9c83-6cde18fbfc41\/relationships\/vid"
+                        },
+                        "related": {
+                            "href": "https:\/\/csis.myclimateservice.eu\/jsonapi\/taxonomy_term\/service_type\/9b02ca7c-f9d5-480f-9c83-6cde18fbfc41\/vid"
+                        }
+                    }
+                },
+                "revision_user": {
+                    "data": null,
+                    "links": {
+                        "self": {
+                            "href": "https:\/\/csis.myclimateservice.eu\/jsonapi\/taxonomy_term\/service_type\/9b02ca7c-f9d5-480f-9c83-6cde18fbfc41\/relationships\/revision_user"
+                        },
+                        "related": {
+                            "href": "https:\/\/csis.myclimateservice.eu\/jsonapi\/taxonomy_term\/service_type\/9b02ca7c-f9d5-480f-9c83-6cde18fbfc41\/revision_user"
+                        }
+                    }
+                },
+                "parent": {
+                    "data": [
+                        {
+                            "type": "taxonomy_term--service_type",
+                            "id": "virtual",
+                            "meta": {
+                                "links": {
+                                    "help": {
+                                        "href": "https:\/\/www.drupal.org\/docs\/8\/modules\/json-api\/core-concepts#virtual",
+                                        "meta": {
+                                            "about": "Usage and meaning of the \u0027virtual\u0027 resource identifier."
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    ],
+                    "links": {
+                        "self": {
+                            "href": "https:\/\/csis.myclimateservice.eu\/jsonapi\/taxonomy_term\/service_type\/9b02ca7c-f9d5-480f-9c83-6cde18fbfc41\/relationships\/parent"
+                        },
+                        "related": {
+                            "href": "https:\/\/csis.myclimateservice.eu\/jsonapi\/taxonomy_term\/service_type\/9b02ca7c-f9d5-480f-9c83-6cde18fbfc41\/parent"
+                        }
+                    }
+                }
+            },
+            "links": {
+                "self": {
+                    "href": "https:\/\/csis.myclimateservice.eu\/jsonapi\/taxonomy_term\/service_type\/9b02ca7c-f9d5-480f-9c83-6cde18fbfc41"
+                }
+            }
+        },
+        {
+            "type": "taxonomy_term--dp_variables",
+            "id": "277eae9b-4f79-48a2-bd7b-fd841d67365b",
+            "attributes": {
+                "drupal_internal__tid": 2243,
+                "drupal_internal__revision_id": 2243,
+                "langcode": "en",
+                "revision_created": "2019-09-16T12:06:50+00:00",
+                "revision_log_message": null,
+                "status": true,
+                "name": "emikat_id: [0-9]+ (EMIKAT Study ID)",
+                "description": {
+                    "value": "\u003Cp\u003EEMIKAT Study ID is not known before the study is defined, but it must be a number\u003C\/p\u003E\r\n",
+                    "format": "basic_html",
+                    "processed": "\u003Cp\u003EEMIKAT Study ID is not known before the study is defined, but it must be a number\u003C\/p\u003E\n"
+                },
+                "weight": 0,
+                "changed": "2019-09-23T12:20:25+00:00",
+                "default_langcode": true,
+                "revision_translation_affected": true,
+                "path": {
+                    "alias": null,
+                    "pid": null,
+                    "langcode": "en"
+                },
+                "field_var_meaning": null,
+                "field_var_name": "emikat_id",
+                "field_var_value": "[0-9]+"
+            },
+            "relationships": {
+                "vid": {
+                    "data": {
+                        "type": "taxonomy_vocabulary--taxonomy_vocabulary",
+                        "id": "8f682e27-a50f-4966-8164-a797127df26c"
+                    },
+                    "links": {
+                        "self": {
+                            "href": "https:\/\/csis.myclimateservice.eu\/jsonapi\/taxonomy_term\/dp_variables\/277eae9b-4f79-48a2-bd7b-fd841d67365b\/relationships\/vid"
+                        },
+                        "related": {
+                            "href": "https:\/\/csis.myclimateservice.eu\/jsonapi\/taxonomy_term\/dp_variables\/277eae9b-4f79-48a2-bd7b-fd841d67365b\/vid"
+                        }
+                    }
+                },
+                "revision_user": {
+                    "data": null,
+                    "links": {
+                        "self": {
+                            "href": "https:\/\/csis.myclimateservice.eu\/jsonapi\/taxonomy_term\/dp_variables\/277eae9b-4f79-48a2-bd7b-fd841d67365b\/relationships\/revision_user"
+                        },
+                        "related": {
+                            "href": "https:\/\/csis.myclimateservice.eu\/jsonapi\/taxonomy_term\/dp_variables\/277eae9b-4f79-48a2-bd7b-fd841d67365b\/revision_user"
+                        }
+                    }
+                },
+                "parent": {
+                    "data": [
+                        {
+                            "type": "taxonomy_term--dp_variables",
+                            "id": "virtual",
+                            "meta": {
+                                "links": {
+                                    "help": {
+                                        "href": "https:\/\/www.drupal.org\/docs\/8\/modules\/json-api\/core-concepts#virtual",
+                                        "meta": {
+                                            "about": "Usage and meaning of the \u0027virtual\u0027 resource identifier."
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    ],
+                    "links": {
+                        "self": {
+                            "href": "https:\/\/csis.myclimateservice.eu\/jsonapi\/taxonomy_term\/dp_variables\/277eae9b-4f79-48a2-bd7b-fd841d67365b\/relationships\/parent"
+                        },
+                        "related": {
+                            "href": "https:\/\/csis.myclimateservice.eu\/jsonapi\/taxonomy_term\/dp_variables\/277eae9b-4f79-48a2-bd7b-fd841d67365b\/parent"
+                        }
+                    }
+                },
+                "field_var_meaning2": {
+                    "data": {
+                        "type": "taxonomy_term--dp_variable_meanings",
+                        "id": "e4057f0f-0f69-4a08-8d26-5d7a104de2e6"
+                    },
+                    "links": {
+                        "self": {
+                            "href": "https:\/\/csis.myclimateservice.eu\/jsonapi\/taxonomy_term\/dp_variables\/277eae9b-4f79-48a2-bd7b-fd841d67365b\/relationships\/field_var_meaning2"
+                        },
+                        "related": {
+                            "href": "https:\/\/csis.myclimateservice.eu\/jsonapi\/taxonomy_term\/dp_variables\/277eae9b-4f79-48a2-bd7b-fd841d67365b\/field_var_meaning2"
+                        }
+                    }
+                }
+            },
+            "links": {
+                "self": {
+                    "href": "https:\/\/csis.myclimateservice.eu\/jsonapi\/taxonomy_term\/dp_variables\/277eae9b-4f79-48a2-bd7b-fd841d67365b"
+                }
+            }
+        },
+        {
+            "type": "taxonomy_term--dp_variables",
+            "id": "98649abd-0005-4350-9883-d2d5d104a42f",
+            "attributes": {
+                "drupal_internal__tid": 2244,
+                "drupal_internal__revision_id": 2244,
+                "langcode": "en",
+                "revision_created": "2019-09-16T12:08:19+00:00",
+                "revision_log_message": null,
+                "status": true,
+                "name": "study_variant: BASELINE (Variant: no Adaptation Options)",
+                "description": {
+                    "value": "\u003Cp\u003EBaseline study variant without any adaptation options\u003C\/p\u003E\r\n",
+                    "format": "basic_html",
+                    "processed": "\u003Cp\u003EBaseline study variant without any adaptation options\u003C\/p\u003E\n"
+                },
+                "weight": 8,
+                "changed": "2019-09-23T12:17:48+00:00",
+                "default_langcode": true,
+                "revision_translation_affected": true,
+                "path": {
+                    "alias": null,
+                    "pid": null,
+                    "langcode": "en"
+                },
+                "field_var_meaning": null,
+                "field_var_name": "study_variant",
+                "field_var_value": "BASELINE"
+            },
+            "relationships": {
+                "vid": {
+                    "data": {
+                        "type": "taxonomy_vocabulary--taxonomy_vocabulary",
+                        "id": "8f682e27-a50f-4966-8164-a797127df26c"
+                    },
+                    "links": {
+                        "self": {
+                            "href": "https:\/\/csis.myclimateservice.eu\/jsonapi\/taxonomy_term\/dp_variables\/98649abd-0005-4350-9883-d2d5d104a42f\/relationships\/vid"
+                        },
+                        "related": {
+                            "href": "https:\/\/csis.myclimateservice.eu\/jsonapi\/taxonomy_term\/dp_variables\/98649abd-0005-4350-9883-d2d5d104a42f\/vid"
+                        }
+                    }
+                },
+                "revision_user": {
+                    "data": null,
+                    "links": {
+                        "self": {
+                            "href": "https:\/\/csis.myclimateservice.eu\/jsonapi\/taxonomy_term\/dp_variables\/98649abd-0005-4350-9883-d2d5d104a42f\/relationships\/revision_user"
+                        },
+                        "related": {
+                            "href": "https:\/\/csis.myclimateservice.eu\/jsonapi\/taxonomy_term\/dp_variables\/98649abd-0005-4350-9883-d2d5d104a42f\/revision_user"
+                        }
+                    }
+                },
+                "parent": {
+                    "data": [
+                        {
+                            "type": "taxonomy_term--dp_variables",
+                            "id": "virtual",
+                            "meta": {
+                                "links": {
+                                    "help": {
+                                        "href": "https:\/\/www.drupal.org\/docs\/8\/modules\/json-api\/core-concepts#virtual",
+                                        "meta": {
+                                            "about": "Usage and meaning of the \u0027virtual\u0027 resource identifier."
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    ],
+                    "links": {
+                        "self": {
+                            "href": "https:\/\/csis.myclimateservice.eu\/jsonapi\/taxonomy_term\/dp_variables\/98649abd-0005-4350-9883-d2d5d104a42f\/relationships\/parent"
+                        },
+                        "related": {
+                            "href": "https:\/\/csis.myclimateservice.eu\/jsonapi\/taxonomy_term\/dp_variables\/98649abd-0005-4350-9883-d2d5d104a42f\/parent"
+                        }
+                    }
+                },
+                "field_var_meaning2": {
+                    "data": {
+                        "type": "taxonomy_term--dp_variable_meanings",
+                        "id": "1274b124-ec46-42c7-a0df-cf0b9239e81b"
+                    },
+                    "links": {
+                        "self": {
+                            "href": "https:\/\/csis.myclimateservice.eu\/jsonapi\/taxonomy_term\/dp_variables\/98649abd-0005-4350-9883-d2d5d104a42f\/relationships\/field_var_meaning2"
+                        },
+                        "related": {
+                            "href": "https:\/\/csis.myclimateservice.eu\/jsonapi\/taxonomy_term\/dp_variables\/98649abd-0005-4350-9883-d2d5d104a42f\/field_var_meaning2"
+                        }
+                    }
+                }
+            },
+            "links": {
+                "self": {
+                    "href": "https:\/\/csis.myclimateservice.eu\/jsonapi\/taxonomy_term\/dp_variables\/98649abd-0005-4350-9883-d2d5d104a42f"
+                }
+            }
+        },
+        {
+            "type": "taxonomy_term--dp_variables",
+            "id": "d9de23b0-2851-4287-88cb-cee13c2514ed",
+            "attributes": {
+                "drupal_internal__tid": 2245,
+                "drupal_internal__revision_id": 2245,
+                "langcode": "en",
+                "revision_created": "2019-09-16T12:15:30+00:00",
+                "revision_log_message": null,
+                "status": true,
+                "name": "study_variant: ADAPTATION-01 (Variant: with Adaptation Options)",
+                "description": {
+                    "value": "\u003Cp\u003EStudy variant with adaptation options. Currently only one is supported.\u003C\/p\u003E\r\n",
+                    "format": "basic_html",
+                    "processed": "\u003Cp\u003EStudy variant with adaptation options. Currently only one is supported.\u003C\/p\u003E\n"
+                },
+                "weight": 7,
+                "changed": "2019-09-23T12:18:01+00:00",
+                "default_langcode": true,
+                "revision_translation_affected": true,
+                "path": {
+                    "alias": null,
+                    "pid": null,
+                    "langcode": "en"
+                },
+                "field_var_meaning": null,
+                "field_var_name": "study_variant",
+                "field_var_value": "ADAPTATION-01"
+            },
+            "relationships": {
+                "vid": {
+                    "data": {
+                        "type": "taxonomy_vocabulary--taxonomy_vocabulary",
+                        "id": "8f682e27-a50f-4966-8164-a797127df26c"
+                    },
+                    "links": {
+                        "self": {
+                            "href": "https:\/\/csis.myclimateservice.eu\/jsonapi\/taxonomy_term\/dp_variables\/d9de23b0-2851-4287-88cb-cee13c2514ed\/relationships\/vid"
+                        },
+                        "related": {
+                            "href": "https:\/\/csis.myclimateservice.eu\/jsonapi\/taxonomy_term\/dp_variables\/d9de23b0-2851-4287-88cb-cee13c2514ed\/vid"
+                        }
+                    }
+                },
+                "revision_user": {
+                    "data": null,
+                    "links": {
+                        "self": {
+                            "href": "https:\/\/csis.myclimateservice.eu\/jsonapi\/taxonomy_term\/dp_variables\/d9de23b0-2851-4287-88cb-cee13c2514ed\/relationships\/revision_user"
+                        },
+                        "related": {
+                            "href": "https:\/\/csis.myclimateservice.eu\/jsonapi\/taxonomy_term\/dp_variables\/d9de23b0-2851-4287-88cb-cee13c2514ed\/revision_user"
+                        }
+                    }
+                },
+                "parent": {
+                    "data": [
+                        {
+                            "type": "taxonomy_term--dp_variables",
+                            "id": "virtual",
+                            "meta": {
+                                "links": {
+                                    "help": {
+                                        "href": "https:\/\/www.drupal.org\/docs\/8\/modules\/json-api\/core-concepts#virtual",
+                                        "meta": {
+                                            "about": "Usage and meaning of the \u0027virtual\u0027 resource identifier."
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    ],
+                    "links": {
+                        "self": {
+                            "href": "https:\/\/csis.myclimateservice.eu\/jsonapi\/taxonomy_term\/dp_variables\/d9de23b0-2851-4287-88cb-cee13c2514ed\/relationships\/parent"
+                        },
+                        "related": {
+                            "href": "https:\/\/csis.myclimateservice.eu\/jsonapi\/taxonomy_term\/dp_variables\/d9de23b0-2851-4287-88cb-cee13c2514ed\/parent"
+                        }
+                    }
+                },
+                "field_var_meaning2": {
+                    "data": {
+                        "type": "taxonomy_term--dp_variable_meanings",
+                        "id": "e42ea3df-40af-4924-a933-929acab74e1a"
+                    },
+                    "links": {
+                        "self": {
+                            "href": "https:\/\/csis.myclimateservice.eu\/jsonapi\/taxonomy_term\/dp_variables\/d9de23b0-2851-4287-88cb-cee13c2514ed\/relationships\/field_var_meaning2"
+                        },
+                        "related": {
+                            "href": "https:\/\/csis.myclimateservice.eu\/jsonapi\/taxonomy_term\/dp_variables\/d9de23b0-2851-4287-88cb-cee13c2514ed\/field_var_meaning2"
+                        }
+                    }
+                }
+            },
+            "links": {
+                "self": {
+                    "href": "https:\/\/csis.myclimateservice.eu\/jsonapi\/taxonomy_term\/dp_variables\/d9de23b0-2851-4287-88cb-cee13c2514ed"
+                }
+            }
+        },
+        {
+            "type": "taxonomy_term--dp_variables",
+            "id": "44dd4a2c-f5fd-4651-abbc-b3c3bc4f4c36",
+            "attributes": {
+                "drupal_internal__tid": 2255,
+                "drupal_internal__revision_id": 2255,
+                "langcode": "en",
+                "revision_created": "2019-09-16T14:32:15+00:00",
+                "revision_log_message": null,
+                "status": true,
+                "name": "time_period: Baseline (Period: historical)",
+                "description": {
+                    "value": "\u003Cp\u003EBaseline time period refers to the climate of the last 30(?) years, ending in ????\u003C\/p\u003E\r\n",
+                    "format": "basic_html",
+                    "processed": "\u003Cp\u003EBaseline time period refers to the climate of the last 30(?) years, ending in ????\u003C\/p\u003E\n"
+                },
+                "weight": 12,
+                "changed": "2019-09-23T12:16:54+00:00",
+                "default_langcode": true,
+                "revision_translation_affected": true,
+                "path": {
+                    "alias": null,
+                    "pid": null,
+                    "langcode": "en"
+                },
+                "field_var_meaning": null,
+                "field_var_name": "time_period",
+                "field_var_value": "Baseline"
+            },
+            "relationships": {
+                "vid": {
+                    "data": {
+                        "type": "taxonomy_vocabulary--taxonomy_vocabulary",
+                        "id": "8f682e27-a50f-4966-8164-a797127df26c"
+                    },
+                    "links": {
+                        "self": {
+                            "href": "https:\/\/csis.myclimateservice.eu\/jsonapi\/taxonomy_term\/dp_variables\/44dd4a2c-f5fd-4651-abbc-b3c3bc4f4c36\/relationships\/vid"
+                        },
+                        "related": {
+                            "href": "https:\/\/csis.myclimateservice.eu\/jsonapi\/taxonomy_term\/dp_variables\/44dd4a2c-f5fd-4651-abbc-b3c3bc4f4c36\/vid"
+                        }
+                    }
+                },
+                "revision_user": {
+                    "data": null,
+                    "links": {
+                        "self": {
+                            "href": "https:\/\/csis.myclimateservice.eu\/jsonapi\/taxonomy_term\/dp_variables\/44dd4a2c-f5fd-4651-abbc-b3c3bc4f4c36\/relationships\/revision_user"
+                        },
+                        "related": {
+                            "href": "https:\/\/csis.myclimateservice.eu\/jsonapi\/taxonomy_term\/dp_variables\/44dd4a2c-f5fd-4651-abbc-b3c3bc4f4c36\/revision_user"
+                        }
+                    }
+                },
+                "parent": {
+                    "data": [
+                        {
+                            "type": "taxonomy_term--dp_variables",
+                            "id": "virtual",
+                            "meta": {
+                                "links": {
+                                    "help": {
+                                        "href": "https:\/\/www.drupal.org\/docs\/8\/modules\/json-api\/core-concepts#virtual",
+                                        "meta": {
+                                            "about": "Usage and meaning of the \u0027virtual\u0027 resource identifier."
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    ],
+                    "links": {
+                        "self": {
+                            "href": "https:\/\/csis.myclimateservice.eu\/jsonapi\/taxonomy_term\/dp_variables\/44dd4a2c-f5fd-4651-abbc-b3c3bc4f4c36\/relationships\/parent"
+                        },
+                        "related": {
+                            "href": "https:\/\/csis.myclimateservice.eu\/jsonapi\/taxonomy_term\/dp_variables\/44dd4a2c-f5fd-4651-abbc-b3c3bc4f4c36\/parent"
+                        }
+                    }
+                },
+                "field_var_meaning2": {
+                    "data": {
+                        "type": "taxonomy_term--dp_variable_meanings",
+                        "id": "c9ebee41-de8a-4cab-99d6-7e86b07dbc41"
+                    },
+                    "links": {
+                        "self": {
+                            "href": "https:\/\/csis.myclimateservice.eu\/jsonapi\/taxonomy_term\/dp_variables\/44dd4a2c-f5fd-4651-abbc-b3c3bc4f4c36\/relationships\/field_var_meaning2"
+                        },
+                        "related": {
+                            "href": "https:\/\/csis.myclimateservice.eu\/jsonapi\/taxonomy_term\/dp_variables\/44dd4a2c-f5fd-4651-abbc-b3c3bc4f4c36\/field_var_meaning2"
+                        }
+                    }
+                }
+            },
+            "links": {
+                "self": {
+                    "href": "https:\/\/csis.myclimateservice.eu\/jsonapi\/taxonomy_term\/dp_variables\/44dd4a2c-f5fd-4651-abbc-b3c3bc4f4c36"
+                }
+            }
+        },
+        {
+            "type": "taxonomy_term--dp_variables",
+            "id": "befdefda-f2a3-48e6-8986-78c02ac8ae5a",
+            "attributes": {
+                "drupal_internal__tid": 2256,
+                "drupal_internal__revision_id": 2256,
+                "langcode": "en",
+                "revision_created": "2019-09-19T15:18:35+00:00",
+                "revision_log_message": null,
+                "status": true,
+                "name": "emissions_scenario: Baseline (Scenario: Historical)",
+                "description": {
+                    "value": "\u003Cp\u003EIn baseline time period, we know exactly what happened so there are no emission scenarios.\u003C\/p\u003E\r\n\r\n\u003Cp\u003ETherefore, the \u0022Baseline\u0022 emissions scenario CAN\u0026nbsp;and MUST\u0026nbsp;be used with \u0022Baseline\u0022 time period!\u003C\/p\u003E\r\n\r\n\u003Cp\u003E\u0026nbsp;\u003C\/p\u003E\r\n",
+                    "format": "basic_html",
+                    "processed": "\u003Cp\u003EIn baseline time period, we know exactly what happened so there are no emission scenarios.\u003C\/p\u003E\n\n\u003Cp\u003ETherefore, the \u0022Baseline\u0022 emissions scenario CAN\u00a0and MUST\u00a0be used with \u0022Baseline\u0022 time period!\u003C\/p\u003E\n\n\u003Cp\u003E\u00a0\u003C\/p\u003E\n"
+                },
+                "weight": 0,
+                "changed": "2019-09-23T12:20:14+00:00",
+                "default_langcode": true,
+                "revision_translation_affected": true,
+                "path": {
+                    "alias": null,
+                    "pid": null,
+                    "langcode": "en"
+                },
+                "field_var_meaning": null,
+                "field_var_name": "emissions_scenario",
+                "field_var_value": "Baseline"
+            },
+            "relationships": {
+                "vid": {
+                    "data": {
+                        "type": "taxonomy_vocabulary--taxonomy_vocabulary",
+                        "id": "8f682e27-a50f-4966-8164-a797127df26c"
+                    },
+                    "links": {
+                        "self": {
+                            "href": "https:\/\/csis.myclimateservice.eu\/jsonapi\/taxonomy_term\/dp_variables\/befdefda-f2a3-48e6-8986-78c02ac8ae5a\/relationships\/vid"
+                        },
+                        "related": {
+                            "href": "https:\/\/csis.myclimateservice.eu\/jsonapi\/taxonomy_term\/dp_variables\/befdefda-f2a3-48e6-8986-78c02ac8ae5a\/vid"
+                        }
+                    }
+                },
+                "revision_user": {
+                    "data": null,
+                    "links": {
+                        "self": {
+                            "href": "https:\/\/csis.myclimateservice.eu\/jsonapi\/taxonomy_term\/dp_variables\/befdefda-f2a3-48e6-8986-78c02ac8ae5a\/relationships\/revision_user"
+                        },
+                        "related": {
+                            "href": "https:\/\/csis.myclimateservice.eu\/jsonapi\/taxonomy_term\/dp_variables\/befdefda-f2a3-48e6-8986-78c02ac8ae5a\/revision_user"
+                        }
+                    }
+                },
+                "parent": {
+                    "data": [
+                        {
+                            "type": "taxonomy_term--dp_variables",
+                            "id": "virtual",
+                            "meta": {
+                                "links": {
+                                    "help": {
+                                        "href": "https:\/\/www.drupal.org\/docs\/8\/modules\/json-api\/core-concepts#virtual",
+                                        "meta": {
+                                            "about": "Usage and meaning of the \u0027virtual\u0027 resource identifier."
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    ],
+                    "links": {
+                        "self": {
+                            "href": "https:\/\/csis.myclimateservice.eu\/jsonapi\/taxonomy_term\/dp_variables\/befdefda-f2a3-48e6-8986-78c02ac8ae5a\/relationships\/parent"
+                        },
+                        "related": {
+                            "href": "https:\/\/csis.myclimateservice.eu\/jsonapi\/taxonomy_term\/dp_variables\/befdefda-f2a3-48e6-8986-78c02ac8ae5a\/parent"
+                        }
+                    }
+                },
+                "field_var_meaning2": {
+                    "data": {
+                        "type": "taxonomy_term--dp_variable_meanings",
+                        "id": "c323b4ae-6ae9-4cd6-8896-351b5b34a8de"
+                    },
+                    "links": {
+                        "self": {
+                            "href": "https:\/\/csis.myclimateservice.eu\/jsonapi\/taxonomy_term\/dp_variables\/befdefda-f2a3-48e6-8986-78c02ac8ae5a\/relationships\/field_var_meaning2"
+                        },
+                        "related": {
+                            "href": "https:\/\/csis.myclimateservice.eu\/jsonapi\/taxonomy_term\/dp_variables\/befdefda-f2a3-48e6-8986-78c02ac8ae5a\/field_var_meaning2"
+                        }
+                    }
+                }
+            },
+            "links": {
+                "self": {
+                    "href": "https:\/\/csis.myclimateservice.eu\/jsonapi\/taxonomy_term\/dp_variables\/befdefda-f2a3-48e6-8986-78c02ac8ae5a"
+                }
+            }
+        },
+        {
+            "type": "taxonomy_term--dp_variables",
+            "id": "0ee49c22-238f-4f5e-a30f-eff2921f09ee",
+            "attributes": {
+                "drupal_internal__tid": 2246,
+                "drupal_internal__revision_id": 2246,
+                "langcode": "en",
+                "revision_created": "2019-09-16T12:16:50+00:00",
+                "revision_log_message": null,
+                "status": true,
+                "name": "time_period: 20110101-20401231 (Period: 2011 to 2040)",
+                "description": {
+                    "value": "\u003Cp\u003EFrom 2011 to 2040\u003C\/p\u003E\r\n",
+                    "format": "basic_html",
+                    "processed": "\u003Cp\u003EFrom 2011 to 2040\u003C\/p\u003E\n"
+                },
+                "weight": 9,
+                "changed": "2019-09-23T12:17:35+00:00",
+                "default_langcode": true,
+                "revision_translation_affected": true,
+                "path": {
+                    "alias": null,
+                    "pid": null,
+                    "langcode": "en"
+                },
+                "field_var_meaning": null,
+                "field_var_name": "time_period",
+                "field_var_value": "20110101-20401231"
+            },
+            "relationships": {
+                "vid": {
+                    "data": {
+                        "type": "taxonomy_vocabulary--taxonomy_vocabulary",
+                        "id": "8f682e27-a50f-4966-8164-a797127df26c"
+                    },
+                    "links": {
+                        "self": {
+                            "href": "https:\/\/csis.myclimateservice.eu\/jsonapi\/taxonomy_term\/dp_variables\/0ee49c22-238f-4f5e-a30f-eff2921f09ee\/relationships\/vid"
+                        },
+                        "related": {
+                            "href": "https:\/\/csis.myclimateservice.eu\/jsonapi\/taxonomy_term\/dp_variables\/0ee49c22-238f-4f5e-a30f-eff2921f09ee\/vid"
+                        }
+                    }
+                },
+                "revision_user": {
+                    "data": null,
+                    "links": {
+                        "self": {
+                            "href": "https:\/\/csis.myclimateservice.eu\/jsonapi\/taxonomy_term\/dp_variables\/0ee49c22-238f-4f5e-a30f-eff2921f09ee\/relationships\/revision_user"
+                        },
+                        "related": {
+                            "href": "https:\/\/csis.myclimateservice.eu\/jsonapi\/taxonomy_term\/dp_variables\/0ee49c22-238f-4f5e-a30f-eff2921f09ee\/revision_user"
+                        }
+                    }
+                },
+                "parent": {
+                    "data": [
+                        {
+                            "type": "taxonomy_term--dp_variables",
+                            "id": "virtual",
+                            "meta": {
+                                "links": {
+                                    "help": {
+                                        "href": "https:\/\/www.drupal.org\/docs\/8\/modules\/json-api\/core-concepts#virtual",
+                                        "meta": {
+                                            "about": "Usage and meaning of the \u0027virtual\u0027 resource identifier."
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    ],
+                    "links": {
+                        "self": {
+                            "href": "https:\/\/csis.myclimateservice.eu\/jsonapi\/taxonomy_term\/dp_variables\/0ee49c22-238f-4f5e-a30f-eff2921f09ee\/relationships\/parent"
+                        },
+                        "related": {
+                            "href": "https:\/\/csis.myclimateservice.eu\/jsonapi\/taxonomy_term\/dp_variables\/0ee49c22-238f-4f5e-a30f-eff2921f09ee\/parent"
+                        }
+                    }
+                },
+                "field_var_meaning2": {
+                    "data": {
+                        "type": "taxonomy_term--dp_variable_meanings",
+                        "id": "83a5b9a9-64de-44ba-89d7-e0ad4d30e323"
+                    },
+                    "links": {
+                        "self": {
+                            "href": "https:\/\/csis.myclimateservice.eu\/jsonapi\/taxonomy_term\/dp_variables\/0ee49c22-238f-4f5e-a30f-eff2921f09ee\/relationships\/field_var_meaning2"
+                        },
+                        "related": {
+                            "href": "https:\/\/csis.myclimateservice.eu\/jsonapi\/taxonomy_term\/dp_variables\/0ee49c22-238f-4f5e-a30f-eff2921f09ee\/field_var_meaning2"
+                        }
+                    }
+                }
+            },
+            "links": {
+                "self": {
+                    "href": "https:\/\/csis.myclimateservice.eu\/jsonapi\/taxonomy_term\/dp_variables\/0ee49c22-238f-4f5e-a30f-eff2921f09ee"
+                }
+            }
+        },
+        {
+            "type": "taxonomy_term--dp_variables",
+            "id": "428253c6-c2e0-4e22-8412-00864ca2d065",
+            "attributes": {
+                "drupal_internal__tid": 2247,
+                "drupal_internal__revision_id": 2247,
+                "langcode": "en",
+                "revision_created": "2019-09-16T12:17:16+00:00",
+                "revision_log_message": null,
+                "status": true,
+                "name": "time_period: 20410101-20701231 (Period: 2071 to 2100)",
+                "description": {
+                    "value": "\u003Cp\u003EFrom 2041 to 2070\u003C\/p\u003E\r\n",
+                    "format": "basic_html",
+                    "processed": "\u003Cp\u003EFrom 2041 to 2070\u003C\/p\u003E\n"
+                },
+                "weight": 10,
+                "changed": "2019-09-23T12:17:20+00:00",
+                "default_langcode": true,
+                "revision_translation_affected": true,
+                "path": {
+                    "alias": null,
+                    "pid": null,
+                    "langcode": "en"
+                },
+                "field_var_meaning": null,
+                "field_var_name": "time_period",
+                "field_var_value": "20410101-20701231"
+            },
+            "relationships": {
+                "vid": {
+                    "data": {
+                        "type": "taxonomy_vocabulary--taxonomy_vocabulary",
+                        "id": "8f682e27-a50f-4966-8164-a797127df26c"
+                    },
+                    "links": {
+                        "self": {
+                            "href": "https:\/\/csis.myclimateservice.eu\/jsonapi\/taxonomy_term\/dp_variables\/428253c6-c2e0-4e22-8412-00864ca2d065\/relationships\/vid"
+                        },
+                        "related": {
+                            "href": "https:\/\/csis.myclimateservice.eu\/jsonapi\/taxonomy_term\/dp_variables\/428253c6-c2e0-4e22-8412-00864ca2d065\/vid"
+                        }
+                    }
+                },
+                "revision_user": {
+                    "data": null,
+                    "links": {
+                        "self": {
+                            "href": "https:\/\/csis.myclimateservice.eu\/jsonapi\/taxonomy_term\/dp_variables\/428253c6-c2e0-4e22-8412-00864ca2d065\/relationships\/revision_user"
+                        },
+                        "related": {
+                            "href": "https:\/\/csis.myclimateservice.eu\/jsonapi\/taxonomy_term\/dp_variables\/428253c6-c2e0-4e22-8412-00864ca2d065\/revision_user"
+                        }
+                    }
+                },
+                "parent": {
+                    "data": [
+                        {
+                            "type": "taxonomy_term--dp_variables",
+                            "id": "virtual",
+                            "meta": {
+                                "links": {
+                                    "help": {
+                                        "href": "https:\/\/www.drupal.org\/docs\/8\/modules\/json-api\/core-concepts#virtual",
+                                        "meta": {
+                                            "about": "Usage and meaning of the \u0027virtual\u0027 resource identifier."
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    ],
+                    "links": {
+                        "self": {
+                            "href": "https:\/\/csis.myclimateservice.eu\/jsonapi\/taxonomy_term\/dp_variables\/428253c6-c2e0-4e22-8412-00864ca2d065\/relationships\/parent"
+                        },
+                        "related": {
+                            "href": "https:\/\/csis.myclimateservice.eu\/jsonapi\/taxonomy_term\/dp_variables\/428253c6-c2e0-4e22-8412-00864ca2d065\/parent"
+                        }
+                    }
+                },
+                "field_var_meaning2": {
+                    "data": {
+                        "type": "taxonomy_term--dp_variable_meanings",
+                        "id": "dafd5d86-4506-47a8-b5c0-6ad35623f2d0"
+                    },
+                    "links": {
+                        "self": {
+                            "href": "https:\/\/csis.myclimateservice.eu\/jsonapi\/taxonomy_term\/dp_variables\/428253c6-c2e0-4e22-8412-00864ca2d065\/relationships\/field_var_meaning2"
+                        },
+                        "related": {
+                            "href": "https:\/\/csis.myclimateservice.eu\/jsonapi\/taxonomy_term\/dp_variables\/428253c6-c2e0-4e22-8412-00864ca2d065\/field_var_meaning2"
+                        }
+                    }
+                }
+            },
+            "links": {
+                "self": {
+                    "href": "https:\/\/csis.myclimateservice.eu\/jsonapi\/taxonomy_term\/dp_variables\/428253c6-c2e0-4e22-8412-00864ca2d065"
+                }
+            }
+        },
+        {
+            "type": "taxonomy_term--dp_variables",
+            "id": "55892e0b-b17a-4533-be33-2bd9fee26bf3",
+            "attributes": {
+                "drupal_internal__tid": 2248,
+                "drupal_internal__revision_id": 2248,
+                "langcode": "en",
+                "revision_created": "2019-09-16T12:17:37+00:00",
+                "revision_log_message": null,
+                "status": true,
+                "name": "time_period: 20710101-21001231 (Period: 2071 to 2100)",
+                "description": {
+                    "value": "\u003Cp\u003Efrom\u0026nbsp;2071 to 2100\u003C\/p\u003E\r\n",
+                    "format": "basic_html",
+                    "processed": "\u003Cp\u003Efrom\u00a02071 to 2100\u003C\/p\u003E\n"
+                },
+                "weight": 11,
+                "changed": "2019-09-23T12:17:01+00:00",
+                "default_langcode": true,
+                "revision_translation_affected": true,
+                "path": {
+                    "alias": null,
+                    "pid": null,
+                    "langcode": "en"
+                },
+                "field_var_meaning": null,
+                "field_var_name": "time_period",
+                "field_var_value": "20710101-21001231"
+            },
+            "relationships": {
+                "vid": {
+                    "data": {
+                        "type": "taxonomy_vocabulary--taxonomy_vocabulary",
+                        "id": "8f682e27-a50f-4966-8164-a797127df26c"
+                    },
+                    "links": {
+                        "self": {
+                            "href": "https:\/\/csis.myclimateservice.eu\/jsonapi\/taxonomy_term\/dp_variables\/55892e0b-b17a-4533-be33-2bd9fee26bf3\/relationships\/vid"
+                        },
+                        "related": {
+                            "href": "https:\/\/csis.myclimateservice.eu\/jsonapi\/taxonomy_term\/dp_variables\/55892e0b-b17a-4533-be33-2bd9fee26bf3\/vid"
+                        }
+                    }
+                },
+                "revision_user": {
+                    "data": null,
+                    "links": {
+                        "self": {
+                            "href": "https:\/\/csis.myclimateservice.eu\/jsonapi\/taxonomy_term\/dp_variables\/55892e0b-b17a-4533-be33-2bd9fee26bf3\/relationships\/revision_user"
+                        },
+                        "related": {
+                            "href": "https:\/\/csis.myclimateservice.eu\/jsonapi\/taxonomy_term\/dp_variables\/55892e0b-b17a-4533-be33-2bd9fee26bf3\/revision_user"
+                        }
+                    }
+                },
+                "parent": {
+                    "data": [
+                        {
+                            "type": "taxonomy_term--dp_variables",
+                            "id": "virtual",
+                            "meta": {
+                                "links": {
+                                    "help": {
+                                        "href": "https:\/\/www.drupal.org\/docs\/8\/modules\/json-api\/core-concepts#virtual",
+                                        "meta": {
+                                            "about": "Usage and meaning of the \u0027virtual\u0027 resource identifier."
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    ],
+                    "links": {
+                        "self": {
+                            "href": "https:\/\/csis.myclimateservice.eu\/jsonapi\/taxonomy_term\/dp_variables\/55892e0b-b17a-4533-be33-2bd9fee26bf3\/relationships\/parent"
+                        },
+                        "related": {
+                            "href": "https:\/\/csis.myclimateservice.eu\/jsonapi\/taxonomy_term\/dp_variables\/55892e0b-b17a-4533-be33-2bd9fee26bf3\/parent"
+                        }
+                    }
+                },
+                "field_var_meaning2": {
+                    "data": {
+                        "type": "taxonomy_term--dp_variable_meanings",
+                        "id": "dafd5d86-4506-47a8-b5c0-6ad35623f2d0"
+                    },
+                    "links": {
+                        "self": {
+                            "href": "https:\/\/csis.myclimateservice.eu\/jsonapi\/taxonomy_term\/dp_variables\/55892e0b-b17a-4533-be33-2bd9fee26bf3\/relationships\/field_var_meaning2"
+                        },
+                        "related": {
+                            "href": "https:\/\/csis.myclimateservice.eu\/jsonapi\/taxonomy_term\/dp_variables\/55892e0b-b17a-4533-be33-2bd9fee26bf3\/field_var_meaning2"
+                        }
+                    }
+                }
+            },
+            "links": {
+                "self": {
+                    "href": "https:\/\/csis.myclimateservice.eu\/jsonapi\/taxonomy_term\/dp_variables\/55892e0b-b17a-4533-be33-2bd9fee26bf3"
+                }
+            }
+        },
+        {
+            "type": "taxonomy_term--dp_variables",
+            "id": "74f5f3f7-28da-4f0c-9159-ec9f178b3599",
+            "attributes": {
+                "drupal_internal__tid": 2249,
+                "drupal_internal__revision_id": 2249,
+                "langcode": "en",
+                "revision_created": "2019-09-16T12:20:02+00:00",
+                "revision_log_message": null,
+                "status": true,
+                "name": "emissions_scenario: rcp26 (Scenario: Early response)",
+                "description": {
+                    "value": "\u003Cp\u003EThe RCPs are consistent with a wide range of possible changes in future anthropogenic (i.e., human)\u0026nbsp;greenhouse gas\u0026nbsp;(GHG) emissions, and aim to represent their atmospheric concentrations.\u003C\/p\u003E\r\n\r\n\u003Cp\u003ERCP 2.6 assumes that global annual GHG emissions\u0026nbsp;peak between 2010\u20132020, with emissions declining substantially thereafter.\u003C\/p\u003E\r\n",
+                    "format": "basic_html",
+                    "processed": "\u003Cp\u003EThe RCPs are consistent with a wide range of possible changes in future anthropogenic (i.e., human)\u00a0greenhouse gas\u00a0(GHG) emissions, and aim to represent their atmospheric concentrations.\u003C\/p\u003E\n\n\u003Cp\u003ERCP 2.6 assumes that global annual GHG emissions\u00a0peak between 2010\u20132020, with emissions declining substantially thereafter.\u003C\/p\u003E\n"
+                },
+                "weight": 1,
+                "changed": "2019-09-23T12:19:46+00:00",
+                "default_langcode": true,
+                "revision_translation_affected": true,
+                "path": {
+                    "alias": null,
+                    "pid": null,
+                    "langcode": "en"
+                },
+                "field_var_meaning": null,
+                "field_var_name": "emissions_scenario",
+                "field_var_value": "rcp26"
+            },
+            "relationships": {
+                "vid": {
+                    "data": {
+                        "type": "taxonomy_vocabulary--taxonomy_vocabulary",
+                        "id": "8f682e27-a50f-4966-8164-a797127df26c"
+                    },
+                    "links": {
+                        "self": {
+                            "href": "https:\/\/csis.myclimateservice.eu\/jsonapi\/taxonomy_term\/dp_variables\/74f5f3f7-28da-4f0c-9159-ec9f178b3599\/relationships\/vid"
+                        },
+                        "related": {
+                            "href": "https:\/\/csis.myclimateservice.eu\/jsonapi\/taxonomy_term\/dp_variables\/74f5f3f7-28da-4f0c-9159-ec9f178b3599\/vid"
+                        }
+                    }
+                },
+                "revision_user": {
+                    "data": null,
+                    "links": {
+                        "self": {
+                            "href": "https:\/\/csis.myclimateservice.eu\/jsonapi\/taxonomy_term\/dp_variables\/74f5f3f7-28da-4f0c-9159-ec9f178b3599\/relationships\/revision_user"
+                        },
+                        "related": {
+                            "href": "https:\/\/csis.myclimateservice.eu\/jsonapi\/taxonomy_term\/dp_variables\/74f5f3f7-28da-4f0c-9159-ec9f178b3599\/revision_user"
+                        }
+                    }
+                },
+                "parent": {
+                    "data": [
+                        {
+                            "type": "taxonomy_term--dp_variables",
+                            "id": "virtual",
+                            "meta": {
+                                "links": {
+                                    "help": {
+                                        "href": "https:\/\/www.drupal.org\/docs\/8\/modules\/json-api\/core-concepts#virtual",
+                                        "meta": {
+                                            "about": "Usage and meaning of the \u0027virtual\u0027 resource identifier."
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    ],
+                    "links": {
+                        "self": {
+                            "href": "https:\/\/csis.myclimateservice.eu\/jsonapi\/taxonomy_term\/dp_variables\/74f5f3f7-28da-4f0c-9159-ec9f178b3599\/relationships\/parent"
+                        },
+                        "related": {
+                            "href": "https:\/\/csis.myclimateservice.eu\/jsonapi\/taxonomy_term\/dp_variables\/74f5f3f7-28da-4f0c-9159-ec9f178b3599\/parent"
+                        }
+                    }
+                },
+                "field_var_meaning2": {
+                    "data": {
+                        "type": "taxonomy_term--dp_variable_meanings",
+                        "id": "6a1ee21c-1863-4f20-b64c-076f2e3cd83e"
+                    },
+                    "links": {
+                        "self": {
+                            "href": "https:\/\/csis.myclimateservice.eu\/jsonapi\/taxonomy_term\/dp_variables\/74f5f3f7-28da-4f0c-9159-ec9f178b3599\/relationships\/field_var_meaning2"
+                        },
+                        "related": {
+                            "href": "https:\/\/csis.myclimateservice.eu\/jsonapi\/taxonomy_term\/dp_variables\/74f5f3f7-28da-4f0c-9159-ec9f178b3599\/field_var_meaning2"
+                        }
+                    }
+                }
+            },
+            "links": {
+                "self": {
+                    "href": "https:\/\/csis.myclimateservice.eu\/jsonapi\/taxonomy_term\/dp_variables\/74f5f3f7-28da-4f0c-9159-ec9f178b3599"
+                }
+            }
+        },
+        {
+            "type": "taxonomy_term--dp_variables",
+            "id": "32bca98a-9693-4a60-b797-5061840bf68f",
+            "attributes": {
+                "drupal_internal__tid": 2250,
+                "drupal_internal__revision_id": 2250,
+                "langcode": "en",
+                "revision_created": "2019-09-16T12:21:01+00:00",
+                "revision_log_message": null,
+                "status": true,
+                "name": "emissions_scenario: rcp45 (Scenario: Effective measures)",
+                "description": {
+                    "value": "\u003Cp\u003EThe RCPs are consistent with a wide range of possible changes in future anthropogenic (i.e., human)\u0026nbsp;greenhouse gas\u0026nbsp;(GHG) emissions, and aim to represent their atmospheric concentrations.\u003C\/p\u003E\r\n\r\n\u003Cp\u003ERCP 4.5 scenario\u0026nbsp;assumes that global annual GHG emissions (measured in\u0026nbsp;\u003Ca href=\u0022https:\/\/en.wikipedia.org\/wiki\/Carbon_dioxide_equivalent\u0022 title=\u0022Carbon dioxide equivalent\u0022\u003ECO2-equivalents\u003C\/a\u003E) peak around 2040, then decline.\u003C\/p\u003E\r\n",
+                    "format": "basic_html",
+                    "processed": "\u003Cp\u003EThe RCPs are consistent with a wide range of possible changes in future anthropogenic (i.e., human)\u00a0greenhouse gas\u00a0(GHG) emissions, and aim to represent their atmospheric concentrations.\u003C\/p\u003E\n\n\u003Cp\u003ERCP 4.5 scenario\u00a0assumes that global annual GHG emissions (measured in\u00a0\u003Ca href=\u0022https:\/\/en.wikipedia.org\/wiki\/Carbon_dioxide_equivalent\u0022 title=\u0022Carbon dioxide equivalent\u0022\u003ECO2-equivalents\u003C\/a\u003E) peak around 2040, then decline.\u003C\/p\u003E\n"
+                },
+                "weight": 2,
+                "changed": "2019-09-23T12:19:24+00:00",
+                "default_langcode": true,
+                "revision_translation_affected": true,
+                "path": {
+                    "alias": null,
+                    "pid": null,
+                    "langcode": "en"
+                },
+                "field_var_meaning": null,
+                "field_var_name": "emissions_scenario",
+                "field_var_value": "rcp45"
+            },
+            "relationships": {
+                "vid": {
+                    "data": {
+                        "type": "taxonomy_vocabulary--taxonomy_vocabulary",
+                        "id": "8f682e27-a50f-4966-8164-a797127df26c"
+                    },
+                    "links": {
+                        "self": {
+                            "href": "https:\/\/csis.myclimateservice.eu\/jsonapi\/taxonomy_term\/dp_variables\/32bca98a-9693-4a60-b797-5061840bf68f\/relationships\/vid"
+                        },
+                        "related": {
+                            "href": "https:\/\/csis.myclimateservice.eu\/jsonapi\/taxonomy_term\/dp_variables\/32bca98a-9693-4a60-b797-5061840bf68f\/vid"
+                        }
+                    }
+                },
+                "revision_user": {
+                    "data": null,
+                    "links": {
+                        "self": {
+                            "href": "https:\/\/csis.myclimateservice.eu\/jsonapi\/taxonomy_term\/dp_variables\/32bca98a-9693-4a60-b797-5061840bf68f\/relationships\/revision_user"
+                        },
+                        "related": {
+                            "href": "https:\/\/csis.myclimateservice.eu\/jsonapi\/taxonomy_term\/dp_variables\/32bca98a-9693-4a60-b797-5061840bf68f\/revision_user"
+                        }
+                    }
+                },
+                "parent": {
+                    "data": [
+                        {
+                            "type": "taxonomy_term--dp_variables",
+                            "id": "virtual",
+                            "meta": {
+                                "links": {
+                                    "help": {
+                                        "href": "https:\/\/www.drupal.org\/docs\/8\/modules\/json-api\/core-concepts#virtual",
+                                        "meta": {
+                                            "about": "Usage and meaning of the \u0027virtual\u0027 resource identifier."
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    ],
+                    "links": {
+                        "self": {
+                            "href": "https:\/\/csis.myclimateservice.eu\/jsonapi\/taxonomy_term\/dp_variables\/32bca98a-9693-4a60-b797-5061840bf68f\/relationships\/parent"
+                        },
+                        "related": {
+                            "href": "https:\/\/csis.myclimateservice.eu\/jsonapi\/taxonomy_term\/dp_variables\/32bca98a-9693-4a60-b797-5061840bf68f\/parent"
+                        }
+                    }
+                },
+                "field_var_meaning2": {
+                    "data": {
+                        "type": "taxonomy_term--dp_variable_meanings",
+                        "id": "895bdf09-4a16-46f9-96af-5a46a9606bc6"
+                    },
+                    "links": {
+                        "self": {
+                            "href": "https:\/\/csis.myclimateservice.eu\/jsonapi\/taxonomy_term\/dp_variables\/32bca98a-9693-4a60-b797-5061840bf68f\/relationships\/field_var_meaning2"
+                        },
+                        "related": {
+                            "href": "https:\/\/csis.myclimateservice.eu\/jsonapi\/taxonomy_term\/dp_variables\/32bca98a-9693-4a60-b797-5061840bf68f\/field_var_meaning2"
+                        }
+                    }
+                }
+            },
+            "links": {
+                "self": {
+                    "href": "https:\/\/csis.myclimateservice.eu\/jsonapi\/taxonomy_term\/dp_variables\/32bca98a-9693-4a60-b797-5061840bf68f"
+                }
+            }
+        },
+        {
+            "type": "taxonomy_term--dp_variables",
+            "id": "7781aa7f-4588-4180-afbf-2d7ba13f4f71",
+            "attributes": {
+                "drupal_internal__tid": 2251,
+                "drupal_internal__revision_id": 2251,
+                "langcode": "en",
+                "revision_created": "2019-09-16T12:21:35+00:00",
+                "revision_log_message": null,
+                "status": true,
+                "name": "emissions_scenario: rcp85 (Scenario: Business as usual)",
+                "description": {
+                    "value": "\u003Cp\u003EThe RCPs are consistent with a wide range of possible changes in future anthropogenic (i.e., human)\u0026nbsp;greenhouse gas\u0026nbsp;(GHG) emissions, and aim to represent their atmospheric concentrations.\u003C\/p\u003E\r\n\r\n\u003Cp\u003ERCP 8.5 scenario\u0026nbsp;assumes that emissions continue to rise throughout the 21st century.\u003C\/p\u003E\r\n",
+                    "format": "basic_html",
+                    "processed": "\u003Cp\u003EThe RCPs are consistent with a wide range of possible changes in future anthropogenic (i.e., human)\u00a0greenhouse gas\u00a0(GHG) emissions, and aim to represent their atmospheric concentrations.\u003C\/p\u003E\n\n\u003Cp\u003ERCP 8.5 scenario\u00a0assumes that emissions continue to rise throughout the 21st century.\u003C\/p\u003E\n"
+                },
+                "weight": 3,
+                "changed": "2019-09-23T12:18:56+00:00",
+                "default_langcode": true,
+                "revision_translation_affected": true,
+                "path": {
+                    "alias": null,
+                    "pid": null,
+                    "langcode": "en"
+                },
+                "field_var_meaning": null,
+                "field_var_name": "emissions_scenario",
+                "field_var_value": "rcp85"
+            },
+            "relationships": {
+                "vid": {
+                    "data": {
+                        "type": "taxonomy_vocabulary--taxonomy_vocabulary",
+                        "id": "8f682e27-a50f-4966-8164-a797127df26c"
+                    },
+                    "links": {
+                        "self": {
+                            "href": "https:\/\/csis.myclimateservice.eu\/jsonapi\/taxonomy_term\/dp_variables\/7781aa7f-4588-4180-afbf-2d7ba13f4f71\/relationships\/vid"
+                        },
+                        "related": {
+                            "href": "https:\/\/csis.myclimateservice.eu\/jsonapi\/taxonomy_term\/dp_variables\/7781aa7f-4588-4180-afbf-2d7ba13f4f71\/vid"
+                        }
+                    }
+                },
+                "revision_user": {
+                    "data": null,
+                    "links": {
+                        "self": {
+                            "href": "https:\/\/csis.myclimateservice.eu\/jsonapi\/taxonomy_term\/dp_variables\/7781aa7f-4588-4180-afbf-2d7ba13f4f71\/relationships\/revision_user"
+                        },
+                        "related": {
+                            "href": "https:\/\/csis.myclimateservice.eu\/jsonapi\/taxonomy_term\/dp_variables\/7781aa7f-4588-4180-afbf-2d7ba13f4f71\/revision_user"
+                        }
+                    }
+                },
+                "parent": {
+                    "data": [
+                        {
+                            "type": "taxonomy_term--dp_variables",
+                            "id": "virtual",
+                            "meta": {
+                                "links": {
+                                    "help": {
+                                        "href": "https:\/\/www.drupal.org\/docs\/8\/modules\/json-api\/core-concepts#virtual",
+                                        "meta": {
+                                            "about": "Usage and meaning of the \u0027virtual\u0027 resource identifier."
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    ],
+                    "links": {
+                        "self": {
+                            "href": "https:\/\/csis.myclimateservice.eu\/jsonapi\/taxonomy_term\/dp_variables\/7781aa7f-4588-4180-afbf-2d7ba13f4f71\/relationships\/parent"
+                        },
+                        "related": {
+                            "href": "https:\/\/csis.myclimateservice.eu\/jsonapi\/taxonomy_term\/dp_variables\/7781aa7f-4588-4180-afbf-2d7ba13f4f71\/parent"
+                        }
+                    }
+                },
+                "field_var_meaning2": {
+                    "data": {
+                        "type": "taxonomy_term--dp_variable_meanings",
+                        "id": "98510796-f939-4f99-95be-c9b828f47a24"
+                    },
+                    "links": {
+                        "self": {
+                            "href": "https:\/\/csis.myclimateservice.eu\/jsonapi\/taxonomy_term\/dp_variables\/7781aa7f-4588-4180-afbf-2d7ba13f4f71\/relationships\/field_var_meaning2"
+                        },
+                        "related": {
+                            "href": "https:\/\/csis.myclimateservice.eu\/jsonapi\/taxonomy_term\/dp_variables\/7781aa7f-4588-4180-afbf-2d7ba13f4f71\/field_var_meaning2"
+                        }
+                    }
+                }
+            },
+            "links": {
+                "self": {
+                    "href": "https:\/\/csis.myclimateservice.eu\/jsonapi\/taxonomy_term\/dp_variables\/7781aa7f-4588-4180-afbf-2d7ba13f4f71"
+                }
+            }
+        },
+        {
+            "type": "taxonomy_term--dp_variables",
+            "id": "f678437d-af00-4e11-967a-a4f55831241f",
+            "attributes": {
+                "drupal_internal__tid": 2254,
+                "drupal_internal__revision_id": 2254,
+                "langcode": "en",
+                "revision_created": "2019-09-16T12:23:52+00:00",
+                "revision_log_message": null,
+                "status": true,
+                "name": "event_frequency: Frequent (Frequency: yearly)",
+                "description": null,
+                "weight": 4,
+                "changed": "2019-09-23T12:18:40+00:00",
+                "default_langcode": true,
+                "revision_translation_affected": true,
+                "path": {
+                    "alias": null,
+                    "pid": null,
+                    "langcode": "en"
+                },
+                "field_var_meaning": null,
+                "field_var_name": "event_frequency",
+                "field_var_value": "Frequent"
+            },
+            "relationships": {
+                "vid": {
+                    "data": {
+                        "type": "taxonomy_vocabulary--taxonomy_vocabulary",
+                        "id": "8f682e27-a50f-4966-8164-a797127df26c"
+                    },
+                    "links": {
+                        "self": {
+                            "href": "https:\/\/csis.myclimateservice.eu\/jsonapi\/taxonomy_term\/dp_variables\/f678437d-af00-4e11-967a-a4f55831241f\/relationships\/vid"
+                        },
+                        "related": {
+                            "href": "https:\/\/csis.myclimateservice.eu\/jsonapi\/taxonomy_term\/dp_variables\/f678437d-af00-4e11-967a-a4f55831241f\/vid"
+                        }
+                    }
+                },
+                "revision_user": {
+                    "data": null,
+                    "links": {
+                        "self": {
+                            "href": "https:\/\/csis.myclimateservice.eu\/jsonapi\/taxonomy_term\/dp_variables\/f678437d-af00-4e11-967a-a4f55831241f\/relationships\/revision_user"
+                        },
+                        "related": {
+                            "href": "https:\/\/csis.myclimateservice.eu\/jsonapi\/taxonomy_term\/dp_variables\/f678437d-af00-4e11-967a-a4f55831241f\/revision_user"
+                        }
+                    }
+                },
+                "parent": {
+                    "data": [
+                        {
+                            "type": "taxonomy_term--dp_variables",
+                            "id": "virtual",
+                            "meta": {
+                                "links": {
+                                    "help": {
+                                        "href": "https:\/\/www.drupal.org\/docs\/8\/modules\/json-api\/core-concepts#virtual",
+                                        "meta": {
+                                            "about": "Usage and meaning of the \u0027virtual\u0027 resource identifier."
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    ],
+                    "links": {
+                        "self": {
+                            "href": "https:\/\/csis.myclimateservice.eu\/jsonapi\/taxonomy_term\/dp_variables\/f678437d-af00-4e11-967a-a4f55831241f\/relationships\/parent"
+                        },
+                        "related": {
+                            "href": "https:\/\/csis.myclimateservice.eu\/jsonapi\/taxonomy_term\/dp_variables\/f678437d-af00-4e11-967a-a4f55831241f\/parent"
+                        }
+                    }
+                },
+                "field_var_meaning2": {
+                    "data": {
+                        "type": "taxonomy_term--dp_variable_meanings",
+                        "id": "dba8569e-a5df-4e36-b21b-59392fc849a0"
+                    },
+                    "links": {
+                        "self": {
+                            "href": "https:\/\/csis.myclimateservice.eu\/jsonapi\/taxonomy_term\/dp_variables\/f678437d-af00-4e11-967a-a4f55831241f\/relationships\/field_var_meaning2"
+                        },
+                        "related": {
+                            "href": "https:\/\/csis.myclimateservice.eu\/jsonapi\/taxonomy_term\/dp_variables\/f678437d-af00-4e11-967a-a4f55831241f\/field_var_meaning2"
+                        }
+                    }
+                }
+            },
+            "links": {
+                "self": {
+                    "href": "https:\/\/csis.myclimateservice.eu\/jsonapi\/taxonomy_term\/dp_variables\/f678437d-af00-4e11-967a-a4f55831241f"
+                }
+            }
+        },
+        {
+            "type": "taxonomy_term--dp_variables",
+            "id": "aaadb150-5598-4e74-9564-4ee30995d83d",
+            "attributes": {
+                "drupal_internal__tid": 2253,
+                "drupal_internal__revision_id": 2253,
+                "langcode": "en",
+                "revision_created": "2019-09-16T12:23:17+00:00",
+                "revision_log_message": null,
+                "status": true,
+                "name": "event_frequency: Occasional (Frequency: 5 years)",
+                "description": null,
+                "weight": 5,
+                "changed": "2019-09-23T12:18:25+00:00",
+                "default_langcode": true,
+                "revision_translation_affected": true,
+                "path": {
+                    "alias": null,
+                    "pid": null,
+                    "langcode": "en"
+                },
+                "field_var_meaning": null,
+                "field_var_name": "event_frequency",
+                "field_var_value": "Occasional"
+            },
+            "relationships": {
+                "vid": {
+                    "data": {
+                        "type": "taxonomy_vocabulary--taxonomy_vocabulary",
+                        "id": "8f682e27-a50f-4966-8164-a797127df26c"
+                    },
+                    "links": {
+                        "self": {
+                            "href": "https:\/\/csis.myclimateservice.eu\/jsonapi\/taxonomy_term\/dp_variables\/aaadb150-5598-4e74-9564-4ee30995d83d\/relationships\/vid"
+                        },
+                        "related": {
+                            "href": "https:\/\/csis.myclimateservice.eu\/jsonapi\/taxonomy_term\/dp_variables\/aaadb150-5598-4e74-9564-4ee30995d83d\/vid"
+                        }
+                    }
+                },
+                "revision_user": {
+                    "data": null,
+                    "links": {
+                        "self": {
+                            "href": "https:\/\/csis.myclimateservice.eu\/jsonapi\/taxonomy_term\/dp_variables\/aaadb150-5598-4e74-9564-4ee30995d83d\/relationships\/revision_user"
+                        },
+                        "related": {
+                            "href": "https:\/\/csis.myclimateservice.eu\/jsonapi\/taxonomy_term\/dp_variables\/aaadb150-5598-4e74-9564-4ee30995d83d\/revision_user"
+                        }
+                    }
+                },
+                "parent": {
+                    "data": [
+                        {
+                            "type": "taxonomy_term--dp_variables",
+                            "id": "virtual",
+                            "meta": {
+                                "links": {
+                                    "help": {
+                                        "href": "https:\/\/www.drupal.org\/docs\/8\/modules\/json-api\/core-concepts#virtual",
+                                        "meta": {
+                                            "about": "Usage and meaning of the \u0027virtual\u0027 resource identifier."
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    ],
+                    "links": {
+                        "self": {
+                            "href": "https:\/\/csis.myclimateservice.eu\/jsonapi\/taxonomy_term\/dp_variables\/aaadb150-5598-4e74-9564-4ee30995d83d\/relationships\/parent"
+                        },
+                        "related": {
+                            "href": "https:\/\/csis.myclimateservice.eu\/jsonapi\/taxonomy_term\/dp_variables\/aaadb150-5598-4e74-9564-4ee30995d83d\/parent"
+                        }
+                    }
+                },
+                "field_var_meaning2": {
+                    "data": {
+                        "type": "taxonomy_term--dp_variable_meanings",
+                        "id": "635af7d9-8888-4313-b733-065433046dc5"
+                    },
+                    "links": {
+                        "self": {
+                            "href": "https:\/\/csis.myclimateservice.eu\/jsonapi\/taxonomy_term\/dp_variables\/aaadb150-5598-4e74-9564-4ee30995d83d\/relationships\/field_var_meaning2"
+                        },
+                        "related": {
+                            "href": "https:\/\/csis.myclimateservice.eu\/jsonapi\/taxonomy_term\/dp_variables\/aaadb150-5598-4e74-9564-4ee30995d83d\/field_var_meaning2"
+                        }
+                    }
+                }
+            },
+            "links": {
+                "self": {
+                    "href": "https:\/\/csis.myclimateservice.eu\/jsonapi\/taxonomy_term\/dp_variables\/aaadb150-5598-4e74-9564-4ee30995d83d"
+                }
+            }
+        },
+        {
+            "type": "taxonomy_term--dp_variables",
+            "id": "588b6601-434b-49d4-afb2-da702e606921",
+            "attributes": {
+                "drupal_internal__tid": 2252,
+                "drupal_internal__revision_id": 2252,
+                "langcode": "en",
+                "revision_created": "2019-09-16T12:23:07+00:00",
+                "revision_log_message": null,
+                "status": true,
+                "name": "event_frequency: Rare (Frequency: 20 years)",
+                "description": null,
+                "weight": 6,
+                "changed": "2019-09-23T12:18:13+00:00",
+                "default_langcode": true,
+                "revision_translation_affected": true,
+                "path": {
+                    "alias": null,
+                    "pid": null,
+                    "langcode": "en"
+                },
+                "field_var_meaning": "Rare",
+                "field_var_name": "event_frequency",
+                "field_var_value": "Rare"
+            },
+            "relationships": {
+                "vid": {
+                    "data": {
+                        "type": "taxonomy_vocabulary--taxonomy_vocabulary",
+                        "id": "8f682e27-a50f-4966-8164-a797127df26c"
+                    },
+                    "links": {
+                        "self": {
+                            "href": "https:\/\/csis.myclimateservice.eu\/jsonapi\/taxonomy_term\/dp_variables\/588b6601-434b-49d4-afb2-da702e606921\/relationships\/vid"
+                        },
+                        "related": {
+                            "href": "https:\/\/csis.myclimateservice.eu\/jsonapi\/taxonomy_term\/dp_variables\/588b6601-434b-49d4-afb2-da702e606921\/vid"
+                        }
+                    }
+                },
+                "revision_user": {
+                    "data": null,
+                    "links": {
+                        "self": {
+                            "href": "https:\/\/csis.myclimateservice.eu\/jsonapi\/taxonomy_term\/dp_variables\/588b6601-434b-49d4-afb2-da702e606921\/relationships\/revision_user"
+                        },
+                        "related": {
+                            "href": "https:\/\/csis.myclimateservice.eu\/jsonapi\/taxonomy_term\/dp_variables\/588b6601-434b-49d4-afb2-da702e606921\/revision_user"
+                        }
+                    }
+                },
+                "parent": {
+                    "data": [
+                        {
+                            "type": "taxonomy_term--dp_variables",
+                            "id": "virtual",
+                            "meta": {
+                                "links": {
+                                    "help": {
+                                        "href": "https:\/\/www.drupal.org\/docs\/8\/modules\/json-api\/core-concepts#virtual",
+                                        "meta": {
+                                            "about": "Usage and meaning of the \u0027virtual\u0027 resource identifier."
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    ],
+                    "links": {
+                        "self": {
+                            "href": "https:\/\/csis.myclimateservice.eu\/jsonapi\/taxonomy_term\/dp_variables\/588b6601-434b-49d4-afb2-da702e606921\/relationships\/parent"
+                        },
+                        "related": {
+                            "href": "https:\/\/csis.myclimateservice.eu\/jsonapi\/taxonomy_term\/dp_variables\/588b6601-434b-49d4-afb2-da702e606921\/parent"
+                        }
+                    }
+                },
+                "field_var_meaning2": {
+                    "data": {
+                        "type": "taxonomy_term--dp_variable_meanings",
+                        "id": "aa33015f-213b-4aa6-bc73-0fdd819a3cdb"
+                    },
+                    "links": {
+                        "self": {
+                            "href": "https:\/\/csis.myclimateservice.eu\/jsonapi\/taxonomy_term\/dp_variables\/588b6601-434b-49d4-afb2-da702e606921\/relationships\/field_var_meaning2"
+                        },
+                        "related": {
+                            "href": "https:\/\/csis.myclimateservice.eu\/jsonapi\/taxonomy_term\/dp_variables\/588b6601-434b-49d4-afb2-da702e606921\/field_var_meaning2"
+                        }
+                    }
+                }
+            },
+            "links": {
+                "self": {
+                    "href": "https:\/\/csis.myclimateservice.eu\/jsonapi\/taxonomy_term\/dp_variables\/588b6601-434b-49d4-afb2-da702e606921"
+                }
+            }
+        }
+    ],
+    "links": {
+        "self": {
+            "href": "https:\/\/csis.myclimateservice.eu\/jsonapi\/node\/data_package_metadata\/38457a62-5fd1-4c1b-b308-ba1a66174ff8?include=field_resource_tags"
+        }
+    }
+}
