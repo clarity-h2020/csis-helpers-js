@@ -364,20 +364,20 @@ export default class CSISHelpers {
 	}
 
 	static extractVariableNamesfromResource(resource, tagsArray) {
-		let variableNames = [];
+		let variableNames = new Set();
 		let variableTags = extractTagsfromResource(resource, tagsArray, 'taxonomy_term--dp_variables');
 		if (variableTags && variableTags.length > 0) {
 			const iterator = variableTags.values();
 			for (const variableTag of iterator) {
 				if (variableTag.attributes && variableTag.attributes.field_var_name) {
-					variableNames.push(variableTag.attributes.field_var_name);
+					variableNames.add(variableTag.attributes.field_var_name);
 				}
 			}
 		} else {
 			log.warn(`no tags of type 'taxonomy_term--dp_variables' in resource`);
 		}
 
-		return variableNames;
+		return Array.from(variableNames);
 	}
 
 	/**

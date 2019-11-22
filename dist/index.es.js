@@ -2651,7 +2651,7 @@ function () {
   }, {
     key: "extractVariableNamesfromResource",
     value: function extractVariableNamesfromResource(resource, tagsArray) {
-      var variableNames = [];
+      var variableNames = new Set();
       var variableTags = extractTagsfromResource(resource, tagsArray, 'taxonomy_term--dp_variables');
 
       if (variableTags && variableTags.length > 0) {
@@ -2665,7 +2665,7 @@ function () {
             var variableTag = _step2.value;
 
             if (variableTag.attributes && variableTag.attributes.field_var_name) {
-              variableNames.push(variableTag.attributes.field_var_name);
+              variableNames.add(variableTag.attributes.field_var_name);
             }
           }
         } catch (err) {
@@ -2686,7 +2686,7 @@ function () {
         log.warn("no tags of type 'taxonomy_term--dp_variables' in resource");
       }
 
-      return variableNames;
+      return Array.from(variableNames);
     }
     /**
      * Take a template resource and create parameters map for all possible variable combinations

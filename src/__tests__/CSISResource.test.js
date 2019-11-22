@@ -27,8 +27,14 @@ test('[DEV] test CSISResource getParametersMaps', () => {
 	expect(templateResource.data).not.toBeNull();
 	expect(templateResource.included).not.toBeNull();
 	const csisResource = new CSISResource(templateResource.data, templateResource.included);
-    const parametersMaps = csisResource.getParametersMaps();
-    
-    log.info(parametersMaps.length);
-	
+	const parametersMaps = csisResource.getParametersMaps();
+	expect(parametersMaps.length).toEqual(410);
+});
+
+test('[PROD] test CSISResource getParametersMaps', () => {
+	expect(templateResource.data).not.toBeNull();
+	expect(templateResource.included).not.toBeNull();
+	const csisResource = new _CSISResource(templateResource.data, templateResource.included);
+	const parametersMaps = csisResource.getParametersMaps();
+	expect(parametersMaps.length).toEqual(410);
 });
