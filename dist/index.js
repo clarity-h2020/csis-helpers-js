@@ -2379,26 +2379,26 @@ function () {
     key: "getIncludedObject",
 
     /**
-     * Common Constants for *Template Resources*
-     */
+      * Common Constants for *Template Resources*
+      */
 
     /**
-     * The WMS getMap request layers attribute 
-     */
+      * The WMS getMap request layers attribute 
+      */
 
     /**
-     * Query params extracted from CSIS Helpers. See /examples and /fixtures/csisHelpers.json
-     */
+      * Query params extracted from CSIS Helpers. See /examples and /fixtures/csisHelpers.json
+      */
 
     /**
-      * Drupal JSON API 'deeply' includes objects, e.g. &include=field_references are provided only once in a separate array name 'included'.
-      * This method resolves the references and extracts the included  object.
-      * 
-      * @param {string} type 
-      * @param {number} id 
-      * @param {Object[]} includedArray 
-      * @see https://www.drupal.org/docs/8/modules/jsonapi/includes
-     */
+       * Drupal JSON API 'deeply' includes objects, e.g. &include=field_references are provided only once in a separate array name 'included'.
+       * This method resolves the references and extracts the included  object.
+       * 
+       * @param {string} type 
+       * @param {number} id 
+       * @param {Object[]} includedArray 
+       * @see https://www.drupal.org/docs/8/modules/jsonapi/includes
+      */
     value: function getIncludedObject(type, id, includedArray) {
       if (type != null && id != null) {
         for (var i = 0; i < includedArray.length; ++i) {
@@ -2411,11 +2411,11 @@ function () {
       return null;
     }
     /**
-     * Retrieves the EMIKAT Study / Scenario ID from the Drupal Study
-     * 
-     * @param {Object} studyGroupNode
-     * @return {Number}
-     */
+      * Retrieves the EMIKAT Study / Scenario ID from the Drupal Study
+      * 
+      * @param {Object} studyGroupNode
+      * @return {Number}
+      */
 
   }, {
     key: "extractEmikatIdFromStudyGroupNode",
@@ -2431,18 +2431,18 @@ function () {
       return emikatId;
     }
     /**
-     * Returns the JSON representation of the study area.
-     * 
-     * @param {Object} studyGroupNode 
-     * @returns {JSON}
-     */
+      * Returns the JSON representation of the study area.
+      * 
+      * @param {Object} studyGroupNode 
+      * @returns {JSON}
+      */
 
   }, {
     key: "extractStudyAreaFromStudyGroupNode",
     value: function extractStudyAreaFromStudyGroupNode(studyGroupNode) {
       /**
-       * @type {Wkt}
-       */
+         * @type {Wkt}
+         */
       var studyArea = new wicket.Wkt();
 
       if (studyGroupNode && studyGroupNode.attributes && studyGroupNode.attributes.field_area != null && studyGroupNode.attributes.field_area.value != null) {
@@ -2455,23 +2455,23 @@ function () {
       return studyAreaJson;
     }
     /**
-     * Filters resource array by tag name which are included in the tags array (due to Drupal API quirks).
-     * 
-     * @param {Object[]} resourceArray the original resource array
-     * @param {Object[]} tagsArray included objects - Drupal APi style! :-/
-     * @param {string} tagType The tag type, e.g. 'taxonomy_term--eu_gl'
-     * @param {string} tagName The name of the tag, e.g.'Hazard Characterization - Local Effects'
-     * @return {Object[]}
-     * @see getIncludedObject()
-     */
+      * Filters resource array by tag name which are included in the tags array (due to Drupal API quirks).
+      * 
+      * @param {Object[]} resourceArray the original resource array
+      * @param {Object[]} tagsArray included objects - Drupal APi style! :-/
+      * @param {string} tagType The tag type, e.g. 'taxonomy_term--eu_gl'
+      * @param {string} tagName The name of the tag, e.g.'Hazard Characterization - Local Effects'
+      * @return {Object[]}
+      * @see getIncludedObject()
+      */
 
   }, {
     key: "filterResourcesbyTagName",
     value: function filterResourcesbyTagName(resourceArray, tagsArray, tagType, tagName) {
       /**
-       * If we request exactly **one** resource, there would be a possibility for simplification that applies to all taxonomy terms and tags: 
-       * Instead of looking at `resource.relationships.field_resource_tags.data` we just have to search in `tagsArray` (included objects, respectively).
-       */
+         * If we request exactly **one** resource, there would be a possibility for simplification that applies to all taxonomy terms and tags: 
+         * Instead of looking at `resource.relationships.field_resource_tags.data` we just have to search in `tagsArray` (included objects, respectively).
+         */
       var filteredResourceArray = resourceArray.filter(function (resource) {
         if (resource.relationships.field_resource_tags != null && resource.relationships.field_resource_tags.data != null && resource.relationships.field_resource_tags.data.length > 0) {
           return resource.relationships.field_resource_tags.data.some(function (tagReference) {
@@ -2502,9 +2502,9 @@ function () {
     key: "filterResourcesByEuglId",
     value: function filterResourcesByEuglId(resourceArray, tagsArray, id) {
       /**
-       * If we request exactly **one** resource, there would be a possibility for simplification that applies to all taxonomy terms and tags: 
-       * Instead of looking at `resource.relationships.field_resource_tags.data` we just have to search in `tagsArray` (included objects, respectively).
-       */
+         * If we request exactly **one** resource, there would be a possibility for simplification that applies to all taxonomy terms and tags: 
+         * Instead of looking at `resource.relationships.field_resource_tags.data` we just have to search in `tagsArray` (included objects, respectively).
+         */
       var tagType = 'taxonomy_term--eu_gl';
       var filteredResourceArray = resourceArray.filter(function (resource) {
         if (resource.relationships.field_resource_tags != null && resource.relationships.field_resource_tags.data != null && resource.relationships.field_resource_tags.data.length > 0) {
@@ -2523,14 +2523,14 @@ function () {
       return filteredResourceArray;
     }
     /**
-       * Filters resource array by reference type which are included in the references array (due to Drupal API quirks).
-       * 
-       * @param {Object[]} resourceArray the original resource array
-       * @param {Object[]} referencesArray included objects - Drupal APi style! :-/
-       * @param {string} referenceType The reference type, e.g. '@mapview:ogc:wms'
-       * @return {Object[]}
-       * @see getIncludedObject()
-       */
+        * Filters resource array by reference type which are included in the references array (due to Drupal API quirks).
+        * 
+        * @param {Object[]} resourceArray the original resource array
+        * @param {Object[]} referencesArray included objects - Drupal APi style! :-/
+        * @param {string} referenceType The reference type, e.g. '@mapview:ogc:wms'
+        * @return {Object[]}
+        * @see getIncludedObject()
+        */
 
   }, {
     key: "filterResourcesbyReferenceType",
@@ -2553,14 +2553,14 @@ function () {
       return filteredResourceArray;
     }
     /**
-        * Extracts references which are included in the references array (due to Drupal API quirks) from a resource
-        * 
-        * @param {Object} resource the original resource
-        * @param {Object[]} referencesArray included objects - Drupal APi style! :-/
-        * @param {string} referenceType The reference type, e.g. '@mapview:ogc:wms'
-        * @return {Object[]}
-        * @see getIncludedObject()
-        */
+         * Extracts references which are included in the references array (due to Drupal API quirks) from a resource
+         * 
+         * @param {Object} resource the original resource
+         * @param {Object[]} referencesArray included objects - Drupal APi style! :-/
+         * @param {string} referenceType The reference type, e.g. '@mapview:ogc:wms'
+         * @return {Object[]}
+         * @see getIncludedObject()
+         */
 
   }, {
     key: "extractReferencesfromResource",
@@ -2580,14 +2580,14 @@ function () {
       return references;
     }
     /**
-        * Extracts tags which are included in the tags array (due to Drupal API quirks) from a resource
-        * 
-        * @param {Object} resource the original resource
-        * @param {Object[]} tagsArray included objects - Drupal APi style! :-/
-        * @param {string} tagType The tag type, e.g. '@mapview:ogc:wms'
-        * @return {Object[]}
-        * @see getIncludedObject()
-        */
+         * Extracts tags which are included in the tags array (due to Drupal API quirks) from a resource
+         * 
+         * @param {Object} resource the original resource
+         * @param {Object[]} tagsArray included objects - Drupal APi style! :-/
+         * @param {string} tagType The tag type, e.g. '@mapview:ogc:wms'
+         * @return {Object[]}
+         * @see getIncludedObject()
+         */
 
   }, {
     key: "extractTagsfromResource",
@@ -2602,8 +2602,142 @@ function () {
         });
       }
 
-      log.debug("".concat(tags.length, " tags found in resouce for tag type ").concat(tagType));
+      log.debug("".concat(tags.length, " tags found in resource for tag type ").concat(tagType));
       return tags;
+    }
+    /**
+      * Extract the resource variable value for a specific variable from the resource tags array.
+      * 
+      * @param {Object} resource the original resource
+      * @param {Object[]} tagsArray included objects - Drupal APi style! :-/ 
+      * @param {*} variableName The variable we are interested in e.g. 'layers'
+      * @return {String[]}
+      */
+
+  }, {
+    key: "extractVariableValuesfromResource",
+    value: function extractVariableValuesfromResource(resource, tagsArray, variableName) {
+      var variableValues = [];
+      var variableTags = extractTagsfromResource(resource, tagsArray, 'taxonomy_term--dp_variables');
+
+      if (variableTags && variableTags.length > 0) {
+        var iterator = variableTags.values();
+        var _iteratorNormalCompletion = true;
+        var _didIteratorError = false;
+        var _iteratorError = undefined;
+
+        try {
+          for (var _iterator = iterator[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
+            var variableTag = _step.value;
+
+            if (variableTag.attributes && variableTag.attributes.field_var_name && variableTag.attributes.field_var_name.toLowerCase() == variableName.toLowerCase() && variableTag.attributes.field_var_value) {
+              variableValues.push(variableTag.attributes.field_var_value);
+            }
+          }
+        } catch (err) {
+          _didIteratorError = true;
+          _iteratorError = err;
+        } finally {
+          try {
+            if (!_iteratorNormalCompletion && _iterator["return"] != null) {
+              _iterator["return"]();
+            }
+          } finally {
+            if (_didIteratorError) {
+              throw _iteratorError;
+            }
+          }
+        }
+      } else {
+        log.warn("no tags of type 'taxonomy_term--dp_variables' in resource");
+      }
+
+      return variableValues;
+    }
+  }, {
+    key: "extractVariableNamesfromResource",
+    value: function extractVariableNamesfromResource(resource, tagsArray) {
+      var variableNames = [];
+      var variableTags = extractTagsfromResource(resource, tagsArray, 'taxonomy_term--dp_variables');
+
+      if (variableTags && variableTags.length > 0) {
+        var iterator = variableTags.values();
+        var _iteratorNormalCompletion2 = true;
+        var _didIteratorError2 = false;
+        var _iteratorError2 = undefined;
+
+        try {
+          for (var _iterator2 = iterator[Symbol.iterator](), _step2; !(_iteratorNormalCompletion2 = (_step2 = _iterator2.next()).done); _iteratorNormalCompletion2 = true) {
+            var variableTag = _step2.value;
+
+            if (variableTag.attributes && variableTag.attributes.field_var_name) {
+              variableNames.push(variableTag.attributes.field_var_name);
+            }
+          }
+        } catch (err) {
+          _didIteratorError2 = true;
+          _iteratorError2 = err;
+        } finally {
+          try {
+            if (!_iteratorNormalCompletion2 && _iterator2["return"] != null) {
+              _iterator2["return"]();
+            }
+          } finally {
+            if (_didIteratorError2) {
+              throw _iteratorError2;
+            }
+          }
+        }
+      } else {
+        log.warn("no tags of type 'taxonomy_term--dp_variables' in resource");
+      }
+
+      return variableNames;
+    }
+    /**
+     * Take a template resource and create parameters map for all possible variable combinations
+     * 
+     * @param {*} resource 
+     * @param {*} tagsArray 
+     * @return {Map[]}
+     */
+
+  }, {
+    key: "parametersMapsFromTemplateResource",
+    value: function parametersMapsFromTemplateResource(resource, tagsArray) {
+      /**
+       * 
+       * @param {*} variableNames 
+       * @param {*} parametersMaps 
+       * @param {*} parametersMap 
+       */
+      var expandVariables = function expandVariables(variableNames, parametersMaps) {
+        var parametersMap = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : new Map();
+        variableNames.forEach(function (variableName, variableNameIndex, array) {
+          var variableValues = CSISHelpers.extractVariableValuesfromResource(resource, tagsArray, variableName);
+
+          if (variableValues && variableValues.length > 0) {
+            variableValues.forEach(function (variableValue, variableValueIndex) {
+              if (variableValueIndex > 0) {
+                // create new entry
+                parametersMaps.push(new Map(parametersMap).set(variableName, variableValue));
+              } else {
+                parametersMap.set(variableName, variableValue);
+              } // create a new Map Entry for each variableName=variableValue combination
+
+
+              expandVariables(array.slice(variableNameIndex + 1), parametersMaps, parametersMap);
+            });
+          } else {
+            log.warn("no values for variable ".concat(variableName, " found in resource ").concat(resource.attributes.title, " "));
+          }
+        });
+      };
+
+      var parametersMaps = [];
+      expandVariables(CSISHelpers.extractVariableNamesfromResource(resource, tagsArray), parametersMaps);
+      log.debug("creating ".concat(parametersMaps.length, " virtual resources from template resource ").concat(resource.attributes.title, " (").concat(resource.id, ")"));
+      return parametersMaps;
     }
   }]);
 
@@ -2621,29 +2755,29 @@ function () {
 defineProperty(CSISHelpers, "LAYERS", '${layers}');
 
 defineProperty(CSISHelpers, "defaultQueryParams", {
-  "host": "https://csis.myclimateservice.eu",
-  "study_uuid": undefined,
-  "step_uuid": undefined,
-  "datapackage_uuid": undefined,
-  "resource_uuid": undefined,
-  "study_area": undefined,
-  "grouping_tag": undefined,
-  "write_permissions": undefined,
-  "minx": 72,
+  host: 'https://csis.myclimateservice.eu',
+  study_uuid: undefined,
+  step_uuid: undefined,
+  datapackage_uuid: undefined,
+  resource_uuid: undefined,
+  study_area: undefined,
+  grouping_tag: undefined,
+  write_permissions: undefined,
+  minx: 72,
   // deprecated
-  "miny": 55,
+  miny: 55,
   // deprecated
-  "maxx": 30,
+  maxx: 30,
   // deprecated
-  "maxy": -30,
-  // deprecated  
-  "emikat_id": undefined,
+  maxy: -30,
+  // deprecated
+  emikat_id: undefined,
   // this is the emikat study id
-  "data_format": DATA_FORMAT_VALUES[0],
-  "study_variant": STUDY_VARIANT_VALUES[0],
-  "time_period": TIME_PERIOD_VALUES[0],
-  "emissions_scenario": EMISSIONS_SCENARIO_VALUES[0],
-  "event_frequency": EVENT_FREQUENCY_VALUES[0]
+  data_format: DATA_FORMAT_VALUES[0],
+  study_variant: STUDY_VARIANT_VALUES[0],
+  time_period: TIME_PERIOD_VALUES[0],
+  emissions_scenario: EMISSIONS_SCENARIO_VALUES[0],
+  event_frequency: EVENT_FREQUENCY_VALUES[0]
 });
 var extractEmikatIdFromStudyGroupNode = CSISHelpers.extractEmikatIdFromStudyGroupNode;
 var getIncludedObject = CSISHelpers.getIncludedObject;
@@ -2655,8 +2789,8 @@ var extractTagsfromResource = CSISHelpers.extractTagsfromResource;
 var extractStudyAreaFromStudyGroupNode = CSISHelpers.extractStudyAreaFromStudyGroupNode;
 var defaultQueryParams = CSISHelpers.defaultQueryParams;
 /**
-*Re-Export *common* variable constants defined in EMIKATHelpers and add new common constants not relevant for EMIKATHelpers
-*/
+ *Re-Export *common* variable constants defined in EMIKATHelpers and add new common constants not relevant for EMIKATHelpers
+ */
 
 var LAYERS = CSISHelpers.LAYERS;
 var DATA_FORMAT$1 = DATA_FORMAT;
@@ -2694,9 +2828,77 @@ var CSISHelpers$1 = /*#__PURE__*/Object.freeze({
 	TIME_PERIOD_VALUES: TIME_PERIOD_VALUES$1
 });
 
+/**
+ * Experimental CSIS Resource Class
+ * 
+ * @author [Pascal Dihé](https://github.com/p-a-s-c-a-l)
+ * @class
+ */
+
+var CSISResource =
+/*#__PURE__*/
+function () {
+  /**
+   * 
+   * @param {Object} resource 
+   * @param {Object[]} includes 
+   * @constructor
+   */
+  function CSISResource(resource, includes) {
+    classCallCheck(this, CSISResource);
+
+    this.resource = resource;
+    this.includes = includes;
+  }
+  /**
+   * Convenience method for retrieving the service type from Drupal resource JSON object
+   * 
+   * @return {String}
+   */
+
+
+  createClass(CSISResource, [{
+    key: "getServiceType",
+    value: function getServiceType() {
+      var serviceType = this.getTags('taxonomy_term--service_type');
+      return Array.isArray(serviceType) && serviceType.length > 0 ? serviceType[0] : null;
+    }
+    /**
+     * 
+     * @param {String} referenceType 
+     * @returns {Object{[]}
+     */
+
+  }, {
+    key: "getReferences",
+    value: function getReferences(referenceType) {
+      return CSISHelpers.extractReferencesfromResource(this.resource, this.includes, referenceType);
+    }
+    /**
+     * 
+     * @param {String} tagType 
+     * @returns {Object{[]}
+     */
+
+  }, {
+    key: "getTags",
+    value: function getTags(tagType) {
+      return CSISHelpers.extractTagsfromResource(this.resource, this.includes, tagType);
+    }
+  }, {
+    key: "getParametersMaps",
+    value: function getParametersMaps() {
+      return CSISHelpers.parametersMapsFromTemplateResource(this.resource, this.includes);
+    }
+  }]);
+
+  return CSISResource;
+}();
+
 log.enableAll(); //export {CSISHelpers, CSISRemoteHelpers, EMIKATHelpers, CSISRemoteHelpersTests}
 
 exports.CSISHelpers = CSISHelpers$1;
 exports.CSISRemoteHelpers = CSISRemoteHelpers;
+exports.CSISResource = CSISResource;
 exports.EMIKATHelpers = EMIKATHelpers;
 //# sourceMappingURL=index.js.map

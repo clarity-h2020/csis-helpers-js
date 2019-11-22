@@ -379,6 +379,51 @@ export default class CSISHelpers {
 
 		return variableNames;
 	}
+
+	/**
+	 * Take a template resource and create parameters map for all possible variable combinations
+	 * 
+	 * @param {*} resource 
+	 * @param {*} tagsArray 
+	 * @return {Map[]}
+	 */
+	static parametersMapsFromTemplateResource(resource, tagsArray) {
+		/**
+		 * 
+		 * @param {*} variableNames 
+		 * @param {*} parametersMaps 
+		 * @param {*} parametersMap 
+		 */
+		const expandVariables = function(variableNames, parametersMaps, parametersMap = new Map()) {
+			variableNames.forEach((variableName, variableNameIndex, array) => {
+				const variableValues = CSISHelpers.extractVariableValuesfromResource(resource, tagsArray, variableName);
+				if (variableValues && variableValues.length > 0) {
+					variableValues.forEach((variableValue, variableValueIndex) => {
+						if (variableValueIndex > 0) {
+							// create new entry
+							parametersMaps.push(new Map(parametersMap).set(variableName, variableValue));
+						} else {
+							parametersMap.set(variableName, variableValue);
+						}
+
+						// create a new Map Entry for each variableName=variableValue combination
+						expandVariables(array.slice(variableNameIndex + 1), parametersMaps, parametersMap);
+					});
+				} else {
+					log.warn(`no values for variable ${variableName} found in resource ${resource.attributes.title} `);
+				}
+			});
+		};
+
+		const parametersMaps = [];
+		expandVariables(CSISHelpers.extractVariableNamesfromResource(resource, tagsArray), parametersMaps);
+
+		log.debug(
+			`creating ${parametersMaps.length} virtual resources from template resource ${resource.attributes
+				.title} (${resource.id})`
+		);
+		return parametersMaps;
+	}
 }
 
 /**
