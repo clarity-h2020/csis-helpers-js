@@ -424,6 +424,21 @@ export default class CSISHelpers {
 		);
 		return parametersMaps;
 	}
+
+	/**
+ * Replaces ${variables} in template url by actual values from the urlVariables map.
+ * 
+ * @param {String} urlTemplate 
+ * @param {Map<String,any>} urlVariables 
+ * @return {String}
+ * 
+ */
+	static addUrlParameters(urlTemplate, urlVariables) {
+		// same method different name.
+		// of course we could try to call CSISHelpers.addUrlParameters from EMIKATHelpers.addEmikatParameters
+		// however, this would result in a cyclic import. 
+		return EMIKATHelpers.addEmikatParameters(urlTemplate, urlVariables);
+	}
 }
 
 /**

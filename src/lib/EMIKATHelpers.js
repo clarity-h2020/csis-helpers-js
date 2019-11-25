@@ -90,7 +90,8 @@ export const EVENT_FREQUENCY_VALUES = ['Rare', 'Occasional', 'Frequent'];
 export const DATA_FORMAT_VALUES = ['data', 'csv', 'geojson'];
 
 /**
- * Query Parameter Mapping. 
+ * Query Parameter Mapping for **EMIKAT** Resources
+ * 
  * @see CSISHelpers.defaultQueryParams
  */
 export const QUERY_PARAMS = new Map(
@@ -151,7 +152,7 @@ export function addEmikatId(urlTemplate, emikatId) {
 }
 
 /**
- * Replaces EMIKAT_STUDY_ID with the actual study id.
+ * Replaces EMIKAT_STUDY_ID, etc. with the actual study id.
  * Note: We *could* use template strings in a fixed URL,  e.g.
  * `https://service.emikat.at/EmiKatTst/api/scenarios/${emikat_id}/feature/view.2812/table/data`
  * However, this has to many drawbacks
@@ -159,8 +160,6 @@ export function addEmikatId(urlTemplate, emikatId) {
  * @param {String} urlTemplate 
  * @param {Map<String,any>} emikatVariables 
  * @return {String}
- * 
- * @deprecated
  */
 export function addEmikatParameters(urlTemplate, emikatVariables) {
   if (urlTemplate && emikatVariables) {

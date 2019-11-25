@@ -1275,7 +1275,8 @@ var EVENT_FREQUENCY_VALUES = ['Rare', 'Occasional', 'Frequent'];
 
 var DATA_FORMAT_VALUES = ['data', 'csv', 'geojson'];
 /**
- * Query Parameter Mapping. 
+ * Query Parameter Mapping for **EMIKAT** Resources
+ * 
  * @see CSISHelpers.defaultQueryParams
  */
 
@@ -1351,7 +1352,7 @@ function addEmikatId(urlTemplate, emikatId) {
   return urlTemplate;
 }
 /**
- * Replaces EMIKAT_STUDY_ID with the actual study id.
+ * Replaces EMIKAT_STUDY_ID, etc. with the actual study id.
  * Note: We *could* use template strings in a fixed URL,  e.g.
  * `https://service.emikat.at/EmiKatTst/api/scenarios/${emikat_id}/feature/view.2812/table/data`
  * However, this has to many drawbacks
@@ -1359,8 +1360,6 @@ function addEmikatId(urlTemplate, emikatId) {
  * @param {String} urlTemplate 
  * @param {Map<String,any>} emikatVariables 
  * @return {String}
- * 
- * @deprecated
  */
 
 function addEmikatParameters(urlTemplate, emikatVariables) {
@@ -2738,6 +2737,23 @@ function () {
       expandVariables(CSISHelpers.extractVariableNamesfromResource(resource, tagsArray), parametersMaps);
       log.debug("creating ".concat(parametersMaps.length, " virtual resources from template resource ").concat(resource.attributes.title, " (").concat(resource.id, ")"));
       return parametersMaps;
+    }
+    /**
+    * Replaces ${variables} in template url by actual values from the urlVariables map.
+    * 
+    * @param {String} urlTemplate 
+    * @param {Map<String,any>} urlVariables 
+    * @return {String}
+    * 
+    */
+
+  }, {
+    key: "addUrlParameters",
+    value: function addUrlParameters(urlTemplate, urlVariables) {
+      // same method different name.
+      // of course we could try to call CSISHelpers.addUrlParameters from EMIKATHelpers.addEmikatParameters
+      // however, this would result in a cyclic import. 
+      return addEmikatParameters(urlTemplate, urlVariables);
     }
   }]);
 
