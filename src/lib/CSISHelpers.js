@@ -394,20 +394,29 @@ export default class CSISHelpers {
 		 * @param {*} parametersMaps 
 		 * @param {*} parametersMap 
 		 */
-		const expandVariables = function(variableNames, parametersMaps, parametersMap = new Map()) {
+		const expandVariables = function(variableNames, parametersMaps, parametersMap) {
+			if (!variableNames || variableNames.length === 0) {
+				return;
+			}
+
+			log.debug(`expanding resource ${resource.attributes.title} by ${variableNames.length} variables`);
 			variableNames.forEach((variableName, variableNameIndex, array) => {
 				const variableValues = CSISHelpers.extractVariableValuesfromResource(resource, tagsArray, variableName);
 				if (variableValues && variableValues.length > 0) {
 					variableValues.forEach((variableValue, variableValueIndex) => {
 						if (variableValueIndex > 0) {
 							// create new entry
-							parametersMaps.push(new Map(parametersMap).set(variableName, variableValue));
+							// Circumvent another incoherence in CSIS taxonomies: '${'+variableName+'}'
+							parametersMaps.push(new Map(parametersMap).set('${' + variableName + '}', variableValue));
 						} else {
-							parametersMap.set(variableName, variableValue);
+							// see https://github.com/clarity-h2020/csis-helpers-js/issues/8#issuecomment-558593929
+							parametersMap.set('${' + variableName + '}', variableValue);
 						}
 
 						// create a new Map Entry for each variableName=variableValue combination
-						expandVariables(array.slice(variableNameIndex + 1), parametersMaps, parametersMap);
+						if (variableNameIndex < variableNames.length - 1) {
+							expandVariables(array.slice(variableNameIndex + 1), parametersMaps, parametersMap);
+						}
 					});
 				} else {
 					log.warn(`no values for variable ${variableName} found in resource ${resource.attributes.title} `);
@@ -416,13 +425,33 @@ export default class CSISHelpers {
 		};
 
 		const parametersMaps = [];
-		expandVariables(CSISHelpers.extractVariableNamesfromResource(resource, tagsArray), parametersMaps);
+		parametersMaps.push(new Map());
+		expandVariables(
+			CSISHelpers.extractVariableNamesfromResource(resource, tagsArray),
+			parametersMaps,
+			parametersMaps[0]
+		);
 
 		log.debug(
 			`creating ${parametersMaps.length} virtual resources from template resource ${resource.attributes
 				.title} (${resource.id})`
 		);
 		return parametersMaps;
+	}
+
+	/**
+ * Replaces ${variables} in template url by actual values from the urlVariables map.
+ * 
+ * @param {String} urlTemplate 
+ * @param {Map<String,any>} urlVariables 
+ * @return {String}
+ * 
+ */
+	static addUrlParameters(urlTemplate, urlVariables) {
+		// same method different name.
+		// of course we could try to call CSISHelpers.addUrlParameters from EMIKATHelpers.addEmikatParameters
+		// however, this would result in a cyclic import.
+		return EMIKATHelpers.addEmikatParameters(urlTemplate, urlVariables);
 	}
 }
 
@@ -434,6 +463,10 @@ export default class CSISHelpers {
  * See https://www.kaplankomputing.com/blog/tutorials/javascript/understanding-imports-exports-es6/
  */
 
+export const parametersMapsFromTemplateResource = CSISHelpers.parametersMapsFromTemplateResource;
+export const extractVariableNamesfromResource = CSISHelpers.extractVariableNamesfromResource;
+export const extractVariableValuesfromResource = CSISHelpers.extractVariableValuesfromResource;
+export const addUrlParameters = CSISHelpers.addUrlParameters;
 export const extractEmikatIdFromStudyGroupNode = CSISHelpers.extractEmikatIdFromStudyGroupNode;
 export const getIncludedObject = CSISHelpers.getIncludedObject;
 export const filterResourcesbyTagName = CSISHelpers.filterResourcesbyTagName;

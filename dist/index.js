@@ -1275,7 +1275,8 @@ var EVENT_FREQUENCY_VALUES = ['Rare', 'Occasional', 'Frequent'];
 
 var DATA_FORMAT_VALUES = ['data', 'csv', 'geojson'];
 /**
- * Query Parameter Mapping. 
+ * Query Parameter Mapping for **EMIKAT** Resources
+ * 
  * @see CSISHelpers.defaultQueryParams
  */
 
@@ -1351,7 +1352,7 @@ function addEmikatId(urlTemplate, emikatId) {
   return urlTemplate;
 }
 /**
- * Replaces EMIKAT_STUDY_ID with the actual study id.
+ * Replaces EMIKAT_STUDY_ID, etc. with the actual study id.
  * Note: We *could* use template strings in a fixed URL,  e.g.
  * `https://service.emikat.at/EmiKatTst/api/scenarios/${emikat_id}/feature/view.2812/table/data`
  * However, this has to many drawbacks
@@ -1359,8 +1360,6 @@ function addEmikatId(urlTemplate, emikatId) {
  * @param {String} urlTemplate 
  * @param {Map<String,any>} emikatVariables 
  * @return {String}
- * 
- * @deprecated
  */
 
 function addEmikatParameters(urlTemplate, emikatVariables) {
@@ -2711,8 +2710,12 @@ function () {
        * @param {*} parametersMaps 
        * @param {*} parametersMap 
        */
-      var expandVariables = function expandVariables(variableNames, parametersMaps) {
-        var parametersMap = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : new Map();
+      var expandVariables = function expandVariables(variableNames, parametersMaps, parametersMap) {
+        if (!variableNames || variableNames.length === 0) {
+          return;
+        }
+
+        log.debug("expanding resource ".concat(resource.attributes.title, " by ").concat(variableNames.length, " variables"));
         variableNames.forEach(function (variableName, variableNameIndex, array) {
           var variableValues = CSISHelpers.extractVariableValuesfromResource(resource, tagsArray, variableName);
 
@@ -2720,13 +2723,17 @@ function () {
             variableValues.forEach(function (variableValue, variableValueIndex) {
               if (variableValueIndex > 0) {
                 // create new entry
-                parametersMaps.push(new Map(parametersMap).set(variableName, variableValue));
+                // Circumvent another incoherence in CSIS taxonomies: '${'+variableName+'}'
+                parametersMaps.push(new Map(parametersMap).set('${' + variableName + '}', variableValue));
               } else {
-                parametersMap.set(variableName, variableValue);
+                // see https://github.com/clarity-h2020/csis-helpers-js/issues/8#issuecomment-558593929
+                parametersMap.set('${' + variableName + '}', variableValue);
               } // create a new Map Entry for each variableName=variableValue combination
 
 
-              expandVariables(array.slice(variableNameIndex + 1), parametersMaps, parametersMap);
+              if (variableNameIndex < variableNames.length - 1) {
+                expandVariables(array.slice(variableNameIndex + 1), parametersMaps, parametersMap);
+              }
             });
           } else {
             log.warn("no values for variable ".concat(variableName, " found in resource ").concat(resource.attributes.title, " "));
@@ -2735,9 +2742,27 @@ function () {
       };
 
       var parametersMaps = [];
-      expandVariables(CSISHelpers.extractVariableNamesfromResource(resource, tagsArray), parametersMaps);
+      parametersMaps.push(new Map());
+      expandVariables(CSISHelpers.extractVariableNamesfromResource(resource, tagsArray), parametersMaps, parametersMaps[0]);
       log.debug("creating ".concat(parametersMaps.length, " virtual resources from template resource ").concat(resource.attributes.title, " (").concat(resource.id, ")"));
       return parametersMaps;
+    }
+    /**
+    * Replaces ${variables} in template url by actual values from the urlVariables map.
+    * 
+    * @param {String} urlTemplate 
+    * @param {Map<String,any>} urlVariables 
+    * @return {String}
+    * 
+    */
+
+  }, {
+    key: "addUrlParameters",
+    value: function addUrlParameters(urlTemplate, urlVariables) {
+      // same method different name.
+      // of course we could try to call CSISHelpers.addUrlParameters from EMIKATHelpers.addEmikatParameters
+      // however, this would result in a cyclic import.
+      return addEmikatParameters(urlTemplate, urlVariables);
     }
   }]);
 
@@ -2779,6 +2804,10 @@ defineProperty(CSISHelpers, "defaultQueryParams", {
   emissions_scenario: EMISSIONS_SCENARIO_VALUES[0],
   event_frequency: EVENT_FREQUENCY_VALUES[0]
 });
+var parametersMapsFromTemplateResource = CSISHelpers.parametersMapsFromTemplateResource;
+var extractVariableNamesfromResource = CSISHelpers.extractVariableNamesfromResource;
+var extractVariableValuesfromResource = CSISHelpers.extractVariableValuesfromResource;
+var addUrlParameters = CSISHelpers.addUrlParameters;
 var extractEmikatIdFromStudyGroupNode = CSISHelpers.extractEmikatIdFromStudyGroupNode;
 var getIncludedObject = CSISHelpers.getIncludedObject;
 var filterResourcesbyTagName = CSISHelpers.filterResourcesbyTagName;
@@ -2806,6 +2835,10 @@ var TIME_PERIOD_VALUES$1 = TIME_PERIOD_VALUES;
 
 var CSISHelpers$1 = /*#__PURE__*/Object.freeze({
 	'default': CSISHelpers,
+	parametersMapsFromTemplateResource: parametersMapsFromTemplateResource,
+	extractVariableNamesfromResource: extractVariableNamesfromResource,
+	extractVariableValuesfromResource: extractVariableValuesfromResource,
+	addUrlParameters: addUrlParameters,
 	extractEmikatIdFromStudyGroupNode: extractEmikatIdFromStudyGroupNode,
 	getIncludedObject: getIncludedObject,
 	filterResourcesbyTagName: filterResourcesbyTagName,
