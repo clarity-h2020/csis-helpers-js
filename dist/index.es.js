@@ -2704,8 +2704,12 @@ function () {
        * @param {*} parametersMaps 
        * @param {*} parametersMap 
        */
-      var expandVariables = function expandVariables(variableNames, parametersMaps) {
-        var parametersMap = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : new Map();
+      var expandVariables = function expandVariables(variableNames, parametersMaps, parametersMap) {
+        if (!variableNames || variableNames.length === 0) {
+          return;
+        }
+
+        log.debug("expanding resource ".concat(resource.attributes.title, " by ").concat(variableNames.length, " variables"));
         variableNames.forEach(function (variableName, variableNameIndex, array) {
           var variableValues = CSISHelpers.extractVariableValuesfromResource(resource, tagsArray, variableName);
 
@@ -2721,7 +2725,9 @@ function () {
               } // create a new Map Entry for each variableName=variableValue combination
 
 
-              expandVariables(array.slice(variableNameIndex + 1), parametersMaps, parametersMap);
+              if (variableNameIndex < variableNames.length - 1) {
+                expandVariables(array.slice(variableNameIndex + 1), parametersMaps, parametersMap);
+              }
             });
           } else {
             log.warn("no values for variable ".concat(variableName, " found in resource ").concat(resource.attributes.title, " "));
@@ -2730,7 +2736,8 @@ function () {
       };
 
       var parametersMaps = [];
-      expandVariables(CSISHelpers.extractVariableNamesfromResource(resource, tagsArray), parametersMaps);
+      parametersMaps.push(new Map());
+      expandVariables(CSISHelpers.extractVariableNamesfromResource(resource, tagsArray), parametersMaps, parametersMaps[0]);
       log.debug("creating ".concat(parametersMaps.length, " virtual resources from template resource ").concat(resource.attributes.title, " (").concat(resource.id, ")"));
       return parametersMaps;
     }
@@ -2791,6 +2798,10 @@ defineProperty(CSISHelpers, "defaultQueryParams", {
   emissions_scenario: EMISSIONS_SCENARIO_VALUES[0],
   event_frequency: EVENT_FREQUENCY_VALUES[0]
 });
+var parametersMapsFromTemplateResource = CSISHelpers.parametersMapsFromTemplateResource;
+var extractVariableNamesfromResource = CSISHelpers.extractVariableNamesfromResource;
+var extractVariableValuesfromResource = CSISHelpers.extractVariableValuesfromResource;
+var addUrlParameters = CSISHelpers.addUrlParameters;
 var extractEmikatIdFromStudyGroupNode = CSISHelpers.extractEmikatIdFromStudyGroupNode;
 var getIncludedObject = CSISHelpers.getIncludedObject;
 var filterResourcesbyTagName = CSISHelpers.filterResourcesbyTagName;
@@ -2818,6 +2829,10 @@ var TIME_PERIOD_VALUES$1 = TIME_PERIOD_VALUES;
 
 var CSISHelpers$1 = /*#__PURE__*/Object.freeze({
 	'default': CSISHelpers,
+	parametersMapsFromTemplateResource: parametersMapsFromTemplateResource,
+	extractVariableNamesfromResource: extractVariableNamesfromResource,
+	extractVariableValuesfromResource: extractVariableValuesfromResource,
+	addUrlParameters: addUrlParameters,
 	extractEmikatIdFromStudyGroupNode: extractEmikatIdFromStudyGroupNode,
 	getIncludedObject: getIncludedObject,
 	filterResourcesbyTagName: filterResourcesbyTagName,

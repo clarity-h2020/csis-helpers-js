@@ -394,7 +394,12 @@ export default class CSISHelpers {
 		 * @param {*} parametersMaps 
 		 * @param {*} parametersMap 
 		 */
-		const expandVariables = function(variableNames, parametersMaps, parametersMap = new Map()) {
+		const expandVariables = function(variableNames, parametersMaps, parametersMap) {
+			if (!variableNames || variableNames.length === 0) {
+				return;
+			}
+
+			log.debug(`expanding resource ${resource.attributes.title} by ${variableNames.length} variables`);
 			variableNames.forEach((variableName, variableNameIndex, array) => {
 				const variableValues = CSISHelpers.extractVariableValuesfromResource(resource, tagsArray, variableName);
 				if (variableValues && variableValues.length > 0) {
@@ -409,7 +414,9 @@ export default class CSISHelpers {
 						}
 
 						// create a new Map Entry for each variableName=variableValue combination
-						expandVariables(array.slice(variableNameIndex + 1), parametersMaps, parametersMap);
+						if (variableNameIndex < variableNames.length - 1) {
+							expandVariables(array.slice(variableNameIndex + 1), parametersMaps, parametersMap);
+						}
 					});
 				} else {
 					log.warn(`no values for variable ${variableName} found in resource ${resource.attributes.title} `);
@@ -418,7 +425,12 @@ export default class CSISHelpers {
 		};
 
 		const parametersMaps = [];
-		expandVariables(CSISHelpers.extractVariableNamesfromResource(resource, tagsArray), parametersMaps);
+		parametersMaps.push(new Map());
+		expandVariables(
+			CSISHelpers.extractVariableNamesfromResource(resource, tagsArray),
+			parametersMaps,
+			parametersMaps[0]
+		);
 
 		log.debug(
 			`creating ${parametersMaps.length} virtual resources from template resource ${resource.attributes
@@ -451,6 +463,10 @@ export default class CSISHelpers {
  * See https://www.kaplankomputing.com/blog/tutorials/javascript/understanding-imports-exports-es6/
  */
 
+export const parametersMapsFromTemplateResource = CSISHelpers.parametersMapsFromTemplateResource;
+export const extractVariableNamesfromResource = CSISHelpers.extractVariableNamesfromResource;
+export const extractVariableValuesfromResource = CSISHelpers.extractVariableValuesfromResource;
+export const addUrlParameters = CSISHelpers.addUrlParameters;
 export const extractEmikatIdFromStudyGroupNode = CSISHelpers.extractEmikatIdFromStudyGroupNode;
 export const getIncludedObject = CSISHelpers.getIncludedObject;
 export const filterResourcesbyTagName = CSISHelpers.filterResourcesbyTagName;
