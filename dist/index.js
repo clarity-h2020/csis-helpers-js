@@ -2719,9 +2719,11 @@ function () {
             variableValues.forEach(function (variableValue, variableValueIndex) {
               if (variableValueIndex > 0) {
                 // create new entry
-                parametersMaps.push(new Map(parametersMap).set(variableName, variableValue));
+                // Circumvent another incoherence in CSIS taxonomies: '${'+variableName+'}'
+                parametersMaps.push(new Map(parametersMap).set('${' + variableName + '}', variableValue));
               } else {
-                parametersMap.set(variableName, variableValue);
+                // see https://github.com/clarity-h2020/csis-helpers-js/issues/8#issuecomment-558593929
+                parametersMap.set('${' + variableName + '}', variableValue);
               } // create a new Map Entry for each variableName=variableValue combination
 
 
@@ -2752,7 +2754,7 @@ function () {
     value: function addUrlParameters(urlTemplate, urlVariables) {
       // same method different name.
       // of course we could try to call CSISHelpers.addUrlParameters from EMIKATHelpers.addEmikatParameters
-      // however, this would result in a cyclic import. 
+      // however, this would result in a cyclic import.
       return addEmikatParameters(urlTemplate, urlVariables);
     }
   }]);
