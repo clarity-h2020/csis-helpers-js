@@ -167,7 +167,7 @@ export function addEmikatParameters(urlTemplate, emikatVariables) {
     let url = (' ' + urlTemplate).slice(1);
     emikatVariables.forEach((value, key) => {
       if (value) {
-        // another 'nice' JS pitfall: String.replace doesn't replace all occurrences. UNBELIEVEABLE!!
+        // another 'nice' JS pitfall: String.replace doesn't replace all occurrences. UNBELIEVABLE!!
         // See https://stackoverflow.com/a/1145525
         url = url.split(key).join(value);
       } else {

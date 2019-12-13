@@ -334,7 +334,7 @@ export default class CSISHelpers {
 	}
 
 	/**
-   * Extract the resource variable value for a specific variable from the resource tags array.
+   * Extract the resource variable values for a specific variable from the resource tags array.
    * 
    * @param {Object} resource the original resource
    * @param {Object[]} tagsArray included objects - Drupal APi style! :-/ 
@@ -363,6 +363,47 @@ export default class CSISHelpers {
 		return variableValues;
 	}
 
+	/**
+   * This is a completely unecessary method  that does nothing than adding unnecessary complexity to the system.
+   * Since we did not mange to agree on a simple set of variable values that are used across different services,
+   * we have to program around a problem that we invented by ourselves. Another sad example how avoidable accidental complexity
+   * is introduced by incoherence and lack of harmonisation. See https://github.com/clarity-h2020/csis/issues/101#issuecomment-565025875
+   * 
+   * @param {Object} resource the original resource
+   * @param {Object[]} tagsArray included objects - Drupal APi style! :-/ 
+   * @param {*} variableName The variable we are interested in e.g. 'layers'
+   * @param {*} variableName Actually the value recived viy query params but unfortunately not the real value. Confusing.
+   * @return {String[]}
+   */
+  static extractVariableValueForVariableMeaningfromResource(resource, tagsArray, variableName, variableMeaning) {
+	let variableValues = [];
+	let variableTags = extractTagsfromResource(resource, tagsArray, 'taxonomy_term--dp_variables');
+	if (variableTags && variableTags.length > 0) {
+		const iterator = variableTags.values();
+		// yes, 'field_var_meaning2'. No refactoring in Drupal -> https://github.com/clarity-h2020/docker-drupal/issues/29 
+		for (const variableTag of iterator) {
+			if (
+				variableTag.attributes &&
+				variableTag.attributes.field_var_name &&
+				variableTag.attributes.field_var_name.toLowerCase() == variableName.toLowerCase() &&
+				variableTag.attributes.field_var_value &&
+				variableTag.attributes.field_var_meaning2 &&
+				getIncludedObject(variableTag.attributes.field_var_meaning2.data.type, variableTag.attributes.field_var_meaning2.data.id,tagsArray) &&
+				getIncludedObject(variableTag.attributes.field_var_meaning2.data.type, variableTag.attributes.field_var_meaning2.data.id,tagsArray).attributes.field_var_meaning == variableMeaning
+
+			) {
+				log.debug(`${variableName} maps to meaning ${variableMeaning} with value ${variableTag.attributes.field_var_value} in resource ${resource.attributes.name}`);
+				return variableTag.attributes.field_var_value;
+			}
+		}
+	} else {
+		log.warn(`no tags of type 'taxonomy_term--dp_variables' in resource ${resource.attributes.name}`);
+	}
+
+	log.warn(`${variableName} does not map to meaning/value ${variableMeaning} in resource ${resource.attributes.name}`);
+	return variableValues;
+}
+
 	static extractVariableNamesfromResource(resource, tagsArray) {
 		let variableNames = new Set();
 		let variableTags = extractTagsfromResource(resource, tagsArray, 'taxonomy_term--dp_variables');
@@ -381,11 +422,12 @@ export default class CSISHelpers {
 	}
 
 	/**
-	 * Take a template resource and create parameters map for all possible variable combinations
+	 * Take a template resource and create parameters map for all possible variable combinations! OMG!
 	 * 
 	 * @param {*} resource 
 	 * @param {*} tagsArray 
 	 * @return {Map[]}
+	 * @deprecated  don't use this method!
 	 */
 	static parametersMapsFromTemplateResource(resource, tagsArray) {
 		/**
@@ -453,7 +495,30 @@ export default class CSISHelpers {
 		// however, this would result in a cyclic import.
 		return EMIKATHelpers.addEmikatParameters(urlTemplate, urlVariables);
 	}
+
+	/**
+	 * 
+	 * @param {*} queryParameterMap 
+	 * @param {*} queryParameters 
+	 * @param {*} resource 
+	 * @param {*} tagsArray 
+	 */
+	static generateParametersMap(queryParameterMap, queryParameters, resource, tagsArray) {
+		const parametersMap = new Map();
+		queryParameterMap.forEach((value, key) => {
+			if (queryParameters[value]) {
+				const mappedValue = CSISHelpers.extractVariableValueForVariableMeaningfromResource(resource, tagsArray, value, queryParameters[value]);
+				if(mappedValue) {
+					parametersMap.set(key, mappedValue);
+				} else {
+					parametersMap.set(key, queryParameters[value]);
+				}
+			}
+		});
+	}
 }
+
+
 
 /**
  * We can either use "import CSISHelpers from './CSISHelpers.js'" and call  "CSISHelpers.getIncludedObject(...)" or
@@ -476,12 +541,14 @@ export const extractReferencesfromResource = CSISHelpers.extractReferencesfromRe
 export const extractTagsfromResource = CSISHelpers.extractTagsfromResource;
 export const extractStudyAreaFromStudyGroupNode = CSISHelpers.extractStudyAreaFromStudyGroupNode;
 export const defaultQueryParams = CSISHelpers.defaultQueryParams;
+export const generateParametersMap = CSISHelpers.generateParametersMap;
 
 /**
  *Re-Export *common* variable constants defined in EMIKATHelpers and add new common constants not relevant for EMIKATHelpers
  */
-export const LAYERS = CSISHelpers.LAYERS;
 
+export const LAYERS = CSISHelpers.LAYERS;
+export const QUERY_PARAMS = EMIKATHelpers.QUERY_PARAMS;
 export const DATA_FORMAT = EMIKATHelpers.DATA_FORMAT;
 export const DATA_FORMAT_VALUES = EMIKATHelpers.DATA_FORMAT_VALUES;
 export const EMISSIONS_SCENARIO = EMIKATHelpers.EMISSIONS_SCENARIO;
@@ -492,3 +559,4 @@ export const STUDY_VARIANT = EMIKATHelpers.STUDY_VARIANT;
 export const STUDY_VARIANT_VALUES = EMIKATHelpers.STUDY_VARIANT_VALUES;
 export const TIME_PERIOD = EMIKATHelpers.TIME_PERIOD;
 export const TIME_PERIOD_VALUES = EMIKATHelpers.TIME_PERIOD_VALUES;
+export const addTemplateParameters = EMIKATHelpers.addEmikatParameters;

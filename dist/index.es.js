@@ -971,7 +971,7 @@ function () {
           case 0:
             csisBaseUrl = _args4.length > 0 && _args4[0] !== undefined ? _args4[0] : 'https://csis.myclimateservice.eu';
             studyUuid = _args4.length > 1 ? _args4[1] : undefined;
-            include = _args4.length > 2 && _args4[2] !== undefined ? _args4[2] : 'field_data_package,field_data_package.field_resources,field_data_package.field_resources.field_resource_tags,field_data_package.field_resources.field_references';
+            include = _args4.length > 2 && _args4[2] !== undefined ? _args4[2] : 'field_data_package,field_data_package.field_resources,field_data_package.field_resources.field_resource_tags,field_data_package.field_resources.field_references,field_data_package.field_resources.field_resource_tags.field_var_meaning2';
             requestUrl = csisBaseUrl + '/jsonapi/group/study/' + studyUuid + '?include=' + include;
             _context4.prev = 4;
             log.debug('fetching study from CSIS API: ' + requestUrl);
@@ -1029,7 +1029,7 @@ function () {
           case 0:
             csisBaseUrl = _args5.length > 0 && _args5[0] !== undefined ? _args5[0] : 'https://csis.myclimateservice.eu';
             datapackageUuid = _args5.length > 1 ? _args5[1] : undefined;
-            include = _args5.length > 2 && _args5[2] !== undefined ? _args5[2] : 'field_resources,field_resources.field_resource_tags,field_resources.field_references';
+            include = _args5.length > 2 && _args5[2] !== undefined ? _args5[2] : 'field_resources,field_resources.field_resource_tags,field_resources.field_references,field_resources.field_resource_tags.field_var_meaning2';
             requestUrl = csisBaseUrl + '/jsonapi/node/data_package/' + datapackageUuid + '?include=' + include;
             _context5.prev = 4;
             log.debug('fetching datapackage from CSIS API:' + requestUrl);
@@ -1087,7 +1087,7 @@ function () {
           case 0:
             csisBaseUrl = _args6.length > 0 && _args6[0] !== undefined ? _args6[0] : 'https://csis.myclimateservice.eu';
             datapackageUuid = _args6.length > 1 ? _args6[1] : undefined;
-            include = _args6.length > 2 && _args6[2] !== undefined ? _args6[2] : 'field_resource_tags,field_references';
+            include = _args6.length > 2 && _args6[2] !== undefined ? _args6[2] : 'field_resource_tags,field_references,field_resource_tags.field_var_meaning2';
             requestUrl = csisBaseUrl + '/jsonapi/node/data_package/' + datapackageUuid + '/field_resources?include=' + include;
             _context6.prev = 4;
             log.debug('fetching datapackage resources from CSIS API:' + requestUrl);
@@ -1146,7 +1146,7 @@ function () {
           case 0:
             csisBaseUrl = _args7.length > 0 && _args7[0] !== undefined ? _args7[0] : 'https://csis.myclimateservice.eu';
             resourceUuid = _args7.length > 1 ? _args7[1] : undefined;
-            include = _args7.length > 2 && _args7[2] !== undefined ? _args7[2] : 'field_resource_tags,field_references';
+            include = _args7.length > 2 && _args7[2] !== undefined ? _args7[2] : 'field_resource_tags,field_references,field_resource_tags.field_var_meaning2';
             // data_package_metadata WTF? yaeh, that's the name of the resource type :-(
             requestUrl = csisBaseUrl + '/jsonapi/node/data_package_metadata/' + resourceUuid + '?include=' + include;
             _context7.prev = 4;
@@ -1362,7 +1362,7 @@ function addEmikatParameters(urlTemplate, emikatVariables) {
     var url = (' ' + urlTemplate).slice(1);
     emikatVariables.forEach(function (value, key) {
       if (value) {
-        // another 'nice' JS pitfall: String.replace doesn't replace all occurrences. UNBELIEVEABLE!!
+        // another 'nice' JS pitfall: String.replace doesn't replace all occurrences. UNBELIEVABLE!!
         // See https://stackoverflow.com/a/1145525
         url = url.split(key).join(value);
       } else {
@@ -2599,7 +2599,7 @@ function () {
       return tags;
     }
     /**
-      * Extract the resource variable value for a specific variable from the resource tags array.
+      * Extract the resource variable values for a specific variable from the resource tags array.
       * 
       * @param {Object} resource the original resource
       * @param {Object[]} tagsArray included objects - Drupal APi style! :-/ 
@@ -2647,14 +2647,28 @@ function () {
 
       return variableValues;
     }
+    /**
+      * This is a completely unecessary method  that does nothing than adding unecessary complexity to the system.
+      * Since we did not mange to agree on a simple set of variable values that are used accross different services,
+      * we have to program around a problem that we invented by ourseles. Another sad example how aviodable accidetal complexitiy
+      * is introced by incoherence and lack of harmonisation. See https://github.com/clarity-h2020/csis/issues/101#issuecomment-565025875
+      * 
+      * @param {Object} resource the original resource
+      * @param {Object[]} tagsArray included objects - Drupal APi style! :-/ 
+      * @param {*} variableName The variable we are interested in e.g. 'layers'
+      * @param {*} variableName Actually the value recived viy query params but unfortunately not the real value. Confusing.
+      * @return {String[]}
+      */
+
   }, {
-    key: "extractVariableNamesfromResource",
-    value: function extractVariableNamesfromResource(resource, tagsArray) {
-      var variableNames = new Set();
+    key: "extractVariableValueForVariableMeaningfromResource",
+    value: function extractVariableValueForVariableMeaningfromResource(resource, tagsArray, variableName, variableMeaning) {
+      var variableValues = [];
       var variableTags = extractTagsfromResource(resource, tagsArray, 'taxonomy_term--dp_variables');
 
       if (variableTags && variableTags.length > 0) {
-        var iterator = variableTags.values();
+        var iterator = variableTags.values(); // yes, 'field_var_meaning2'. No refactoring in Drupal -> https://github.com/clarity-h2020/docker-drupal/issues/29 
+
         var _iteratorNormalCompletion2 = true;
         var _didIteratorError2 = false;
         var _iteratorError2 = undefined;
@@ -2663,8 +2677,9 @@ function () {
           for (var _iterator2 = iterator[Symbol.iterator](), _step2; !(_iteratorNormalCompletion2 = (_step2 = _iterator2.next()).done); _iteratorNormalCompletion2 = true) {
             var variableTag = _step2.value;
 
-            if (variableTag.attributes && variableTag.attributes.field_var_name) {
-              variableNames.add(variableTag.attributes.field_var_name);
+            if (variableTag.attributes && variableTag.attributes.field_var_name && variableTag.attributes.field_var_name.toLowerCase() == variableName.toLowerCase() && variableTag.attributes.field_var_value && variableTag.attributes.field_var_meaning2 && getIncludedObject(variableTag.attributes.field_var_meaning2.data.type, variableTag.attributes.field_var_meaning2.data.id, tagsArray) && getIncludedObject(variableTag.attributes.field_var_meaning2.data.type, variableTag.attributes.field_var_meaning2.data.id, tagsArray).attributes.field_var_meaning == variableMeaning) {
+              log.debug("".concat(variableName, " maps to meaning ").concat(variableMeaning, " with value ").concat(variableTag.attributes.field_var_value, " in resource ").concat(resource.attributes.name));
+              return variableTag.attributes.field_var_value;
             }
           }
         } catch (err) {
@@ -2682,17 +2697,59 @@ function () {
           }
         }
       } else {
+        log.warn("no tags of type 'taxonomy_term--dp_variables' in resource ".concat(resource.attributes.name));
+      }
+
+      log.warn("".concat(variableName, " does not map to meaning/value ").concat(variableMeaning, " in resource ").concat(resource.attributes.name));
+      return variableValues;
+    }
+  }, {
+    key: "extractVariableNamesfromResource",
+    value: function extractVariableNamesfromResource(resource, tagsArray) {
+      var variableNames = new Set();
+      var variableTags = extractTagsfromResource(resource, tagsArray, 'taxonomy_term--dp_variables');
+
+      if (variableTags && variableTags.length > 0) {
+        var iterator = variableTags.values();
+        var _iteratorNormalCompletion3 = true;
+        var _didIteratorError3 = false;
+        var _iteratorError3 = undefined;
+
+        try {
+          for (var _iterator3 = iterator[Symbol.iterator](), _step3; !(_iteratorNormalCompletion3 = (_step3 = _iterator3.next()).done); _iteratorNormalCompletion3 = true) {
+            var variableTag = _step3.value;
+
+            if (variableTag.attributes && variableTag.attributes.field_var_name) {
+              variableNames.add(variableTag.attributes.field_var_name);
+            }
+          }
+        } catch (err) {
+          _didIteratorError3 = true;
+          _iteratorError3 = err;
+        } finally {
+          try {
+            if (!_iteratorNormalCompletion3 && _iterator3["return"] != null) {
+              _iterator3["return"]();
+            }
+          } finally {
+            if (_didIteratorError3) {
+              throw _iteratorError3;
+            }
+          }
+        }
+      } else {
         log.warn("no tags of type 'taxonomy_term--dp_variables' in resource");
       }
 
       return Array.from(variableNames);
     }
     /**
-     * Take a template resource and create parameters map for all possible variable combinations
+     * Take a template resource and create parameters map for all possible variable combinations! OMG!
      * 
      * @param {*} resource 
      * @param {*} tagsArray 
      * @return {Map[]}
+     * @deprecated  don't use this method!
      */
 
   }, {
@@ -2758,6 +2815,30 @@ function () {
       // however, this would result in a cyclic import.
       return addEmikatParameters(urlTemplate, urlVariables);
     }
+    /**
+     * 
+     * @param {*} queryParameterMap 
+     * @param {*} queryParameters 
+     * @param {*} resource 
+     * @param {*} tagsArray 
+     */
+
+  }, {
+    key: "generateParametersMap",
+    value: function generateParametersMap(queryParameterMap, queryParameters, resource, tagsArray) {
+      var parametersMap = new Map();
+      queryParameterMap.forEach(function (value, key) {
+        if (queryParameters[value]) {
+          var mappedValue = CSISHelpers.extractVariableValueForVariableMeaningfromResource(resource, tagsArray, value, queryParameters[value]);
+
+          if (mappedValue) {
+            parametersMap.set(key, mappedValue);
+          } else {
+            parametersMap.set(key, queryParameters[value]);
+          }
+        }
+      });
+    }
   }]);
 
   return CSISHelpers;
@@ -2811,11 +2892,13 @@ var extractReferencesfromResource = CSISHelpers.extractReferencesfromResource;
 var extractTagsfromResource = CSISHelpers.extractTagsfromResource;
 var extractStudyAreaFromStudyGroupNode = CSISHelpers.extractStudyAreaFromStudyGroupNode;
 var defaultQueryParams = CSISHelpers.defaultQueryParams;
+var generateParametersMap = CSISHelpers.generateParametersMap;
 /**
  *Re-Export *common* variable constants defined in EMIKATHelpers and add new common constants not relevant for EMIKATHelpers
  */
 
 var LAYERS = CSISHelpers.LAYERS;
+var QUERY_PARAMS$1 = QUERY_PARAMS;
 var DATA_FORMAT$1 = DATA_FORMAT;
 var DATA_FORMAT_VALUES$1 = DATA_FORMAT_VALUES;
 var EMISSIONS_SCENARIO$1 = EMISSIONS_SCENARIO;
@@ -2826,6 +2909,7 @@ var STUDY_VARIANT$1 = STUDY_VARIANT;
 var STUDY_VARIANT_VALUES$1 = STUDY_VARIANT_VALUES;
 var TIME_PERIOD$1 = TIME_PERIOD;
 var TIME_PERIOD_VALUES$1 = TIME_PERIOD_VALUES;
+var addTemplateParameters = addEmikatParameters;
 
 var CSISHelpers$1 = /*#__PURE__*/Object.freeze({
 	'default': CSISHelpers,
@@ -2842,7 +2926,9 @@ var CSISHelpers$1 = /*#__PURE__*/Object.freeze({
 	extractTagsfromResource: extractTagsfromResource,
 	extractStudyAreaFromStudyGroupNode: extractStudyAreaFromStudyGroupNode,
 	defaultQueryParams: defaultQueryParams,
+	generateParametersMap: generateParametersMap,
 	LAYERS: LAYERS,
+	QUERY_PARAMS: QUERY_PARAMS$1,
 	DATA_FORMAT: DATA_FORMAT$1,
 	DATA_FORMAT_VALUES: DATA_FORMAT_VALUES$1,
 	EMISSIONS_SCENARIO: EMISSIONS_SCENARIO$1,
@@ -2852,7 +2938,8 @@ var CSISHelpers$1 = /*#__PURE__*/Object.freeze({
 	STUDY_VARIANT: STUDY_VARIANT$1,
 	STUDY_VARIANT_VALUES: STUDY_VARIANT_VALUES$1,
 	TIME_PERIOD: TIME_PERIOD$1,
-	TIME_PERIOD_VALUES: TIME_PERIOD_VALUES$1
+	TIME_PERIOD_VALUES: TIME_PERIOD_VALUES$1,
+	addTemplateParameters: addTemplateParameters
 });
 
 /**
@@ -2912,6 +2999,10 @@ function () {
     value: function getTags(tagType) {
       return CSISHelpers.extractTagsfromResource(this.resource, this.includes, tagType);
     }
+    /**
+     * @deprecated
+     */
+
   }, {
     key: "getParametersMaps",
     value: function getParametersMaps() {

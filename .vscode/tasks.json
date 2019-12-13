@@ -16,11 +16,6 @@
             ]
         },
         {
-            "type": "npm",
-            "script": "test:current",
-            "problemMatcher": [],
-        },
-        {
             "label": "runCurrentTest",
             "type": "shell",
             "command": "yarn",

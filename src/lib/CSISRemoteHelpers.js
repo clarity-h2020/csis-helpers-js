@@ -77,7 +77,7 @@ export const getEmikatCredentialsFromCsis = async function (csisBaseUrl = 'https
 export const getStudyGroupNodeFromCsis = async function (
   csisBaseUrl = 'https://csis.myclimateservice.eu',
   studyUuid,
-  include = 'field_data_package,field_data_package.field_resources,field_data_package.field_resources.field_resource_tags,field_data_package.field_resources.field_references',
+  include = 'field_data_package,field_data_package.field_resources,field_data_package.field_resources.field_resource_tags,field_data_package.field_resources.field_references,field_data_package.field_resources.field_resource_tags.field_var_meaning2',
 ) {
 
   const requestUrl = csisBaseUrl + '/jsonapi/group/study/' + studyUuid + '?include=' + include;
@@ -105,7 +105,7 @@ export const getStudyGroupNodeFromCsis = async function (
 export const getDatapackageFromCsis = async function (
   csisBaseUrl = 'https://csis.myclimateservice.eu',
   datapackageUuid,
-  include = 'field_resources,field_resources.field_resource_tags,field_resources.field_references',
+  include = 'field_resources,field_resources.field_resource_tags,field_resources.field_references,field_resources.field_resource_tags.field_var_meaning2',
 ) {
 
   const requestUrl = csisBaseUrl + '/jsonapi/node/data_package/' + datapackageUuid + '?include=' + include;
@@ -133,9 +133,8 @@ export const getDatapackageFromCsis = async function (
 export const getDatapackageResourcesFromCsis = async function (
   csisBaseUrl = 'https://csis.myclimateservice.eu',
   datapackageUuid,
-  include = 'field_resource_tags,field_references'
+  include = 'field_resource_tags,field_references,field_resource_tags.field_var_meaning2'
 ) {
-
   const requestUrl = csisBaseUrl + '/jsonapi/node/data_package/' + datapackageUuid + '/field_resources?include=' + include;
 
   try {
@@ -162,7 +161,7 @@ export const getDatapackageResourcesFromCsis = async function (
 export const getDatapackageResourceFromCsis = async function (
   csisBaseUrl = 'https://csis.myclimateservice.eu',
   resourceUuid,
-  include = 'field_resource_tags,field_references'
+  include = 'field_resource_tags,field_references,field_resource_tags.field_var_meaning2'
 ) {
 
   // data_package_metadata WTF? yaeh, that's the name of the resource type :-(
