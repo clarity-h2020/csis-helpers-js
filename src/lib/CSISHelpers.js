@@ -23,7 +23,7 @@ import * as EMIKATHelpers from './EMIKATHelpers.js';
  */
 
 /**
- * Helpers for cSIS API
+ * Helpers for CSIS API
  * 
  * @author Pascal Dihé
  */
@@ -375,34 +375,63 @@ export default class CSISHelpers {
    * @param {*} variableName Actually the value recived viy query params but unfortunately not the real value. Confusing.
    * @return {String[]}
    */
-  static extractVariableValueForVariableMeaningfromResource(resource, tagsArray, variableName, variableMeaning) {
-	let variableValues = [];
-	let variableTags = extractTagsfromResource(resource, tagsArray, 'taxonomy_term--dp_variables');
-	if (variableTags && variableTags.length > 0) {
-		const iterator = variableTags.values();
-		// yes, 'field_var_meaning2'. No refactoring in Drupal -> https://github.com/clarity-h2020/docker-drupal/issues/29 
-		for (const variableTag of iterator) {
-			if (
-				variableTag.attributes &&
-				variableTag.attributes.field_var_name &&
-				variableTag.attributes.field_var_name.toLowerCase() == variableName.toLowerCase() &&
-				variableTag.attributes.field_var_value &&
-				variableTag.attributes.field_var_meaning2 &&
-				getIncludedObject(variableTag.attributes.field_var_meaning2.data.type, variableTag.attributes.field_var_meaning2.data.id,tagsArray) &&
-				getIncludedObject(variableTag.attributes.field_var_meaning2.data.type, variableTag.attributes.field_var_meaning2.data.id,tagsArray).attributes.field_var_meaning == variableMeaning
-
-			) {
-				log.debug(`${variableName} maps to meaning ${variableMeaning} with value ${variableTag.attributes.field_var_value} in resource ${resource.attributes.name}`);
-				return variableTag.attributes.field_var_value;
+	static extractVariableValueForVariableMeaningFromResource(resource, tagsArray, variableName, variableMeaning) {
+		let variableValues = [];
+		let variableTags = extractTagsfromResource(resource, tagsArray, 'taxonomy_term--dp_variables');
+		if (variableTags && variableTags.length > 0) {
+			const iterator = variableTags.values();
+			// yes, 'field_var_meaning2'. No refactoring in Drupal -> https://github.com/clarity-h2020/docker-drupal/issues/29
+			// This JSON FORMAT is madness: NOT variableTag.attributes.field_var_meaning2 BUT variableTag.relationships.field_var_meaning2
+			for (const variableTag of iterator) {
+				if (
+					variableTag.attributes &&
+					variableTag.attributes.field_var_name &&
+					variableTag.attributes.field_var_name.toLowerCase() == variableName.toLowerCase() &&
+					variableTag.attributes.field_var_value
+				) {
+					if (
+						variableTag.relationships.field_var_meaning2 &&
+						getIncludedObject(
+							variableTag.relationships.field_var_meaning2.data.type,
+							variableTag.relationships.field_var_meaning2.data.id,
+							tagsArray
+						) &&
+						getIncludedObject(
+							variableTag.relationships.field_var_meaning2.data.type,
+							variableTag.relationships.field_var_meaning2.data.id,
+							tagsArray
+						).attributes.field_var_meaning == variableMeaning
+					) {
+						log.debug(
+							`variable name / query parameter '${variableName}' maps to meaning '${variableMeaning}' with value '${variableTag
+								.attributes.field_var_value}' in resource '${resource.attributes.title}'.`
+						);
+						return variableTag.attributes.field_var_value;
+					} else {
+						/*log.debug(
+							`variable name / query parameter '${variableName}' does not map to variable meaning '${variableMeaning}' (${getIncludedObject(
+								variableTag.relationships.field_var_meaning2.data.type,
+								variableTag.relationships.field_var_meaning2.data.id,
+								tagsArray
+							).attributes.field_var_meaning}) in resource ${resource.attributes.title}`
+						);*/
+					}
+				} else {
+					/*log.debug(
+						`variable name / query parameter '${variableName}' does not map to variable tag '${variableTag
+							.attributes.field_var_name}' in resource ${resource.attributes.title}`
+					);*/
+				}
 			}
+		} else {
+			log.warn(`no tags of type 'taxonomy_term--dp_variables' in resource ${resource.attributes.title}`);
 		}
-	} else {
-		log.warn(`no tags of type 'taxonomy_term--dp_variables' in resource ${resource.attributes.name}`);
-	}
 
-	log.warn(`${variableName} does not map to meaning/value ${variableMeaning} in resource ${resource.attributes.name}`);
-	return variableValues;
-}
+		log.warn(
+			`${variableName} does not map to meaning/value ${variableMeaning} in resource ${resource.attributes.title}`
+		);
+		return variableValues;
+	}
 
 	static extractVariableNamesfromResource(resource, tagsArray) {
 		let variableNames = new Set();
@@ -504,21 +533,32 @@ export default class CSISHelpers {
 	 * @param {*} tagsArray 
 	 */
 	static generateParametersMap(queryParameterMap, queryParameters, resource, tagsArray) {
+		log.info(
+			`generating parameters map for ${queryParameterMap.size} = ${queryParameters.length} parameters for ${resource
+				.attributes.title}`
+		);
 		const parametersMap = new Map();
 		queryParameterMap.forEach((value, key) => {
 			if (queryParameters[value]) {
-				const mappedValue = CSISHelpers.extractVariableValueForVariableMeaningfromResource(resource, tagsArray, value, queryParameters[value]);
-				if(mappedValue) {
+				const mappedValue = CSISHelpers.extractVariableValueForVariableMeaningFromResource(
+					resource,
+					tagsArray,
+					value,
+					queryParameters[value]
+				);
+				if (mappedValue) {
 					parametersMap.set(key, mappedValue);
 				} else {
 					parametersMap.set(key, queryParameters[value]);
 				}
+			} else {
+				//log.debug(`no value for query parameter ${key} = ${value} found`);
 			}
 		});
+
+		return parametersMap;
 	}
 }
-
-
 
 /**
  * We can either use "import CSISHelpers from './CSISHelpers.js'" and call  "CSISHelpers.getIncludedObject(...)" or
@@ -544,10 +584,15 @@ export const defaultQueryParams = CSISHelpers.defaultQueryParams;
 export const generateParametersMap = CSISHelpers.generateParametersMap;
 
 /**
- *Re-Export *common* variable constants defined in EMIKATHelpers and add new common constants not relevant for EMIKATHelpers
+ * Re-Export *common* variable constants defined in EMIKATHelpers and add new common constants not relevant for EMIKATHelpers
+ * WARNING: These re-exports do not work with DEFAULT export. CSISHelpers.QUERY_PARAMS === undefined. 
+ * DON't use import CSISHelpers from './../lib/CSISHelpers.js'; !
  */
 
 export const LAYERS = CSISHelpers.LAYERS;
+/**
+ * 
+ */
 export const QUERY_PARAMS = EMIKATHelpers.QUERY_PARAMS;
 export const DATA_FORMAT = EMIKATHelpers.DATA_FORMAT;
 export const DATA_FORMAT_VALUES = EMIKATHelpers.DATA_FORMAT_VALUES;
@@ -559,4 +604,8 @@ export const STUDY_VARIANT = EMIKATHelpers.STUDY_VARIANT;
 export const STUDY_VARIANT_VALUES = EMIKATHelpers.STUDY_VARIANT_VALUES;
 export const TIME_PERIOD = EMIKATHelpers.TIME_PERIOD;
 export const TIME_PERIOD_VALUES = EMIKATHelpers.TIME_PERIOD_VALUES;
+/**
+ * WARNING: This re-export does not work. CSISHelpers.addTemplateParameters === undefined.
+ * Don't ask why. This is another JS-madness. :-(
+ */
 export const addTemplateParameters = EMIKATHelpers.addEmikatParameters;

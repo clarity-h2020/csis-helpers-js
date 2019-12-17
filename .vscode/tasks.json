@@ -33,6 +33,12 @@
                 "focus": false,
                 "panel": "dedicated"
             }
+        },
+        {
+            "type": "npm",
+            "script": "test:watch",
+            "group": "build",
+            "problemMatcher": []
         }
     ]
 }

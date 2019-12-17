@@ -1292,6 +1292,18 @@ var emikatClient = axios.create();
 function fetchData(_x, _x2) {
   return _fetchData.apply(this, arguments);
 }
+/**
+ * Replaces EMIKAT_STUDY_ID with the actual study id.
+ * Note: We *could* use template strings in a fixed URL,  e.g.
+ * `https://service.emikat.at/EmiKatTst/api/scenarios/${emikat_id}/feature/view.2812/table/data`
+ * However, this has to many drawbacks
+ * 
+ * @param {String} urlTemplate 
+ * @param {String|Number} emikatId 
+ * @return {String}
+ * 
+ * @deprecated use addEmikatParameters() instead!
+ */
 
 function _fetchData() {
   _fetchData = asyncToGenerator(
@@ -1330,18 +1342,6 @@ function _fetchData() {
   }));
   return _fetchData.apply(this, arguments);
 }
-/**
- * Replaces EMIKAT_STUDY_ID with the actual study id.
- * Note: We *could* use template strings in a fixed URL,  e.g.
- * `https://service.emikat.at/EmiKatTst/api/scenarios/${emikat_id}/feature/view.2812/table/data`
- * However, this has to many drawbacks
- * 
- * @param {String} urlTemplate 
- * @param {String|Number} emikatId 
- * @return {String}
- * 
- * @deprecated use addEmikatParameters() instead!
- */
 
 function addEmikatId(urlTemplate, emikatId) {
   if (urlTemplate && emikatId && urlTemplate.includes(EMIKAT_STUDY_ID)) {
@@ -1388,7 +1388,7 @@ function addEmikatParameters(urlTemplate, emikatVariables) {
  */
 
 function generateColumns(columnnames) {
-  // add parentheses around the entire body `({})` to force the parser to treat the object literal 
+  // add parentheses around the entire body `({})` to force the parser to treat the object literal
   // as an expression so that it's not treated as a block statement.
   return columnnames.map(function (columnname, index) {
     return {
@@ -2362,7 +2362,7 @@ var wicket = createCommonjsModule(function (module, exports) {
  */
 
 /**
- * Helpers for cSIS API
+ * Helpers for CSIS API
  * 
  * @author Pascal Dihé
  */
@@ -2654,10 +2654,10 @@ function () {
       return variableValues;
     }
     /**
-      * This is a completely unecessary method  that does nothing than adding unecessary complexity to the system.
-      * Since we did not mange to agree on a simple set of variable values that are used accross different services,
-      * we have to program around a problem that we invented by ourseles. Another sad example how aviodable accidetal complexitiy
-      * is introced by incoherence and lack of harmonisation. See https://github.com/clarity-h2020/csis/issues/101#issuecomment-565025875
+      * This is a completely unecessary method  that does nothing than adding unnecessary complexity to the system.
+      * Since we did not mange to agree on a simple set of variable values that are used across different services,
+      * we have to program around a problem that we invented by ourselves. Another sad example how avoidable accidental complexity
+      * is introduced by incoherence and lack of harmonisation. See https://github.com/clarity-h2020/csis/issues/101#issuecomment-565025875
       * 
       * @param {Object} resource the original resource
       * @param {Object[]} tagsArray included objects - Drupal APi style! :-/ 
@@ -2667,13 +2667,14 @@ function () {
       */
 
   }, {
-    key: "extractVariableValueForVariableMeaningfromResource",
-    value: function extractVariableValueForVariableMeaningfromResource(resource, tagsArray, variableName, variableMeaning) {
+    key: "extractVariableValueForVariableMeaningFromResource",
+    value: function extractVariableValueForVariableMeaningFromResource(resource, tagsArray, variableName, variableMeaning) {
       var variableValues = [];
       var variableTags = extractTagsfromResource(resource, tagsArray, 'taxonomy_term--dp_variables');
 
       if (variableTags && variableTags.length > 0) {
-        var iterator = variableTags.values(); // yes, 'field_var_meaning2'. No refactoring in Drupal -> https://github.com/clarity-h2020/docker-drupal/issues/29 
+        var iterator = variableTags.values(); // yes, 'field_var_meaning2'. No refactoring in Drupal -> https://github.com/clarity-h2020/docker-drupal/issues/29
+        // This JSON FORMAT is madness: NOT variableTag.attributes.field_var_meaning2 BUT variableTag.relationships.field_var_meaning2
 
         var _iteratorNormalCompletion2 = true;
         var _didIteratorError2 = false;
@@ -2683,10 +2684,25 @@ function () {
           for (var _iterator2 = iterator[Symbol.iterator](), _step2; !(_iteratorNormalCompletion2 = (_step2 = _iterator2.next()).done); _iteratorNormalCompletion2 = true) {
             var variableTag = _step2.value;
 
-            if (variableTag.attributes && variableTag.attributes.field_var_name && variableTag.attributes.field_var_name.toLowerCase() == variableName.toLowerCase() && variableTag.attributes.field_var_value && variableTag.attributes.field_var_meaning2 && getIncludedObject(variableTag.attributes.field_var_meaning2.data.type, variableTag.attributes.field_var_meaning2.data.id, tagsArray) && getIncludedObject(variableTag.attributes.field_var_meaning2.data.type, variableTag.attributes.field_var_meaning2.data.id, tagsArray).attributes.field_var_meaning == variableMeaning) {
-              log.debug("".concat(variableName, " maps to meaning ").concat(variableMeaning, " with value ").concat(variableTag.attributes.field_var_value, " in resource ").concat(resource.attributes.name));
-              return variableTag.attributes.field_var_value;
-            }
+            if (variableTag.attributes && variableTag.attributes.field_var_name && variableTag.attributes.field_var_name.toLowerCase() == variableName.toLowerCase() && variableTag.attributes.field_var_value) {
+              if (variableTag.relationships.field_var_meaning2 && getIncludedObject(variableTag.relationships.field_var_meaning2.data.type, variableTag.relationships.field_var_meaning2.data.id, tagsArray) && getIncludedObject(variableTag.relationships.field_var_meaning2.data.type, variableTag.relationships.field_var_meaning2.data.id, tagsArray).attributes.field_var_meaning == variableMeaning) {
+                log.debug("variable name / query parameter '".concat(variableName, "' maps to meaning '").concat(variableMeaning, "' with value '").concat(variableTag.attributes.field_var_value, "' in resource '").concat(resource.attributes.title, "'."));
+                return variableTag.attributes.field_var_value;
+              } else {
+                /*log.debug(
+                	`variable name / query parameter '${variableName}' does not map to variable meaning '${variableMeaning}' (${getIncludedObject(
+                		variableTag.relationships.field_var_meaning2.data.type,
+                		variableTag.relationships.field_var_meaning2.data.id,
+                		tagsArray
+                	).attributes.field_var_meaning}) in resource ${resource.attributes.title}`
+                );*/
+              }
+            } else {
+                /*log.debug(
+                	`variable name / query parameter '${variableName}' does not map to variable tag '${variableTag
+                		.attributes.field_var_name}' in resource ${resource.attributes.title}`
+                );*/
+              }
           }
         } catch (err) {
           _didIteratorError2 = true;
@@ -2703,10 +2719,10 @@ function () {
           }
         }
       } else {
-        log.warn("no tags of type 'taxonomy_term--dp_variables' in resource ".concat(resource.attributes.name));
+        log.warn("no tags of type 'taxonomy_term--dp_variables' in resource ".concat(resource.attributes.title));
       }
 
-      log.warn("".concat(variableName, " does not map to meaning/value ").concat(variableMeaning, " in resource ").concat(resource.attributes.name));
+      log.warn("".concat(variableName, " does not map to meaning/value ").concat(variableMeaning, " in resource ").concat(resource.attributes.title));
       return variableValues;
     }
   }, {
@@ -2832,10 +2848,11 @@ function () {
   }, {
     key: "generateParametersMap",
     value: function generateParametersMap(queryParameterMap, queryParameters, resource, tagsArray) {
+      log.info("generating parameters map for ".concat(queryParameterMap.size, " = ").concat(queryParameters.length, " parameters for ").concat(resource.attributes.title));
       var parametersMap = new Map();
       queryParameterMap.forEach(function (value, key) {
         if (queryParameters[value]) {
-          var mappedValue = CSISHelpers.extractVariableValueForVariableMeaningfromResource(resource, tagsArray, value, queryParameters[value]);
+          var mappedValue = CSISHelpers.extractVariableValueForVariableMeaningFromResource(resource, tagsArray, value, queryParameters[value]);
 
           if (mappedValue) {
             parametersMap.set(key, mappedValue);
@@ -2844,6 +2861,7 @@ function () {
           }
         }
       });
+      return parametersMap;
     }
   }]);
 
@@ -2900,10 +2918,16 @@ var extractStudyAreaFromStudyGroupNode = CSISHelpers.extractStudyAreaFromStudyGr
 var defaultQueryParams = CSISHelpers.defaultQueryParams;
 var generateParametersMap = CSISHelpers.generateParametersMap;
 /**
- *Re-Export *common* variable constants defined in EMIKATHelpers and add new common constants not relevant for EMIKATHelpers
+ * Re-Export *common* variable constants defined in EMIKATHelpers and add new common constants not relevant for EMIKATHelpers
+ * WARNING: These re-exports do not work with DEFAULT export. CSISHelpers.QUERY_PARAMS === undefined. 
+ * DON't use import CSISHelpers from './../lib/CSISHelpers.js'; !
  */
 
 var LAYERS = CSISHelpers.LAYERS;
+/**
+ * 
+ */
+
 var QUERY_PARAMS$1 = QUERY_PARAMS;
 var DATA_FORMAT$1 = DATA_FORMAT;
 var DATA_FORMAT_VALUES$1 = DATA_FORMAT_VALUES;
@@ -2915,6 +2939,11 @@ var STUDY_VARIANT$1 = STUDY_VARIANT;
 var STUDY_VARIANT_VALUES$1 = STUDY_VARIANT_VALUES;
 var TIME_PERIOD$1 = TIME_PERIOD;
 var TIME_PERIOD_VALUES$1 = TIME_PERIOD_VALUES;
+/**
+ * WARNING: This re-export does not work. CSISHelpers.addTemplateParameters === undefined.
+ * Don't ask why. This is another JS-madness. :-(
+ */
+
 var addTemplateParameters = addEmikatParameters;
 
 var CSISHelpers$1 = /*#__PURE__*/Object.freeze({

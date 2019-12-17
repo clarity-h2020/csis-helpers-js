@@ -34,7 +34,7 @@ export const STUDY_VARIANT = '${study_variant}';
  * Allowed values for STUDY_VARIANT constant
  * @type {String[]}
  */
-export const STUDY_VARIANT_VALUES = ['BASELINE'];
+export const STUDY_VARIANT_VALUES = [ 'BASELINE' ];
 
 /**
  * TIME_PERIOD='Baseline' ... (Alternatives are: '20110101-20401231', '20410101-20701231' and '20710101-21001231')
@@ -54,7 +54,7 @@ export const DATA_FORMAT = '${data_format}';
  * Allowed values for TIME_PERIOD constant
  * @type {String[]}
  */
-export const TIME_PERIOD_VALUES = ['Baseline', '20110101-20401231', '20410101-20701231', '20710101-21001231'];
+export const TIME_PERIOD_VALUES = [ 'Baseline', '20110101-20401231', '20410101-20701231', '20710101-21001231' ];
 
 /**
  * EMISSIONS_SCENARIO='Baseline' ... (Alternatives are: 'rcp26', 'rcp45' and 'rcp85')
@@ -67,7 +67,7 @@ export const EMISSIONS_SCENARIO = '${emissions_scenario}';
  * Allowed values for EMISSIONS_SCENARIO constant
  * @type {String[]}
  */
-export const EMISSIONS_SCENARIO_VALUES = ['Baseline', 'rcp26', 'rcp45', 'rcp85'];
+export const EMISSIONS_SCENARIO_VALUES = [ 'Baseline', 'rcp26', 'rcp45', 'rcp85' ];
 
 /**
  * EVENT_FREQUENCY='Rare' ... (Alternatives are: 'Occasional' or 'Frequent')
@@ -80,28 +80,28 @@ export const EVENT_FREQUENCY = '${event_frequency}';
  * Allowed values for EVENT_FREQUENCY constant
  * @type {String[]}
  */
-export const EVENT_FREQUENCY_VALUES = ['Rare', 'Occasional', 'Frequent'];
+export const EVENT_FREQUENCY_VALUES = [ 'Rare', 'Occasional', 'Frequent' ];
 
 /**
  * Allowed values for EMIKAT_DATA_FORMAT constant.
  * data = EMIKAT proprietary JSON
  * @type {String[]}
  */
-export const DATA_FORMAT_VALUES = ['data', 'csv', 'geojson'];
+export const DATA_FORMAT_VALUES = [ 'data', 'csv', 'geojson' ];
 
 /**
  * Query Parameter Mapping for **EMIKAT** Resources
  * 
  * @see CSISHelpers.defaultQueryParams
  */
-export const QUERY_PARAMS = new Map(
-  [[EMIKAT_STUDY_ID, 'emikat_id'],
-  [DATA_FORMAT, 'data_format'],
-  [STUDY_VARIANT, 'study_variant'],
-  [TIME_PERIOD, 'time_period'],
-  [EMISSIONS_SCENARIO, 'emissions_scenario'],
-  [EVENT_FREQUENCY, 'event_frequency']]
-);
+export const QUERY_PARAMS = new Map([
+	[ EMIKAT_STUDY_ID, 'emikat_id' ],
+	[ DATA_FORMAT, 'data_format' ],
+	[ STUDY_VARIANT, 'study_variant' ],
+	[ TIME_PERIOD, 'time_period' ],
+	[ EMISSIONS_SCENARIO, 'emissions_scenario' ],
+	[ EVENT_FREQUENCY, 'event_frequency' ]
+]);
 
 const emikatClient = axios.create();
 
@@ -112,23 +112,21 @@ const emikatClient = axios.create();
  * @throws
  */
 export async function fetchData(url, emikatCredentials) {
-  try {
+	try {
+		console.log('fetching from EMIKAT:' + url);
 
-    console.log('fetching from EMIKAT:' + url);
+		const response = await emikatClient.get(url, { headers: { Authorization: emikatCredentials } });
 
-    const response = await emikatClient.get(url, { headers: { Authorization: emikatCredentials } });
+		// we *could* do once:
+		// emikatClient.defaults.headers.common['Authorization'] = emikatCredentials;
+		// but that would break functional code as it has side effects on the emikatClient instance.
 
-    // we *could* do once:  
-    // emikatClient.defaults.headers.common['Authorization'] = emikatCredentials;
-    // but that would break functional code as it has side effects on the emikatClient instance.
-
-    return response;
-
-  } catch (error) {
-    console.error('could not fetch EMIKAT data from ' + url, error);
-    throw error;
-  }
-};
+		return response;
+	} catch (error) {
+		console.error('could not fetch EMIKAT data from ' + url, error);
+		throw error;
+	}
+}
 
 /**
  * Replaces EMIKAT_STUDY_ID with the actual study id.
@@ -143,12 +141,12 @@ export async function fetchData(url, emikatCredentials) {
  * @deprecated use addEmikatParameters() instead!
  */
 export function addEmikatId(urlTemplate, emikatId) {
-  if (urlTemplate && emikatId && urlTemplate.includes(EMIKAT_STUDY_ID)) {
-    //return urlTemplate.replace(EMIKAT_STUDY_ID, emikatId.toString());
-    return addEmikatParameters(urlTemplate, new Map([[EMIKAT_STUDY_ID, emikatId]]));
-  }
+	if (urlTemplate && emikatId && urlTemplate.includes(EMIKAT_STUDY_ID)) {
+		//return urlTemplate.replace(EMIKAT_STUDY_ID, emikatId.toString());
+		return addEmikatParameters(urlTemplate, new Map([ [ EMIKAT_STUDY_ID, emikatId ] ]));
+	}
 
-  return urlTemplate;
+	return urlTemplate;
 }
 
 /**
@@ -162,23 +160,23 @@ export function addEmikatId(urlTemplate, emikatId) {
  * @return {String}
  */
 export function addEmikatParameters(urlTemplate, emikatVariables) {
-  if (urlTemplate && emikatVariables) {
-    // make a copy - JavaScript style ... :-(
-    let url = (' ' + urlTemplate).slice(1);
-    emikatVariables.forEach((value, key) => {
-      if (value) {
-        // another 'nice' JS pitfall: String.replace doesn't replace all occurrences. UNBELIEVABLE!!
-        // See https://stackoverflow.com/a/1145525
-        url = url.split(key).join(value);
-      } else {
-        log.warn(`no value found for parameter ${key} in ${urlTemplate}`);
-      }
-    });
+	if (urlTemplate && emikatVariables) {
+		// make a copy - JavaScript style ... :-(
+		let url = (' ' + urlTemplate).slice(1);
+		emikatVariables.forEach((value, key) => {
+			if (value) {
+				// another 'nice' JS pitfall: String.replace doesn't replace all occurrences. UNBELIEVABLE!!
+				// See https://stackoverflow.com/a/1145525
+				url = url.split(key).join(value);
+			} else {
+				log.warn(`no value found for parameter ${key} in ${urlTemplate}`);
+			}
+		});
 
-    return url;
-  }
+		return url;
+	}
 
-  return urlTemplate;
+	return urlTemplate;
 }
 
 /**
@@ -188,14 +186,13 @@ export function addEmikatParameters(urlTemplate, emikatVariables) {
  * @return {Object[]}
  */
 export function generateColumns(columnnames) {
-
-  // add parentheses around the entire body `({})` to force the parser to treat the object literal 
-  // as an expression so that it's not treated as a block statement.
-  return columnnames.map((columnname, index) => ({
-    id: columnname, // Required because our accessor is not a string
-    Header: columnname,
-    accessor: row => row.values[index] // Custom value accessors!
-  }));
+	// add parentheses around the entire body `({})` to force the parser to treat the object literal
+	// as an expression so that it's not treated as a block statement.
+	return columnnames.map((columnname, index) => ({
+		id: columnname, // Required because our accessor is not a string
+		Header: columnname,
+		accessor: (row) => row.values[index] // Custom value accessors!
+	}));
 }
 
 /**

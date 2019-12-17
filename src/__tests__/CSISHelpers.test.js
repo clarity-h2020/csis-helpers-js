@@ -1,7 +1,10 @@
 import axios from 'axios';
 import log from 'loglevel';
-import CSISHelpers from './../lib/CSISHelpers.js';
-import EMIKATHelpers from './../lib/EMIKATHelpers.js';
+
+// DON't use this. It imports just the default export which is the CSISHelpers class.
+// import CSISHelpers from './../lib/CSISHelpers.js';
+import * as CSISHelpers from './../lib/CSISHelpers.js';
+import * as EMIKATHelpers from './../lib/EMIKATHelpers.js';
 import { CSISHelpers as _CSISHelpers } from './../../dist/index.js';
 import express from 'express';
 import apiResponseStudy from './../__fixtures__/study.json';
@@ -139,7 +142,7 @@ test('get taxonomy_term--hazards tags from resources ', () => {
 
 	expect(distinctTags.size).toBeGreaterThan(0);
 	distinctTags.forEach((tag) => {
-		log.debug(`found distinct tag $tag.attributes.name in $resourcesArray.length`);
+		log.debug(`found distinct tag ${tag.attributes.name} in ${resourcesArray.length}`);
 	});
 });
 
@@ -201,7 +204,7 @@ test('[DEV] WMS URL with mapped PARAMETERS', () => {
 	/**
 	 * @type {String}
 	 */
-	const urlTemplate = `https://clarity.meteogrid.com/geoserver/europe/wms?service=WMS&version=1.1.0&request=GetMap&layers=europe%3API_consecutive-wet-days_${CSISHelpers.TIME_PERIOD}_${CSISHelpers.EMISSIONS_SCENARIO}_ensmean&bbox=2145642.726143716%2C982955.8095900388%2C6605432.868301096%2C5706496.981659953&width=725&height=768&srs=EPSG%3A3035&format=image%2Fpng%3B%20mode%3D8bit`;
+	const urlTemplate = `https://clarity.meteogrid.com/geoserver/europe/wms?service=WMS&version=1.1.0&request=GetMap&layers=europe%3API_consecutive-wet-days_${CSISHelpers.EMISSIONS_SCENARIO}_${CSISHelpers.TIME_PERIOD}_ensmean&bbox=2145642.726143716%2C982955.8095900388%2C6605432.868301096%2C5706496.981659953&width=725&height=768&srs=EPSG%3A3035&format=image%2Fpng%3B%20mode%3D8bit`;
 
 	/**
 	 * @type {String}
@@ -210,31 +213,40 @@ test('[DEV] WMS URL with mapped PARAMETERS', () => {
 		'https://clarity.meteogrid.com/geoserver/europe/wms?service=WMS&version=1.1.0&request=GetMap&layers=europe%3API_consecutive-wet-days_historical_19710101-20001231_ensmean&bbox=2145642.726143716%2C982955.8095900388%2C6605432.868301096%2C5706496.981659953&width=725&height=768&srs=EPSG%3A3035&format=image%2Fpng%3B%20mode%3D8bit';
 
 	/**
-	 * UNBELIEBABLE: This does not work in CSISHelpers.js: 'export const TIME_PERIOD = EMIKATHelpers.TIME_PERIOD;' ARGH!
-	 * Don't ask  why, this is JS %(
-	 * 
-	 * @type{String[]}
+	 * Another JS Madness. Associative array are no arrays. Don't use them at all!
+	 * See https://www.xul.fr/javascript/associative.php
 	 */
-	const queryParams = [
-		EMIKATHelpers.QUERY_PARAMS.get(EMIKATHelpers.TIME_PERIOD),
-		'Baseline',
-		EMIKATHelpers.QUERY_PARAMS.get(EMIKATHelpers.EMISSIONS_SCENARIO),
-		'Baseline'
-	];
+	/*const queryParameters = [
+		[ 'time_period', 'Baseline' ],
+		[ EMIKATHelpers.QUERY_PARAMS.get(CSISHelpers.EMISSIONS_SCENARIO), 'Baseline' ]
+	];*/
 
+	const queryParameters = {
+		time_period: 'Baseline',
+		emissions_scenario: 'Baseline'
+	};
+
+	/**
+	 * @type{Map}
+	 */
 	const parametersMap = CSISHelpers.generateParametersMap(
-		EMIKATHelpers.QUERY_PARAMS,
-		queryParams,
+		CSISHelpers.QUERY_PARAMS,
+		queryParameters,
 		resourceWithVariableMeanings.data,
 		resourceWithVariableMeanings.included
 	);
 
+	expect(parametersMap.size).toEqual(2);
+
+	/**
+	 * @type{String[]}
+	 */
 	const transformedUrl = CSISHelpers.addTemplateParameters(urlTemplate, parametersMap);
 
-	expect(urlTemplate).not.toEqual(transformedUrl);
 	expect(transformedUrl.includes('$')).toBeFalsy;
-	expect(transformedUrl.includes('historical'));
-	expect(transformedUrl.includes('19710101-20001231'));
+	expect(transformedUrl.includes('historical')).toBeTruthy;
+	expect(transformedUrl.includes('19710101-20001231')).toBeTruthy;
+	expect(transformedUrl).not.toEqual(urlTemplate);
 	expect(url).toEqual(transformedUrl);
 });
 
@@ -242,7 +254,7 @@ test('[PROD] WMS URL with mapped PARAMETERS', () => {
 	/**
 	 * @type {String}
 	 */
-	const urlTemplate = `https://clarity.meteogrid.com/geoserver/europe/wms?service=WMS&version=1.1.0&request=GetMap&layers=europe%3API_consecutive-wet-days_${CSISHelpers.TIME_PERIOD}_${CSISHelpers.EMISSIONS_SCENARIO}_ensmean&bbox=2145642.726143716%2C982955.8095900388%2C6605432.868301096%2C5706496.981659953&width=725&height=768&srs=EPSG%3A3035&format=image%2Fpng%3B%20mode%3D8bit`;
+	const urlTemplate = `https://clarity.meteogrid.com/geoserver/europe/wms?service=WMS&version=1.1.0&request=GetMap&layers=europe%3API_consecutive-wet-days_${CSISHelpers.EMISSIONS_SCENARIO}_${CSISHelpers.TIME_PERIOD}_ensmean&bbox=2145642.726143716%2C982955.8095900388%2C6605432.868301096%2C5706496.981659953&width=725&height=768&srs=EPSG%3A3035&format=image%2Fpng%3B%20mode%3D8bit`;
 
 	/**
 	 * @type {String}
@@ -250,29 +262,26 @@ test('[PROD] WMS URL with mapped PARAMETERS', () => {
 	const url =
 		'https://clarity.meteogrid.com/geoserver/europe/wms?service=WMS&version=1.1.0&request=GetMap&layers=europe%3API_consecutive-wet-days_historical_19710101-20001231_ensmean&bbox=2145642.726143716%2C982955.8095900388%2C6605432.868301096%2C5706496.981659953&width=725&height=768&srs=EPSG%3A3035&format=image%2Fpng%3B%20mode%3D8bit';
 
-	/**
-	 *  @type{String[]}
-	 */
-	const queryParams = [
-		_CSISHelpers.QUERY_PARAMS.get(_CSISHelpers.TIME_PERIOD),
-		'Baseline',
-		CSISHelpers.QUERY_PARAMS.get(_CSISHelpers.EMISSIONS_SCENARIO),
-		'Baseline'
-	];
+	const queryParameters = {
+		time_period: 'Baseline',
+		emissions_scenario: 'Baseline'
+	};
 
-	const parametersMap = CSISHelpers.generateParametersMap(
+	const parametersMap = _CSISHelpers.generateParametersMap(
 		_CSISHelpers.QUERY_PARAMS,
-		queryParams,
+		queryParameters,
 		resourceWithVariableMeanings.data,
 		resourceWithVariableMeanings.included
 	);
 
+	expect(parametersMap.size).toEqual(2);
+
 	const transformedUrl = _CSISHelpers.addTemplateParameters(urlTemplate, parametersMap);
 
-	expect(urlTemplate).not.toEqual(transformedUrl);
 	expect(transformedUrl.includes('$')).toBeFalsy;
-	expect(transformedUrl.includes('historical'));
-	expect(transformedUrl.includes('19710101-20001231'));
+	expect(transformedUrl.includes('historical')).toBeTruthy;
+	expect(transformedUrl.includes('19710101-20001231')).toBeTruthy;
+	expect(transformedUrl).not.toEqual(urlTemplate);
 	expect(url).toEqual(transformedUrl);
 });
 
