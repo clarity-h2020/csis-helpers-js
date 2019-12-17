@@ -1,15 +1,25 @@
 import axios from 'axios';
 import log from 'loglevel';
-import CSISHelpers from './../lib/CSISHelpers.js';
+
+// DON't use this. It imports just the default export which is the CSISHelpers class.
+// import CSISHelpers from './../lib/CSISHelpers.js';
+import * as CSISHelpers from './../lib/CSISHelpers.js';
+import * as EMIKATHelpers from './../lib/EMIKATHelpers.js';
 import { CSISHelpers as _CSISHelpers } from './../../dist/index.js';
 import express from 'express';
 import apiResponseStudy from './../__fixtures__/study.json';
 import apiResponseDataPackage from './../__fixtures__/dataPackage.json';
 import apiResponseResources from './../__fixtures__/resources.json';
 import studyArea from './../__fixtures__/studyArea.json';
+import resourceWithVariableMeanings from './../__fixtures__/resourceWithVariableMeanings.json';
 
 const app = express();
 var server;
+
+/**
+ * 
+ * 
+ */
 
 beforeAll(() => {
 	// https://csis.myclimateservice.eu/jsonapi/group/study/c3609e3e-f80f-482b-9e9f-3a26226a6859
@@ -70,8 +80,7 @@ test('[RELEASE] find HC LE resources in resource array', () => {
 	const tagName = 'Hazard Characterization - Local Effects';
 	const resourcesArray = apiResponseResources.data;
 	const includedArray = apiResponseResources.included;
-    const filteredResources = _CSISHelpers.filterResourcesbyTagName(resourcesArray
-        , includedArray, tagType, tagName);
+	const filteredResources = _CSISHelpers.filterResourcesbyTagName(resourcesArray, includedArray, tagType, tagName);
 	expect(filteredResources).toHaveLength(17);
 });
 
@@ -133,7 +142,7 @@ test('get taxonomy_term--hazards tags from resources ', () => {
 
 	expect(distinctTags.size).toBeGreaterThan(0);
 	distinctTags.forEach((tag) => {
-		log.debug(`found distinct tag $tag.attributes.name in $resourcesArray.length`);
+		log.debug(`found distinct tag ${tag.attributes.name} in ${resourcesArray.length}`);
 	});
 });
 
@@ -189,6 +198,91 @@ test('get 1st "reference" for first HC resource with @mapview:ogc:wms references
 test('check for emikat id in study', () => {
 	const emikatId = CSISHelpers.extractEmikatIdFromStudyGroupNode(apiResponseStudy.data);
 	expect(emikatId).toEqual(2846);
+});
+
+test('[DEV] WMS URL with mapped PARAMETERS', () => {
+	/**
+	 * @type {String}
+	 */
+	const urlTemplate = `https://clarity.meteogrid.com/geoserver/europe/wms?service=WMS&version=1.1.0&request=GetMap&layers=europe%3API_consecutive-wet-days_${CSISHelpers.EMISSIONS_SCENARIO}_${CSISHelpers.TIME_PERIOD}_ensmean&bbox=2145642.726143716%2C982955.8095900388%2C6605432.868301096%2C5706496.981659953&width=725&height=768&srs=EPSG%3A3035&format=image%2Fpng%3B%20mode%3D8bit`;
+
+	/**
+	 * @type {String}
+	 */
+	const url =
+		'https://clarity.meteogrid.com/geoserver/europe/wms?service=WMS&version=1.1.0&request=GetMap&layers=europe%3API_consecutive-wet-days_historical_19710101-20001231_ensmean&bbox=2145642.726143716%2C982955.8095900388%2C6605432.868301096%2C5706496.981659953&width=725&height=768&srs=EPSG%3A3035&format=image%2Fpng%3B%20mode%3D8bit';
+
+	/**
+	 * Another JS Madness. Associative array are no arrays. Don't use them at all!
+	 * See https://www.xul.fr/javascript/associative.php
+	 */
+	/*const queryParameters = [
+		[ 'time_period', 'Baseline' ],
+		[ EMIKATHelpers.QUERY_PARAMS.get(CSISHelpers.EMISSIONS_SCENARIO), 'Baseline' ]
+	];*/
+
+	const queryParameters = {
+		time_period: 'Baseline',
+		emissions_scenario: 'Baseline'
+	};
+
+	/**
+	 * @type{Map}
+	 */
+	const parametersMap = CSISHelpers.generateParametersMap(
+		CSISHelpers.QUERY_PARAMS,
+		queryParameters,
+		resourceWithVariableMeanings.data,
+		resourceWithVariableMeanings.included
+	);
+
+	expect(parametersMap.size).toEqual(2);
+
+	/**
+	 * @type{String[]}
+	 */
+	const transformedUrl = CSISHelpers.addTemplateParameters(urlTemplate, parametersMap);
+
+	expect(transformedUrl.includes('$')).toBeFalsy;
+	expect(transformedUrl.includes('historical')).toBeTruthy;
+	expect(transformedUrl.includes('19710101-20001231')).toBeTruthy;
+	expect(transformedUrl).not.toEqual(urlTemplate);
+	expect(url).toEqual(transformedUrl);
+});
+
+test('[PROD] WMS URL with mapped PARAMETERS', () => {
+	/**
+	 * @type {String}
+	 */
+	const urlTemplate = `https://clarity.meteogrid.com/geoserver/europe/wms?service=WMS&version=1.1.0&request=GetMap&layers=europe%3API_consecutive-wet-days_${CSISHelpers.EMISSIONS_SCENARIO}_${CSISHelpers.TIME_PERIOD}_ensmean&bbox=2145642.726143716%2C982955.8095900388%2C6605432.868301096%2C5706496.981659953&width=725&height=768&srs=EPSG%3A3035&format=image%2Fpng%3B%20mode%3D8bit`;
+
+	/**
+	 * @type {String}
+	 */
+	const url =
+		'https://clarity.meteogrid.com/geoserver/europe/wms?service=WMS&version=1.1.0&request=GetMap&layers=europe%3API_consecutive-wet-days_historical_19710101-20001231_ensmean&bbox=2145642.726143716%2C982955.8095900388%2C6605432.868301096%2C5706496.981659953&width=725&height=768&srs=EPSG%3A3035&format=image%2Fpng%3B%20mode%3D8bit';
+
+	const queryParameters = {
+		time_period: 'Baseline',
+		emissions_scenario: 'Baseline'
+	};
+
+	const parametersMap = _CSISHelpers.generateParametersMap(
+		_CSISHelpers.QUERY_PARAMS,
+		queryParameters,
+		resourceWithVariableMeanings.data,
+		resourceWithVariableMeanings.included
+	);
+
+	expect(parametersMap.size).toEqual(2);
+
+	const transformedUrl = _CSISHelpers.addTemplateParameters(urlTemplate, parametersMap);
+
+	expect(transformedUrl.includes('$')).toBeFalsy;
+	expect(transformedUrl.includes('historical')).toBeTruthy;
+	expect(transformedUrl.includes('19710101-20001231')).toBeTruthy;
+	expect(transformedUrl).not.toEqual(urlTemplate);
+	expect(url).toEqual(transformedUrl);
 });
 
 afterAll(() => {

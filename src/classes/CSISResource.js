@@ -58,6 +58,9 @@ export default class CSISResource {
         return CSISHelpers.extractTagsfromResource(this.resource, this.includes, tagType);
     }
 
+    /**
+     * @deprecated
+     */
     getParametersMaps() {
         return CSISHelpers.parametersMapsFromTemplateResource(this.resource, this.includes);
     }

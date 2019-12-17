@@ -5,6 +5,9 @@
 		}
 	],
 	"settings": {
-		"javascript.implicitProjectConfig.checkJs": true
+		"javascript.implicitProjectConfig.checkJs": true,
+		"jest.autoEnable": false,
+		"jest.enableInlineErrorMessages": false,
+		"jest.debugCodeLens.showWhenTestStateIn": []
 	}
 }
