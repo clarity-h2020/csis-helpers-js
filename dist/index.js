@@ -1364,7 +1364,8 @@ function addEmikatId(urlTemplate, emikatId) {
 
 function addEmikatParameters(urlTemplate, emikatVariables) {
   if (urlTemplate && emikatVariables) {
-    // make a copy - JavaScript style ... :-(
+    log.info("adding ".concat(emikatVariables.size, " values to url template ").concat(urlTemplate, " with ").concat(urlTemplate.split('$').length - 1, " variables")); // make a copy - JavaScript style ... :-(
+
     var url = (' ' + urlTemplate).slice(1);
     emikatVariables.forEach(function (value, key) {
       if (value) {
@@ -1375,7 +1376,10 @@ function addEmikatParameters(urlTemplate, emikatVariables) {
         log.warn("no value found for parameter ".concat(key, " in ").concat(urlTemplate));
       }
     });
+    log.debug(url);
     return url;
+  } else {
+    log.warn('could not process urlTemplate, either urlTemplate or varaibles ap is empty');
   }
 
   return urlTemplate;
@@ -2839,16 +2843,17 @@ function () {
     }
     /**
      * 
-     * @param {*} queryParameterMap 
-     * @param {*} queryParameters 
-     * @param {*} resource 
-     * @param {*} tagsArray 
+     * @param {Map} queryParameterMap 
+     * @param {Object} queryParameters 
+     * @param {Object} resource 
+     * @param {Object} tagsArray 
+     * @return {Map}
      */
 
   }, {
     key: "generateParametersMap",
     value: function generateParametersMap(queryParameterMap, queryParameters, resource, tagsArray) {
-      log.info("generating parameters map for ".concat(queryParameterMap.size, " = ").concat(queryParameters.length, " parameters for ").concat(resource.attributes.title));
+      log.info("generating parameters map for ".concat(queryParameterMap.size, " = ").concat(Object.keys(queryParameters).length, " parameters for ").concat(resource.attributes.title));
       var parametersMap = new Map();
       queryParameterMap.forEach(function (value, key) {
         if (queryParameters[value]) {
@@ -2858,9 +2863,13 @@ function () {
             parametersMap.set(key, mappedValue);
           } else {
             parametersMap.set(key, queryParameters[value]);
-          }
+          } //log.debug(`${key} = ${parametersMap.get(key)}`);
+
         }
-      });
+      }); // Another JS Madness: Object.keys() !== objectInstance.keys()
+      // -> Object.keys(queryParameters).length instead of queryParameters.keys().length
+
+      log.info("parameters map with ".concat(parametersMap.size, " entries for ").concat(queryParameterMap.size, " = ").concat(Object.keys(queryParameters).length, " parameters for ").concat(resource.attributes.title, " generated"));
       return parametersMap;
     }
   }]);

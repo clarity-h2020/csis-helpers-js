@@ -161,6 +161,10 @@ export function addEmikatId(urlTemplate, emikatId) {
  */
 export function addEmikatParameters(urlTemplate, emikatVariables) {
 	if (urlTemplate && emikatVariables) {
+		log.info(
+			`adding ${emikatVariables.size} values to url template ${urlTemplate} with ${urlTemplate.split('$').length -
+				1} variables`
+		);
 		// make a copy - JavaScript style ... :-(
 		let url = (' ' + urlTemplate).slice(1);
 		emikatVariables.forEach((value, key) => {
@@ -172,8 +176,10 @@ export function addEmikatParameters(urlTemplate, emikatVariables) {
 				log.warn(`no value found for parameter ${key} in ${urlTemplate}`);
 			}
 		});
-
+		log.debug(url);
 		return url;
+	} else {
+		log.warn('could not process urlTemplate, either urlTemplate or varaibles ap is empty');
 	}
 
 	return urlTemplate;

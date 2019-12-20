@@ -527,15 +527,16 @@ export default class CSISHelpers {
 
 	/**
 	 * 
-	 * @param {*} queryParameterMap 
-	 * @param {*} queryParameters 
-	 * @param {*} resource 
-	 * @param {*} tagsArray 
+	 * @param {Map} queryParameterMap 
+	 * @param {Object} queryParameters 
+	 * @param {Object} resource 
+	 * @param {Object} tagsArray 
+	 * @return {Map}
 	 */
 	static generateParametersMap(queryParameterMap, queryParameters, resource, tagsArray) {
 		log.info(
-			`generating parameters map for ${queryParameterMap.size} = ${queryParameters.length} parameters for ${resource
-				.attributes.title}`
+			`generating parameters map for ${queryParameterMap.size} = ${Object.keys(queryParameters)
+				.length} parameters for ${resource.attributes.title}`
 		);
 		const parametersMap = new Map();
 		queryParameterMap.forEach((value, key) => {
@@ -551,10 +552,19 @@ export default class CSISHelpers {
 				} else {
 					parametersMap.set(key, queryParameters[value]);
 				}
+				//log.debug(`${key} = ${parametersMap.get(key)}`);
 			} else {
 				//log.debug(`no value for query parameter ${key} = ${value} found`);
 			}
 		});
+
+		// Another JS Madness: Object.keys() !== objectInstance.keys()
+		// -> Object.keys(queryParameters).length instead of queryParameters.keys().length
+		log.info(
+			`parameters map with ${parametersMap.size} entries for ${queryParameterMap.size} = ${Object.keys(
+				queryParameters
+			).length} parameters for ${resource.attributes.title} generated`
+		);
 
 		return parametersMap;
 	}

@@ -204,13 +204,14 @@ test('[DEV] WMS URL with mapped PARAMETERS', () => {
 	/**
 	 * @type {String}
 	 */
-	const urlTemplate = `https://clarity.meteogrid.com/geoserver/europe/wms?service=WMS&version=1.1.0&request=GetMap&layers=europe%3API_consecutive-wet-days_${CSISHelpers.EMISSIONS_SCENARIO}_${CSISHelpers.TIME_PERIOD}_ensmean&bbox=2145642.726143716%2C982955.8095900388%2C6605432.868301096%2C5706496.981659953&width=725&height=768&srs=EPSG%3A3035&format=image%2Fpng%3B%20mode%3D8bit`;
+	const urlTemplate =
+		'https://clarity.meteogrid.com/geoserver/europe/wms?service=WMS&version=1.1.0&request=GetMap&layers=europe%3API_consecutive-wet-days_${emissions_scenario}_${time_period}_ensmean&srs=EPSG%3A3035&format=image%2Fpng%3B%20mode%3D8bit';
 
 	/**
 	 * @type {String}
 	 */
 	const url =
-		'https://clarity.meteogrid.com/geoserver/europe/wms?service=WMS&version=1.1.0&request=GetMap&layers=europe%3API_consecutive-wet-days_historical_19710101-20001231_ensmean&bbox=2145642.726143716%2C982955.8095900388%2C6605432.868301096%2C5706496.981659953&width=725&height=768&srs=EPSG%3A3035&format=image%2Fpng%3B%20mode%3D8bit';
+		'https://clarity.meteogrid.com/geoserver/europe/wms?service=WMS&version=1.1.0&request=GetMap&layers=europe%3API_consecutive-wet-days_historical_19710101-20001231_ensmean&srs=EPSG%3A3035&format=image%2Fpng%3B%20mode%3D8bit';
 
 	/**
 	 * Another JS Madness. Associative array are no arrays. Don't use them at all!
@@ -222,8 +223,25 @@ test('[DEV] WMS URL with mapped PARAMETERS', () => {
 	];*/
 
 	const queryParameters = {
+		host: 'https://csis.myclimateservice.eu',
+		study_uuid: '3c480040-42c5-4bef-a0ff-df05b7ea7329',
+		step_uuid: undefined,
+		datapackage_uuid: '14c81c77-a6f2-4419-b916-aad431f6accd',
+		resource_uuid: undefined,
+		study_area: undefined,
+		grouping_tag: undefined,
+		write_permissions: undefined,
+		minx: 72,
+		miny: 55,
+		maxx: 30,
+		maxy: -30,
+		emikat_id: undefined,
+		data_format: 'data',
+		study_variant: 'BASELINE',
 		time_period: 'Baseline',
-		emissions_scenario: 'Baseline'
+		emissions_scenario: 'Baseline',
+		event_frequency: 'Rare',
+		url: 'https://csis.myclimateservice.eu'
 	};
 
 	/**
@@ -236,7 +254,7 @@ test('[DEV] WMS URL with mapped PARAMETERS', () => {
 		resourceWithVariableMeanings.included
 	);
 
-	expect(parametersMap.size).toEqual(2);
+	expect(parametersMap.size).toEqual(5);
 
 	/**
 	 * @type{String[]}
@@ -263,8 +281,25 @@ test('[PROD] WMS URL with mapped PARAMETERS', () => {
 		'https://clarity.meteogrid.com/geoserver/europe/wms?service=WMS&version=1.1.0&request=GetMap&layers=europe%3API_consecutive-wet-days_historical_19710101-20001231_ensmean&bbox=2145642.726143716%2C982955.8095900388%2C6605432.868301096%2C5706496.981659953&width=725&height=768&srs=EPSG%3A3035&format=image%2Fpng%3B%20mode%3D8bit';
 
 	const queryParameters = {
+		host: 'https://csis.myclimateservice.eu',
+		study_uuid: '3c480040-42c5-4bef-a0ff-df05b7ea7329',
+		step_uuid: undefined,
+		datapackage_uuid: '14c81c77-a6f2-4419-b916-aad431f6accd',
+		resource_uuid: undefined,
+		study_area: undefined,
+		grouping_tag: undefined,
+		write_permissions: undefined,
+		minx: 72,
+		miny: 55,
+		maxx: 30,
+		maxy: -30,
+		emikat_id: undefined,
+		data_format: 'data',
+		study_variant: 'BASELINE',
 		time_period: 'Baseline',
-		emissions_scenario: 'Baseline'
+		emissions_scenario: 'Baseline',
+		event_frequency: 'Rare',
+		url: 'https://csis.myclimateservice.eu'
 	};
 
 	const parametersMap = _CSISHelpers.generateParametersMap(
@@ -274,7 +309,7 @@ test('[PROD] WMS URL with mapped PARAMETERS', () => {
 		resourceWithVariableMeanings.included
 	);
 
-	expect(parametersMap.size).toEqual(2);
+	expect(parametersMap.size).toEqual(5);
 
 	const transformedUrl = _CSISHelpers.addTemplateParameters(urlTemplate, parametersMap);
 

@@ -21,7 +21,7 @@
             "status": true,
             "title": "[TEST] Template Resource Resource consecutive-wet-days",
             "created": "2019-03-19T14:56:35+00:00",
-            "changed": "2019-12-13T10:15:09+00:00",
+            "changed": "2019-12-20T14:36:35+00:00",
             "promote": false,
             "sticky": false,
             "default_langcode": true,
@@ -460,7 +460,7 @@
                     "processed": "\u003Cp\u003E\u003Ccode\u003EHistorical Time Period (not foie EMIKAT)\u003C\/code\u003E\u003C\/p\u003E\n"
                 },
                 "weight": 14,
-                "changed": "2019-12-13T10:12:16+00:00",
+                "changed": "2019-12-17T09:18:28+00:00",
                 "default_langcode": true,
                 "revision_translation_affected": true,
                 "path": {
@@ -2395,7 +2395,7 @@
                 "status": true,
                 "title": "European Population: Map",
                 "created": "2019-07-30T14:39:27+00:00",
-                "changed": "2019-09-16T13:59:00+00:00",
+                "changed": "2019-12-20T14:36:35+00:00",
                 "promote": true,
                 "sticky": false,
                 "default_langcode": true,
@@ -2407,7 +2407,7 @@
                 },
                 "content_translation_source": "und",
                 "content_translation_outdated": false,
-                "field_reference_path": "https:\/\/service.emikat.at\/geoserver\/clarity\/wms?service=WMS\u0026version=1.1.0\u0026request=GetMap\u0026layers=clarity:view.2955\u0026bbox=4673500.0,1980000.0,4691500.0,1988000.0\u0026width=768\u0026height=341\u0026srs=EPSG:3035\u0026format=image\/gif\u0026CQL_FILTER=SZ_ID=${emikat_id}",
+                "field_reference_path": "https:\/\/clarity.meteogrid.com\/geoserver\/europe\/wms?service=WMS\u0026version=1.1.0\u0026request=GetMap\u0026layers=europe%3API_consecutive-wet-days_${emissions_scenario}_${time_period}_ensmean\u0026srs=EPSG%3A3035\u0026format=image%2Fpng%3B%20mode%3D8bit",
                 "field_reference_qualifier": "#path",
                 "field_reference_type": "@mapview:ogc:wms"
             },
@@ -2443,7 +2443,7 @@
                 "uid": {
                     "data": {
                         "type": "user--user",
-                        "id": "e98ea441-976e-46c5-b5d8-05222d014b55"
+                        "id": "ff8f149f-0ff1-44b6-bb90-82667f269c82"
                     },
                     "links": {
                         "self": {
