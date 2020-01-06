@@ -1186,6 +1186,7 @@ function () {
 }();
 
 var CSISRemoteHelpers = /*#__PURE__*/Object.freeze({
+	__proto__: null,
 	csisClient: csisClient,
 	getXCsrfToken: getXCsrfToken,
 	login: login,
@@ -1412,6 +1413,7 @@ function generateColumns(columnnames) {
  */
 
 var EMIKATHelpers = /*#__PURE__*/Object.freeze({
+	__proto__: null,
 	EMIKAT_STUDY_ID: EMIKAT_STUDY_ID,
 	STUDY_VARIANT: STUDY_VARIANT,
 	STUDY_VARIANT_VALUES: STUDY_VARIANT_VALUES,
@@ -2956,6 +2958,7 @@ var TIME_PERIOD_VALUES$1 = TIME_PERIOD_VALUES;
 var addTemplateParameters = addEmikatParameters;
 
 var CSISHelpers$1 = /*#__PURE__*/Object.freeze({
+	__proto__: null,
 	'default': CSISHelpers,
 	parametersMapsFromTemplateResource: parametersMapsFromTemplateResource,
 	extractVariableNamesfromResource: extractVariableNamesfromResource,
