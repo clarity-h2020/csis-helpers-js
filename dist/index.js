@@ -2774,6 +2774,8 @@ function () {
     /**
      * Take a template resource and create parameters map for all possible variable combinations! OMG!
      * 
+     * This "strongly demanded feature" has become unnecessary now. It didn't make much sense in the first place, tough.
+     * 
      * @param {*} resource 
      * @param {*} tagsArray 
      * @return {Map[]}
@@ -2844,6 +2846,7 @@ function () {
       return addEmikatParameters(urlTemplate, urlVariables);
     }
     /**
+     * This generates a parameters map and this is where this unfortunate "variable meaning" stuff has to be sorted out.
      * 
      * @param {Map} queryParameterMap 
      * @param {Object} queryParameters 
@@ -2859,6 +2862,7 @@ function () {
       var parametersMap = new Map();
       queryParameterMap.forEach(function (value, key) {
         if (queryParameters[value]) {
+          // what a mess! See https://github.com/clarity-h2020/csis/issues/101#issuecomment-565025875
           var mappedValue = CSISHelpers.extractVariableValueForVariableMeaningFromResource(resource, tagsArray, value, queryParameters[value]);
 
           if (mappedValue) {

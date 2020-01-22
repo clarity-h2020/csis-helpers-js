@@ -453,6 +453,8 @@ export default class CSISHelpers {
 	/**
 	 * Take a template resource and create parameters map for all possible variable combinations! OMG!
 	 * 
+	 * This "strongly demanded feature" has become unnecessary now. It didn't make much sense in the first place, tough.
+	 * 
 	 * @param {*} resource 
 	 * @param {*} tagsArray 
 	 * @return {Map[]}
@@ -526,6 +528,7 @@ export default class CSISHelpers {
 	}
 
 	/**
+	 * This generates a parameters map and this is where this unfortunate "variable meaning" stuff has to be sorted out.
 	 * 
 	 * @param {Map} queryParameterMap 
 	 * @param {Object} queryParameters 
@@ -541,6 +544,7 @@ export default class CSISHelpers {
 		const parametersMap = new Map();
 		queryParameterMap.forEach((value, key) => {
 			if (queryParameters[value]) {
+				// what a mess! See https://github.com/clarity-h2020/csis/issues/101#issuecomment-565025875
 				const mappedValue = CSISHelpers.extractVariableValueForVariableMeaningFromResource(
 					resource,
 					tagsArray,
