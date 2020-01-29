@@ -2654,22 +2654,23 @@ function () {
       return variableValues;
     }
     /**
-      * This is a completely unecessary method  that does nothing than adding unnecessary complexity to the system.
+      * This is a completely unnecessary method  that does nothing than adding unnecessary complexity to the system.
       * Since we did not mange to agree on a simple set of variable values that are used across different services,
       * we have to program around a problem that we invented by ourselves. Another sad example how avoidable accidental complexity
-      * is introduced by incoherence and lack of harmonisation. See https://github.com/clarity-h2020/csis/issues/101#issuecomment-565025875
+      * is introduced by incoherence and lack of harmonization. See https://github.com/clarity-h2020/csis/issues/101#issuecomment-565025875
       * 
       * @param {Object} resource the original resource
       * @param {Object[]} tagsArray included objects - Drupal APi style! :-/ 
       * @param {*} variableName The variable we are interested in e.g. 'layers'
-      * @param {*} variableName Actually the value recived viy query params but unfortunately not the real value. Confusing.
+      * @param {*} variableName Actually the value received via query params but unfortunately sometimes not the real value. Confusing.
       * @return {String[]}
       */
 
   }, {
     key: "extractVariableValueForVariableMeaningFromResource",
     value: function extractVariableValueForVariableMeaningFromResource(resource, tagsArray, variableName, variableMeaning) {
-      var variableValues = [];
+      // what a mess. if no 'meaning' is found, return the plain value received via query param.
+      var variableValue = variableMeaning;
       var variableTags = extractTagsfromResource(resource, tagsArray, 'taxonomy_term--dp_variables');
 
       if (variableTags && variableTags.length > 0) {
@@ -2722,8 +2723,8 @@ function () {
         log.warn("no tags of type 'taxonomy_term--dp_variables' in resource ".concat(resource.attributes.title));
       }
 
-      log.warn("".concat(variableName, " does not map to meaning/value ").concat(variableMeaning, " in resource ").concat(resource.attributes.title));
-      return variableValues;
+      log.warn("".concat(variableName, " does not map to meaning/value ").concat(variableValue, " in resource ").concat(resource.attributes.title));
+      return variableValue;
     }
   }, {
     key: "extractVariableNamesfromResource",
@@ -2853,7 +2854,8 @@ function () {
     key: "generateParametersMap",
     value: function generateParametersMap(queryParameterMap, queryParameters, resource, tagsArray) {
       log.info("generating parameters map for ".concat(queryParameterMap.size, " = ").concat(Object.keys(queryParameters).length, " parameters for ").concat(resource.attributes.title));
-      var parametersMap = new Map();
+      var parametersMap = new Map(); // e.g. key = '${emikat_id}' and value = 'emikat_id';
+
       queryParameterMap.forEach(function (value, key) {
         if (queryParameters[value]) {
           // what a mess! See https://github.com/clarity-h2020/csis/issues/101#issuecomment-565025875
