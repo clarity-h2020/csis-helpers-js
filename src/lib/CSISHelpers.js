@@ -435,6 +435,13 @@ export default class CSISHelpers {
 		return variableValue;
 	}
 
+	/**
+	 * Get all variables (tags from taxonomy 'dp_variables').
+	 * 
+	 * @param {Object} resource 
+	 * @param {Object[]} tagsArray 
+	 * @return {String[]}
+	 */
 	static extractVariableNamesfromResource(resource, tagsArray) {
 		let variableNames = new Set();
 		let variableTags = extractTagsfromResource(resource, tagsArray, 'taxonomy_term--dp_variables');
@@ -455,15 +462,13 @@ export default class CSISHelpers {
 	/**
 	 * Take a template resource and create parameters map for all possible variable combinations! OMG!
 	 * 
-	 * This "strongly demanded feature" has become unnecessary now. It didn't make much sense in the first place, tough.
-	 * 
 	 * @param {*} resource 
 	 * @param {*} tagsArray 
 	 * @return {Map[]}
-	 * @deprecated  don't use this method!
 	 */
 	static parametersMapsFromTemplateResource(resource, tagsArray) {
 		/**
+		 * "Expands" the variables: create all possible permutations for variables.
 		 * 
 		 * @param {*} variableNames 
 		 * @param {*} parametersMaps 
@@ -508,7 +513,7 @@ export default class CSISHelpers {
 		);
 
 		log.debug(
-			`creating ${parametersMaps.length} virtual resources from template resource ${resource.attributes
+			`creating ${parametersMaps.length} virtual expanded resources from template resource ${resource.attributes
 				.title} (${resource.id})`
 		);
 		return parametersMaps;

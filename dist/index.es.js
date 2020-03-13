@@ -2726,6 +2726,14 @@ function () {
       log.warn("".concat(variableName, " does not map to meaning/value ").concat(variableValue, " in resource ").concat(resource.attributes.title));
       return variableValue;
     }
+    /**
+     * Get all variables (tags from taxonomy 'dp_variables').
+     * 
+     * @param {Object} resource 
+     * @param {Object[]} tagsArray 
+     * @return {String[]}
+     */
+
   }, {
     key: "extractVariableNamesfromResource",
     value: function extractVariableNamesfromResource(resource, tagsArray) {
@@ -2769,18 +2777,16 @@ function () {
     /**
      * Take a template resource and create parameters map for all possible variable combinations! OMG!
      * 
-     * This "strongly demanded feature" has become unnecessary now. It didn't make much sense in the first place, tough.
-     * 
      * @param {*} resource 
      * @param {*} tagsArray 
      * @return {Map[]}
-     * @deprecated  don't use this method!
      */
 
   }, {
     key: "parametersMapsFromTemplateResource",
     value: function parametersMapsFromTemplateResource(resource, tagsArray) {
       /**
+       * "Expands" the variables: create all possible permutations for variables.
        * 
        * @param {*} variableNames 
        * @param {*} parametersMaps 
@@ -2820,7 +2826,7 @@ function () {
       var parametersMaps = [];
       parametersMaps.push(new Map());
       expandVariables(CSISHelpers.extractVariableNamesfromResource(resource, tagsArray), parametersMaps, parametersMaps[0]);
-      log.debug("creating ".concat(parametersMaps.length, " virtual resources from template resource ").concat(resource.attributes.title, " (").concat(resource.id, ")"));
+      log.debug("creating ".concat(parametersMaps.length, " virtual expanded resources from template resource ").concat(resource.attributes.title, " (").concat(resource.id, ")"));
       return parametersMaps;
     }
     /**
