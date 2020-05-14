@@ -2532,8 +2532,8 @@ function () {
         */
 
   }, {
-    key: "filterResourcesbyReferenceType",
-    value: function filterResourcesbyReferenceType(resourceArray, referencesArray, referenceType) {
+    key: "filterResourcesByReferenceType",
+    value: function filterResourcesByReferenceType(resourceArray, referencesArray, referenceType) {
       var filteredResourceArray = resourceArray.filter(function (resource) {
         if (resource.relationships.field_references != null && resource.relationships.field_references.data != null && resource.relationships.field_references.data.length > 0) {
           return resource.relationships.field_references.data.some(function (referenceReference) {
@@ -2562,8 +2562,8 @@ function () {
          */
 
   }, {
-    key: "extractReferencesfromResource",
-    value: function extractReferencesfromResource(resource, referencesArray, referenceType) {
+    key: "extractReferencesFromResource",
+    value: function extractReferencesFromResource(resource, referencesArray, referenceType) {
       var references = []; // the reference type is available only at the level of the `included` array
 
       if (resource.relationships.field_references != null && resource.relationships.field_references.data != null && resource.relationships.field_references.data.length > 0) {
@@ -2928,8 +2928,8 @@ var extractEmikatIdFromStudyGroupNode = CSISHelpers.extractEmikatIdFromStudyGrou
 var getIncludedObject = CSISHelpers.getIncludedObject;
 var filterResourcesbyTagName = CSISHelpers.filterResourcesbyTagName;
 var filterResourcesByEuglId = CSISHelpers.filterResourcesByEuglId;
-var filterResourcesbyReferenceType = CSISHelpers.filterResourcesbyReferenceType;
-var extractReferencesfromResource = CSISHelpers.extractReferencesfromResource;
+var filterResourcesByReferenceType = CSISHelpers.filterResourcesByReferenceType;
+var extractReferencesFromResource = CSISHelpers.extractReferencesFromResource;
 var extractTagsfromResource = CSISHelpers.extractTagsfromResource;
 var extractStudyAreaFromStudyGroupNode = CSISHelpers.extractStudyAreaFromStudyGroupNode;
 var defaultQueryParams = CSISHelpers.defaultQueryParams;
@@ -2974,8 +2974,8 @@ var CSISHelpers$1 = /*#__PURE__*/Object.freeze({
 	getIncludedObject: getIncludedObject,
 	filterResourcesbyTagName: filterResourcesbyTagName,
 	filterResourcesByEuglId: filterResourcesByEuglId,
-	filterResourcesbyReferenceType: filterResourcesbyReferenceType,
-	extractReferencesfromResource: extractReferencesfromResource,
+	filterResourcesByReferenceType: filterResourcesByReferenceType,
+	extractReferencesFromResource: extractReferencesFromResource,
 	extractTagsfromResource: extractTagsfromResource,
 	extractStudyAreaFromStudyGroupNode: extractStudyAreaFromStudyGroupNode,
 	defaultQueryParams: defaultQueryParams,
@@ -3039,7 +3039,7 @@ function () {
   }, {
     key: "getReferences",
     value: function getReferences(referenceType) {
-      return CSISHelpers.extractReferencesfromResource(this.resource, this.includes, referenceType);
+      return CSISHelpers.extractReferencesFromResource(this.resource, this.includes, referenceType);
     }
     /**
      * 

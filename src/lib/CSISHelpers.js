@@ -244,7 +244,7 @@ export default class CSISHelpers {
      * @return {Object[]}
      * @see getIncludedObject()
      */
-	static filterResourcesbyReferenceType(resourceArray, referencesArray, referenceType) {
+	static filterResourcesByReferenceType(resourceArray, referencesArray, referenceType) {
 		let filteredResourceArray = resourceArray.filter((resource) => {
 			if (
 				resource.relationships.field_references != null &&
@@ -282,7 +282,7 @@ export default class CSISHelpers {
       * @return {Object[]}
       * @see getIncludedObject()
       */
-	static extractReferencesfromResource(resource, referencesArray, referenceType) {
+	static extractReferencesFromResource(resource, referencesArray, referenceType) {
 		let references = [];
 		// the reference type is available only at the level of the `included` array
 		if (
@@ -598,8 +598,8 @@ export const extractEmikatIdFromStudyGroupNode = CSISHelpers.extractEmikatIdFrom
 export const getIncludedObject = CSISHelpers.getIncludedObject;
 export const filterResourcesbyTagName = CSISHelpers.filterResourcesbyTagName;
 export const filterResourcesByEuglId = CSISHelpers.filterResourcesByEuglId;
-export const filterResourcesbyReferenceType = CSISHelpers.filterResourcesbyReferenceType;
-export const extractReferencesfromResource = CSISHelpers.extractReferencesfromResource;
+export const filterResourcesByReferenceType = CSISHelpers.filterResourcesByReferenceType;
+export const extractReferencesFromResource = CSISHelpers.extractReferencesFromResource;
 export const extractTagsfromResource = CSISHelpers.extractTagsfromResource;
 export const extractStudyAreaFromStudyGroupNode = CSISHelpers.extractStudyAreaFromStudyGroupNode;
 export const defaultQueryParams = CSISHelpers.defaultQueryParams;
