@@ -1,5 +1,20 @@
-import axios from 'axios';
+/* 
+ * ***************************************************
+ * 
+ * cismet GmbH, Saarbruecken, Germany
+ * 
+ *               ... and it just works.
+ * 
+ * ***************************************************
+ */
+
+ import axios from 'axios';
 import log from 'loglevel';
+
+// Using ie9 polyfills as the "kitchen sink" of polyfills
+// https://github.com/clarity-h2020/csis-helpers-js/issues/12
+import 'react-app-polyfill/ie9';
+import 'react-app-polyfill/stable';
 
 // DON't use this. It imports just the default export which is the CSISHelpers class.
 // import CSISHelpers from './../lib/CSISHelpers.js';
@@ -106,7 +121,7 @@ test('[DEV] find resources with @mapview:ogc:wms references in resource array', 
 	const referenceType = '@mapview:ogc:wms';
 	const resourcesArray = apiResponseResources.data;
 	const includedArray = apiResponseResources.included;
-	const filteredResources = CSISHelpers.filterResourcesbyReferenceType(resourcesArray, includedArray, referenceType);
+	const filteredResources = CSISHelpers.filterResourcesByReferenceType(resourcesArray, includedArray, referenceType);
 	expect(filteredResources.length).toBeLessThan(resourcesArray.length);
 	expect(filteredResources).toHaveLength(102);
 });
@@ -115,7 +130,7 @@ test('[RELEASE] find resources with @mapview:ogc:wms references in resource arra
 	const referenceType = '@mapview:ogc:wms';
 	const resourcesArray = apiResponseResources.data;
 	const includedArray = apiResponseResources.included;
-	const filteredResources = _CSISHelpers.filterResourcesbyReferenceType(resourcesArray, includedArray, referenceType);
+	const filteredResources = _CSISHelpers.filterResourcesByReferenceType(resourcesArray, includedArray, referenceType);
 	expect(filteredResources.length).toBeLessThan(resourcesArray.length);
 	expect(filteredResources).toHaveLength(102);
 });
@@ -153,7 +168,7 @@ test('[RELEASE] find resources with @mapview:ogc:wms references in resource arra
 	const referenceType = '@mapview:ogc:wms';
 	const resourcesArray = apiResponseResources.data;
 	const includedArray = apiResponseResources.included;
-	const filteredResources = _CSISHelpers.filterResourcesbyReferenceType(resourcesArray, includedArray, referenceType);
+	const filteredResources = _CSISHelpers.filterResourcesByReferenceType(resourcesArray, includedArray, referenceType);
 	expect(filteredResources.length).toBeLessThan(resourcesArray.length);
 	expect(filteredResources).toHaveLength(102);
 });
@@ -165,7 +180,7 @@ test('find HC resources with @mapview:ogc:wms references in resource array', () 
 	const resourcesArray = apiResponseResources.data;
 	const includedArray = apiResponseResources.included;
 
-	const filteredResources = CSISHelpers.filterResourcesbyReferenceType(
+	const filteredResources = CSISHelpers.filterResourcesByReferenceType(
 		CSISHelpers.filterResourcesbyTagName(resourcesArray, includedArray, tagType, tagName),
 		includedArray,
 		referenceType
@@ -181,14 +196,14 @@ test('get 1st "reference" for first HC resource with @mapview:ogc:wms references
 	const resourcesArray = apiResponseResources.data;
 	const includedArray = apiResponseResources.included;
 
-	const filteredResources = CSISHelpers.filterResourcesbyReferenceType(
+	const filteredResources = CSISHelpers.filterResourcesByReferenceType(
 		CSISHelpers.filterResourcesbyTagName(resourcesArray, includedArray, tagType, tagName),
 		includedArray,
 		referenceType
 	);
 	expect(filteredResources).not.toBeNull();
 	expect(filteredResources.length).toBeGreaterThan(0);
-	const reference = CSISHelpers.extractReferencesfromResource(filteredResources[0], includedArray, referenceType);
+	const reference = CSISHelpers.extractReferencesFromResource(filteredResources[0], includedArray, referenceType);
 	expect(reference).not.toBeNull();
 	expect(reference.length).toBeGreaterThan(0);
 
