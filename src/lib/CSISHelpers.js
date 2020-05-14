@@ -145,6 +145,12 @@ export default class CSISHelpers {
      * If we request exactly **one** resource, there would be a possibility for simplification that applies to all taxonomy terms and tags: 
      * Instead of looking at `resource.relationships.field_resource_tags.data` we just have to search in `tagsArray` (included objects, respectively).
      */
+		if(!resourceArray || resourceArray == null || resourceArray.length == 0) {
+			return [];
+		}
+
+
+
 		let filteredResourceArray = resourceArray.filter((resource) => {
 			if (
 				resource.relationships.field_resource_tags != null &&
@@ -154,28 +160,28 @@ export default class CSISHelpers {
 				return resource.relationships.field_resource_tags.data.some((tagReference) => {
 					return tagReference.type === tagType
 						? tagsArray.some((tagObject) => {
-								return (
-									tagReference.type === tagObject.type &&
-									tagReference.id === tagObject.id &&
-									tagObject.attributes.name === tagName
-								);
-							})
+							return (
+								tagReference.type === tagObject.type &&
+								tagReference.id === tagObject.id &&
+								tagObject.attributes.name === tagName
+							);
+						})
 						: false;
 				});
 			} else {
-				log.warn('no tags found  in resource ' + resource.id);
+				log.warn('no "' + tagType + ' = ' + tagName + '" tags found  in resource "' + resource.id + '"');
 			}
 			return false;
 		});
 
 		log.debug(
 			filteredResourceArray.length +
-				' resources left after filtering ' +
-				resourceArray.length +
-				' resources by tag type ' +
-				tagType +
-				' and tag name ' +
-				tagName
+			' resources left after filtering ' +
+			resourceArray.length +
+			' resources by tag type ' +
+			tagType +
+			' and tag name ' +
+			tagName
 		);
 
 		return filteredResourceArray;
@@ -189,50 +195,10 @@ export default class CSISHelpers {
  * @param {string} id The id of the UU-GL Taxonomy tag, e.g.'eu-gl:hazard-characterization:local-effects'
  * @return {Object[]}
  * @see getIncludedObject()
+ * @deprecated https://github.com/clarity-h2020/csis-helpers-js/issues/11
  */
 	static filterResourcesByEuglId(resourceArray, tagsArray, id) {
-		/**
-     * If we request exactly **one** resource, there would be a possibility for simplification that applies to all taxonomy terms and tags: 
-     * Instead of looking at `resource.relationships.field_resource_tags.data` we just have to search in `tagsArray` (included objects, respectively).
-     */
-		const tagType = 'taxonomy_term--eu_gl';
-		let filteredResourceArray = resourceArray.filter((resource) => {
-			if (
-				resource.relationships.field_resource_tags != null &&
-				resource.relationships.field_resource_tags.data != null &&
-				resource.relationships.field_resource_tags.data.length > 0
-			) {
-				return resource.relationships.field_resource_tags.data.some((tagReference) => {
-					return tagReference.type === tagType
-						? tagsArray.some((tagObject) => {
-								return (
-									tagReference.type === tagObject.type &&
-									tagReference.id === tagObject.id &&
-									tagObject.attributes.field_eu_gl_taxonomy_id &&
-									tagObject.attributes.field_eu_gl_taxonomy_id.value &&
-									tagObject.attributes.field_eu_gl_taxonomy_id.value === id
-								);
-							})
-						: false;
-				});
-			} else {
-				log.warn('no EU-GL tags found  in resource ' + resource.id);
-			}
-
-			return false;
-		});
-
-		log.debug(
-			filteredResourceArray.length +
-				' resources left after filtering ' +
-				resourceArray.length +
-				' resources by tag type ' +
-				tagType +
-				' and EU-GL id ' +
-				id
-		);
-
-		return filteredResourceArray;
+		return filterResourcesbyTagName(resourceArray, tagsArray, 'taxonomy_term--eu_gl', id);
 	}
 
 	/**
@@ -245,6 +211,11 @@ export default class CSISHelpers {
      * @see getIncludedObject()
      */
 	static filterResourcesByReferenceType(resourceArray, referencesArray, referenceType) {
+
+		if(!resourceArray || resourceArray == null || resourceArray.length == 0) {
+			return [];
+		}
+
 		let filteredResourceArray = resourceArray.filter((resource) => {
 			if (
 				resource.relationships.field_references != null &&
@@ -324,8 +295,8 @@ export default class CSISHelpers {
 			tags = resource.relationships.field_resource_tags.data.flatMap((tagReference) => {
 				return tagReference.type === tagType
 					? tagsArray.filter(
-							(tagObject) => tagReference.type === tagObject.type && tagReference.id === tagObject.id
-						)
+						(tagObject) => tagReference.type === tagObject.type && tagReference.id === tagObject.id
+					)
 					: [];
 			});
 		}
@@ -474,7 +445,7 @@ export default class CSISHelpers {
 		 * @param {*} parametersMaps 
 		 * @param {*} parametersMap 
 		 */
-		const expandVariables = function(variableNames, parametersMaps, parametersMap) {
+		const expandVariables = function (variableNames, parametersMaps, parametersMap) {
 			if (!variableNames || variableNames.length === 0) {
 				return;
 			}
