@@ -2898,6 +2898,15 @@ defineProperty(CSISHelpers, "defaultQueryParams", {
   datapackage_uuid: undefined,
   resource_uuid: undefined,
   study_area: undefined,
+
+  /*set grouping_tag(grouping_tag) { 
+  	this.overlayLayersGroupingTagType = grouping_tag;
+    },
+  get grouping_tag() {
+  	return this.overlayLayersGroupingTagType;
+  },
+  overlayLayersGroupingTagType:undefined,*/
+  // <- does not work
   grouping_tag: undefined,
   write_permissions: undefined,
   minx: 72,
