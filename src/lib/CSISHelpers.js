@@ -47,6 +47,13 @@ export default class CSISHelpers {
 		datapackage_uuid: undefined,
 		resource_uuid: undefined,
 		study_area: undefined,
+		/*set grouping_tag(grouping_tag) { 
+			this.overlayLayersGroupingTagType = grouping_tag;
+		  },
+		get grouping_tag() {
+			return this.overlayLayersGroupingTagType;
+		},
+		overlayLayersGroupingTagType:undefined,*/ // <- does not work
 		grouping_tag: undefined,
 		write_permissions: undefined,
 		minx: 72, // deprecated
@@ -145,6 +152,11 @@ export default class CSISHelpers {
      * If we request exactly **one** resource, there would be a possibility for simplification that applies to all taxonomy terms and tags: 
      * Instead of looking at `resource.relationships.field_resource_tags.data` we just have to search in `tagsArray` (included objects, respectively).
      */
+		if (!resourceArray || resourceArray == null || resourceArray.length == 0) {
+			log.warn('resourceArray is emtpy, cannot apply filters');
+			return [];
+		}
+
 		let filteredResourceArray = resourceArray.filter((resource) => {
 			if (
 				resource.relationships.field_resource_tags != null &&
@@ -154,28 +166,28 @@ export default class CSISHelpers {
 				return resource.relationships.field_resource_tags.data.some((tagReference) => {
 					return tagReference.type === tagType
 						? tagsArray.some((tagObject) => {
-								return (
-									tagReference.type === tagObject.type &&
-									tagReference.id === tagObject.id &&
-									tagObject.attributes.name === tagName
-								);
-							})
+							return (
+								tagReference.type === tagObject.type &&
+								tagReference.id === tagObject.id &&
+								tagObject.attributes.name === tagName
+							);
+						})
 						: false;
 				});
 			} else {
-				log.warn('no tags found  in resource ' + resource.id);
+				log.warn('no "' + tagType + ' = ' + tagName + '" tags found  in resource "' + resource.id + '"');
 			}
 			return false;
 		});
 
 		log.debug(
 			filteredResourceArray.length +
-				' resources left after filtering ' +
-				resourceArray.length +
-				' resources by tag type ' +
-				tagType +
-				' and tag name ' +
-				tagName
+			' resources left after filtering ' +
+			resourceArray.length +
+			' resources by tag type ' +
+			tagType +
+			' and tag name ' +
+			tagName
 		);
 
 		return filteredResourceArray;
@@ -189,6 +201,7 @@ export default class CSISHelpers {
  * @param {string} id The id of the UU-GL Taxonomy tag, e.g.'eu-gl:hazard-characterization:local-effects'
  * @return {Object[]}
  * @see getIncludedObject()
+ * @deprecated https://github.com/clarity-h2020/csis-helpers-js/issues/11
  */
 	static filterResourcesByEuglId(resourceArray, tagsArray, id) {
 		/**
@@ -205,14 +218,16 @@ export default class CSISHelpers {
 				return resource.relationships.field_resource_tags.data.some((tagReference) => {
 					return tagReference.type === tagType
 						? tagsArray.some((tagObject) => {
-								return (
-									tagReference.type === tagObject.type &&
-									tagReference.id === tagObject.id &&
-									tagObject.attributes.field_eu_gl_taxonomy_id &&
-									tagObject.attributes.field_eu_gl_taxonomy_id.value &&
-									tagObject.attributes.field_eu_gl_taxonomy_id.value === id
-								);
-							})
+							return (
+								// filter my ID instead of name -> deprecated
+								// See https://github.com/clarity-h2020/map-component/issues/96#issuecomment-629235840
+								tagReference.type === tagObject.type &&
+								tagReference.id === tagObject.id &&
+								tagObject.attributes.field_eu_gl_taxonomy_id &&
+								tagObject.attributes.field_eu_gl_taxonomy_id.value &&
+								tagObject.attributes.field_eu_gl_taxonomy_id.value === id
+							);
+						})
 						: false;
 				});
 			} else {
@@ -224,12 +239,12 @@ export default class CSISHelpers {
 
 		log.debug(
 			filteredResourceArray.length +
-				' resources left after filtering ' +
-				resourceArray.length +
-				' resources by tag type ' +
-				tagType +
-				' and EU-GL id ' +
-				id
+			' resources left after filtering ' +
+			resourceArray.length +
+			' resources by tag type ' +
+			tagType +
+			' and EU-GL id ' +
+			id
 		);
 
 		return filteredResourceArray;
@@ -244,7 +259,12 @@ export default class CSISHelpers {
      * @return {Object[]}
      * @see getIncludedObject()
      */
-	static filterResourcesbyReferenceType(resourceArray, referencesArray, referenceType) {
+	static filterResourcesByReferenceType(resourceArray, referencesArray, referenceType) {
+
+		if (!resourceArray || resourceArray == null || resourceArray.length == 0) {
+			return [];
+		}
+
 		let filteredResourceArray = resourceArray.filter((resource) => {
 			if (
 				resource.relationships.field_references != null &&
@@ -282,7 +302,7 @@ export default class CSISHelpers {
       * @return {Object[]}
       * @see getIncludedObject()
       */
-	static extractReferencesfromResource(resource, referencesArray, referenceType) {
+	static extractReferencesFromResource(resource, referencesArray, referenceType) {
 		let references = [];
 		// the reference type is available only at the level of the `included` array
 		if (
@@ -324,8 +344,8 @@ export default class CSISHelpers {
 			tags = resource.relationships.field_resource_tags.data.flatMap((tagReference) => {
 				return tagReference.type === tagType
 					? tagsArray.filter(
-							(tagObject) => tagReference.type === tagObject.type && tagReference.id === tagObject.id
-						)
+						(tagObject) => tagReference.type === tagObject.type && tagReference.id === tagObject.id
+					)
 					: [];
 			});
 		}
@@ -474,7 +494,7 @@ export default class CSISHelpers {
 		 * @param {*} parametersMaps 
 		 * @param {*} parametersMap 
 		 */
-		const expandVariables = function(variableNames, parametersMaps, parametersMap) {
+		const expandVariables = function (variableNames, parametersMaps, parametersMap) {
 			if (!variableNames || variableNames.length === 0) {
 				return;
 			}
@@ -598,8 +618,8 @@ export const extractEmikatIdFromStudyGroupNode = CSISHelpers.extractEmikatIdFrom
 export const getIncludedObject = CSISHelpers.getIncludedObject;
 export const filterResourcesbyTagName = CSISHelpers.filterResourcesbyTagName;
 export const filterResourcesByEuglId = CSISHelpers.filterResourcesByEuglId;
-export const filterResourcesbyReferenceType = CSISHelpers.filterResourcesbyReferenceType;
-export const extractReferencesfromResource = CSISHelpers.extractReferencesfromResource;
+export const filterResourcesByReferenceType = CSISHelpers.filterResourcesByReferenceType;
+export const extractReferencesFromResource = CSISHelpers.extractReferencesFromResource;
 export const extractTagsfromResource = CSISHelpers.extractTagsfromResource;
 export const extractStudyAreaFromStudyGroupNode = CSISHelpers.extractStudyAreaFromStudyGroupNode;
 export const defaultQueryParams = CSISHelpers.defaultQueryParams;

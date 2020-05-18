@@ -1,5 +1,20 @@
-import axios from 'axios';
+/* 
+ * ***************************************************
+ * 
+ * cismet GmbH, Saarbruecken, Germany
+ * 
+ *               ... and it just works.
+ * 
+ * ***************************************************
+ */
+
+ import axios from 'axios';
 import log from 'loglevel';
+
+// Using ie9 polyfills as the "kitchen sink" of polyfills
+// https://github.com/clarity-h2020/csis-helpers-js/issues/12
+import 'react-app-polyfill/ie9';
+import 'react-app-polyfill/stable';
 
 import * as CSISRemoteHelpers from './../lib/CSISRemoteHelpers.js';
 import * as CSISHelpers from './../lib/CSISHelpers.js';

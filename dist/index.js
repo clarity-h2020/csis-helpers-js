@@ -2477,6 +2477,11 @@ function () {
          * If we request exactly **one** resource, there would be a possibility for simplification that applies to all taxonomy terms and tags: 
          * Instead of looking at `resource.relationships.field_resource_tags.data` we just have to search in `tagsArray` (included objects, respectively).
          */
+      if (!resourceArray || resourceArray == null || resourceArray.length == 0) {
+        log.warn('resourceArray is emtpy, cannot apply filters');
+        return [];
+      }
+
       var filteredResourceArray = resourceArray.filter(function (resource) {
         if (resource.relationships.field_resource_tags != null && resource.relationships.field_resource_tags.data != null && resource.relationships.field_resource_tags.data.length > 0) {
           return resource.relationships.field_resource_tags.data.some(function (tagReference) {
@@ -2485,7 +2490,7 @@ function () {
             }) : false;
           });
         } else {
-          log.warn('no tags found  in resource ' + resource.id);
+          log.warn('no "' + tagType + ' = ' + tagName + '" tags found  in resource "' + resource.id + '"');
         }
 
         return false;
@@ -2501,6 +2506,7 @@ function () {
     * @param {string} id The id of the UU-GL Taxonomy tag, e.g.'eu-gl:hazard-characterization:local-effects'
     * @return {Object[]}
     * @see getIncludedObject()
+    * @deprecated https://github.com/clarity-h2020/csis-helpers-js/issues/11
     */
 
   }, {
@@ -2515,7 +2521,10 @@ function () {
         if (resource.relationships.field_resource_tags != null && resource.relationships.field_resource_tags.data != null && resource.relationships.field_resource_tags.data.length > 0) {
           return resource.relationships.field_resource_tags.data.some(function (tagReference) {
             return tagReference.type === tagType ? tagsArray.some(function (tagObject) {
-              return tagReference.type === tagObject.type && tagReference.id === tagObject.id && tagObject.attributes.field_eu_gl_taxonomy_id && tagObject.attributes.field_eu_gl_taxonomy_id.value && tagObject.attributes.field_eu_gl_taxonomy_id.value === id;
+              return (// filter my ID instead of name -> deprecated
+                // See https://github.com/clarity-h2020/map-component/issues/96#issuecomment-629235840
+                tagReference.type === tagObject.type && tagReference.id === tagObject.id && tagObject.attributes.field_eu_gl_taxonomy_id && tagObject.attributes.field_eu_gl_taxonomy_id.value && tagObject.attributes.field_eu_gl_taxonomy_id.value === id
+              );
             }) : false;
           });
         } else {
@@ -2538,8 +2547,12 @@ function () {
         */
 
   }, {
-    key: "filterResourcesbyReferenceType",
-    value: function filterResourcesbyReferenceType(resourceArray, referencesArray, referenceType) {
+    key: "filterResourcesByReferenceType",
+    value: function filterResourcesByReferenceType(resourceArray, referencesArray, referenceType) {
+      if (!resourceArray || resourceArray == null || resourceArray.length == 0) {
+        return [];
+      }
+
       var filteredResourceArray = resourceArray.filter(function (resource) {
         if (resource.relationships.field_references != null && resource.relationships.field_references.data != null && resource.relationships.field_references.data.length > 0) {
           return resource.relationships.field_references.data.some(function (referenceReference) {
@@ -2568,8 +2581,8 @@ function () {
          */
 
   }, {
-    key: "extractReferencesfromResource",
-    value: function extractReferencesfromResource(resource, referencesArray, referenceType) {
+    key: "extractReferencesFromResource",
+    value: function extractReferencesFromResource(resource, referencesArray, referenceType) {
       var references = []; // the reference type is available only at the level of the `included` array
 
       if (resource.relationships.field_references != null && resource.relationships.field_references.data != null && resource.relationships.field_references.data.length > 0) {
@@ -2908,6 +2921,15 @@ defineProperty(CSISHelpers, "defaultQueryParams", {
   datapackage_uuid: undefined,
   resource_uuid: undefined,
   study_area: undefined,
+
+  /*set grouping_tag(grouping_tag) { 
+  	this.overlayLayersGroupingTagType = grouping_tag;
+    },
+  get grouping_tag() {
+  	return this.overlayLayersGroupingTagType;
+  },
+  overlayLayersGroupingTagType:undefined,*/
+  // <- does not work
   grouping_tag: undefined,
   write_permissions: undefined,
   minx: 72,
@@ -2934,8 +2956,8 @@ var extractEmikatIdFromStudyGroupNode = CSISHelpers.extractEmikatIdFromStudyGrou
 var getIncludedObject = CSISHelpers.getIncludedObject;
 var filterResourcesbyTagName = CSISHelpers.filterResourcesbyTagName;
 var filterResourcesByEuglId = CSISHelpers.filterResourcesByEuglId;
-var filterResourcesbyReferenceType = CSISHelpers.filterResourcesbyReferenceType;
-var extractReferencesfromResource = CSISHelpers.extractReferencesfromResource;
+var filterResourcesByReferenceType = CSISHelpers.filterResourcesByReferenceType;
+var extractReferencesFromResource = CSISHelpers.extractReferencesFromResource;
 var extractTagsfromResource = CSISHelpers.extractTagsfromResource;
 var extractStudyAreaFromStudyGroupNode = CSISHelpers.extractStudyAreaFromStudyGroupNode;
 var defaultQueryParams = CSISHelpers.defaultQueryParams;
@@ -2980,8 +3002,8 @@ var CSISHelpers$1 = /*#__PURE__*/Object.freeze({
 	getIncludedObject: getIncludedObject,
 	filterResourcesbyTagName: filterResourcesbyTagName,
 	filterResourcesByEuglId: filterResourcesByEuglId,
-	filterResourcesbyReferenceType: filterResourcesbyReferenceType,
-	extractReferencesfromResource: extractReferencesfromResource,
+	filterResourcesByReferenceType: filterResourcesByReferenceType,
+	extractReferencesFromResource: extractReferencesFromResource,
 	extractTagsfromResource: extractTagsfromResource,
 	extractStudyAreaFromStudyGroupNode: extractStudyAreaFromStudyGroupNode,
 	defaultQueryParams: defaultQueryParams,
@@ -3045,7 +3067,7 @@ function () {
   }, {
     key: "getReferences",
     value: function getReferences(referenceType) {
-      return CSISHelpers.extractReferencesfromResource(this.resource, this.includes, referenceType);
+      return CSISHelpers.extractReferencesFromResource(this.resource, this.includes, referenceType);
     }
     /**
      * 

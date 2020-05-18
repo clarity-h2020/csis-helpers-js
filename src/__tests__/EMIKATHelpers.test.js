@@ -10,6 +10,11 @@
 
 import axios from 'axios';
 
+// Using ie9 polyfills as the "kitchen sink" of polyfills
+// https://github.com/clarity-h2020/csis-helpers-js/issues/12
+import 'react-app-polyfill/ie9';
+import 'react-app-polyfill/stable';
+
 import * as EMIKATHelpers from './../lib/EMIKATHelpers.js';
 import { EMIKATHelpers as _EMIKATHelpers } from './../../dist/index.js';
 

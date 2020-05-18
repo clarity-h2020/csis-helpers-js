@@ -1,4 +1,3 @@
-
 /* 
  * ***************************************************
  * 
@@ -46,7 +45,7 @@ export default class CSISResource {
      * @returns {Object{[]}
      */
     getReferences(referenceType) {
-        return CSISHelpers.extractReferencesfromResource(this.resource, this.includes, referenceType);
+        return CSISHelpers.extractReferencesFromResource(this.resource, this.includes, referenceType);
     }
 
     /**
