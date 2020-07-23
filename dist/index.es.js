@@ -1224,6 +1224,13 @@ var STUDY_VARIANT_VALUES = ['BASELINE', 'ADAPTATION-01'];
 
 var TIME_PERIOD = '${time_period}';
 /**
+ * ROWNUM = number of rows returned
+ * 
+ * @type {String}
+ */
+
+var ROWNUM = '${rownum}';
+/**
  * DATA_FORMAT = 'data' (JSON), 'csv' or 'geojson'
  * 
  * @type {String}
@@ -1275,7 +1282,7 @@ var DATA_FORMAT_VALUES = ['data', 'csv', 'geojson'];
  * @see CSISHelpers.defaultQueryParams
  */
 
-var QUERY_PARAMS = new Map([[EMIKAT_STUDY_ID, 'emikat_id'], [DATA_FORMAT, 'data_format'], [STUDY_VARIANT, 'study_variant'], [TIME_PERIOD, 'time_period'], [EMISSIONS_SCENARIO, 'emissions_scenario'], [EVENT_FREQUENCY, 'event_frequency']]);
+var QUERY_PARAMS = new Map([[EMIKAT_STUDY_ID, 'emikat_id'], [ROWNUM, 'rownum'], [DATA_FORMAT, 'data_format'], [STUDY_VARIANT, 'study_variant'], [TIME_PERIOD, 'time_period'], [EMISSIONS_SCENARIO, 'emissions_scenario'], [EVENT_FREQUENCY, 'event_frequency']]);
 var emikatClient = axios.create();
 /**
  * 
@@ -1410,6 +1417,7 @@ var EMIKATHelpers = /*#__PURE__*/Object.freeze({
 	STUDY_VARIANT: STUDY_VARIANT,
 	STUDY_VARIANT_VALUES: STUDY_VARIANT_VALUES,
 	TIME_PERIOD: TIME_PERIOD,
+	ROWNUM: ROWNUM,
 	DATA_FORMAT: DATA_FORMAT,
 	TIME_PERIOD_VALUES: TIME_PERIOD_VALUES,
 	EMISSIONS_SCENARIO: EMISSIONS_SCENARIO,
@@ -2909,6 +2917,7 @@ defineProperty(CSISHelpers, "defaultQueryParams", {
   // deprecated
   emikat_id: undefined,
   // this is the emikat study id
+  rownum: 1000,
   data_format: DATA_FORMAT_VALUES[0],
   study_variant: STUDY_VARIANT_VALUES[0],
   time_period: TIME_PERIOD_VALUES[0],
@@ -2941,6 +2950,7 @@ var LAYERS = CSISHelpers.LAYERS;
  */
 
 var QUERY_PARAMS$1 = QUERY_PARAMS;
+var ROWNUM$1 = ROWNUM;
 var DATA_FORMAT$1 = DATA_FORMAT;
 var DATA_FORMAT_VALUES$1 = DATA_FORMAT_VALUES;
 var EMISSIONS_SCENARIO$1 = EMISSIONS_SCENARIO;
@@ -2977,6 +2987,7 @@ var CSISHelpers$1 = /*#__PURE__*/Object.freeze({
 	generateParametersMap: generateParametersMap,
 	LAYERS: LAYERS,
 	QUERY_PARAMS: QUERY_PARAMS$1,
+	ROWNUM: ROWNUM$1,
 	DATA_FORMAT: DATA_FORMAT$1,
 	DATA_FORMAT_VALUES: DATA_FORMAT_VALUES$1,
 	EMISSIONS_SCENARIO: EMISSIONS_SCENARIO$1,

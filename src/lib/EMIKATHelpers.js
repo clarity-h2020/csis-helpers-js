@@ -43,6 +43,15 @@ export const STUDY_VARIANT_VALUES = [ 'BASELINE', 'ADAPTATION-01' ];
  */
 export const TIME_PERIOD = '${time_period}';
 
+
+/**
+ * ROWNUM = number of rows returned
+ * 
+ * @type {String}
+ */
+export const ROWNUM = '${rownum}';
+
+
 /**
  * DATA_FORMAT = 'data' (JSON), 'csv' or 'geojson'
  * 
@@ -96,6 +105,7 @@ export const DATA_FORMAT_VALUES = [ 'data', 'csv', 'geojson' ];
  */
 export const QUERY_PARAMS = new Map([
 	[ EMIKAT_STUDY_ID, 'emikat_id' ],
+	[ ROWNUM, 'rownum' ],
 	[ DATA_FORMAT, 'data_format' ],
 	[ STUDY_VARIANT, 'study_variant' ],
 	[ TIME_PERIOD, 'time_period' ],

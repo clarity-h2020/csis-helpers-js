@@ -9,24 +9,23 @@
  */
 
 import axios from 'axios';
+import express from 'express';
 import log from 'loglevel';
-
 // Using ie9 polyfills as the "kitchen sink" of polyfills
 // https://github.com/clarity-h2020/csis-helpers-js/issues/12
 import 'react-app-polyfill/ie9';
 import 'react-app-polyfill/stable';
-
+import { CSISHelpers as _CSISHelpers } from './../../dist/index.js';
 // DON't use this. It imports just the default export which is the CSISHelpers class.
 // import CSISHelpers from './../lib/CSISHelpers.js';
 import * as CSISHelpers from './../lib/CSISHelpers.js';
-import * as EMIKATHelpers from './../lib/EMIKATHelpers.js';
-import { CSISHelpers as _CSISHelpers } from './../../dist/index.js';
-import express from 'express';
-import apiResponseStudy from './../__fixtures__/study.json';
 import apiResponseDataPackage from './../__fixtures__/dataPackage.json';
 import apiResponseResources from './../__fixtures__/resources.json';
-import studyArea from './../__fixtures__/studyArea.json';
 import resourceWithVariableMeanings from './../__fixtures__/resourceWithVariableMeanings.json';
+import apiResponseStudy from './../__fixtures__/study.json';
+import studyArea from './../__fixtures__/studyArea.json';
+
+
 
 const app = express();
 var server;
@@ -251,6 +250,7 @@ test('[DEV] WMS URL with mapped PARAMETERS', () => {
 		maxx: 30,
 		maxy: -30,
 		emikat_id: undefined,
+		rownum: 999,
 		data_format: 'data',
 		study_variant: 'BASELINE',
 		time_period: 'Baseline',
@@ -269,10 +269,10 @@ test('[DEV] WMS URL with mapped PARAMETERS', () => {
 		resourceWithVariableMeanings.included
 	);
 
-	expect(parametersMap.size).toEqual(5);
+	expect(parametersMap.size).toEqual(6);
 
 	/**
-	 * @type{String[]}
+	 * @type{String}
 	 */
 	const transformedUrl = CSISHelpers.addTemplateParameters(urlTemplate, parametersMap);
 
@@ -309,6 +309,7 @@ test('[PROD] WMS URL with mapped PARAMETERS', () => {
 		maxx: 30,
 		maxy: -30,
 		emikat_id: undefined,
+		rownum:999,
 		data_format: 'data',
 		study_variant: 'BASELINE',
 		time_period: 'Baseline',
@@ -324,7 +325,7 @@ test('[PROD] WMS URL with mapped PARAMETERS', () => {
 		resourceWithVariableMeanings.included
 	);
 
-	expect(parametersMap.size).toEqual(5);
+	expect(parametersMap.size).toEqual(6);
 
 	const transformedUrl = _CSISHelpers.addTemplateParameters(urlTemplate, parametersMap);
 

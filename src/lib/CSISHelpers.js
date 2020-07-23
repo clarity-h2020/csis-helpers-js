@@ -8,10 +8,10 @@
  * ***************************************************
  */
 
-import Wkt from 'wicket';
 import log from 'loglevel';
-
+import Wkt from 'wicket';
 import * as EMIKATHelpers from './EMIKATHelpers.js';
+
 
 /**
  * Be aware of the difference between default and named exports. It is a common source of mistakes.
@@ -61,6 +61,7 @@ export default class CSISHelpers {
 		maxx: 30, // deprecated
 		maxy: -30, // deprecated
 		emikat_id: undefined, // this is the emikat study id
+		rownum: 1000,
 		data_format: EMIKATHelpers.DATA_FORMAT_VALUES[0],
 		study_variant: EMIKATHelpers.STUDY_VARIANT_VALUES[0],
 		time_period: EMIKATHelpers.TIME_PERIOD_VALUES[0],
@@ -636,6 +637,7 @@ export const LAYERS = CSISHelpers.LAYERS;
  * 
  */
 export const QUERY_PARAMS = EMIKATHelpers.QUERY_PARAMS;
+export const ROWNUM = EMIKATHelpers.ROWNUM;
 export const DATA_FORMAT = EMIKATHelpers.DATA_FORMAT;
 export const DATA_FORMAT_VALUES = EMIKATHelpers.DATA_FORMAT_VALUES;
 export const EMISSIONS_SCENARIO = EMIKATHelpers.EMISSIONS_SCENARIO;
