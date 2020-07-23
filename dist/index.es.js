@@ -25,6 +25,24 @@ var runtime = (function (exports) {
   var asyncIteratorSymbol = $Symbol.asyncIterator || "@@asyncIterator";
   var toStringTagSymbol = $Symbol.toStringTag || "@@toStringTag";
 
+  function define(obj, key, value) {
+    Object.defineProperty(obj, key, {
+      value: value,
+      enumerable: true,
+      configurable: true,
+      writable: true
+    });
+    return obj[key];
+  }
+  try {
+    // IE 8 has a broken Object.defineProperty that only works on DOM objects.
+    define({}, "");
+  } catch (err) {
+    define = function(obj, key, value) {
+      return obj[key] = value;
+    };
+  }
+
   function wrap(innerFn, outerFn, self, tryLocsList) {
     // If outerFn provided and outerFn.prototype is a Generator, then outerFn.prototype instanceof Generator.
     var protoGenerator = outerFn && outerFn.prototype instanceof Generator ? outerFn : Generator;
@@ -95,16 +113,19 @@ var runtime = (function (exports) {
     Generator.prototype = Object.create(IteratorPrototype);
   GeneratorFunction.prototype = Gp.constructor = GeneratorFunctionPrototype;
   GeneratorFunctionPrototype.constructor = GeneratorFunction;
-  GeneratorFunctionPrototype[toStringTagSymbol] =
-    GeneratorFunction.displayName = "GeneratorFunction";
+  GeneratorFunction.displayName = define(
+    GeneratorFunctionPrototype,
+    toStringTagSymbol,
+    "GeneratorFunction"
+  );
 
   // Helper for defining the .next, .throw, and .return methods of the
   // Iterator interface in terms of a single ._invoke method.
   function defineIteratorMethods(prototype) {
     ["next", "throw", "return"].forEach(function(method) {
-      prototype[method] = function(arg) {
+      define(prototype, method, function(arg) {
         return this._invoke(method, arg);
-      };
+      });
     });
   }
 
@@ -123,9 +144,7 @@ var runtime = (function (exports) {
       Object.setPrototypeOf(genFun, GeneratorFunctionPrototype);
     } else {
       genFun.__proto__ = GeneratorFunctionPrototype;
-      if (!(toStringTagSymbol in genFun)) {
-        genFun[toStringTagSymbol] = "GeneratorFunction";
-      }
+      define(genFun, toStringTagSymbol, "GeneratorFunction");
     }
     genFun.prototype = Object.create(Gp);
     return genFun;
@@ -139,7 +158,7 @@ var runtime = (function (exports) {
     return { __await: arg };
   };
 
-  function AsyncIterator(generator) {
+  function AsyncIterator(generator, PromiseImpl) {
     function invoke(method, arg, resolve, reject) {
       var record = tryCatch(generator[method], generator, arg);
       if (record.type === "throw") {
@@ -150,14 +169,14 @@ var runtime = (function (exports) {
         if (value &&
             typeof value === "object" &&
             hasOwn.call(value, "__await")) {
-          return Promise.resolve(value.__await).then(function(value) {
+          return PromiseImpl.resolve(value.__await).then(function(value) {
             invoke("next", value, resolve, reject);
           }, function(err) {
             invoke("throw", err, resolve, reject);
           });
         }
 
-        return Promise.resolve(value).then(function(unwrapped) {
+        return PromiseImpl.resolve(value).then(function(unwrapped) {
           // When a yielded Promise is resolved, its final value becomes
           // the .value of the Promise<{value,done}> result for the
           // current iteration.
@@ -175,7 +194,7 @@ var runtime = (function (exports) {
 
     function enqueue(method, arg) {
       function callInvokeWithMethodAndArg() {
-        return new Promise(function(resolve, reject) {
+        return new PromiseImpl(function(resolve, reject) {
           invoke(method, arg, resolve, reject);
         });
       }
@@ -215,9 +234,12 @@ var runtime = (function (exports) {
   // Note that simple async functions are implemented on top of
   // AsyncIterator objects; they just return a Promise for the value of
   // the final result produced by the iterator.
-  exports.async = function(innerFn, outerFn, self, tryLocsList) {
+  exports.async = function(innerFn, outerFn, self, tryLocsList, PromiseImpl) {
+    if (PromiseImpl === void 0) PromiseImpl = Promise;
+
     var iter = new AsyncIterator(
-      wrap(innerFn, outerFn, self, tryLocsList)
+      wrap(innerFn, outerFn, self, tryLocsList),
+      PromiseImpl
     );
 
     return exports.isGeneratorFunction(outerFn)
@@ -392,7 +414,7 @@ var runtime = (function (exports) {
   // unified ._invoke helper method.
   defineIteratorMethods(Gp);
 
-  Gp[toStringTagSymbol] = "Generator";
+  define(Gp, toStringTagSymbol, "Generator");
 
   // A Generator should always return itself as the iterator object when the
   // @@iterator function is called on it. Some browsers' implementations of the
@@ -787,12 +809,8 @@ csisClient.defaults.headers.common['Content-Type'] = 'application/vnd.api+json';
  * @return {Promise<Object>}
  */
 
-var getXCsrfToken =
-/*#__PURE__*/
-function () {
-  var _ref = asyncToGenerator(
-  /*#__PURE__*/
-  regenerator.mark(function _callee() {
+var getXCsrfToken = /*#__PURE__*/function () {
+  var _ref = asyncToGenerator( /*#__PURE__*/regenerator.mark(function _callee() {
     var csisBaseUrl,
         apiResponse,
         _args = arguments;
@@ -831,12 +849,8 @@ function () {
  * @return {Promise<Object>}
  */
 
-var login =
-/*#__PURE__*/
-function () {
-  var _ref2 = asyncToGenerator(
-  /*#__PURE__*/
-  regenerator.mark(function _callee2() {
+var login = /*#__PURE__*/function () {
+  var _ref2 = asyncToGenerator( /*#__PURE__*/regenerator.mark(function _callee2() {
     var csisBaseUrl,
         username,
         password,
@@ -879,12 +893,8 @@ function () {
 * @return {Promise<Object>}
 */
 
-var getEmikatCredentialsFromCsis =
-/*#__PURE__*/
-function () {
-  var _ref3 = asyncToGenerator(
-  /*#__PURE__*/
-  regenerator.mark(function _callee3() {
+var getEmikatCredentialsFromCsis = /*#__PURE__*/function () {
+  var _ref3 = asyncToGenerator( /*#__PURE__*/regenerator.mark(function _callee3() {
     var csisBaseUrl,
         apiResponse,
         userResponse,
@@ -894,50 +904,56 @@ function () {
         switch (_context3.prev = _context3.next) {
           case 0:
             csisBaseUrl = _args3.length > 0 && _args3[0] !== undefined ? _args3[0] : 'https://csis.myclimateservice.eu';
-            _context3.prev = 1;
-            _context3.next = 4;
+            apiResponse = undefined;
+            _context3.prev = 2;
+            _context3.next = 5;
             return csisClient.get(csisBaseUrl + '/jsonapi', {
               withCredentials: true
             });
 
-          case 4:
+          case 5:
             apiResponse = _context3.sent;
-            _context3.next = 7;
+            _context3.next = 8;
             return csisClient.get(apiResponse.data.meta.links.me.href, {
               withCredentials: true
             });
 
-          case 7:
+          case 8:
             userResponse = _context3.sent;
 
             if (!userResponse.data.data.attributes.field_basic_auth_credentials) {
-              _context3.next = 12;
+              _context3.next = 13;
               break;
             }
 
             return _context3.abrupt("return", 'Basic ' + btoa(userResponse.data.data.attributes.field_basic_auth_credentials));
 
-          case 12:
+          case 13:
             log.error('no field field_basic_auth_credentials in user profile ' + userResponse.data.data.attributes.name);
             return _context3.abrupt("return", null);
 
-          case 14:
-            _context3.next = 20;
+          case 15:
+            _context3.next = 22;
             break;
 
-          case 16:
-            _context3.prev = 16;
-            _context3.t0 = _context3["catch"](1);
-            console.error("could not fetch emikat credentials from $csisBaseUrl", _context3.t0); // return null;
+          case 17:
+            _context3.prev = 17;
+            _context3.t0 = _context3["catch"](2);
+            console.error("could not fetch emikat credentials from $csisBaseUrl", _context3.t0);
+
+            if (apiResponse) {
+              log.debug(apiResponse);
+            } // return null;
+
 
             throw _context3.t0;
 
-          case 20:
+          case 22:
           case "end":
             return _context3.stop();
         }
       }
-    }, _callee3, null, [[1, 16]]);
+    }, _callee3, null, [[2, 17]]);
   }));
 
   return function getEmikatCredentialsFromCsis() {
@@ -953,12 +969,8 @@ function () {
 * @return {Promise<Object>}
 */
 
-var getStudyGroupNodeFromCsis =
-/*#__PURE__*/
-function () {
-  var _ref4 = asyncToGenerator(
-  /*#__PURE__*/
-  regenerator.mark(function _callee4() {
+var getStudyGroupNodeFromCsis = /*#__PURE__*/function () {
+  var _ref4 = asyncToGenerator( /*#__PURE__*/regenerator.mark(function _callee4() {
     var csisBaseUrl,
         studyUuid,
         include,
@@ -1011,12 +1023,8 @@ function () {
 * @return {Promise<Object>}
 */
 
-var getDatapackageFromCsis =
-/*#__PURE__*/
-function () {
-  var _ref5 = asyncToGenerator(
-  /*#__PURE__*/
-  regenerator.mark(function _callee5() {
+var getDatapackageFromCsis = /*#__PURE__*/function () {
+  var _ref5 = asyncToGenerator( /*#__PURE__*/regenerator.mark(function _callee5() {
     var csisBaseUrl,
         datapackageUuid,
         include,
@@ -1069,12 +1077,8 @@ function () {
 * @return {Promise<Object>}
 */
 
-var getDatapackageResourcesFromCsis =
-/*#__PURE__*/
-function () {
-  var _ref6 = asyncToGenerator(
-  /*#__PURE__*/
-  regenerator.mark(function _callee6() {
+var getDatapackageResourcesFromCsis = /*#__PURE__*/function () {
+  var _ref6 = asyncToGenerator( /*#__PURE__*/regenerator.mark(function _callee6() {
     var csisBaseUrl,
         datapackageUuid,
         include,
@@ -1128,12 +1132,8 @@ function () {
 * @return {Promise<Object>}
 */
 
-var getDatapackageResourceFromCsis =
-/*#__PURE__*/
-function () {
-  var _ref7 = asyncToGenerator(
-  /*#__PURE__*/
-  regenerator.mark(function _callee7() {
+var getDatapackageResourceFromCsis = /*#__PURE__*/function () {
+  var _ref7 = asyncToGenerator( /*#__PURE__*/regenerator.mark(function _callee7() {
     var csisBaseUrl,
         resourceUuid,
         include,
@@ -1215,7 +1215,7 @@ var STUDY_VARIANT = '${study_variant}';
  * @type {String[]}
  */
 
-var STUDY_VARIANT_VALUES = ['BASELINE'];
+var STUDY_VARIANT_VALUES = ['BASELINE', 'ADAPTATION-01'];
 /**
  * TIME_PERIOD='Baseline' ... (Alternatives are: '20110101-20401231', '20410101-20701231' and '20710101-21001231')
  * 
@@ -1301,9 +1301,7 @@ function fetchData(_x, _x2) {
  */
 
 function _fetchData() {
-  _fetchData = asyncToGenerator(
-  /*#__PURE__*/
-  regenerator.mark(function _callee(url, emikatCredentials) {
+  _fetchData = asyncToGenerator( /*#__PURE__*/regenerator.mark(function _callee(url, emikatCredentials) {
     var response;
     return regenerator.wrap(function _callee$(_context) {
       while (1) {
@@ -2352,6 +2350,11 @@ var wicket = createCommonjsModule(function (module, exports) {
 }));
 });
 
+function _createForOfIteratorHelper(o, allowArrayLike) { var it; if (typeof Symbol === "undefined" || o[Symbol.iterator] == null) { if (Array.isArray(o) || (it = _unsupportedIterableToArray(o)) || allowArrayLike && o && typeof o.length === "number") { if (it) o = it; var i = 0; var F = function F() {}; return { s: F, n: function n() { if (i >= o.length) return { done: true }; return { done: false, value: o[i++] }; }, e: function e(_e) { throw _e; }, f: F }; } throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); } var normalCompletion = true, didErr = false, err; return { s: function s() { it = o[Symbol.iterator](); }, n: function n() { var step = it.next(); normalCompletion = step.done; return step; }, e: function e(_e2) { didErr = true; err = _e2; }, f: function f() { try { if (!normalCompletion && it["return"] != null) it["return"](); } finally { if (didErr) throw err; } } }; }
+
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
 /**
  * Be aware of the difference between default and named exports. It is a common source of mistakes.
  * We suggest that you stick to using default imports and exports when a module only exports a single thing (for example, a component). 
@@ -2367,9 +2370,7 @@ var wicket = createCommonjsModule(function (module, exports) {
  * @author Pascal Dihé
  */
 
-var CSISHelpers =
-/*#__PURE__*/
-function () {
+var CSISHelpers = /*#__PURE__*/function () {
   function CSISHelpers() {
     classCallCheck(this, CSISHelpers);
   }
@@ -2634,12 +2635,12 @@ function () {
 
       if (variableTags && variableTags.length > 0) {
         var iterator = variableTags.values();
-        var _iteratorNormalCompletion = true;
-        var _didIteratorError = false;
-        var _iteratorError = undefined;
+
+        var _iterator = _createForOfIteratorHelper(iterator),
+            _step;
 
         try {
-          for (var _iterator = iterator[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
+          for (_iterator.s(); !(_step = _iterator.n()).done;) {
             var variableTag = _step.value;
 
             if (variableTag.attributes && variableTag.attributes.field_var_name && variableTag.attributes.field_var_name.toLowerCase() == variableName.toLowerCase() && variableTag.attributes.field_var_value) {
@@ -2647,18 +2648,9 @@ function () {
             }
           }
         } catch (err) {
-          _didIteratorError = true;
-          _iteratorError = err;
+          _iterator.e(err);
         } finally {
-          try {
-            if (!_iteratorNormalCompletion && _iterator["return"] != null) {
-              _iterator["return"]();
-            }
-          } finally {
-            if (_didIteratorError) {
-              throw _iteratorError;
-            }
-          }
+          _iterator.f();
         }
       } else {
         log.warn("no tags of type 'taxonomy_term--dp_variables' in resource");
@@ -2690,12 +2682,11 @@ function () {
         var iterator = variableTags.values(); // yes, 'field_var_meaning2'. No refactoring in Drupal -> https://github.com/clarity-h2020/docker-drupal/issues/29
         // This JSON FORMAT is madness: NOT variableTag.attributes.field_var_meaning2 BUT variableTag.relationships.field_var_meaning2
 
-        var _iteratorNormalCompletion2 = true;
-        var _didIteratorError2 = false;
-        var _iteratorError2 = undefined;
+        var _iterator2 = _createForOfIteratorHelper(iterator),
+            _step2;
 
         try {
-          for (var _iterator2 = iterator[Symbol.iterator](), _step2; !(_iteratorNormalCompletion2 = (_step2 = _iterator2.next()).done); _iteratorNormalCompletion2 = true) {
+          for (_iterator2.s(); !(_step2 = _iterator2.n()).done;) {
             var variableTag = _step2.value;
 
             if (variableTag.attributes && variableTag.attributes.field_var_name && variableTag.attributes.field_var_name.toLowerCase() == variableName.toLowerCase() && variableTag.attributes.field_var_value) {
@@ -2719,18 +2710,9 @@ function () {
               }
           }
         } catch (err) {
-          _didIteratorError2 = true;
-          _iteratorError2 = err;
+          _iterator2.e(err);
         } finally {
-          try {
-            if (!_iteratorNormalCompletion2 && _iterator2["return"] != null) {
-              _iterator2["return"]();
-            }
-          } finally {
-            if (_didIteratorError2) {
-              throw _iteratorError2;
-            }
-          }
+          _iterator2.f();
         }
       } else {
         log.warn("no tags of type 'taxonomy_term--dp_variables' in resource ".concat(resource.attributes.title));
@@ -2755,12 +2737,12 @@ function () {
 
       if (variableTags && variableTags.length > 0) {
         var iterator = variableTags.values();
-        var _iteratorNormalCompletion3 = true;
-        var _didIteratorError3 = false;
-        var _iteratorError3 = undefined;
+
+        var _iterator3 = _createForOfIteratorHelper(iterator),
+            _step3;
 
         try {
-          for (var _iterator3 = iterator[Symbol.iterator](), _step3; !(_iteratorNormalCompletion3 = (_step3 = _iterator3.next()).done); _iteratorNormalCompletion3 = true) {
+          for (_iterator3.s(); !(_step3 = _iterator3.n()).done;) {
             var variableTag = _step3.value;
 
             if (variableTag.attributes && variableTag.attributes.field_var_name) {
@@ -2768,18 +2750,9 @@ function () {
             }
           }
         } catch (err) {
-          _didIteratorError3 = true;
-          _iteratorError3 = err;
+          _iterator3.e(err);
         } finally {
-          try {
-            if (!_iteratorNormalCompletion3 && _iterator3["return"] != null) {
-              _iterator3["return"]();
-            }
-          } finally {
-            if (_didIteratorError3) {
-              throw _iteratorError3;
-            }
-          }
+          _iterator3.f();
         }
       } else {
         log.warn("no tags of type 'taxonomy_term--dp_variables' in resource");
@@ -3024,9 +2997,7 @@ var CSISHelpers$1 = /*#__PURE__*/Object.freeze({
  * @class
  */
 
-var CSISResource =
-/*#__PURE__*/
-function () {
+var CSISResource = /*#__PURE__*/function () {
   /**
    * 
    * @param {Object} resource 

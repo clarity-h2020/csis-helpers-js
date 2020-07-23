@@ -34,7 +34,7 @@ export const STUDY_VARIANT = '${study_variant}';
  * Allowed values for STUDY_VARIANT constant
  * @type {String[]}
  */
-export const STUDY_VARIANT_VALUES = [ 'BASELINE' ];
+export const STUDY_VARIANT_VALUES = [ 'BASELINE', 'ADAPTATION-01' ];
 
 /**
  * TIME_PERIOD='Baseline' ... (Alternatives are: '20110101-20401231', '20410101-20701231' and '20710101-21001231')

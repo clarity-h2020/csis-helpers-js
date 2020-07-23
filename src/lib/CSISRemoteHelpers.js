@@ -45,9 +45,9 @@ export const login = async function (csisBaseUrl = 'https://csis.myclimateservic
 * @return {Promise<Object>}
 */
 export const getEmikatCredentialsFromCsis = async function (csisBaseUrl = 'https://csis.myclimateservice.eu') {
-
+  let apiResponse = undefined;
   try {
-    const apiResponse = await csisClient.get(csisBaseUrl + '/jsonapi', { withCredentials: true });
+    apiResponse = await csisClient.get(csisBaseUrl + '/jsonapi', { withCredentials: true });
     const userResponse = await csisClient.get(apiResponse.data.meta.links.me.href, { withCredentials: true });
 
     if (userResponse.data.data.attributes.field_basic_auth_credentials) {
@@ -61,6 +61,9 @@ export const getEmikatCredentialsFromCsis = async function (csisBaseUrl = 'https
   }
   catch (error) {
     console.error(`could not fetch emikat credentials from $csisBaseUrl`, error);
+    if(apiResponse) {
+      log.debug(apiResponse);
+    }
     // return null;
     throw error;
   }
