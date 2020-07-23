@@ -1,11 +1,5 @@
-/* 
- * ***************************************************
- * 
- * cismet GmbH, Saarbruecken, Germany
- * 
- *               ... and it just works.
- * 
- * ***************************************************
+/**
+ * @jest-environment node
  */
 
 import axios from 'axios';

@@ -8,7 +8,7 @@
  * ***************************************************
  */
 
- import axios from 'axios';
+import axios from 'axios';
 import log from 'loglevel';
 
 // Using ie9 polyfills as the "kitchen sink" of polyfills
