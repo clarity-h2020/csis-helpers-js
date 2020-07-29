@@ -61,7 +61,7 @@ export default class CSISHelpers {
 		maxx: 30, // deprecated
 		maxy: -30, // deprecated
 		emikat_id: undefined, // this is the emikat study id
-		rownum: 1000,
+		rownum: 3000,
 		data_format: EMIKATHelpers.DATA_FORMAT_VALUES[0],
 		study_variant: EMIKATHelpers.STUDY_VARIANT_VALUES[0],
 		time_period: EMIKATHelpers.TIME_PERIOD_VALUES[0],
