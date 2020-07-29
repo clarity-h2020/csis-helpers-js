@@ -2895,7 +2895,7 @@ defineProperty(CSISHelpers, "defaultQueryParams", {
   // deprecated
   emikat_id: undefined,
   // this is the emikat study id
-  rownum: 1000,
+  rownum: 3000,
   data_format: DATA_FORMAT_VALUES[0],
   study_variant: STUDY_VARIANT_VALUES[0],
   time_period: TIME_PERIOD_VALUES[0],

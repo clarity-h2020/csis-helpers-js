@@ -8,6 +8,14 @@
 		"javascript.implicitProjectConfig.checkJs": true,
 		"jest.autoEnable": false,
 		"jest.enableInlineErrorMessages": false,
-		"jest.debugCodeLens.showWhenTestStateIn": []
+		"jest.debugCodeLens.showWhenTestStateIn": [],
+		"spellright.language": [
+			"en"
+		],
+		"spellright.documentTypes": [
+			"markdown",
+			"latex",
+			"plaintext"
+		]
 	}
 }
